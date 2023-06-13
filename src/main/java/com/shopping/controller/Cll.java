@@ -1,5 +1,8 @@
 package com.shopping.controller;
 
-public class Cll {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class Cll {
+ 
 }
