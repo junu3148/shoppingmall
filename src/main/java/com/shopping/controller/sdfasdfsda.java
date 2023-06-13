@@ -1,8 +1,10 @@
 package com.shopping.controller;
 
 public class sdfasdfsda {
- private void sysout() {
-	 sysout();
-	 
- }
- }
+
+	public void sysout() {
+
+		System.out.print("미친거아니야");
+
+	}
+}
