@@ -11,6 +11,7 @@ public class testController {
 	public String test() {
 		
 		System.out.println("test입니다...");
+		System.out.println("수정했습니다.");
 		
 		return "";
 	}
