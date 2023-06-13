@@ -17,7 +17,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
     <context:annotation-config />
 
-    <context:component-scan base-package="com.javaex">
+    <context:component-scan base-package="com.shopping">
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
@@ -26,7 +26,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
     <!-- oracle datasource -->
     <bean id="oracleDatasource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
         <property name="URL" value="jdbc:oracle:thin:@localhost:1521:xe" />
-        <property name="user" value="c##shoppingmall" />
+        <property name="user" value="c##shopping" />
         <property name="password" value="oracle" />
         <property name="connectionCachingEnabled" value="true" />
         <qualifier value="main-db" />

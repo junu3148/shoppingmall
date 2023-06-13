@@ -1,8 +1,8 @@
-package com.shoppingmall.controller;
+package com.shopping.controller;
 
 public class sdfasdfsda {
  private void sysout() {
-	 sysout();sd
+	 sysout();
 	 
  }
  }
