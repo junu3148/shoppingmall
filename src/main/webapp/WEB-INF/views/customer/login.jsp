@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -49,7 +47,6 @@
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
       
-      <span>or use your email for registration</span>
       <button type ="submit">로그인</button>
     </form>
       <!--------------------------------// 로그인을 위한 input 영역 //-------------------------------->

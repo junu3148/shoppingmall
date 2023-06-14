@@ -1,7 +1,10 @@
 package com.shopping.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,10 +22,11 @@ public class CustomerController {
 	
 	/* 로그인 페이지 이동 */
 
+	
 	@RequestMapping(value = "/loginPage")
 	public String loginForm() {
 			
-		System.out.println("loginPage 이동");
+		System.out.println("loginPage Controller()");
 		
 		return "customer/login";
 	}
@@ -33,14 +37,38 @@ public class CustomerController {
 	/* 로그인 */
 
 	@RequestMapping(value = "/login")
-	public String login(@ModelAttribute CustomerVO customerVO) {
+	public String login(@ModelAttribute CustomerVO customerVO
+						,HttpSession session
+						,Model model) {
+		
+		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n 입력하신 내용을 다시 확인해주세요.";
 		
 	
-		System.out.println("로그인 넘어오는 값 보기 :" + customerVO);
+		System.out.println("login Controller()" + customerVO);
+		CustomerVO authCustomer = customerService.login(customerVO);
 		
-		return "redirect:/main";
+		if(authCustomer == null) {
+			model.addAttribute("message", message);
+			return "customer/login";
+		}else {
+			session.setAttribute("authCustomer", authCustomer);
+			return "redirect:/main/";
+		}
 	}
 
+	///////////////////////////////////////////////
+	
+	/* 로그아웃 */
+	
+	public String logout(HttpSession session) { 
+		System.out.println("logout Controller()");
+		session.removeAttribute("authCustomer");
+		session.invalidate();
+		
+		return "redirect:/main/";
+	}
+	
+	
 	///////////////////////////////////////////////
 	
 	/* 회원가입 페이지 이동 */
@@ -48,7 +76,7 @@ public class CustomerController {
 	@RequestMapping(value = "/joinPage")
 	public String joinForm() {
 		
-		System.out.println("JoinPage 이동");
+		System.out.println("JoinPage Controller()");
 		
 		return "customer/join";
 	}
@@ -58,16 +86,19 @@ public class CustomerController {
 
 	
 	/* 회원가입 */
-
+	/* 가입 성공 후에는 로그인 페이지로 이동 */
 	@RequestMapping(value = "/join")
 	public String join(@ModelAttribute CustomerVO customerVO) {
 		
-		System.out.println("가입할 때 넘어오는 값 보기 :" + customerVO);
+		System.out.println("join Controller" + customerVO);
 		
-//		customerService.join(customerVO);
+		int joinRow = customerService.join(customerVO);
 		
-//		redirect:/user/login
-		return "";
+		if(joinRow > 0) { 
+			System.out.println("가입성공");
+		}
+		
+		return "redirect:/customer/loginPage";
 	}
 	
 	
@@ -90,6 +121,7 @@ public class CustomerController {
 		return jasonResult;
 	}
 	
+	///////////////////////////////////////////////
 	
 	
 }

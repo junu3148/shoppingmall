@@ -4,13 +4,43 @@
 
 <!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="customer">
-
-	<!-- 쿼리문 작성 -->
+	
+	
+	<!-- 로그인 -->
+	<select id ="selectLoginVO"  parameterType ="CustomerVO" resultType ="CustomerVO">
+		<![CDATA[
+			select
+				CUSTOMER_NO as customerNo
+				,CUSTOMER_ID as customerId
+				,CUSTOMER_ROLE as customerRole
+			from customer
+			where CUSTOMER_ID = #{customerId} and CUSTOMER_PASSWORD = #{customerPassword}
+		]]>	
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id = "insertCustomer" parameterType  ="CustomerVO" >
+		<![CDATA[
+			insert into customer (customer_no, customer_id, customer_password, customer_name, customer_role)
+				values(
+    				SEQ_CUSTOMER_NO.nextval
+   					 ,#{customerId}
+   					 ,#{customerPassword}
+    				 ,#{customerName}
+    				 ,1
+    				)
+		]]>	
+	</insert>
+	
+	
+	<!-- 아이디 유효성 체크 -->
 
 	<select id ="selectSameId" parameterType ="CustomerVO" resultType ="CustomerVO">
+		<![CDATA[
 		  SELECT customer_name AS customerName
 			FROM customer
 		  WHERE customer_id = #{customerId}
+		]]>
 	</select>
 	
 	

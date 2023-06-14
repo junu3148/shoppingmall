@@ -7,12 +7,12 @@
 <!doctype html>
 <html lang="ko">
 <head>
+
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<style>
-</style>
+
 
 <title>join, login</title>
 
@@ -43,14 +43,16 @@
 
 
 
-
 </head>
 <body>
+
+
+
 	<div class="container" id="container">
 		<div class="form-container sign-up-container"></div>
 		<div class="form-container sign-in-container">
 			<form action="${pageContext.request.contextPath}/customer/join"
-				method="get">
+				method="get" id = "joinForm">
 				<h1>회원가입</h1>
 				<div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a> <a
@@ -62,8 +64,8 @@
 				<!-- 아이디 유효성 체크 html 요소 -->
 				<span id = "checkId"></span>
 				<input type="text" placeholder="Id"id="inputId" name="customerId" required> 
-				<input type="text" placeholder="name" name="customerName" required /> 
-				<input type="password" placeholder="Password" name="customerPassword"  required/>
+				<input type="text" placeholder="name" id = "" name="customerName" required /> 
+				<input type="password" id="inputPassword" placeholder="Password" name="customerPassword"  required/>
 				<a href="#"></a>
 				<button type="submit">회원가입</button>
 			</form>
@@ -91,6 +93,30 @@
 	<!-----------------------------// 가입창으로 이동하는 버튼 공간 //----------------------------->
 
 
+	
+	<!------------------------------------// 모달창 양식 //-------------------------------------->
+
+
+<div id="joinModal" class="modal">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header">
+                    <h4 class="modal-title">Notice</h4>
+               </div>
+               <div class="modal-body">
+               <br>
+                    <p id = "text-warning">알림</p>
+               </div>
+               <div class="modal-footer">
+                    <button type="button" class="btn btn-primary modalCheckBtn">확인</button>
+               </div>
+          </div>
+     </div>
+</div>
+
+
+
+
 </body>
 
 
@@ -103,7 +129,7 @@
 		
 		
 		
-		/*아이디 유효성 검사*/
+		/*------------------------------------아이디 유효성 검사-------------------------------------*/
 		
 		$('#inputId').on("keyup", function(){
 			
@@ -142,11 +168,58 @@
 	         });//ajax end
 		});//keyup event end 아이디 유효성 검사 AJAX end
 		
+		/*------------------------------------//아이디 유효성 검사//-------------------------------------*/
+		
+		/*----------------------------------제출 전 가입 폼 입력 확인---------------------------------*/
+		
+		$('#joinForm').on("submit", function(){
+			
+
+			
+			var idCheck = $('#checkId').text()//유효성 체크 메세지 확인
+			var inputId = $('#inputId').val() //입력된 아이디 체크
+			var inputPassword = $('#inputPassword').val() //입력된 비밀번호 체크
+			
+			if(idCheck == '이미 존재하는 아이디입니다.'){showModal('다른 아이디로 가입해주세요.'); return false;}
+			else if(inputPassword.length < 3){ showModal('비밀번호는 3자리 이상부터 가능합니다.'); return false;}
+			else if(inputId.length < 3){ showModal('아이디는 3자리 이상부터 가능합니다.'); return false;}
+			
+			
+			return true;
+		})
+		
+		/*----------------------------------//제출 전 가입 폼 입력 확인//---------------------------------*/
+		
+		
+		/*----------모달창 닫는 function-----------*/
+		
+		$('.modalCheckBtn').on("click", function(){
+			
+			$('#joinModal').modal('hide');
+			$("#text-warning").text("");
+		})
+		
+		/*----------//모달창 닫는 function//-----------*/
 		
 		
 		
 	}; //window event end
-</script>
+
+
+	
+	/*--------------------------------------- modal 메서드 ------------------------------------- */
+	
+		function showModal(message){
+			$("#text-warning").text(message);
+			$('#joinModal').css('text-align', 'center');
+			$('#joinModal').modal('show');
+			
+		}
+	
+	/*---------------------------------------// modal 메서드 //------------------------------------- */
+	
+	
+	</script>
 
 
 

@@ -10,15 +10,31 @@ import com.shopping.vo.CustomerVO;
 public class CustomerDAO {
 	
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
+	
+	/*로그인*/
+	
+	public CustomerVO selectLoginVO(CustomerVO customerVO) { 
+		
+		System.out.println("DAO까지 넘어오는지 체크" + customerVO);
+		CustomerVO returnVO = sqlSession.selectOne("customer.selectLoginVO", customerVO);
+		
+		return returnVO;
+	}
+	
+	
+	/*회원가입*/
 	
 	public int isertCustomer(CustomerVO customerVO) { 
 		
 		System.out.println("DAO 연결 확인" + customerVO);
+		int row  = sqlSession.insert("customer.insertCustomer", customerVO);
 		
-		return 0;
+		return row;
 	}
+	
+	/*아이디 유효성 검사*/
 	
 	public CustomerVO selectSameId(CustomerVO customerVO) {  
 		

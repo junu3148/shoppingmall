@@ -12,17 +12,26 @@ public class CustomerService {
 	@Autowired
 	CustomerDAO customerDAO;
 	
+	
+	public CustomerVO login(CustomerVO customerVO) {
+		
+		CustomerVO returnVO = customerDAO.selectLoginVO(customerVO);
+		
+		return returnVO;
+	}
+	
+	
 	//회원가입 기능 구현
 	public int join(CustomerVO customerVO) { 
 		
-		customerDAO.isertCustomer(customerVO);
+		int row = customerDAO.isertCustomer(customerVO);
 		
-		
-		return 0;
+		return row;
 	}
 	
 	
 	/* 아이디 유효성 체크 구현 AJAX */
+	//아이디 체크 후 가입 불가인 경우 false 리턴함
 	public boolean checkId(CustomerVO customerVO) { 
 			
 		boolean result = false; //가입 불가 = false
