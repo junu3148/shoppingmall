@@ -5,7 +5,7 @@
 <mapper namespace="image">
 
 	<!-- 상품 이미지 등록 -->
-	<insert id="insertProductImage" parameterType ="map">
+	<insert id="insertProductImage" parameterType="java.util.Map">
 	
 		<![CDATA[
 		

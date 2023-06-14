@@ -14,9 +14,29 @@
 		</selectKey>
 		
 		<![CDATA[
-		
 			
-		
+			insert into product(
+	                    PRODUCT_NO,
+	                    PRODUCT_NAME,
+	                    PRODUCT_EA,
+	                    PRICE,
+	                    PRODUCT_CONTENT,
+	                    REG_DATE,
+	                    CATEGORY,
+	                    SUBCATEGORY
+	                    )
+	            values(
+	                    #{productNo},
+	                    #{productName},
+	                    #{productEa},
+	                    #{price},
+	                    #{productContent},
+	                    sysdate,
+	                    #{category},
+	                    #{subCategory}	            
+	                    )
+	
+
 		]]>
 
 	</insert>

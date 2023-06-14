@@ -16,16 +16,16 @@ import com.shopping.vo.ProductVO;
 @Service
 public class ProductService {
 
-	String saveDir = "C:/javaStudy/upload/";
+	String saveDir = "C:/shopping/img/upload/";
 	@Autowired
 	private ProductDAO productDAO;
 
 	// -------------- 상품 등록 & 상품이미지 등록
 	public int insertProduct(ProductVO vo, MultipartFile file) {
 		System.out.println("insertProduct Service()");
-		
-		 int result = productDAO.insertProduct(vo);
-		
+
+		int result = productDAO.insertProduct(vo);
+
 		if (!file.isEmpty()) {
 			// 오리지널파일
 			String orgName = file.getOriginalFilename();
@@ -45,14 +45,13 @@ public class ProductService {
 
 			try {
 				file.transferTo(new File(filePath));
-				//파일이름 상품번호 map으로 만들어 보내기
-				
+				// 파일이름 상품번호 map으로 만들어 보내기
+
 				Map<String, Object> prdouctImgMap = new HashMap<>();
 				prdouctImgMap.put("productNo", vo.getProductNo());
 				prdouctImgMap.put("saveName", saveName);
-				
+
 				productDAO.insertProductImg(prdouctImgMap);
-				
 
 			} catch (IOException e) {
 				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
@@ -63,7 +62,6 @@ public class ProductService {
 			// 업로드된 파일이 없는 경우에 대한 처리를 수행합니다.
 			System.out.println("No file uploaded.");
 		}
-		
 
 		return result;
 	}

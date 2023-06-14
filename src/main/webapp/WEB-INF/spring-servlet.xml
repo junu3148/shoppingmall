@@ -57,7 +57,7 @@
 
 	<!-- url매핑 -->
 	<mvc:resources mapping="/upload/**"
-		location="file:C:/javaStudy/upload/" />
+		location="file:C:/shopping/img/upload/" />
 
 	<!-- 기본 뷰 리졸버 설정 -->
 	<bean id="viewResolver"
