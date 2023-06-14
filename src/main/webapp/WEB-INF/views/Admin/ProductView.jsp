@@ -109,12 +109,12 @@
                     </tr>
                     <c:forEach items="${productList}" var="product">
                         <tr>
-                            <td style="width: 20%; text-align: center;">${product.productId}</td>
+                            <td style="width: 20%; text-align: center;">${product.productNo}</td>
                             <td style="width: 30%; text-align: center;">${product.productName}</td>
-                            <td style="width: 10%; text-align: center;">${product.productEA}</td>
+                            <td style="width: 10%; text-align: center;">${product.productEa}</td>
                             <td style="width: 30%; text-align: center;"><fmt:formatNumber
                                value="${product.price}" pattern="#,##0원" /></td>
-                            <td style="width: 10%; text-align: center;"><a href="${pageContext.request.contextPath}/updateForm/${product.productId}" class="btn btn-primary">수정</a></td>
+                            <td style="width: 10%; text-align: center;"><a href="${pageContext.request.contextPath}/updateForm/${product.productNo}" class="btn btn-primary">수정</a></td>
                         </tr>
                     </c:forEach>
                 </table>

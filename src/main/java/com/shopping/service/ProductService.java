@@ -3,6 +3,7 @@ package com.shopping.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -65,5 +66,21 @@ public class ProductService {
 
 		return result;
 	}
-
+	
+	// ----------------- 상품 삭제
+	public int deleteProduct(int productNo) {
+		System.out.println("deleteProduct Service");
+		
+		productDAO.deleteProductImg(productNo);
+		
+		return productDAO.deleteProduct(productNo);
+	}
+	
+	// ---------------- 상품 리스트 가지고오기
+	public List<ProductVO> getProductList(){
+		System.out.println("getProductList Service");
+		
+		return productDAO.getProductList();
+	}
+	
 }

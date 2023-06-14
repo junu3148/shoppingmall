@@ -40,6 +40,49 @@
 		]]>
 
 	</insert>
+	
+	<!-- 상품삭제 -->
+	<delete id="deleteProduct" parameterType="int">
+		
+		<![CDATA[
+		
+			delete from product where product_no = #{productNo}
+		
+		]]>
+	
+	</delete>
+	
+	<!-- 상품리스트 가지고오기 -->
+	<select id="getProductList" resultType="ProductVO">
+	
+		<![CDATA[
+		
+			SELECT
+			    a.product_no as productNo,
+			    product_name as productName,
+			    product_ea as productEa,
+			    price,
+			    product_content as productContent,
+			    reg_date as regDate,
+			    category,
+			    subcategory as subCategory,
+			    b.save_name as saveName
+			FROM
+			    product a
+			    INNER JOIN product_image b 
+			    ON a.product_no = b.product_no
+			ORDER BY
+			    a.product_no DESC
+		
+		]]>	
+	
+	</select>
 
 
 </mapper>
+
+
+
+
+
+

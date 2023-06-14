@@ -1,7 +1,10 @@
 package com.shopping.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +35,7 @@ public class ProductController {
 	public String insertProductForm() {
 		System.out.println("insertProductForm()");
 
-		return "/Admin/ProductUpdate";
+		return "Admin/ProductUpdate";
 	}
 
 	// ----------------- 상품 등록
@@ -43,15 +46,21 @@ public class ProductController {
 		
 		int result = productService.insertProduct(vo, file);
 		
-		return "";
+		return "Admin/ProductView";
 	}
 
 	// ------------------- 상품정보 수정
 	@RequestMapping(value = "/modifyPoductForm", method = RequestMethod.GET)
-	public String modifyPoductForm() {
+	public String modifyPoductForm(Model model) {
 		System.out.println("modifyPoductForm()");
-
-		return "";
+		
+		List<ProductVO> productList = productService.getProductList();
+		
+		System.out.println(productList.get(0));
+		
+		model.addAttribute("productList", productList);
+				
+		return "Admin/ProductView";
 	}
 
 	// ------------------- 상품 수정

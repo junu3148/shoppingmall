@@ -22,6 +22,16 @@
 	
 	</insert>	
 
+	<!-- 상품 이미지 삭제 -->
+	<delete id="deleteProductImg" parameterType="int">
+		
+		<![CDATA[
+		
+			delete from product_image where product_no = #{productNo}
+		
+		]]>
+	
+	</delete>
 
 
 </mapper>

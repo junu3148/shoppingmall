@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class ProductVO {
 
 	private int productNo, productEa, price;
-	private String productName, productContent, category, subCategory;
+	private String productName, productContent, category, subCategory, saveName;
 	private Date regDate;
 
 	public ProductVO() {
@@ -16,7 +16,7 @@ public class ProductVO {
 	}
 
 	public ProductVO(int productNo, int productEa, int price, String productName, String productContent,
-			String category, String subCategory, Date regDate) {
+			String category, String subCategory, String saveName, Date regDate) {
 		super();
 		this.productNo = productNo;
 		this.productEa = productEa;
@@ -25,6 +25,7 @@ public class ProductVO {
 		this.productContent = productContent;
 		this.category = category;
 		this.subCategory = subCategory;
+		this.saveName = saveName;
 		this.regDate = regDate;
 	}
 
@@ -92,11 +93,19 @@ public class ProductVO {
 		this.regDate = regDate;
 	}
 
+	public String getSaveName() {
+		return saveName;
+	}
+
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVO [productNo=" + productNo + ", productEa=" + productEa + ", price=" + price + ", productName="
 				+ productName + ", productContent=" + productContent + ", category=" + category + ", subCategory="
-				+ subCategory + ", regDate=" + regDate + "]";
+				+ subCategory + ", saveName=" + saveName + ", regDate=" + regDate + "]";
 	}
 
 }
