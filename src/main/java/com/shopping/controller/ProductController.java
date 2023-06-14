@@ -82,17 +82,17 @@ public class ProductController {
 		
 		int result = productService.modifyProduct(vo, file);
 		
-		System.out.println(result);
-
-		return "";
+		return "redirect:/product/poductListForm";
 	}
 
 	// ------------------- 상품 삭제
-	@RequestMapping(value = "/deletePoduct", method = RequestMethod.POST)
-	public String deletePoduct() {
+	@RequestMapping(value = "/deletePoduct/{no}", method = RequestMethod.GET)
+	public String deletePoduct(@PathVariable("no") int productNo) {
 		System.out.println("deletePoduct()");
+		
+		int result = productService.deleteProduct(productNo);
 
-		return "";
+		return "redirect:/product/poductListForm";
 	}
 
 	// -------------------- 상품 검색

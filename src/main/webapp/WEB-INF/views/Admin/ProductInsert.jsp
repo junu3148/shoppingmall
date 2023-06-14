@@ -123,7 +123,7 @@ input {
 					</tr>
 
 					<tr>
-						<td colspan="4" style="text-align: center;">
+						<td colspan="4" style="text-align: right;">
 							<button type="submit">등록</button>
 						</td>
 					</tr>

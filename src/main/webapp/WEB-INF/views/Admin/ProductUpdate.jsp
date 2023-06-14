@@ -21,6 +21,46 @@
 input {
 	width: 400px;
 }
+
+a {
+	appearance: auto;
+	font-style:;
+	font-variant-ligatures:;
+	font-variant-caps:;
+	font-variant-numeric:;
+	font-variant-east-asian:;
+	font-variant-alternates:;
+	font-weight:;
+	font-stretch:;
+	font-size:;
+	font-family:;
+	font-optical-sizing:;
+	font-kerning:;
+	font-feature-settings:;
+	font-variation-settings:;
+	text-rendering: auto;
+	color: buttontext;
+	letter-spacing: normal;
+	word-spacing: normal;
+	line-height: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: center;
+	align-items: flex-start;
+	cursor: default;
+	box-sizing: border-box;
+	background-color: buttonface;
+	margin: 0em;
+	padding: 1px 6px;
+	border-width: 2px;
+	border-style: outset;
+	border-color: buttonborder;
+	border-image: initial;
+	text-decoration: none; 
+	
+}
 </style>
 </head>
 <body>
@@ -126,12 +166,13 @@ input {
 					</tr>
 					<tr>
 						<td style="text-align: center;">제품사진</td>
-						<td><input type="file" name="file" ></td>
+						<td><input type="file" name="file"></td>
 					</tr>
 
 					<tr>
-						<td colspan="4" style="text-align: center;">
-							<button type="submit">등록</button>
+						<td colspan="4" style="text-align: right;">
+							<button type="submit">수정</button>&nbsp;&nbsp;&nbsp; <a
+							href="${pageContext.request.contextPath}/product/deletePoduct/${product.productNo}">삭제</a>
 						</td>
 					</tr>
 				</table>
