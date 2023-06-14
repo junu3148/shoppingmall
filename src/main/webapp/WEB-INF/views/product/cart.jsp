@@ -29,87 +29,11 @@
 </head>
 
 <body>
-    <!-- 헤더 -->
-    <header class="pc"> <!--웹에서의 헤더-->
-        <div id="lnb">
-            <ul class="lnb">
-                <li class="login"><a href="#none">로그인</a></li>
-                <li class="cart"><a href="#none">장바구니</a></li>
-                <li class="search"><a href="#none">검색</a></li>
-                <li class="notice"><a href="#none">커뮤니티</a></li>
-            </ul>
-        </div>
-        <div id="header">
-            <h1><a href="#none">로고이미지</a></h1>
-            <!-- 메뉴 (gnb) -->
-            <ul id="nav">
-                <li class="on"><a href="#none">All</a></li>
-                <li><a href="#none">사료</a></li>
-                <li><a href="#none">간식</a></li>
-                <li><a href="#none">미용</a></li>
-                <li><a href="#none">장난감</a></li>
-                <li><a href="#none">가구</a></li>
-            </ul>
-            <!-- /메뉴 (gnb) -->
-        </div>
-    </header>
-
-    <header class="mo"> <!--테블릿/모바일에서의 헤더-->
-        <h1><a href="#none">로고이미지</a></h1>
-        <input type="checkbox" id="icon">
-        <label for="icon"> 
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <div id="header">
-            <h1><a href="#none">로고이미지</a></h1>
-            <p class="who">로그인이 필요합니다.</p><!-- 사용자 로그인 시 ooo(id)님 으로 변경 -->
-            <ul class="top_menu clear">
-                <li class="login"><a href="#none">로그인</a></li><!-- 사용자 로그인 시 로그아웃으로 변경 -->
-                <li class="join"><a href="#none">회원가입</a></li><!-- 사용자 로그인 시 마이페이지로 변경 -->
-            </ul>
-            <ul class="icon_menu">
-                <li class="search"><a href="#none"><img src="${pageContext.request.contextPath }/assets/images/search.png" alt="">검색</a></li>
-                <li class="cart"><a href="#none"><img src="${pageContext.request.contextPath }/assets/images/cart.png" alt="">장바구니</a></li>
-                <li class="cart"><a href="#none"><img src="${pageContext.request.contextPath }/assets/images/search.png" alt="">??</a></li>
-                <li class="cart"><a href="#none"><img src="${pageContext.request.contextPath }/assets/images/search.png" alt="">??</a></li>
-            </ul>
-            <ul class="middle_menu">
-                <li class="dir"><a href="#none" class="en">All</a></li>
-                <li>
-                    <a href="#none" class="en">DOG</a>
-                    <ul>
-                        <li><a href="#none">사료</a></li>
-                        <li><a href="#none">간식</a></li>
-                        <li><a href="#none">미용</a></li>
-                        <li><a href="#none">장난감</a></li>
-                        <li><a href="#none">가구</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#none" class="en">CAT</a>
-                    <ul>
-                        <li><a href="#none">사료</a></li>
-                        <li><a href="#none">간식</a></li>
-                        <li><a href="#none">미용</a></li>
-                        <li><a href="#none">장난감</a></li>
-                        <li><a href="#none">가구</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#none" class="en">COMMUNITY</a>
-                    <ul>
-                        <li><a href="#none">공지사항</a></li>
-                        <li><a href="#none">FAQ</a></li>
-                        <li><a href="#none">Q&A</a></li>
-                        <li><a href="#none">이벤트</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <!-- /헤더 -->
+  
+  	<!-- 헤더 -->
+	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
+	<!-- //헤더 -->
+  
 
     <main id="cart">
         
@@ -314,32 +238,9 @@
 
     </main>
 
-    <!-- 푸터 -->
-    <footer>
-        <div id="footer" class="clear">
-            <div class="logo"><img src="${pageContext.request.contextPath }/assets/images/ver02/logo_blue.png"></div>
-            <div class="customer">
-                <h4>고객센터</h4>
-                <p class="tel">054-873-7749</p>
-                <p class="time">
-                    화~일 : AM 10:00 ~ PM 05:00 (점심시간 : PM 12:00 ~ PM 01:00)<br>
-                    매주 월요일 / 1월1일 / 설날·추석 당일 휴무
-                </p>
-                <p></p>
-            </div>
-            <div class="address">
-                <h4>반품주소 안내</h4>
-                <p>경북 청송군 주왕산면 주왕산로 494 청송백자전수관</p>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>copyright</p>
-        </div>
-    </footer>
-    <!-- /푸터 -->
-    
-
+ 	<!-- Footer -->
+	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+	<!-- //Footer -->
 
 
 
