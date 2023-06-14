@@ -21,8 +21,8 @@ public class CustomerController {
 
 	@RequestMapping(value = "/loginPage")
 	public String loginForm() {
-		
-		System.out.println("하하하하");
+			
+		System.out.println("loginPage 이동");
 		
 		return "customer/login";
 	}
@@ -46,9 +46,9 @@ public class CustomerController {
 	/* 회원가입 페이지 이동 */
 	
 	@RequestMapping(value = "/joinPage")
-	public String joinForm(@ModelAttribute CustomerVO customerVO) {
+	public String joinForm() {
 		
-		System.out.println("가입할 때 넘어오는 값 보기 :" + customerVO);
+		System.out.println("JoinPage 이동");
 		
 		return "customer/join";
 	}
