@@ -20,12 +20,61 @@ public class ProductService {
 	String saveDir = "C:/shopping/img/upload/";
 	@Autowired
 	private ProductDAO productDAO;
+	Map<String, Object> prdouctImgMap = new HashMap<>();
 
 	// -------------- 상품 등록 & 상품이미지 등록
 	public int insertProduct(ProductVO vo, MultipartFile file) {
 		System.out.println("insertProduct Service()");
 
 		int result = productDAO.insertProduct(vo);
+
+		fileCheck(vo, file);
+		if (!file.isEmpty()) {
+			productDAO.insertProductImg(prdouctImgMap);
+		}
+		return result;
+	}
+
+	// ----------------- 상품 삭제
+	public int deleteProduct(int productNo) {
+		System.out.println("deleteProduct Service");
+
+		productDAO.deleteProductImg(productNo);
+
+		return productDAO.deleteProduct(productNo);
+	}
+
+	// ---------------- 상품 리스트 가져오기
+	public List<ProductVO> getProductList() {
+		System.out.println("getProductList Service");
+
+		return productDAO.getProductList();
+	}
+
+	// ---------------- 상품 정보 가져오기
+	public ProductVO getProduct(ProductVO vo) {
+		System.out.println("getProduct Service");
+
+		return productDAO.getProduct(vo);
+	}
+
+	// -------------- 상품 수정 & 상품이미지 수정
+	public int modifyProduct(ProductVO vo, MultipartFile file) {
+		System.out.println("insertProduct Service()");
+
+		int result = productDAO.modifyProduct(vo);
+
+		fileCheck(vo, file);
+
+		if (!file.isEmpty()) {
+			productDAO.modifyProductImg(prdouctImgMap);
+		}
+
+		return result;
+	}
+
+	// ------------- 파일체크 & 맵 치환
+	public void fileCheck(ProductVO vo, MultipartFile file) {
 
 		if (!file.isEmpty()) {
 			// 오리지널파일
@@ -48,11 +97,8 @@ public class ProductService {
 				file.transferTo(new File(filePath));
 				// 파일이름 상품번호 map으로 만들어 보내기
 
-				Map<String, Object> prdouctImgMap = new HashMap<>();
 				prdouctImgMap.put("productNo", vo.getProductNo());
 				prdouctImgMap.put("saveName", saveName);
-
-				productDAO.insertProductImg(prdouctImgMap);
 
 			} catch (IOException e) {
 				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
@@ -64,23 +110,5 @@ public class ProductService {
 			System.out.println("No file uploaded.");
 		}
 
-		return result;
 	}
-	
-	// ----------------- 상품 삭제
-	public int deleteProduct(int productNo) {
-		System.out.println("deleteProduct Service");
-		
-		productDAO.deleteProductImg(productNo);
-		
-		return productDAO.deleteProduct(productNo);
-	}
-	
-	// ---------------- 상품 리스트 가지고오기
-	public List<ProductVO> getProductList(){
-		System.out.println("getProductList Service");
-		
-		return productDAO.getProductList();
-	}
-	
 }

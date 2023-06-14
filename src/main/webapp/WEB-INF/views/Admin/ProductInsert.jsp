@@ -16,7 +16,6 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-
 <style>
 input {
 	width: 400px;
@@ -75,14 +74,14 @@ input {
 
 		<div align="center" style="margin: 5%;">
 			<h1 class="display-6">
-				<b>Product Update Page</b>
+				<b>Product Insert Page</b>
 			</h1>
 			<br>
 			<hr>
 			<br>
 
 			<form
-				action="${pageContext.request.contextPath}/product/modifyPoduct"
+				action="${pageContext.request.contextPath}/product/insertProduct"
 				method="POST" enctype="multipart/form-data">
 				<table width="700px">
 					<tr>
@@ -93,40 +92,34 @@ input {
 							src="https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTVfMTE2/MDAxNjE4NDU0MTU0Nzc5.pHUtY9vre2Blb2nNcKSdHTdcDyOITCuiGBJg8DQYzEIg.CZS_8DFgrsm1gZFFkZpZ9zYwd-lXLfy-urxhoxwwbRYg.JPEG.jj_ssong/1216_%EC%86%8C%EB%A6%AC_%EC%A6%9D%EB%AA%85.jpg?type=w800"
 							width="100%"> 사진 영역(임시고정)</td>
 					</tr>
-					<input type="hidden" name="productNo" value="${product.productNo}">
+
 					<tr>
 						<td style="text-align: center;">제품명</td>
-						<td><input type="text" name="productName"
-							value="${product.productName}" required></td>
+						<td><input type="text" name="productName" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">수량</td>
-						<td><input type="number" name="productEa"
-							value="${product.productEa}" required></td>
+						<td><input type="number" name="productEa" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">가격</td>
-						<td><input type="number" name="price" min="3000"
-							value="${product.price}" required></td>
+						<td><input type="number" name="price" min="3000" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">상품 정보</td>
-						<td><input type="text" name="productContent"
-							value="${product.productContent}" required></td>
+						<td><input type="text" name="productContent" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">카테고리</td>
-						<td><input type="text" name="category"
-							value="${product.category}" required></td>
+						<td><input type="text" name="category" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">서브 카테고리</td>
-						<td><input type="text" name="subCategory"
-							value="${product.subCategory}" required></td>
+						<td><input type="text" name="subCategory" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">제품사진</td>
-						<td><input type="file" name="file" ></td>
+						<td><input type="file" name="file" required></td>
 					</tr>
 
 					<tr>

@@ -32,6 +32,20 @@
 		]]>
 	
 	</delete>
+	
+	<!-- 상품 이미지 수정 -->
+	<update id="modifyProductImg" parameterType="java.util.Map">
+	
+		<![CDATA[
+			
+			update product_image set
+                        			save_name = #{saveName}  
+                 			  where product_no = #{productNo}
+		
+		]]>
+	
+	</update>
+	
 
 
 </mapper>

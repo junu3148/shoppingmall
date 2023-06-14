@@ -54,14 +54,14 @@
             <h1 class="display-6"><b>Product Management Page</b></h1><br><hr><br>
 
             <!--키워드 검색 폼-->
-            <form action="${pageContext.request.contextPath}/search">
+            <form action="${pageContext.request.contextPath}/product/search">
             <table>
                 <tr>
                     <td> 
                         <select name="searchOption" class="form-select" >
                             <option>선택</option>
                             <option value="productName">제품명</option>
-                            <option value="productId">제품코드</option>
+                            <option value="productNo">제품코드</option>
                         </select>
                     </td>
                     <td>
@@ -114,7 +114,7 @@
                             <td style="width: 10%; text-align: center;">${product.productEa}</td>
                             <td style="width: 30%; text-align: center;"><fmt:formatNumber
                                value="${product.price}" pattern="#,##0원" /></td>
-                            <td style="width: 10%; text-align: center;"><a href="${pageContext.request.contextPath}/updateForm/${product.productNo}" class="btn btn-primary">수정</a></td>
+                            <td style="width: 10%; text-align: center;"><a href="${pageContext.request.contextPath}/product/modifyPoductForm?productNo=${product.productNo}" class="btn btn-primary">수정</a></td>
                         </tr>
                     </c:forEach>
                 </table>

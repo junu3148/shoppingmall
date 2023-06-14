@@ -24,9 +24,23 @@ public class ProductDAO {
 
 	// --------------- 상품 이미지 등록
 	public int insertProductImg(Map<String, Object> prdouctImgMap) {
-		System.out.println("insertProduct DAO()");
+		System.out.println("insertProductImg DAO()");
 
 		return sqlSession.insert("image.insertProductImage", prdouctImgMap);
+	}
+	
+	// -------------- 상품 수정
+	public int modifyProduct(ProductVO vo) {
+		System.out.println("modifyProduct DAO()");
+
+		return sqlSession.update("product.modifyProduct", vo);
+	}
+
+	// --------------- 상품 이미지 수정
+	public int modifyProductImg(Map<String, Object> prdouctImgMap) {
+		System.out.println("modifyProductImg DAO()");
+
+		return sqlSession.update("image.modifyProductImg", prdouctImgMap);
 	}
 
 	// --------------- 상품 삭제
@@ -42,24 +56,19 @@ public class ProductDAO {
 
 		return sqlSession.delete("image.deleteProductImg", productNo);
 	}
-	
-	// ---------------- 상품 리스트 가지고오기
-	public List<ProductVO> getProductList(){
+
+	// ---------------- 상품 리스트 가져오기
+	public List<ProductVO> getProductList() {
 		System.out.println("getProductList DAO");
-		
+
 		return sqlSession.selectList("product.getProductList");
 	}
 
+	// ---------------- 상품 정보 가져오기
+	public ProductVO getProduct(ProductVO vo) {
+		System.out.println("getProduct DAO");
+
+		return sqlSession.selectOne("product.getProduct", vo);
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

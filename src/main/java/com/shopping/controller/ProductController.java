@@ -21,6 +21,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductVO productVO;
 
 	// ----------------- 상품 페이지
 	@RequestMapping(value = "/category/{no}", method = RequestMethod.GET)
@@ -35,38 +37,52 @@ public class ProductController {
 	public String insertProductForm() {
 		System.out.println("insertProductForm()");
 
-		return "Admin/ProductUpdate";
+		return "Admin/ProductInsert";
 	}
 
 	// ----------------- 상품 등록
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
-	public String insertProduct(@ModelAttribute ProductVO vo, 
-								@RequestParam("file") MultipartFile file) {
+	public String insertProduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("insertProduct()");
-		
+
 		int result = productService.insertProduct(vo, file);
-		
+
 		return "Admin/ProductView";
 	}
 
-	// ------------------- 상품정보 수정
-	@RequestMapping(value = "/modifyPoductForm", method = RequestMethod.GET)
-	public String modifyPoductForm(Model model) {
-		System.out.println("modifyPoductForm()");
-		
+	// ------------------- 상품정보 리스트
+	@RequestMapping(value = "/poductListForm", method = RequestMethod.GET)
+	public String PoductListForm(Model model) {
+		System.out.println("poductListForm()");
+
 		List<ProductVO> productList = productService.getProductList();
-		
-		System.out.println(productList.get(0));
-		
+
 		model.addAttribute("productList", productList);
-				
+
 		return "Admin/ProductView";
 	}
 
 	// ------------------- 상품 수정
+	@RequestMapping(value = "/modifyPoductForm", method = RequestMethod.GET)
+	public String modifyPoductForm(Model model, @ModelAttribute ProductVO vo) {
+		System.out.println("modifyPoductForm()");
+
+		productVO = productService.getProduct(vo);
+
+		model.addAttribute("product", productVO);
+
+		return "Admin/ProductUpdate";
+	}
+
+	// ------------------- 상품 수정
 	@RequestMapping(value = "/modifyPoduct", method = RequestMethod.POST)
-	public String modifyPoduct() {
+	public String modifyPoduct(@ModelAttribute ProductVO vo,
+							   @RequestParam("file") MultipartFile file) {
 		System.out.println("modifyPoduct()");
+		
+		int result = productService.modifyProduct(vo, file);
+		
+		System.out.println(result);
 
 		return "";
 	}
@@ -75,6 +91,12 @@ public class ProductController {
 	@RequestMapping(value = "/deletePoduct", method = RequestMethod.POST)
 	public String deletePoduct() {
 		System.out.println("deletePoduct()");
+
+		return "";
+	}
+
+	// -------------------- 상품 검색
+	public String searchProduct() {
 
 		return "";
 	}

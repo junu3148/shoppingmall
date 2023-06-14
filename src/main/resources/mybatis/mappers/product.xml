@@ -52,32 +52,78 @@
 	
 	</delete>
 	
-	<!-- 상품리스트 가지고오기 -->
+	<!-- 상품리스트 가져오기 -->
 	<select id="getProductList" resultType="ProductVO">
 	
 		<![CDATA[
 		
 			SELECT
-			    a.product_no as productNo,
-			    product_name as productName,
-			    product_ea as productEa,
-			    price,
-			    product_content as productContent,
-			    reg_date as regDate,
-			    category,
-			    subcategory as subCategory,
-			    b.save_name as saveName
-			FROM
-			    product a
-			    INNER JOIN product_image b 
-			    ON a.product_no = b.product_no
-			ORDER BY
-			    a.product_no DESC
+			      a.product_no as productNo,
+			      product_name as productName,
+			      product_ea as productEa,
+			      price,
+			      product_content as productContent,
+			      reg_date as regDate,
+			      category,
+			      subcategory as subCategory,
+			      b.save_name as saveName
+			  FROM
+			      product a
+			      INNER JOIN product_image b 
+			      ON a.product_no = b.product_no
+			 ORDER BY
+			      a.product_no DESC
 		
 		]]>	
 	
 	</select>
+	
+	<!-- 상품 정보 가져오기 -->
+	<select id="getProduct" parameterType="ProductVO" resultType="ProductVO">
+	
+		<![CDATA[
+		
+			SELECT
+			      a.product_no as productNo,
+			      product_name as productName,
+			      product_ea as productEa,
+			      price,
+			      product_content as productContent,
+			      reg_date as regDate,
+			      category,
+			      subcategory as subCategory,
+			      b.save_name as saveName
+			  FROM
+			      product a
+			      INNER JOIN product_image b 
+			      ON a.product_no = b.product_no
+			  where
+			      a.product_no = #{productNo}
 
+		]]>	
+	
+	</select>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="modifyProduct" parameterType="ProductVO">
+		
+		<![CDATA[
+		
+			update product 
+					   set                  
+		                  product_name = #{productName},
+		                  product_ea = #{productEa},
+		                  price = #{price},
+		                  product_content = #{productContent},
+		                  category = #{category},
+		                  subcategory = #{subCategory}
+		        	where product_no = #{productNo}
+	
+		]]>
+	
+	
+	</update>
+	
 
 </mapper>
 
