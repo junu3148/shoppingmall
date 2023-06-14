@@ -60,6 +60,7 @@ public class CustomerController {
 	
 	/* 로그아웃 */
 	
+	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) { 
 		System.out.println("logout Controller()");
 		session.removeAttribute("authCustomer");
