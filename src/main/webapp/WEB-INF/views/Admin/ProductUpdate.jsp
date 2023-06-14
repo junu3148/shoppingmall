@@ -75,18 +75,15 @@
 			<hr>
 			<br>
 
-			<form action="" method="GET">
-				<table width="510px">
-
+			<form action="${pageContext.request.contextPath}/product/insertProduct" method="POST"  enctype="multipart/form-data">
+				<table width="700px">
 					<tr>
 						<td colspan="4" bgcolor="lightgray"><b>제품등록창</b></td>
 					</tr>
 					<tr>
-						<td colspan="2" rowspan="5" width=30%><img
+						<td colspan="2" rowspan="8" width=30%><img
 							src="https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTVfMTE2/MDAxNjE4NDU0MTU0Nzc5.pHUtY9vre2Blb2nNcKSdHTdcDyOITCuiGBJg8DQYzEIg.CZS_8DFgrsm1gZFFkZpZ9zYwd-lXLfy-urxhoxwwbRYg.JPEG.jj_ssong/1216_%EC%86%8C%EB%A6%AC_%EC%A6%9D%EB%AA%85.jpg?type=w800"
 							width="100%"> 사진 영역(임시고정)</td>
-						<td style="text-align: center;">제품코드</td>
-						<td><input type="text" name="productId" required></td>
 					</tr>
 
 					<tr>
@@ -95,15 +92,27 @@
 					</tr>
 					<tr>
 						<td style="text-align: center;">수량</td>
-						<td><input type="number" name="productEA" required></td>
+						<td><input type="number" name="productEa" required></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">가격</td>
 						<td><input type="number" name="price" min="3000" required></td>
 					</tr>
 					<tr>
+						<td style="text-align: center;">상품 정보</td>
+						<td><input type="text" name="productContent" required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">카테고리</td>
+						<td><input type="text" name="category" required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">서브 카테고리</td>
+						<td><input type="text" name="subCategory" required></td>
+					</tr>
+					<tr>
 						<td style="text-align: center;">제품사진</td>
-						<td><input type="file" name="productImg" required></td>
+						<td><input type="file" name="file" required></td>
 					</tr>
 
 					<tr>

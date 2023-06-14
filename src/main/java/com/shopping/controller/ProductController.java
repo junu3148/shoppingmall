@@ -2,15 +2,20 @@ package com.shopping.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.shopping.service.ProductService;
+import com.shopping.vo.ProductVO;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -32,9 +37,12 @@ public class ProductController {
 
 	// ----------------- 상품 등록
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
-	public String insertProduct() {
+	public String insertProduct(@ModelAttribute ProductVO vo, 
+								@RequestParam("file") MultipartFile file) {
 		System.out.println("insertProduct()");
-
+		
+		int result = productService.insertProduct(vo, file);
+		
 		return "";
 	}
 
@@ -61,9 +69,5 @@ public class ProductController {
 
 		return "";
 	}
-	
+
 }
-
-
-
-
