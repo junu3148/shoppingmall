@@ -59,11 +59,12 @@
 				</div>
 
 				<!------------------------------- 인풋 영역 ---------------------------------------->
-
-				<span>중복체크 영역 AJAX 구현예정</span> <input type="text" placeholder="Id"
-					id="inputId" name="customerId"> <input type="text"
-					placeholder="name" name="customerName" /> <input type="password"
-					placeholder="Password" name="customerPassword" /> <a href="#"></a>
+				<!-- 아이디 유효성 체크 html 요소 -->
+				<span id = "checkId"></span>
+				<input type="text" placeholder="Id"id="inputId" name="customerId" required> 
+				<input type="text" placeholder="name" name="customerName" required /> 
+				<input type="password" placeholder="Password" name="customerPassword"  required/>
+				<a href="#"></a>
 				<button type="submit">회원가입</button>
 			</form>
 		</div>
@@ -101,14 +102,47 @@
 		console.log('onload 이벤트 발생 체크')
 		
 		
+		
+		/*아이디 유효성 검사*/
+		
 		$('#inputId').on("keyup", function(){
 			
 			var inputId = $(this).val();
 			
-		Customer()
+		var CustomerVO = {
+				customerId  : inputId
+		} 
 			
-			
-		});
+		  $.ajax({
+	            
+	            //요청 세팅
+	            url : "${pageContext.request.contextPath}/customer/checkId",      
+	            type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+	            data : CustomerVO,
+	            
+	            //응답 관련 세팅
+	            dataType : "json",
+	            success : function(jsonResult){
+	            
+	            	var data = jsonResult.data;
+	            	console.log(data); //가입 불가면 false, 가입 가능하면 true가 옴
+	          
+					if(data == false){   	/* 가입 불가 상태*/
+	            		$('#checkId').html('이미 존재하는 아이디입니다.');
+	            }else{   	/* 가입 가능 상태*/
+	            		$('#checkId').html('가입 가능한 아이디입니다.');
+	            }
+	            	
+	            	
+	            },
+	            error : function(XHR, status, error) {
+	            console.error(status + " : " + error);
+	            }
+					            
+	         });//ajax end
+		});//keyup event end 아이디 유효성 검사 AJAX end
+		
+		
 		
 		
 	}; //window event end

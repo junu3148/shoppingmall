@@ -64,7 +64,7 @@ public class CustomerController {
 		
 		System.out.println("가입할 때 넘어오는 값 보기 :" + customerVO);
 		
-		customerService.join(customerVO);
+//		customerService.join(customerVO);
 		
 //		redirect:/user/login
 		return "";
@@ -82,8 +82,10 @@ public class CustomerController {
 		
 		JasonResult jasonResult = new JasonResult();
 		
-		System.out.println("넘어온 유저 정보 확인" + customerVO.getCustomerId());
+		boolean result = customerService.checkId(customerVO);
+		System.out.println("Controller로 돌아온 정보" + result);
 		
+		jasonResult.success(result);
 		
 		return jasonResult;
 	}

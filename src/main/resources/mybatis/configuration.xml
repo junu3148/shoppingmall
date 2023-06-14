@@ -5,6 +5,7 @@
 
 	<typeAliases>
 		<typeAlias alias="ProductVO" type="com.shopping.vo.ProductVO" />
+		<typeAlias alias="CustomerVO" type="com.shopping.vo.CustomerVO" />
 	</typeAliases>
 
 	<mappers>
