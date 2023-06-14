@@ -1,5 +1,7 @@
 package com.shopping.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,12 @@ public class ProductDAO {
 		System.out.println("insertProduct DAO()");
 		
 		return sqlSession.insert("product.insertProduct", vo);
+	}
+	
+	public int insertProductImg(Map<String, Object> prdouctImgMap) {
+		System.out.println("insertProduct DAO()");
+				
+		return sqlSession.insert("image.insertProductImage",prdouctImgMap);
 	}
 	
 

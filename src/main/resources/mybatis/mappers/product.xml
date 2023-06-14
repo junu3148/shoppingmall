@@ -2,10 +2,24 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="product">
 
-	<!-- 쿼리문 작성 -->
+	<!-- 상품등록 -->
+	<insert id="insertProduct" parameterType="ProductVO">
+		
+		<selectKey keyProperty="productNo" resultType="int"
+			order="BEFORE">
+			SELECT seq_product_no.nextval AS productNo FROM dual
+		</selectKey>
+		
+		<![CDATA[
+		
+			
+		
+		]]>
+
+	</insert>
 
 
 </mapper>

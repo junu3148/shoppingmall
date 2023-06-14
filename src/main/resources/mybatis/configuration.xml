@@ -3,11 +3,15 @@
 
 <configuration>
 
-    <mappers>
-        <mapper resource="mybatis/mappers/product.xml" />
-        <mapper resource="mybatis/mappers/customer.xml" />
-    </mappers>
-    
-    
-    
+	<typeAliases>
+		<typeAlias alias="ProductVO" type="com.shopping.vo.ProductVO" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mybatis/mappers/product.xml" />
+		<mapper resource="mybatis/mappers/customer.xml" />
+		<mapper resource="mybatis/mappers/image.xml" />
+	</mappers>
+
+
 </configuration>
