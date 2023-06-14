@@ -17,6 +17,7 @@ public class ProductDAO {
 	// -------------- 상품 등록
 	public int insertProduct(ProductVO vo) {
 		System.out.println("insertProduct DAO()");
+		
 
 		return sqlSession.insert("product.insertProduct", vo);
 	}
