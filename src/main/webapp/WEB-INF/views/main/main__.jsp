@@ -187,9 +187,10 @@
 
     </main>
 
+
     <footer>
         <div id="footer" class="clear">
-            <div class="logo"><img src="images/logo.png"></div>
+            <div class="logo"><img src="${pageContext.request.contextPath }/assets/images/logo.png"></div>
             <div class="customer">
                 <h4>고객센터</h4>
                 <p class="tel">054-873-7749</p>
