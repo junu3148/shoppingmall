@@ -47,7 +47,7 @@ public class ProductController {
 
 		int result = productService.insertProduct(vo, file);
 
-		return "Admin/ProductView";
+		return "redirect:/product/poductListForm";
 	}
 
 	// ------------------- 상품정보 리스트
@@ -62,7 +62,7 @@ public class ProductController {
 		return "Admin/ProductView";
 	}
 
-	// ------------------- 상품 수정
+	// ------------------- 상품 수정폼
 	@RequestMapping(value = "/modifyPoductForm", method = RequestMethod.GET)
 	public String modifyPoductForm(Model model, @ModelAttribute ProductVO vo) {
 		System.out.println("modifyPoductForm()");
@@ -79,7 +79,7 @@ public class ProductController {
 	public String modifyPoduct(@ModelAttribute ProductVO vo,
 							   @RequestParam("file") MultipartFile file) {
 		System.out.println("modifyPoduct()");
-		
+	
 		int result = productService.modifyProduct(vo, file);
 		
 		return "redirect:/product/poductListForm";

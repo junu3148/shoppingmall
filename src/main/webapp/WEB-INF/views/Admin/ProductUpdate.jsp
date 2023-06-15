@@ -58,8 +58,7 @@ a {
 	border-style: outset;
 	border-color: buttonborder;
 	border-image: initial;
-	text-decoration: none; 
-	
+	text-decoration: none;
 }
 </style>
 </head>
@@ -129,9 +128,10 @@ a {
 						<td colspan="4" bgcolor="lightgray"><b>제품등록창</b></td>
 					</tr>
 					<tr>
-						<td colspan="2" rowspan="8" width=30%><img
-							src="https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTVfMTE2/MDAxNjE4NDU0MTU0Nzc5.pHUtY9vre2Blb2nNcKSdHTdcDyOITCuiGBJg8DQYzEIg.CZS_8DFgrsm1gZFFkZpZ9zYwd-lXLfy-urxhoxwwbRYg.JPEG.jj_ssong/1216_%EC%86%8C%EB%A6%AC_%EC%A6%9D%EB%AA%85.jpg?type=w800"
-							width="100%"> 사진 영역(임시고정)</td>
+						<td colspan="2" rowspan="8" width=30%><img id="preview"
+							src="${pageContext.request.contextPath}/upload/${product.saveName}"
+							width="100%"> 사진 영역(미리보기) <input type="hidden"
+							name="imageNo" value="${product.imageNo}"></td>
 					</tr>
 					<input type="hidden" name="productNo" value="${product.productNo}">
 					<tr>
@@ -166,7 +166,7 @@ a {
 					</tr>
 					<tr>
 						<td style="text-align: center;">제품사진</td>
-						<td><input type="file" name="file"></td>
+						<td><input id ="file" type="file" name="file"></td>
 					</tr>
 
 					<tr>
@@ -177,40 +177,47 @@ a {
 					</tr>
 				</table>
 			</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-	</div>
-	<!--배경색 end-->
-
-
-
-
-
 </body>
+<script>
+	// 파일 미리보기 이벤트
+	$("#file").on("change", function(event) {
+		console.log("파일 체인지");
+
+		var file = event.target.files[0];
+
+		// 확장자 확인
+		if (!isImageFile(file)) {
+			alert("사진 파일만 올려주세요");
+
+			// 파일 사이즈 확인
+			if (isOverSize(file)) {
+				alert("파일 사이즈가 너무 큽니다.");
+
+			}
+		} else {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+
+				$("#preview").attr("src", e.target.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	});
+
+	// 확장자가 이미지 파일인지 확인
+	function isImageFile(file) {
+		var ext = file.name.split(".").pop().toLowerCase(); // 파일명에서 확장자를 가져온다.
+		return [ "jpg", "jpeg", "gif", "png" ].includes(ext);
+	}
+
+	// 파일의 최대 사이즈 확인
+	function isOverSize(file) {
+		var maxSize = 3 * 1024 * 1024; // 3MB로 제한
+		return file.size > maxSize;
+	}
+</script>
 </html>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductVO {
 
-	private int productNo, productEa, price;
+	private int productNo, productEa, price, imageNo;
 	private String productName, productContent, category, subCategory, saveName;
 	private Date regDate;
 
@@ -15,12 +15,13 @@ public class ProductVO {
 		super();
 	}
 
-	public ProductVO(int productNo, int productEa, int price, String productName, String productContent,
+	public ProductVO(int productNo, int productEa, int price, int imageNo, String productName, String productContent,
 			String category, String subCategory, String saveName, Date regDate) {
 		super();
 		this.productNo = productNo;
 		this.productEa = productEa;
 		this.price = price;
+		this.imageNo = imageNo;
 		this.productName = productName;
 		this.productContent = productContent;
 		this.category = category;
@@ -101,11 +102,19 @@ public class ProductVO {
 		this.saveName = saveName;
 	}
 
+	public int getImageNo() {
+		return imageNo;
+	}
+
+	public void setImageNo(int imageNo) {
+		this.imageNo = imageNo;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductVO [productNo=" + productNo + ", productEa=" + productEa + ", price=" + price + ", productName="
-				+ productName + ", productContent=" + productContent + ", category=" + category + ", subCategory="
-				+ subCategory + ", saveName=" + saveName + ", regDate=" + regDate + "]";
+		return "ProductVO [productNo=" + productNo + ", productEa=" + productEa + ", price=" + price + ", imageNo="
+				+ imageNo + ", productName=" + productName + ", productContent=" + productContent + ", category="
+				+ category + ", subCategory=" + subCategory + ", saveName=" + saveName + ", regDate=" + regDate + "]";
 	}
 
 }
