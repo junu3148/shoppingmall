@@ -19,10 +19,10 @@
             <!-- 메뉴 (gnb) -->
             <ul id="nav">
                 <li class="on"><a href="${pageContext.request.contextPath}/main/all">All</a></li>
-                <li><a href="${pageContext.request.contextPath}/main/category/사료">사료</a></li>
-                <li><a href="#none">간식</a></li>
-                <li><a href="#none">미용</a></li>
-                <li><a href="#none">장난감</a></li>
+                <li><a href="${pageContext.request.contextPath}/main/category/간식">사료/간식</a></li>
+                <li><a href="${pageContext.request.contextPath}/main/category/배변용품">배변용품</a></li>
+                <li><a href="${pageContext.request.contextPath}/main/category/미용">미용</a></li>
+                <li><a href="${pageContext.request.contextPath}/main/category/장난감">장난감</a></li>
                 <li><a href="${pageContext.request.contextPath}/main/category/가구">가구</a></li>
             </ul>
             <!-- /메뉴 (gnb) -->
