@@ -15,10 +15,10 @@
             </ul>
         </div>
         <div id="header">
-            <h1><a href="#none">로고이미지</a></h1>
+            <h1><a href="${pageContext.request.contextPath}/main/">로고이미지</a></h1>
             <!-- 메뉴 (gnb) -->
             <ul id="nav">
-                <li class="on"><a href="#none">All</a></li>
+                <li class="on"><a href="${pageContext.request.contextPath}/main/all">All</a></li>
                 <li><a href="#none">사료</a></li>
                 <li><a href="#none">간식</a></li>
                 <li><a href="#none">미용</a></li>
