@@ -52,14 +52,17 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/script3.js"></script>
 <!-- js -->
+
+
+
 </head>
 
 <body>
-	
-		<!-- 헤더 -->
+
+	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
-	
+
 
 
 
@@ -213,8 +216,7 @@
 
 
 
-
-
 </body>
+
 
 </html>

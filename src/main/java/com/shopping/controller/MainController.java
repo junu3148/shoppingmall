@@ -68,13 +68,27 @@ public class MainController {
 	public String productDetal(Model model, @PathVariable("productNo") int productNo) {
 		System.out.println("productDetal");
 		productVO.setProductNo(productNo);
-		
+
 		ProductVO product = productService.getProduct(productVO);
-		
+
 		model.addAttribute("product", product);
 
-		
 		return "product/pd_detail";
 
 	}
+
+	// -------------------- 상품 검색
+	@RequestMapping(value = "/productSearch", method = RequestMethod.POST)
+	public String productSearch(Model model, @RequestParam("keyword") String keyword) {
+		System.out.println("productSearch()");
+
+		List<ProductVO> productList = productService.productSearch(keyword);
+
+		model.addAttribute("productList", productList);
+		model.addAttribute("view", "all");
+		model.addAttribute("Search","Search");
+
+		return "product/product";
+	}
+
 }

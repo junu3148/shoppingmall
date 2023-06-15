@@ -72,7 +72,7 @@
 			      product a
 			      INNER JOIN product_image b 
 			      ON a.product_no = b.product_no
-			 ORDER BY
+		  ORDER BY
 			      a.product_no DESC
 		
 		]]>	
@@ -98,7 +98,8 @@
 			  FROM
 			      product a,
 			      product_image b 
-            where a.product_no = b.product_no
+             WHERE 
+            	  a.product_no = b.product_no
          ]]>     
           
 	       		<if test="category != 'all'">
@@ -115,6 +116,36 @@
 		]]>
 	
 	</select>
+	
+	<!-- 상품 검색 -->
+	<select id="productSearch" parameterType="String" resultType="ProductVO">
+	
+		<![CDATA[
+		
+			SELECT
+			      a.product_no as productNo,
+			      product_name as productName,
+			      product_ea as productEa,
+			      price,
+			      product_content as productContent,
+			      reg_date as regDate,
+			      category,
+			      subcategory as subCategory,
+			      b.save_name as saveName,
+			      b.image_no as imageNo
+			  FROM
+			      product a
+			      INNER JOIN product_image b 
+			      ON a.product_no = b.product_no
+			      WHERE product_name like '%'||#{keyword}||'%'
+		  ORDER BY
+			      a.product_no DESC
+		
+		]]>	
+	
+	
+	</select>
+	
 	
 	<!-- 상품 정보 가져오기 -->
 	<select id="getProduct" parameterType="ProductVO" resultType="ProductVO">
