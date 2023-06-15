@@ -73,6 +73,7 @@ public class MainController {
 		
 		model.addAttribute("product", product);
 
+		
 		return "product/pd_detail";
 
 	}
