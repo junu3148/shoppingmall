@@ -68,77 +68,23 @@
 		<section id="kv"></section>
 
 		<ul class="category">
-			<li class="on"><a href="#none">전체</a></li>
-			<li><a href="#none">강아지</a></li>
-			<li><a href="#none">고양이</a></li>
+			<li class="on"><a
+				href="${pageContext.request.contextPath}/main/all">전체</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/main/all/?category=강아지&subCategory=">강아지</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/main/all/?category=고양이&subCategory=">고양이</a></li>
 		</ul>
 
 		<section>
 			<ul>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
-				<li><a href="#none"> <img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg">
-						<span class="tit">전통라인 잎새문 다기 세트</span> <span class="price">20,000원</span>
-				</a></li>
+				<c:forEach items="${productList}" var="product">
+					<li><a href="#none"> <img
+							src="${pageContext.request.contextPath}/upload/${product.saveName}">
+							<span class="tit">${product.productName}</span> <span id="i${product.imageNo}"
+							class="price">${product.price}원</span>
+					</a></li>
+				</c:forEach>
 			</ul>
 		</section>
 
@@ -175,8 +121,32 @@
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
-
-
 </body>
 
+<script>
+
+/* 	$(document).ready(function() {
+		
+		$('#i'+).text($('.jb').text().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+	}); */
+</script>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

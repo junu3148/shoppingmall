@@ -2,6 +2,7 @@ package com.shopping.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public class ProductService {
 	String saveDir = "C:/shopping/img/upload/";
 	@Autowired
 	private ProductDAO productDAO;
+	@Autowired
+	private ProductVO productVO;
 	Map<String, Object> prdouctImgMap = new HashMap<>();
 
 	// -------------- 상품 등록 & 상품이미지 등록
@@ -32,7 +35,7 @@ public class ProductService {
 		if (!file.isEmpty()) {
 			productDAO.insertProductImg(prdouctImgMap);
 		}
-		return result; 
+		return result;
 	}
 
 	// ----------------- 상품 삭제
@@ -45,10 +48,25 @@ public class ProductService {
 	}
 
 	// ---------------- 상품 리스트 가져오기
-	public List<ProductVO> getProductList() {
+	public List<ProductVO> getProductList(String category, String subCategory) {
 		System.out.println("getProductList Service");
 
-		return productDAO.getProductList();
+		List<ProductVO> productList = new ArrayList<>();
+
+		if (category.equals("all") && subCategory.equals("all")) {
+
+			productList = productDAO.getAllProductList();
+
+		} else if(!category.equals("all") && subCategory.equals("all")){
+			
+			productVO.setCategory(category);
+			productVO.setSubCategory(subCategory);
+			
+			productList = productDAO.getCategoryProductList(productVO);
+		
+		}
+
+		return productList;
 	}
 
 	// ---------------- 상품 정보 가져오기
@@ -96,9 +114,9 @@ public class ProductService {
 			try {
 				file.transferTo(new File(filePath));
 				// 파일이름 상품번호 map으로 만들어 보내기
-					
+
 				prdouctImgMap.put("productNo", vo.getProductNo());
-				prdouctImgMap.put("imageNo", vo.getImageNo());				
+				prdouctImgMap.put("imageNo", vo.getImageNo());
 				prdouctImgMap.put("saveName", saveName);
 
 			} catch (IOException e) {
