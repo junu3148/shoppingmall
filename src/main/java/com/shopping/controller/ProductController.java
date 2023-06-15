@@ -55,7 +55,7 @@ public class ProductController {
 	public String PoductListForm(Model model) {
 		System.out.println("poductListForm()");
 
-		List<ProductVO> productList = productService.getProductList();
+		List<ProductVO> productList = productService.getProductList("all","all");
 
 		model.addAttribute("productList", productList);
 

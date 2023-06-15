@@ -69,11 +69,11 @@
 
 		<ul class="category">
 			<li class="on"><a
-				href="${pageContext.request.contextPath}/main/all">전체</a></li>
+				href="${pageContext.request.contextPath}/main/${view}">전체</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/all/?category=강아지&subCategory=">강아지</a></li>
+				href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/all/?category=고양이&subCategory=">고양이</a></li>
+				href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=고양이&subCategory=${subCategory}">고양이</a></li>
 		</ul>
 
 		<section>
@@ -81,8 +81,8 @@
 				<c:forEach items="${productList}" var="product">
 					<li><a href="#none"> <img
 							src="${pageContext.request.contextPath}/upload/${product.saveName}">
-							<span class="tit">${product.productName}</span> <span id="i${product.imageNo}"
-							class="price">${product.price}원</span>
+							<span class="tit">${product.productName}</span> 
+							<span class="price jb">${product.price}원</span>
 					</a></li>
 				</c:forEach>
 			</ul>
@@ -125,10 +125,13 @@
 
 <script>
 
-/* 	$(document).ready(function() {
+	/* $(document).ready(function() {
 		
-		$('#i'+).text($('.jb').text().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
-	}); */
+	      $( document ).ready( function() {
+	          $( '.jb' ).text( $( '.jb' ).text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
+	        } );
+	});  */
+	
 </script>
 
 </html>

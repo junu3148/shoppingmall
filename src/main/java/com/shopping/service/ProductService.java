@@ -23,7 +23,8 @@ public class ProductService {
 	private ProductDAO productDAO;
 	@Autowired
 	private ProductVO productVO;
-	Map<String, Object> prdouctImgMap = new HashMap<>();
+	private Map<String, Object> prdouctImgMap = new HashMap<>();
+	private List<ProductVO> productList = new ArrayList<>();
 
 	// -------------- 상품 등록 & 상품이미지 등록
 	public int insertProduct(ProductVO vo, MultipartFile file) {
@@ -51,22 +52,33 @@ public class ProductService {
 	public List<ProductVO> getProductList(String category, String subCategory) {
 		System.out.println("getProductList Service");
 
-		List<ProductVO> productList = new ArrayList<>();
-
 		if (category.equals("all") && subCategory.equals("all")) {
 
 			productList = productDAO.getAllProductList();
 
-		} else if(!category.equals("all") && subCategory.equals("all")){
-			
-			productVO.setCategory(category);
-			productVO.setSubCategory(subCategory);
-			
-			productList = productDAO.getCategoryProductList(productVO);
-		
+		} else if (!category.equals("all") && subCategory.equals("all")) {
+
+			productVO(category, subCategory);
+
+		} else if (category.equals("all") && !subCategory.equals("all")) {
+
+			productVO(category, subCategory);
+
+		} else if (!category.equals("all") && !subCategory.equals("all")) {
+
+			productVO(category, subCategory);
+
 		}
 
 		return productList;
+	}
+
+	public void productVO(String category, String subCategory) {
+
+		productVO.setCategory(category);
+		productVO.setSubCategory(subCategory);
+		
+		productList = productDAO.getCategoryProductList(productVO);
 	}
 
 	// ---------------- 상품 정보 가져오기
@@ -128,6 +140,6 @@ public class ProductService {
 			// 업로드된 파일이 없는 경우에 대한 처리를 수행합니다.
 			System.out.println("No file uploaded.");
 		}
-
 	}
+
 }

@@ -96,10 +96,19 @@
 			      b.save_name as saveName,
 			      b.image_no as imageNo
 			  FROM
-			      product a
-			      INNER JOIN product_image b 
-			      ON a.product_no = b.product_no
-			      where a.category = #{category}
+			      product a,
+			      product_image b 
+            where a.product_no = b.product_no
+         ]]>     
+          
+	       		<if test="category != 'all'">
+	        		AND a.category = '${category}'
+			    </if>
+			    <if test="subCategory != 'all'">
+			        AND a.subcategory = '${subCategory}'
+			    </if>
+                
+         <![CDATA[        
 			 ORDER BY
 			      a.product_no DESC
 			

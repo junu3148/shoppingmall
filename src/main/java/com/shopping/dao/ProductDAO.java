@@ -67,7 +67,7 @@ public class ProductDAO {
 	// ---------------- 카테고리 상품 리스트 가져오기
 	public List<ProductVO> getCategoryProductList(ProductVO productVO) {
 		System.out.println("getCategoryProductList DAO");
-
+		
 		return sqlSession.selectList("product.getCategoryProductList", productVO);
 	}
 
