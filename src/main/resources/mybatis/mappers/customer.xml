@@ -43,5 +43,41 @@
 		]]>
 	</select>
 	
+	<!--고객 전체 리스트-->
+	
+	<select id ="customerAllList" resultType ="CustomerVO">
+		<![CDATA[
+			select 
+				customer_no as customerNo
+				,customer_id as customerId
+				,customer_name as customerName
+				,customer_role as customerRole
+			from customer order by customer_no desc	
+		]]>
+	</select>
+	
+	<!-- 고객 검색 -->
+	
+	<select id = "getCustomerList" parameterType ="map" resultType ="CustomerVO">
+		<![CDATA[
+			select 
+				customer_no as customerNo
+				,customer_id as customerId
+				,customer_name as customerName
+				,customer_role as customerRole
+			from customer order by customer_no desc	
+			where 1 = 1 
+		]]>
+		<if test = "#{searchOption == '고객명'}" >
+		where customer_name like  '%' ||  #{keyword} || '%'
+		</if>
+		<if test = "#{searchOption == '고객아이디'}" >
+		where customer_name like  '%' ||  #{keyword} || '%'
+		</if>
+		
+		
+		
+	</select>
+	
 	
 </mapper>

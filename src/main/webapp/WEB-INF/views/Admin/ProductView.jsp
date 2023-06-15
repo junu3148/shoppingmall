@@ -37,8 +37,19 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/salesView">Sales</a>
               </li>
             </ul>
+            
+            
             <span class="navbar-text">
-              안녕하세요! 000님  <a class="btn btn-secondary disabled" role="button" aria-disabled="true" href="${pageContext.request.contextPath}/logout">Logout</a>
+                <c:if test = "${authCustomer != null}">
+            		<c:if test = "${authCustomer.customerRole != 1}">
+             		 안녕하세요! ${authCustomer.customerName}님
+              		 <a class="btn btn-secondary disabled" role="button" aria-disabled="true" href="${pageContext.request.contextPath}/customer/logout">Logout</a>
+            		</c:if>
+            	</c:if>
+           		 <c:if test = "${authCustomer == null}">
+            	로그인이 필요합니다.
+            	<a class="btn btn-secondary disabled" role="button" aria-disabled="true" href="${pageContext.request.contextPath}/customer/loginForm">Login</a>
+            	</c:if>
             </span>
           </div>
         </div>
@@ -48,7 +59,6 @@
 
     <div class="p-3 mb-2 bg-body text-body">    <!--배경색 start-->
         <br>
-
         
         <div align ="center" style ="margin: 5%;">
             <h1 class="display-6"><b>Product Management Page</b></h1><br><hr><br>

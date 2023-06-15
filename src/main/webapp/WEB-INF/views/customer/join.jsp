@@ -178,8 +178,8 @@
 			var inputPassword = $('#inputPassword').val() //입력된 비밀번호 체크
 			
 			if(idCheck == '이미 존재하는 아이디입니다.'){showModal('다른 아이디로 가입해주세요.'); return false;}
-			else if(inputPassword.length < 3){ showModal('비밀번호는 3자리 이상부터 가능합니다.'); return false;}
-			else if(inputId.length < 3){ showModal('아이디는 3자리 이상부터 가능합니다.'); return false;}
+			else if(inputPassword.length < 3){showModal('비밀번호는 3자리 이상부터 가능합니다.'); return false;}
+			else if(inputId.length < 3){showModal('아이디는 3자리 이상부터 가능합니다.'); return false;}
 			
 			
 			return true;

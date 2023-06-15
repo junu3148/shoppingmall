@@ -1,5 +1,7 @@
 package com.shopping.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shopping.ajax.JasonResult;
@@ -123,6 +126,44 @@ public class CustomerController {
 	}
 	
 	///////////////////////////////////////////////
+	
+	
+	/* 고객 정보 리스트*/
+	
+	
+	@RequestMapping(value = "/customerView")	
+	public String customerView(Model model) {
+			
+		
+		System.out.println("customerView Controller");
+		
+		List<CustomerVO> customerList = customerService.selectAllCustomer();
+		
+		model.addAttribute("customerList", customerList);
+		
+		
+		return "adminTest/ccview";
+	}
+
+	
+	/*고객 검색*/
+	@RequestMapping(value = "/search")	
+	public String customerSearch(@RequestParam("searchOption") String searchOption
+								 ,@RequestParam("keyword") String keyword
+								 ,Model model) {
+		
+		
+		customerService.SearchCustomer(searchOption,keyword);
+		
+		
+		
+		System.out.println("customerSearch Controller");
+		
+		
+		
+		
+		return "redirect:";
+	}
 	
 	
 }
