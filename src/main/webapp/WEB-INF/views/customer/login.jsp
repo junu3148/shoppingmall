@@ -16,25 +16,24 @@
    
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/login.css" type="text/css"> <!-- 초기화 css -->
+
 <script type="text/javascript"  src="${pageContext.request.contextPath}/assets/js/login.js"></script>
 <!-- 아이콘 -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-	rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 <!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
 <!-- MDB -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
-	rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
 <!-- java script-->
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 <!-- jQuery -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+<style>
+.warningMessage{
+	color : red;
+}
+</style>
+
 </head>
 <body>
 <div class="container" id="container">
@@ -62,7 +61,13 @@
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
+
+      <c:if test = "${message == null}" >
       <span>or use your account</span>
+      </c:if>
+      <c:if test = "${message != null}" >
+      <span class = "warningMessage">${message}</span>
+      </c:if>
       <input type="text" placeholder="Id" name = "customerId"/>
       <input type="password" placeholder="Password" name = "customerPassword" />
       <a href="#">비밀번호를 잊어버리셨나요?</a>
@@ -79,9 +84,9 @@
         <button class="ghost" id="signIn">Sign In</button>
       </div>
       <div class="overlay-panel overlay-right">
-        <h1>저희 사이트가 처음이신가요?</h1>
-        <p>회원가입하세요!</p>
-        <button class="ghost" id="signUp">회원가입</button>
+        <h1>첫방문이신가요?</h1>
+        <p>회원가입 후 이용해보세요!</p>
+		<a class="btn btn-outline-light btn-lg " href="${pageContext.request.contextPath}/customer/joinPage"> 회원가입 페이지로 이동하기 </a>
       </div>
     </div>
   </div>

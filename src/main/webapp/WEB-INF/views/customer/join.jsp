@@ -33,9 +33,6 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
 	rel="stylesheet" />
-<!-- java script-->
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
@@ -83,9 +80,9 @@
 					<button class="ghost" id="signIn">Sign In</button>
 				</div>
 				<div class="overlay-panel overlay-right">
-					<h1>이미 아이디가 있으신가요?</h1>
-					<p></p>
-					<button class="ghost" id="signUp">로그인 페이지로 이동하기</button>
+					<h1>회원이신가요?</h1>
+					<p>지금 바로 로그인하세요!</p>
+					<a class="btn btn-outline-light btn-lg " href="${pageContext.request.contextPath}/customer/loginPage"> 로그인 페이지로 이동하기 </a>
 				</div>
 			</div>
 		</div>
@@ -181,8 +178,8 @@
 			var inputPassword = $('#inputPassword').val() //입력된 비밀번호 체크
 			
 			if(idCheck == '이미 존재하는 아이디입니다.'){showModal('다른 아이디로 가입해주세요.'); return false;}
-			else if(inputPassword.length < 3){ showModal('비밀번호는 3자리 이상부터 가능합니다.'); return false;}
-			else if(inputId.length < 3){ showModal('아이디는 3자리 이상부터 가능합니다.'); return false;}
+			else if(inputPassword.length < 3){showModal('비밀번호는 3자리 이상부터 가능합니다.'); return false;}
+			else if(inputId.length < 3){showModal('아이디는 3자리 이상부터 가능합니다.'); return false;}
 			
 			
 			return true;

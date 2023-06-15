@@ -37,7 +37,15 @@
               </li>
             </ul>
             <span class="navbar-text">
-              안녕하세요! 000님  <a class="btn btn-secondary disabled" role="button" aria-disabled="true" href="${pageContext.request.contextPath}/logout">Logout</a>
+            <c:if test = "${authCustomer != null}">
+            	<c:if test = "${authCustomer.customerRole != 1}">
+              안녕하세요! ${authCustomer.customerName}님
+              <a class="btn btn-secondary disabled" role="button" aria-disabled="true" href="${pageContext.request.contextPath}/customer/logout">Logout</a>
+            	</c:if>
+            </c:if>
+            <c:if test = "${authCustomer == null}">
+            	로그인이 필요합니다.
+            </c:if>
             </span>
           </div>
         </div>

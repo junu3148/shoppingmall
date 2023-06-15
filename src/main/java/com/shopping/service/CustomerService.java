@@ -1,5 +1,9 @@
 package com.shopping.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +14,7 @@ import com.shopping.vo.CustomerVO;
 public class CustomerService {
 	
 	@Autowired
-	CustomerDAO customerDAO;
+	private CustomerDAO customerDAO;
 	
 	
 	public CustomerVO login(CustomerVO customerVO) {
@@ -24,7 +28,7 @@ public class CustomerService {
 	//회원가입 기능 구현
 	public int join(CustomerVO customerVO) { 
 		
-		int row = customerDAO.isertCustomer(customerVO);
+		int row = customerDAO.insertCustomer(customerVO);
 		
 		return row;
 	}
@@ -44,6 +48,33 @@ public class CustomerService {
 		}
 		
 		return result;
+	}
+	
+	
+	/*고객 전체 리스트*/
+	
+	public List<CustomerVO> selectAllCustomer() {
+		
+		
+		List<CustomerVO> customerList = customerDAO.getAllCustomer();
+		
+		
+		return customerList;
+	}
+	
+	/* 고객 검색 */
+	
+	public List<CustomerVO> SearchCustomer(String searchOption,String keyword){ 
+		
+		Map<String, Object> searchInfo = new HashMap<>();
+		
+		searchInfo.put("searchOption", searchOption);
+		searchInfo.put("keyword", keyword);
+		
+		customerDAO.getCustomerList(searchInfo);
+		
+		
+		return null;
 	}
 	
 	
