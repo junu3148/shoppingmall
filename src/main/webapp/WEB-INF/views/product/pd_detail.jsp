@@ -66,44 +66,41 @@
 
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
-				<img src="https://cdn.imweb.me/thumbnail/20210402/deeb895a674e3.jpg"
-					alt="">
+				<img
+					src="${pageContext.request.contextPath}/upload/${product.saveName}"
+					alt="${product.productName}">
 			</div>
 			<div class="info_wrap">
 				<div class="title">
-					<h4>선문밥그릇</h4>
-					<p>42,000원</p>
+					<h4>${product.productName}</h4>
+					<p>${product.price}</p>
 				</div>
 				<div>
-					<p class="context">선문라인의 선문밥그릇은 뚜껑을 포함한 제품입니다. 뚜껑상단의 원형홈과 청화의
-						간결한 한줄 선이 잘어우러 지는 밥그릇으로 아래부분의 바닥이 넓어 안정적이고 풍성한 형태미를 갖추고 있습니다.</p>
+					<p class="context">${product.productContent}</p>
 					<ul>
-						<li class="clear"><strong>사이즈</strong> <span>선문밥그릇
-								105x75mm / 300cc</span></li>
 						<li class="clear"><strong>배송 방법</strong> <span>택배비</span></li>
 						<li class="clear"><strong>배송비</strong> <span>2,500원
 								(50,000원 이상 구매 시 무료)</span></li>
 						<li class="clear"><strong>배송 안내</strong> <span
-							class="delivery_context"> 청송백자는 경북 청송의 한적한 산골에서 제작하고 있는
-								지리적 특성으로 일반택배와 달리 조금 느리게 보내드릴 수 밖에 없습니다. 청송백자만의 느린 배송을 여유로운 마음으로
-								이해해 주시면 감사하겠습니다. </span></li>
+							class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수 있습니다.(+5,000원)</span></li>
+							<li>쇼핑에 참고 부탁드립니다. ^_^</li>
 					</ul>
 
 					<div class="pd_num clear">
 						<p>수량</p>
-						<div class="count-wrap _count">
+						<div class="count-wrap _count">						
 							<button type="button" class="minus">-</button>
 							<input type="text" class="inp" value="1" />
 							<button type="button" class="plus">+</button>
 						</div>
-						<span>42,000원</span>
+						<span id="price">${product.price}</span>
 					</div>
 
 					<div class="total_price_wrap">
 						<p>
 							총 상품금액(<span>1</span>개)
 						</p>
-						<p class="total_price">42,000원</p>
+						<p class="total_price">${product.price}</p>
 					</div>
 
 					<div class="btn_wrap">
@@ -138,4 +135,44 @@
 
 </body>
 
+<script>
+	//플러스 버튼을 클릭했을 때 수량 증가
+	$(".plus").on("click", function() {
+		var EA = $(".inp");
+		var EAval = Number(EA.val()); // EAval을 숫자로 변환
+
+		EA.val(EAval + 1); // 증가된 값을 input 요소에 설정
+
+		updateTotalPrice();
+	});
+
+	// 마이너스 버튼을 클릭했을 때 수량 감소
+	$(".minus").on("click", function() {
+		var EA = $(".inp");
+		var EAval = Number(EA.val()); // EAval을 숫자로 변환
+
+		if (EAval > 1) {
+			EA.val(EAval - 1); // 감소된 값을 input 요소에 설정
+			updateTotalPrice();
+		}
+	});
+
+	function updateTotalPrice() {
+		var EAval = Number($(".inp").val());
+		var price = Number($("#price").text());
+		var total_price = EAval * price;
+		$(".total_price").text(total_price);
+	}
+</script>
+
 </html>
+
+
+
+
+
+
+
+
+
+

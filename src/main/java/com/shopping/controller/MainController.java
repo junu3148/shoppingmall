@@ -19,6 +19,8 @@ public class MainController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductVO productVO;
 
 	@RequestMapping(value = "/")
 	public String main(Model model) {
@@ -60,18 +62,18 @@ public class MainController {
 
 		return "product/product";
 	}
-	
+
 	// -------------------- 상품 상세페이지
-	public String productDetal() {
+	@RequestMapping(value = "/productDetal/{productNo}", method = RequestMethod.GET)
+	public String productDetal(Model model, @PathVariable("productNo") int productNo) {
 		System.out.println("productDetal");
+		productVO.setProductNo(productNo);
 		
-		return "";
-				
+		ProductVO product = productService.getProduct(productVO);
+		
+		model.addAttribute("product", product);
+
+		return "product/pd_detail";
+
 	}
 }
-
-
-
-
-
-

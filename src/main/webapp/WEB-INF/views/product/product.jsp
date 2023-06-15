@@ -79,7 +79,7 @@
 		<section>
 			<ul>
 				<c:forEach items="${productList}" var="product">
-					<li><a href="#none"> <img
+					<li><a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}"> <img
 							src="${pageContext.request.contextPath}/upload/${product.saveName}">
 							<span class="tit">${product.productName}</span> 
 							<span class="price jb">${product.price}원</span>
