@@ -52,14 +52,15 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/script3.js"></script>
 <!-- js -->
+
 </head>
 
 <body>
-	
-		<!-- 헤더 -->
+
+	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
-	
+
 
 
 
@@ -210,11 +211,63 @@
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
+	
+	<!-- 이미지등록 팝업(모달)창 -->
+	<div class="modal fade" id="addModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">이미지등록</h4>
+				</div>
+
+				<form method="post" action="./insert" enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="form-text">글작성</label> <input id="addModalContent"
+								type="text" name="content" value="">
+						</div>
+						<div class="form-group">
+							<label class="form-text">이미지선택</label> <input id="file"
+								type="file" name="file" value=""> 
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn" id="btnUpload">등록</button>
+					</div>
+				</form>
 
 
-
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
 
 </body>
+
+<script>
+	
+	$(window).ready(function(){
+		
+		
+		
+		$(".search").on("click", function() {
+			console.log("검색");
+
+			$("#addModal").modal("show");
+
+		});
+		
+	});
+	
+
+	
+</script>
 
 </html>

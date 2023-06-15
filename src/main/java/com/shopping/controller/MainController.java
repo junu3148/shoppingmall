@@ -68,13 +68,21 @@ public class MainController {
 	public String productDetal(Model model, @PathVariable("productNo") int productNo) {
 		System.out.println("productDetal");
 		productVO.setProductNo(productNo);
-		
+
 		ProductVO product = productService.getProduct(productVO);
-		
+
 		model.addAttribute("product", product);
 
-		
 		return "product/pd_detail";
 
 	}
+
+	// -------------------- 상품 검색
+	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
+	public String productSearch() {
+		System.out.println("productSearch()");
+
+		return "";
+	}
+
 }
