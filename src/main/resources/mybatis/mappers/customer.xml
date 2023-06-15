@@ -65,19 +65,33 @@
 				,customer_id as customerId
 				,customer_name as customerName
 				,customer_role as customerRole
-			from customer order by customer_no desc	
-			where 1 = 1 
+			from customer
 		]]>
-		<if test = "#{searchOption == '고객명'}" >
-		where customer_name like  '%' ||  #{keyword} || '%'
+		<if test = "searchOption == '고객명'" >
+		where customer_name like '%' ||  #{keyword} || '%'
 		</if>
-		<if test = "#{searchOption == '고객아이디'}" >
-		where customer_name like  '%' ||  #{keyword} || '%'
+		<if test = "searchOption == '고객아이디'" >
+		where customer_id like '%' ||  #{keyword} || '%'
 		</if>
-		
-		
-		
+		<if test = "searchOption == '--옵션 선택--'" >
+		where customer_id like  '%' ||  #{keyword} || '%' or customer_name like  '%' ||  #{keyword} || '%'
+		</if>
+		<![CDATA[
+		 order by customer_no desc
+		]]>
 	</select>
 	
 	
+	<!-- 고객 번호로 정보 가져오기 -->	
+	<select id = "getCustomerByNo" parameterType = "int" resultType = "CustomerVO">
+		<![CDATA[
+			select 
+				customer_no as customerNo
+				,customer_id as customerId
+				,customer_name as customerName
+				,customer_role as customerRole
+			from customer 
+			where customer_no = #{customerNo}
+		]]>
+	</select>
 </mapper>

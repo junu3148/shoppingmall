@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -152,18 +153,34 @@ public class CustomerController {
 								 ,@RequestParam("keyword") String keyword
 								 ,Model model) {
 		
+		String message = "<br>검색결과가 확인되지 않습니다. "; //검색결과 없을 시 출력될 메세지
 		
 		customerService.SearchCustomer(searchOption,keyword);
 		
+		List<CustomerVO> searchList = customerService.SearchCustomer(searchOption,keyword);
+		System.out.println(searchList.size());
 		
-		
-		System.out.println("customerSearch Controller");
-		
-		
-		
-		
-		return "redirect:";
+		if(searchList.size() == 0) {
+			model.addAttribute("message", message);
+			return "adminTest/ccview";
+		}else { 
+			model.addAttribute("customerList", searchList);
+			return "adminTest/ccview";
+		}
 	}
 	
+	
+	/*고객 정보 수정 페이지*/
+	//고객 넘버로 고객 정보 뿌려줄 예정임
+	@RequestMapping("/detailInfo/{customerNo}")
+	public String modifyForm(@PathVariable("customerNo") int customerNo
+							, Model model) {  
+		
+		System.out.println("컨트롤러로 온 고객 넘버 확인" + customerNo);
+		CustomerVO selectVO = customerService.customerForModi(customerNo);
+		model.addAttribute("customer",selectVO);
+		
+		return "adminTest/ccUpdate";
+	}
 	
 }

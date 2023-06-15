@@ -64,7 +64,7 @@ input{
 					</a></li>
 
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/customerView"> <i
+						href="${pageContext.request.contextPath}/customer/customerView"> <i
 							class="align-middle" data-feather="log-in"></i> <span
 							class="align-middle">고객조회</span>
 					</a></li>
@@ -164,35 +164,21 @@ input{
 					
 					<tr>
 						<td style="text-align: center;">고객명</td>
-						<td><input type="text" name="productName"
-							value="${product.productName}" required></td>
+						<td>${customer.customerName}</td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">아이디</td>
-						<td><input type="number" name="productEa"
-							value="${product.productEa}" required></td>
+						<td>${customer.customerId}</td>
 					</tr>
-					<tr>
-						<td style="text-align: center;">주소</td>
-						<td><input type="number" name="price" min="3000"
-							value="${product.price}" required></td>
-					</tr>
-					<tr>
-						<td style="text-align: center;">누적 금액</td>
-						<td><input type="text" name="productContent"
-							value="${product.productContent}" required></td>
-					</tr>
+					
 					<tr>
 						<td style="text-align: center;">권한</td>
-						<td><input type="text" name="productContent"
-							value="${product.productContent}" required></td>
+						<c:if test = "${customer.customerRole  == 1}">
+						<td>일반회원</td>
+						</c:if>
 					</tr>
-				
-					<tr>
-						<td colspan="4" style="text-align: right;">
-							<button type="submit"  class="btn btn-primary">수정</button>&nbsp;
-						</td>
-					</tr>
+					<tr></tr>
+					<tr></tr>
 				</table>
 			</form>
         </div>

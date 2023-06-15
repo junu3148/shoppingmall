@@ -66,10 +66,21 @@ public class CustomerDAO {
 		
 
 		System.out.println("DAO 오는지 확인" + searchInfo);
-		sqlSession.selectList("customer.getCustomerList", searchInfo);
+		List<CustomerVO> list = sqlSession.selectList("customer.getCustomerList", searchInfo);
+		System.out.println("받아온 데이터 DAO에서 확인" + list);
 		
-		return null;
+		
+		return list;
 	}
 	
+	/* 고객 정보 받아오기*/
+	public CustomerVO getCustomerByNo(int customerNo) { 
+		
+		System.out.println(customerNo);
+		CustomerVO returnVO = sqlSession.selectOne("customer.getCustomerByNo", customerNo);
+		
+		
+		return returnVO;
+	}
 	
 }

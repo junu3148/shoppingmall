@@ -71,11 +71,19 @@ public class CustomerService {
 		searchInfo.put("searchOption", searchOption);
 		searchInfo.put("keyword", keyword);
 		
-		customerDAO.getCustomerList(searchInfo);
+		List<CustomerVO> Searchlist = customerDAO.getCustomerList(searchInfo);
 		
 		
-		return null;
+		return Searchlist;
 	}
 	
+	/* 고객넘버로 고객 정보 가져오기*/
+	
+	public CustomerVO customerForModi(int customerNo) { 
+		
+		CustomerVO returnVO = customerDAO.getCustomerByNo(customerNo);
+		
+		return returnVO;
+	}
 	
 }

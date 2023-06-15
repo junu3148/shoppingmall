@@ -48,7 +48,7 @@
 					</a></li>
 
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/customerView"> <i
+						href="${pageContext.request.contextPath}/customer/customerView"> <i
 							class="align-middle" data-feather="log-in"></i> <span
 							class="align-middle">고객조회</span>
 					</a></li>

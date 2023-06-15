@@ -48,7 +48,7 @@
 					</a></li>
 
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/customerView"> <i
+						href="${pageContext.request.contextPath}/customer/customerView"> <i
 							class="align-middle" data-feather="log-in"></i> <span
 							class="align-middle">고객조회</span>
 					</a></li>
@@ -161,16 +161,26 @@
 													<td style="width: 10%; text-align: center;">고객번호</td>
 													<td style="width: 10%; text-align: center;"></td>
 												</tr>
+												<c:if test = "${message != null}">
+													<tr>
+														<td></td>
+														<td style=" text-align: center;"><p>${message}</p></td>
+														<td></td>								
+													</tr>
+												</c:if>
+												
+											<c:if test = "${customerList != null}">
 												<c:forEach items="${customerList}" var="customer">
 													<tr>
 														<td style="width: 20%; text-align: center;">${customer.customerId}</td>
 														<td style="width: 30%; text-align: center;">${customer.customerName}</td>
 														<td style="width: 10%; text-align: center;">${customer.customerNo}</td>
 														<td style="width: 10%; text-align: center;"><a
-															href="${pageContext.request.contextPath}/customer/modifyCustomerForm?CustomerNo=${customer.customerNo}"
-															class="btn btn-primary">수정</a></td>
+															href="${pageContext.request.contextPath}/customer/detailInfo/${customer.customerNo}"
+															class="btn btn-primary">상세정보</a></td>
 													</tr>
 												</c:forEach>
+												</c:if>
 											</table>
 										</div>
 									</div>
