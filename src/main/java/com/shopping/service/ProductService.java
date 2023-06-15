@@ -32,7 +32,7 @@ public class ProductService {
 		if (!file.isEmpty()) {
 			productDAO.insertProductImg(prdouctImgMap);
 		}
-		return result;
+		return result; 
 	}
 
 	// ----------------- 상품 삭제
@@ -96,8 +96,9 @@ public class ProductService {
 			try {
 				file.transferTo(new File(filePath));
 				// 파일이름 상품번호 map으로 만들어 보내기
-
+					
 				prdouctImgMap.put("productNo", vo.getProductNo());
+				prdouctImgMap.put("imageNo", vo.getImageNo());				
 				prdouctImgMap.put("saveName", saveName);
 
 			} catch (IOException e) {

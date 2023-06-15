@@ -10,10 +10,12 @@
 		<![CDATA[
 		
 			insert into product_image(
+					IMAGE_NO,
                     PRODUCT_NO,
                     SAVE_NAME
                     )
             values(
+            		seq_product_image_no.nextval ,
                     #{productNo} ,
                     #{saveName}
                     )
@@ -40,7 +42,7 @@
 			
 			update product_image set
                         			save_name = #{saveName}  
-                 			  where product_no = #{productNo}
+                 			  where image_no = #{imageNo}
 		
 		]]>
 	
