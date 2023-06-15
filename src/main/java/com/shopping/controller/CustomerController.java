@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,7 +41,7 @@ public class CustomerController {
 	
 	/* 로그인 */
 
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String login(@ModelAttribute CustomerVO customerVO
 						,HttpSession session
 						,Model model) {
@@ -56,6 +57,7 @@ public class CustomerController {
 			return "customer/login";
 		}else {
 			session.setAttribute("authCustomer", authCustomer);
+			session.setMaxInactiveInterval(6000);
 			return "redirect:/main/";
 		}
 	}
@@ -92,7 +94,7 @@ public class CustomerController {
 	
 	/* 회원가입 */
 	/* 가입 성공 후에는 로그인 페이지로 이동 */
-	@RequestMapping(value = "/join")
+	@RequestMapping(value = "/join" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String join(@ModelAttribute CustomerVO customerVO) {
 		
 		System.out.println("join Controller" + customerVO);
@@ -132,7 +134,7 @@ public class CustomerController {
 	/* 고객 정보 리스트*/
 	
 	
-	@RequestMapping(value = "/customerView")	
+	@RequestMapping(value = "/customerView" , method = {RequestMethod.POST, RequestMethod.GET})	
 	public String customerView(Model model) {
 			
 		
@@ -146,9 +148,10 @@ public class CustomerController {
 		return "adminTest/ccview";
 	}
 
+	///////////////////////////////////////////////
 	
 	/*고객 검색*/
-	@RequestMapping(value = "/search")	
+	@RequestMapping(value = "/search" , method = {RequestMethod.POST, RequestMethod.GET})	
 	public String customerSearch(@RequestParam("searchOption") String searchOption
 								 ,@RequestParam("keyword") String keyword
 								 ,Model model) {
@@ -169,18 +172,54 @@ public class CustomerController {
 		}
 	}
 	
+	///////////////////////////////////////////////
 	
-	/*고객 정보 수정 페이지*/
+	/*고객 상세정보 페이지*/
 	//고객 넘버로 고객 정보 뿌려줄 예정임
-	@RequestMapping("/detailInfo/{customerNo}")
-	public String modifyForm(@PathVariable("customerNo") int customerNo
+	@RequestMapping(value = "/detailInfo/{customerNo}")
+	public String detailView(@PathVariable("customerNo") int customerNo
 							, Model model) {  
 		
 		System.out.println("컨트롤러로 온 고객 넘버 확인" + customerNo);
-		CustomerVO selectVO = customerService.customerForModi(customerNo);
+		CustomerVO selectVO = customerService.customerByNo(customerNo);
 		model.addAttribute("customer",selectVO);
 		
 		return "adminTest/ccUpdate";
 	}
+
+	///////////////////////////////////////////////
 	
+	/* 회원정보 수정창 이동*/
+	@RequestMapping(value ="modifyForm/{customerNo}")
+	public String modifyForm(@PathVariable int customerNo
+							,Model model) {  
+		
+		System.out.println("넘어온 값 확인 in controller" + customerNo);
+		CustomerVO customerVO = customerService.customerByNo(customerNo);
+		model.addAttribute("customer", customerVO);
+		
+		return "adminTest/CustomerModify";
+	}
+	
+	///////////////////////////////////////////////
+	
+	/* 회원정보 수정*/
+	@RequestMapping(value ="/modify", method = {RequestMethod.POST, RequestMethod.GET})
+	public String modifyForm(@ModelAttribute CustomerVO customerVO
+							,Model model) {
+		System.out.println(customerVO);
+
+		String success = "정보 수정에 성공했습니다!";
+		String fail = "정보 수정에 실패했습니다.";
+		
+		boolean result = customerService.modifyCustomer(customerVO);
+		
+		if(result == true) {
+			model.addAttribute("Message", success);
+			return "customer/modifyForm/"+customerVO.getCustomerNo();
+		}else{
+			model.addAttribute("Message", fail);
+			return "customer/modifyForm/"+customerVO.getCustomerNo();
+		}
+	}
 }

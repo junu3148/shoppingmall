@@ -83,4 +83,15 @@ public class CustomerDAO {
 		return returnVO;
 	}
 	
+	/*고객정보 업데이트*/
+	
+	public int updateCustomer(CustomerVO customerVO) { 
+		
+		System.out.println(customerVO);
+		int row = sqlSession.update("customer.updateInfo", customerVO);
+		
+		return row;
+	}
+	
+	
 }

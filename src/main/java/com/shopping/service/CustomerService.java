@@ -79,11 +79,25 @@ public class CustomerService {
 	
 	/* 고객넘버로 고객 정보 가져오기*/
 	
-	public CustomerVO customerForModi(int customerNo) { 
+	public CustomerVO customerByNo(int customerNo) { 
 		
 		CustomerVO returnVO = customerDAO.getCustomerByNo(customerNo);
 		
 		return returnVO;
+	}
+	
+	/*고객 회원정보 수정*/
+	
+	public boolean modifyCustomer(CustomerVO customerVO) {
+		
+		boolean result = false;
+		int row = customerDAO.updateCustomer(customerVO);
+		
+		if(row > 0) { 
+			result = true;
+		}
+		
+		return result;
 	}
 	
 }

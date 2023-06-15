@@ -94,4 +94,16 @@
 			where customer_no = #{customerNo}
 		]]>
 	</select>
+	
+	<!-- 고객 정보 수정 -->
+	
+	<update id ="updateInfo" parameterType = "CustomerVO">
+		<![CDATA[
+			update customer 
+			set customer_password = #{customerPassword} 
+			where customer_no = #{customerNo}		
+		]]>
+	</update>
+	
+		
 </mapper>

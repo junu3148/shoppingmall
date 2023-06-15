@@ -73,7 +73,7 @@
 			<div class="info_wrap">
 				<div class="title">
 					<h4>${product.productName}</h4>
-					<p>${product.price}</p>
+					<p><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />원</p>
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>
@@ -90,17 +90,17 @@
 						<p>수량</p>
 						<div class="count-wrap _count">						
 							<button type="button" class="minus">-</button>
-							<input type="text" class="inp" value="1" />
+							<input type="text" class="inp" value="1" /><!-- 변경되는 숫자 -->
 							<button type="button" class="plus">+</button>
 						</div>
-						<span id="price">${product.price}</span>
+						<span class ="price"><fmt:formatNumber type="number"  maxFractionDigits="3" value="${product.price}" />원</span>
 					</div>
 
 					<div class="total_price_wrap">
 						<p>
 							총 상품금액(<span>1</span>개)
 						</p>
-						<p class="total_price">${product.price}</p>
+						<p class ="total_price" ><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />원</p>
 					</div>
 
 					<div class="btn_wrap">
@@ -157,12 +157,24 @@
 		}
 	});
 
+	function replaceAll(str, searchStr, replaceStr) {
+	  return str.split(searchStr).join(replaceStr);
+	}
+
 	function updateTotalPrice() {
 		var EAval = Number($(".inp").val());
-		var price = Number($("#price").text());
-		var total_price = EAval * price;
-		$(".total_price").text(total_price);
+		var price1 = ($(".price3").text())
+		console.log(price1)
+		var price2  = replaceAll(price1, ',', '');
+		console.log(price2)
+		var price3 = Number(replaceAll(price2, '원', ''));
+		console.log(price3)
+		//*/
+		var total_price = EAval * price3;
+		$("fmt\\:formatNumber").val(total_price); //이거 수정해야 함 수정할게요!
 	}
+	
+
 </script>
 
 </html>

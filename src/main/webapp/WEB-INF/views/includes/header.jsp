@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <link
@@ -13,7 +13,13 @@
 	<!--웹에서의 헤더-->
 	<div id="lnb">
 		<ul class="lnb">
-			<li class="login"><a href="#none">로그인</a></li>
+		<c:choose>
+			<c:when test ="${authCustomer != null}" >
+			<li class="login"><a href="#none">로그아웃</a></li>
+			<li class="notice"><a href="${pageContext.request.contextPath }/customer/modifyForm/${authCustomer.customerNo}">마이페이지</a></li>
+			</c:when>
+			<c:otherwise><li class="login"><a href="${pageContext.request.contextPath }/customer/loginPage">로그인</a></li></c:otherwise>
+			</c:choose>
 			<li class="cart"><a href="#none">장바구니</a></li>
 			<li class="search"><a href="#none">검색</a></li>
 			<li class="notice"><a href="#none">커뮤니티</a></li>
