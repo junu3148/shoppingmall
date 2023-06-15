@@ -72,7 +72,16 @@ public class ProductService {
 
 		return productList;
 	}
+	
+	// ----------------- productSearch
+	public List<ProductVO> productSearch(String keyword){
+		System.out.println("productSearch Service()");
+					
+		return productDAO.productSearch(keyword); 
+	}
 
+	
+	// ----------------- productVO 
 	public void productVO(String category, String subCategory) {
 
 		productVO.setCategory(category);

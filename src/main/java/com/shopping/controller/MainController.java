@@ -78,11 +78,17 @@ public class MainController {
 	}
 
 	// -------------------- 상품 검색
-	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
-	public String productSearch() {
+	@RequestMapping(value = "/productSearch", method = RequestMethod.POST)
+	public String productSearch(Model model, @RequestParam("keyword") String keyword) {
 		System.out.println("productSearch()");
 
-		return "";
+		List<ProductVO> productList = productService.productSearch(keyword);
+
+		model.addAttribute("productList", productList);
+		model.addAttribute("view", "all");
+		model.addAttribute("Search","Search");
+
+		return "product/product";
 	}
 
 }

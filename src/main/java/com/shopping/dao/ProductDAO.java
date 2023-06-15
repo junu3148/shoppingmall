@@ -71,6 +71,12 @@ public class ProductDAO {
 		return sqlSession.selectList("product.getCategoryProductList", productVO);
 	}
 
+	// ----------------- productSearch
+	public List<ProductVO> productSearch(String keyword){
+		System.out.println("productSearch DAO()");
+						
+		return sqlSession.selectList("product.productSearch", keyword);
+	}
 	// ---------------- 상품 정보 가져오기
 	public ProductVO getProduct(ProductVO vo) {
 		System.out.println("getProduct DAO");

@@ -66,7 +66,7 @@
 
 	<main id="product">
 		<section id="kv"></section>
-
+		<c:if test="${empty Search}">
 		<ul class="category">
 			<li class="on"><a
 				href="${pageContext.request.contextPath}/main/${view}">전체</a></li>
@@ -75,7 +75,7 @@
 			<li><a
 				href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=고양이&subCategory=${subCategory}">고양이</a></li>
 		</ul>
-
+		</c:if>
 		<section>
 			<ul>
 				<c:forEach items="${productList}" var="product">
