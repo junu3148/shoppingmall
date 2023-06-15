@@ -10,7 +10,7 @@ import com.shopping.vo.CustomerVO;
 public class CustomerService {
 	
 	@Autowired
-	CustomerDAO customerDAO;
+	private CustomerDAO customerDAO;
 	
 	
 	public CustomerVO login(CustomerVO customerVO) {

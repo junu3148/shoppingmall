@@ -33,9 +33,6 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
 	rel="stylesheet" />
-<!-- java script-->
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
@@ -83,9 +80,9 @@
 					<button class="ghost" id="signIn">Sign In</button>
 				</div>
 				<div class="overlay-panel overlay-right">
-					<h1>이미 아이디가 있으신가요?</h1>
-					<p></p>
-					<button class="ghost" id="signUp">로그인 페이지로 이동하기</button>
+					<h1>회원이신가요?</h1>
+					<p>지금 바로 로그인하세요!</p>
+					<a class="btn btn-outline-light btn-lg " href="${pageContext.request.contextPath}/customer/loginPage"> 로그인 페이지로 이동하기 </a>
 				</div>
 			</div>
 		</div>

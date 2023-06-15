@@ -18,7 +18,7 @@ import com.shopping.vo.CustomerVO;
 public class CustomerController {
 	
 	@Autowired
-	CustomerService customerService;
+	private CustomerService customerService;
 	
 	/* 로그인 페이지 이동 */
 
@@ -41,8 +41,8 @@ public class CustomerController {
 						,HttpSession session
 						,Model model) {
 		
-		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n 입력하신 내용을 다시 확인해주세요.";
-		
+		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n<br> 입력하신 내용을 다시 확인해주세요.";
+
 	
 		System.out.println("login Controller()" + customerVO);
 		CustomerVO authCustomer = customerService.login(customerVO);
