@@ -22,8 +22,28 @@ public class Criteria {
     /* 검색 타입 배열 */
     private String[] typeArr;
     
-   
-    /* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
+    private String category = "all";
+    
+    private String subCategory = "all";
+    
+    
+    public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(String subCategory) {
+		this.subCategory = subCategory;
+	}
+
+	/* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
     public Criteria() {
         this(1,9);
     }
@@ -79,7 +99,8 @@ public class Criteria {
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", type=" + type
-				+ ", typeArr=" + Arrays.toString(typeArr) + "]";
+				+ ", typeArr=" + Arrays.toString(typeArr) + ", category=" + category + ", subCategory=" + subCategory
+				+ "]";
 	}
 
 

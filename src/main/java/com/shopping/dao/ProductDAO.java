@@ -68,8 +68,7 @@ public class ProductDAO {
 	// ---------------- 상품 전체리스트 가져오기 테스트----------------------------
 	public List<ProductVO> getAllProductList(Criteria cri) {
 		System.out.println("Test DAO()");
-		System.out.println(cri);
-		
+				
 		return sqlSession.selectList("product.getAllProductListTest",cri);
 	}
 

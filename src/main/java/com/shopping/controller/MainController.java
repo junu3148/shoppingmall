@@ -41,14 +41,13 @@ public class MainController {
 		System.out.println("test()");
 
 		Map<String,Object> map = productService.getProductListTest(category, subCategory,cri);
-		
-				
+						
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-		
 		model.addAttribute("productList", map.get("productList"));
-		
 		model.addAttribute("view", "all2");
-
+		model.addAttribute("category", category);
+		model.addAttribute("subCategory2", subCategory);
+				
 		return "product/product2";
 
 	}
