@@ -118,7 +118,7 @@
 			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="type" value="${pageMaker.cri.type}">
 			<input type="hidden" name="category" value="${category}"> <input
-				type="hidden" name="subCategory" value="${subCategory2}">
+				type="hidden" name="subCategory" value="${Criteria.subCategory}">
 		</form>
 
 

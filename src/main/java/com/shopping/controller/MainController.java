@@ -45,7 +45,7 @@ public class MainController {
 		model.addAttribute("productList", map.get("productList"));
 		model.addAttribute("view", "all");
 		model.addAttribute("category", category);
-		model.addAttribute("subCategory2", subCategory);
+		model.addAttribute("Criteria.subCategory", subCategory);
 
 		return "product/product2";
 
@@ -60,13 +60,11 @@ public class MainController {
 
 		List<ProductVO> productList = productService.getProductList(category, subCategory);
 
-		System.out.println(productList);
-
 		model.addAttribute("productList", productList);
 		model.addAttribute("view", "category2");
 		model.addAttribute("category", category);
 		model.addAttribute("subCategory", subCategory);
-		model.addAttribute("subCategory2", subCategory);
+		model.addAttribute("Criteria.subCategory", subCategory);
 
 		return "product/product2";
 	}

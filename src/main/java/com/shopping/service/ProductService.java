@@ -74,6 +74,8 @@ public class ProductService {
 			
 			productList = productDAO.getAllProductList(cri);
 			System.out.println(productList);
+			// 여기서부터 페이징 처리 하는거 해야해~~ 조건문조건문
+			
 		}
 
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
