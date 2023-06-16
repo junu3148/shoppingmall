@@ -49,7 +49,7 @@ public class ProductService {
 
 		return productDAO.deleteProduct(productNo);
 	}
-
+ 
 	// ---------------- 상품 리스트 가져오기 테스트 ----------------------------------------
 	public Map<String, Object> getProductListTest(String category, String subCategory, Criteria cri) {
 		System.out.println("Test Service()");
