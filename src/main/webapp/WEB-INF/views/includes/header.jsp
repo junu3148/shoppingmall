@@ -41,7 +41,7 @@
 			<li><a
 				href="${pageContext.request.contextPath}/main/category/장난감">장난감</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/category/가구">가구</a></li>
+				href="${pageContext.request.contextPath}/main/category2/가구">가구</a></li>
 		</ul>
 		<!-- /메뉴 (gnb) -->
 	</div>

@@ -62,11 +62,12 @@ public class ProductService {
 		List<ProductVO> productList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
+		// --------------- 상품 전체 리스트
 		if (category.equals("all") && subCategory.equals("all")) {
 
 			total = productDAO.getTotal(cri);
 			productList = productDAO.getAllProductList(cri);
-
+		// --------------- 카테고리 상품 전체 리스트
 		} else if (!category.equals("all") && subCategory.equals("all")) {
 			
 			total = productDAO.getTotal(cri);

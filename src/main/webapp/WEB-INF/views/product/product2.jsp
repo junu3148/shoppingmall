@@ -69,7 +69,7 @@
 		<c:if test="${empty Search}">
 			<ul class="category">
 				<li class="on"><a
-					href="${pageContext.request.contextPath}/main/${view}">전체</a></li>
+					href="${pageContext.request.contextPath}/main/${view}/${subCategory}">전체</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
 				<li><a
@@ -99,8 +99,9 @@
 			<!-- 각 번호 페이지 버튼 -->
 			<c:forEach var="num" begin="${pageMaker.startPage}"
 				end="${pageMaker.endPage}">
-				<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a
-					href="${num}">${num}</a></li>
+				<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+					<a href="${num}">${num}</a>
+				</li>
 			</c:forEach>
 
 			<!-- 다음페이지 버튼 -->
@@ -111,13 +112,13 @@
 		</ul>
 
 		<form id="moveForm"
-			action="${pageContext.request.contextPath}/main/all2" method="get">
+			action="${pageContext.request.contextPath}/main/all" method="get">
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="type" value="${pageMaker.cri.type}">
-			<input type="hidden" name="category" value="${category}">
-			<input type="hidden" name="subCategory" value="${subCategory2}">
+			<input type="hidden" name="category" value="${category}"> <input
+				type="hidden" name="subCategory" value="${subCategory2}">
 		</form>
 
 
