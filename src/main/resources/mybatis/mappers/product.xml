@@ -141,8 +141,8 @@
                         a.product_no = b.product_no                        
                         order by a.product_no desc) c
                         ) d
-            where d.rn >= (#{pageNum}-1) * #{amount}
-            and d.rn <= #{pageNum} * #{amount}
+            where d.rn > (#{pageNum}-1) * #{amount}
+            and d.rn < #{pageNum} * #{amount}
 			
 		]]>	
 	

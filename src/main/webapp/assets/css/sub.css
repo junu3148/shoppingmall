@@ -104,8 +104,8 @@ header.mo #header .middle_menu ul li a::before{content: "-"; margin-right: 5px;}
 #product .category li a:hover{color: #4982cf;}
 
 /* 상품페이지 상품 나열 */
-#product section ul{display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap;}
-#product section ul li{width: calc(25% - 20px); margin-bottom: 70px;}
+#product section ul{display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
+#product section ul li{width: calc(25% - 30px); margin: 0 15px; margin-bottom: 70px;}
 #product section ul li a{}
 #product section ul li a img{width: 100%;}
 #product section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}

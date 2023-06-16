@@ -32,7 +32,7 @@ public class MainController {
 		return "main/main";
 	}
 	
-	// --------------- all 페이지
+	// --------------- all2 페이지
 	@RequestMapping(value = "/all2", method = RequestMethod.GET)
 	public String all2(Model model,
 			@ModelAttribute Criteria cri,
@@ -47,7 +47,7 @@ public class MainController {
 		
 		model.addAttribute("productList", map.get("productList"));
 		
-		model.addAttribute("view", "all");
+		model.addAttribute("view", "all2");
 
 		return "product/product2";
 

@@ -51,17 +51,22 @@ public class ProductService {
 	}
 
 	// ---------------- 상품 리스트 가져오기 테스트 ----------------------------------------
-	public Map<String,Object> getProductListTest(String category, String subCategory, Criteria cri) {
+	public Map<String, Object> getProductListTest(String category, String subCategory, Criteria cri) {
 		System.out.println("Test Service()");
-		
+
 		int total = productDAO.getTotal(cri);
-		
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
-		
-		List<ProductVO> productList = productDAO.getAllProductList(cri);
-		
-		Map<String,Object> map = new HashMap<>();
-		
+
+		List<ProductVO> productList = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
+		;
+
+		if (category.equals("all") && subCategory.equals("all")) {
+
+			productList = productDAO.getAllProductList(cri);
+
+		}
+
 		map.put("pageMaker", pageMaker);
 		map.put("productList", productList);
 
