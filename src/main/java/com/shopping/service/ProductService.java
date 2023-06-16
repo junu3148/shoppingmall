@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopping.dao.ProductDAO;
+import com.shopping.vo.Criteria;
+import com.shopping.vo.PageMakerDTO;
 import com.shopping.vo.ProductVO;
 
 @Service
@@ -48,6 +50,24 @@ public class ProductService {
 		return productDAO.deleteProduct(productNo);
 	}
 
+	// ---------------- 상품 리스트 가져오기 테스트 ----------------------------------------
+	public Map<String,Object> getProductListTest(String category, String subCategory, Criteria cri) {
+		System.out.println("Test Service()");
+		
+		int total = productDAO.getTotal(cri);
+		
+		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+		
+		List<ProductVO> productList = productDAO.getAllProductList(cri);
+		
+		Map<String,Object> map = new HashMap<>();
+		
+		map.put("pageMaker", pageMaker);
+		map.put("productList", productList);
+
+		return map;
+	}
+
 	// ---------------- 상품 리스트 가져오기
 	public List<ProductVO> getProductList(String category, String subCategory) {
 		System.out.println("getProductList Service");
@@ -72,21 +92,20 @@ public class ProductService {
 
 		return productList;
 	}
-	
+
 	// ----------------- productSearch
-	public List<ProductVO> productSearch(String keyword){
+	public List<ProductVO> productSearch(String keyword) {
 		System.out.println("productSearch Service()");
-					
-		return productDAO.productSearch(keyword); 
+
+		return productDAO.productSearch(keyword);
 	}
 
-	
-	// ----------------- productVO 
+	// ----------------- productVO
 	public void productVO(String category, String subCategory) {
 
 		productVO.setCategory(category);
 		productVO.setSubCategory(subCategory);
-		
+
 		productList = productDAO.getCategoryProductList(productVO);
 	}
 

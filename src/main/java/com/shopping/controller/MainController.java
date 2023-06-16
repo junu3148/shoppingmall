@@ -1,16 +1,19 @@
 package com.shopping.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shopping.service.ProductService;
+import com.shopping.vo.Criteria;
 import com.shopping.vo.ProductVO;
 
 @Controller
@@ -28,6 +31,29 @@ public class MainController {
 
 		return "main/main";
 	}
+	
+	// --------------- all 페이지
+	@RequestMapping(value = "/all2", method = RequestMethod.GET)
+	public String all2(Model model,
+			@ModelAttribute Criteria cri,
+			@RequestParam(value = "category", required = false, defaultValue = "all") String category,
+			@RequestParam(value = "subCategory", required = false, defaultValue = "all") String subCategory) {
+		System.out.println("test()");
+
+		Map<String,Object> map = productService.getProductListTest(category, subCategory,cri);
+		
+				
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		
+		model.addAttribute("productList", map.get("productList"));
+		
+		model.addAttribute("view", "all");
+
+		return "product/product2";
+
+	}
+	
+	
 
 	// --------------- all 페이지
 	@RequestMapping(value = "/all", method = RequestMethod.GET)

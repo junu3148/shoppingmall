@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.shopping.vo.Criteria;
 import com.shopping.vo.ProductVO;
 
 @Repository
@@ -63,6 +64,14 @@ public class ProductDAO {
 
 		return sqlSession.selectList("product.getAllProductList");
 	}
+	
+	// ---------------- 상품 전체리스트 가져오기 테스트----------------------------
+	public List<ProductVO> getAllProductList(Criteria cri) {
+		System.out.println("Test DAO()");
+		System.out.println(cri);
+		
+		return sqlSession.selectList("product.getAllProductListTest",cri);
+	}
 
 	// ---------------- 카테고리 상품 리스트 가져오기
 	public List<ProductVO> getCategoryProductList(ProductVO productVO) {
@@ -82,6 +91,14 @@ public class ProductDAO {
 		System.out.println("getProduct DAO");
 
 		return sqlSession.selectOne("product.getProduct", vo);
+	}
+	
+	// ----------------- getTotal 
+	public int getTotal(Criteria cri) {
+		System.out.println("DAO getTotal()");
+		
+		return sqlSession.selectOne("product.getTotal",cri);
+		
 	}
 
 }
