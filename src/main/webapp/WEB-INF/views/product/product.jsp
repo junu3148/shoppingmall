@@ -39,10 +39,10 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
 	rel="stylesheet">
+<!-- 서브 css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/sub.css"
 	type="text/css">
-<!-- 서브 css -->
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 제이쿼리 최신버전 js -->
@@ -54,6 +54,13 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
 <!-- js -->
+
+<style>
+.active {
+	background: Lightgray;
+}
+</style>
+
 </head>
 
 <body>
@@ -89,6 +96,7 @@
 				</c:forEach>
 			</ul>
 		</section>
+
 		<c:if test="${empty keyword}">
 			<ul class="paging pageInfo">
 				<c:if test="${pageMaker.prev}">

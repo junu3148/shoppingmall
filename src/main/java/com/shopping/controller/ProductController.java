@@ -54,12 +54,13 @@ public class ProductController {
 
 	// ------------------- 상품정보 리스트
 	@RequestMapping(value = "/poductListForm", method = RequestMethod.GET)
-	public String PoductListForm(Model model,@ModelAttribute Criteria cri) {
+	public String PoductListForm(Model model, @ModelAttribute Criteria cri) {
 		System.out.println("poductListForm()");
 
 		Map<String, Object> map = productService.getProductList(cri);
 
 		model.addAttribute("productList", map.get("productList"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
 
 		return "Admin/ProductView";
 	}
