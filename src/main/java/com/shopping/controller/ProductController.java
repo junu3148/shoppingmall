@@ -49,13 +49,13 @@ public class ProductController {
 
 		int result = productService.insertProduct(vo, file);
 
-		return "redirect:/product/poductListForm";
+		return "redirect:/product/productListForm";
 	}
 
 	// ------------------- 상품정보 리스트
-	@RequestMapping(value = "/poductListForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/productListForm", method = RequestMethod.GET)
 	public String PoductListForm(Model model, @ModelAttribute Criteria cri) {
-		System.out.println("poductListForm()");
+		System.out.println("productListForm()");
 
 		Map<String, Object> map = productService.getProductList(cri);
 
@@ -66,9 +66,9 @@ public class ProductController {
 	}
 
 	// ------------------- 상품 수정폼
-	@RequestMapping(value = "/modifyPoductForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/modifyProductForm", method = RequestMethod.GET)
 	public String modifyPoductForm(Model model, @ModelAttribute ProductVO vo) {
-		System.out.println("modifyPoductForm()");
+		System.out.println("modifyProductForm()");
 
 		productVO = productService.getProduct(vo);
 
@@ -78,33 +78,36 @@ public class ProductController {
 	}
 
 	// ------------------- 상품 수정
-	@RequestMapping(value = "/modifyPoduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyProduct", method = RequestMethod.POST)
 	public String modifyPoduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
-		System.out.println("modifyPoduct()");
+		System.out.println("modifyProduct()");
 
 		int result = productService.modifyProduct(vo, file);
 
-		return "redirect:/product/poductListForm";
+		return "redirect:/product/productListForm";
 	}
 
 	// ------------------- 상품 삭제
-	@RequestMapping(value = "/deletePoduct/{no}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteProduct/{no}", method = RequestMethod.GET)
 	public String deletePoduct(@PathVariable("no") int productNo) {
-		System.out.println("deletePoduct()");
+		System.out.println("deleteProduct()");
 
 		int result = productService.deleteProduct(productNo);
 
-		return "redirect:/product/poductListForm";
+		return "redirect:/product/productListForm";
 	}
 
 	// -------------------- 상품 검색
 	@RequestMapping(value = "/searchProduct", method = RequestMethod.GET)
 	public String searchProduct(Model model, @ModelAttribute Criteria cri) {
 		System.out.println("searchProduct");
-
-		System.out.println(cri);
-
-		return "";
+		
+		Map<String, Object> map = productService.getProductList(cri);
+		
+		model.addAttribute("productList", map.get("productList"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		
+		return "Admin/ProductView";
 	}
 
 }

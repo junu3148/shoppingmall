@@ -4,27 +4,50 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Criteria {
-	
-	 /* 현재 페이지 */
-    private int pageNum;
-    
-    /* 한 페이지 당 보여질 게시물 갯수 */
-    private int amount;
-    
-    /* 검색 키워드 */
-    private String keyword;
-    
-    /* 검색 타입 */
-    private String type;
-    
-    
-    private String category = "all";
-    
-    private String subCategory = "all";
-    
-    
-    public String getCategory() {
+
+	/* 현재 페이지 */
+	private int pageNum;
+
+	/* 한 페이지 당 보여질 게시물 갯수 */
+	private int amount;
+
+	/* 검색 키워드 */
+	private String keyword;
+
+	private int minPrice;
+
+	private int maxPrice;
+
+	/* 검색 타입 */
+	private String type;
+
+	private String category = "all";
+
+	private String subCategory = "all";
+
+	public String getCategory() {
 		return category;
+	}
+
+	
+
+
+	public int getMinPrice() {
+		return minPrice;
+	}
+
+
+	public void setMinPrice(int minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public int getMaxPrice() {
+		return maxPrice;
+	}
+	
+	
+	public void setMaxPrice(int maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 
 	public void setCategory(String category) {
@@ -40,15 +63,15 @@ public class Criteria {
 	}
 
 	/* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
-    public Criteria() {
-        this(1,8);
-    }
-    
-    /* 생성자 => 원하는 pageNum, 원하는 amount */
-    public Criteria(int pageNum, int amount) {
-        this.pageNum = pageNum;
-        this.amount = amount;
-    }
+	public Criteria() {
+		this(1, 8);
+	}
+
+	/* 생성자 => 원하는 pageNum, 원하는 amount */
+	public Criteria(int pageNum, int amount) {
+		this.pageNum = pageNum;
+		this.amount = amount;
+	}
 
 	public int getPageNum() {
 		return pageNum;
@@ -80,17 +103,14 @@ public class Criteria {
 
 	public void setType(String type) {
 		this.type = type;
-		
-	}
 
+	}
 
 	@Override
 	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", type=" + type
-				+ ", category=" + category + ", subCategory=" + subCategory + "]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", minPrice=" + minPrice
+				+ ", maxPrice=" + maxPrice + ", type=" + type + ", category=" + category + ", subCategory="
+				+ subCategory + "]";
 	}
-
-
-
 
 }

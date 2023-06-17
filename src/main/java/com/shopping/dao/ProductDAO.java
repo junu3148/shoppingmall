@@ -68,7 +68,7 @@ public class ProductDAO {
 	// ---------------- 관리자 페이지 상품 리스트 가져오기
 	public List<ProductVO> getAllProductList2(Criteria cri) {
 		System.out.println("getAllProductList DAO()");
-
+		
 		return sqlSession.selectList("product.getAllProductList2",cri);
 	}
 

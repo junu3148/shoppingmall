@@ -121,7 +121,7 @@ a {
 			<br>
 
 			<form
-				action="${pageContext.request.contextPath}/product/modifyPoduct"
+				action="${pageContext.request.contextPath}/product/modifyProduct"
 				method="POST" enctype="multipart/form-data">
 				<table width="700px">
 					<tr>
@@ -131,9 +131,9 @@ a {
 						<td colspan="2" rowspan="8" width=30%><img id="preview"
 							src="${pageContext.request.contextPath}/upload/${product.saveName}"
 							width="100%"> 사진 영역(미리보기) <input type="hidden"
-							name="imageNo" value="${product.imageNo}"></td>
+							name="imageNo" value="${product.imageNo}"> <input type="hidden"
+							name="productNo" value="${product.productNo}"></td>
 					</tr>
-					<input type="hidden" name="productNo" value="${product.productNo}">
 					<tr>
 						<td style="text-align: center;">제품명</td>
 						<td><input type="text" name="productName"
@@ -172,7 +172,7 @@ a {
 					<tr>
 						<td colspan="4" style="text-align: right;">
 							<button type="submit">수정</button>&nbsp;&nbsp;&nbsp; <a
-							href="${pageContext.request.contextPath}/product/deletePoduct/${product.productNo}">삭제</a>
+							href="${pageContext.request.contextPath}/product/deleteProduct/${product.productNo}">삭제</a>
 						</td>
 					</tr>
 				</table>

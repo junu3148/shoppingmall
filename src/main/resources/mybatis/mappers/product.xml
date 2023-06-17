@@ -63,7 +63,15 @@
 			 WHERE
 			      1 = 1
 		]]>
-
+		<if test="minPrice > 0 ">
+			AND price BETWEEN #{minPrice} AND #{maxPrice}
+		</if>
+		<if test="type == 'code' and keyword != null">
+			AND product_no = #{keyword}
+		</if>
+		<if test="type == 'name' and keyword != null">
+			AND product_name like '%'||#{keyword}||'%'
+		</if>
 		<if test="category != 'all'">
 			AND category = '${category}'
 		</if>
@@ -119,11 +127,12 @@
 			      a.product_no DESC		
 		
 		]]>
-	
+
 	</select>
-	
-	<!-- 관리자 페이지 상품 리스트 가져오기-->
-	<select id="getAllProductList2" parameterType="Criteria" resultType="ProductVO">
+
+	<!-- 관리자 페이지 상품 리스트 가져오기 -->
+	<select id="getAllProductList2" parameterType="Criteria"
+		resultType="ProductVO">
 	<![CDATA[
 		
 	         select 
@@ -168,21 +177,39 @@
 		                   		1 = 1
 					
         ]]>
+
+
+		<if test="minPrice > 0 ">
+			AND price BETWEEN #{minPrice} AND #{maxPrice}
+		</if>
+		<if test="type == 'code' and keyword != null">
+			AND a.product_no = #{keyword}
+		</if>
+		<if test="type == 'name' and keyword != null">
+			AND product_name like '%'||#{keyword}||'%'
+		</if>
 		<if test="category != 'all'">
 			AND category = '${category}'
 		</if>
 	        		
         <![CDATA[                                        
-                        order by a.product_no desc) c
+                        order by
+        ]]>
+		<if test="minPrice != 0 ">
+			a.price ,
+		</if>
+        <![CDATA[        
+                         a.product_no desc) c
                         ) d
             where d.rn > (#{pageNum}-1) * #{amount}
             and d.rn <= #{pageNum} * #{amount}
 			
 		]]>
 	</select>
-	
-	<!-- 전체 상품 리스트 가져오기  -->
-	<select id="getAllProductList" parameterType="Criteria"	resultType="ProductVO">
+
+	<!-- 전체 상품 리스트 가져오기 -->
+	<select id="getAllProductList" parameterType="Criteria"
+		resultType="ProductVO">
 	
 		<![CDATA[
 		

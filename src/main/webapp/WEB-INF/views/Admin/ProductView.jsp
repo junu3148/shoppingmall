@@ -69,7 +69,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath}/productView">Product</a>
+							href="${pageContext.request.contextPath}/product/productListForm">Product</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/customerView">Customer</a>
@@ -119,15 +119,19 @@
 				<table>
 					<tr>
 						<td><select name="type" class="form-select">
-								<option>선택</option>
-								<option value="name">제품명</option>
-								<option value="code">제품코드</option>
+								<option
+									<c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>선택</option>
+								<option value="name"
+									<c:out value="${pageMaker.cri.type eq 'name'?'selected':'' }"/>>제품명</option>
+								<option value="code"
+									<c:out value="${pageMaker.cri.type eq 'code'?'selected':'' }"/>>제품코드</option>
 						</select></td>
-						<td>: <input type="text" name="keyword" />
+						<td>: <input type="text" id="searchKeyword" name="keyword"
+							value="${pageMaker.cri.keyword}" />
 							<button type="submit" class="btn btn-secondary">Search</button>
 						</td>
 						<td><a class="btn btn-primary"
-							href="${pageContext.request.contextPath}/ProductInsertForm"
+							href="${pageContext.request.contextPath}/product/insertProductForm"
 							role="button">Insert</a></td>
 					</tr>
 
@@ -136,28 +140,33 @@
 			<!-- 검색어 마지막-->
 			<br>
 			<!--금액대별 검색폼-->
-			<form action="/Shoppingmall/searchPrice" method="GET">
-				<table style="margin: 0 auto; width: 90%;">
-					<tr align="center">
-						<!--
+			<div id="searchPrice">
+				<form
+					action="${pageContext.request.contextPath}/product/searchProduct"
+					method="GET">
+					<table style="margin: 0 auto; width: 90%;">
+						<tr align="center">
+							<!--
                         <td>가격대 검색 : <input type ="number">원 ~ <input type="number">원</td>
                         <td><button type = "submit">조회</button></td>
                         -->
-						<td><input type="range" min="10000" max="100000" value="0"
-							step="1000" onchange="updateMinRange(this.value)"
-							style="width: 20%"> <input type="number" min="0"
-							max="100000" step="1" id="minRangeInput" step="1000"
-							name="minPrice" value=0 onchange="updateMinRange(this.value)">
-							원 ~ <input type="range" min="10000" max="2000000" step="1000"
-							value="0" onchange="updateMaxRange(this.value)"
-							style="width: 20%"> <input type="number" min="10000"
-							max="2000000" step="1" id="maxRangeInput" name="maxPrice"
-							style="width: 12.5%" value=0
-							onchange="updateMaxRange(this.value)">원
-							<button type="submit" class="btn btn-secondary">Search</button></td>
-					</tr>
-				</table>
-			</form>
+							<td><input type="range" min="1000" max="50000" value="0"
+								step="1000" onchange="updateMinRange(this.value)"
+								style="width: 20%"> <input type="number" min="1000"
+								max="50000" step="1000" id="minRangeInput" step="1000"
+								name="minPrice" value="${pageMaker.cri.minPrice}"
+								onchange="updateMinRange(this.value)">원 ~ <input
+								type="range" min="10000" max="500000" step="1000" value="0"
+								onchange="updateMaxRange(this.value)" style="width: 20%">
+								<input type="number" min="10000" max="500000" step="1000"
+								id="maxRangeInput" name="maxPrice" style="width: 12.5%"
+								value="${pageMaker.cri.maxPrice}"
+								onchange="updateMaxRange(this.value)">원
+								<button type="submit" class="btn btn-secondary">Search</button></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 			<!--금액대별 검색 end-->
 
 
@@ -179,7 +188,7 @@
 							<td style="width: 30%; text-align: center;"><fmt:formatNumber
 									value="${product.price}" pattern="#,##0원" /></td>
 							<td style="width: 10%; text-align: center;"><a
-								href="${pageContext.request.contextPath}/product/modifyPoductForm?productNo=${product.productNo}"
+								href="${pageContext.request.contextPath}/product/modifyProductForm?productNo=${product.productNo}"
 								class="btn btn-primary">수정</a></td>
 						</tr>
 					</c:forEach>
@@ -209,20 +218,21 @@
 			</ul>
 
 			<form id="moveForm"
-				action="${pageContext.request.contextPath}/product/poductListForm"
+				action="${pageContext.request.contextPath}/product/productListForm"
 				method="get">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 				<input type="hidden" name="type" value="${pageMaker.cri.type}">
+				<input type="hidden" name="minPrice"
+					value="${pageMaker.cri.minPrice}"> <input type="hidden"
+					name="maxPrice" value="${pageMaker.cri.maxPrice}">
 			</form>
 
 
+
+
 		</div>
-
-
-
-
 
 
 
@@ -247,11 +257,25 @@
 
 		$(document).ready(function() {
 
+			//페이징 이벤트처리 submit
 			$(".pageInfo a").on("click", function(e) {
 				e.preventDefault();
 				var pageNum = $(this).attr("href");
 				$("#moveForm input[name='pageNum']").val(pageNum);
 				$("#moveForm").submit();
+			});
+			//옵션 변경시 검색어 비우기
+			$(".form-select").on('click', function() {
+
+				$("#searchKeyword").val("");
+			});
+
+			//금액별 상품 검색일때 옵션정리
+			$("#searchPrice").on("click", function() {
+
+				$(".form-select option").first().prop("selected", true);
+				$("#searchKeyword").val("");
+
 			});
 
 		});
