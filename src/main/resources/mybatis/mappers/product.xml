@@ -178,7 +178,7 @@
                         order by a.product_no desc) c
                         ) d
             where d.rn > (#{pageNum}-1) * #{amount}
-            and d.rn < #{pageNum} * #{amount}
+            and d.rn <= #{pageNum} * #{amount}
 			
 		]]>
 
@@ -239,8 +239,8 @@
         	 AND a.subcategory = '${subCategory}'  
 			 order by a.product_no desc) c
                         ) d
-            where d.rn >= (#{pageNum}-1) * #{amount}
-            and d.rn < #{pageNum} * #{amount}
+            where d.rn > (#{pageNum}-1) * #{amount}
+            and d.rn <= #{pageNum} * #{amount}
 			
 		]]>
 
