@@ -67,43 +67,59 @@
 	<main id="product">
 		<section id="kv"></section>
 		<c:if test="${empty Search}">
-		<ul class="category">
-			<li class="on"><a
-				href="${pageContext.request.contextPath}/main/${view}">전체</a></li>
-			<li><a
-				href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
-			<li><a
-				href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=고양이&subCategory=${subCategory}">고양이</a></li>
-		</ul>
+			<ul class="category">
+				<li class="on"><a
+					href="${pageContext.request.contextPath}/main/${view}/${subCategory}">전체</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=고양이&subCategory=${subCategory}">고양이</a></li>
+			</ul>
 		</c:if>
 		<section>
 			<ul>
 				<c:forEach items="${productList}" var="product">
-					<li><a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}"> <img
+					<li><a
+						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
+							<img
 							src="${pageContext.request.contextPath}/upload/${product.saveName}">
-							<span class="tit">${product.productName}</span> 
-							<span class="price jb">${product.price}원</span>
+							<span class="tit">${product.productName}</span> <span
+							class="price jb">${product.price}원</span>
 					</a></li>
 				</c:forEach>
 			</ul>
 		</section>
 
-		<ul class="paging">
-			<li class="first"><a href="#none"></a></li>
-			<li class="pre"><a href="#none"></a></li>
-			<li class="on"><a href="#none">1</a></li>
-			<li><a href="#none">2</a></li>
-			<li><a href="#none">3</a></li>
-			<li><a href="#none">4</a></li>
-			<li><a href="#none">5</a></li>
-			<li><a href="#none">6</a></li>
-			<li><a href="#none">7</a></li>
-			<li><a href="#none">8</a></li>
-			<li><a href="#none">9</a></li>
-			<li><a href="#none">10</a></li>
-			<li class="next"><a href="#none"></a></li>
-			<li class="last"><a href="#none"></a></li>
+		<ul class="paging pageInfo">
+			<c:if test="${pageMaker.prev}">
+				<li class="pageInfo_btn previous"><a
+					href="${pageMaker.startPage - 1}">◀</a></li>
+			</c:if>
+
+			<!-- 각 번호 페이지 버튼 -->
+			<c:forEach var="num" begin="${pageMaker.startPage}"
+				end="${pageMaker.endPage}">
+				<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+
+			<!-- 다음페이지 버튼 -->
+			<c:if test="${pageMaker.next}">
+				<li class="pageInfo_btn next"><a
+					href="${pageMaker.endPage + 1}">▶</a></li>
+			</c:if>
 		</ul>
+
+		<form id="moveForm"
+			action="${pageContext.request.contextPath}/main/${view}/${subCategory}" method="get">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+			<input type="hidden" name="type" value="${pageMaker.cri.type}">
+			<input type="hidden" name="category" value="${category}"> 
+			<input type="hidden" name="subCategory" value="${CriteriaSubCategory}">
+		</form>
 
 
 
@@ -124,14 +140,16 @@
 </body>
 
 <script>
+	$(document).ready(function() {
 
-	/* $(document).ready(function() {
-		
-	      $( document ).ready( function() {
-	          $( '.jb' ).text( $( '.jb' ).text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
-	        } );
-	});  */
-	
+		$(".pageInfo a").on("click", function(e) {
+			e.preventDefault();
+			var pageNum = $(this).attr("href");
+			$("#moveForm input[name='pageNum']").val(pageNum);
+			$("#moveForm").submit();
+		});
+
+	});
 </script>
 
 </html>

@@ -51,7 +51,7 @@ public class ProductService {
 	}
 
 	// ---------------- 상품 리스트 가져오기 테스트 ----------------------------------------
-	public Map<String, Object> getProductListTest(String category, String subCategory, Criteria cri) {
+	public Map<String, Object> getProductList(String category, String subCategory, Criteria cri) {
 		System.out.println("Test Service()");
 
 		System.out.println(category);
@@ -102,45 +102,11 @@ public class ProductService {
 		return map;
 	}  
 
-	// ---------------- 상품 리스트 가져오기
-	public List<ProductVO> getProductList(String category, String subCategory) {
-		System.out.println("getProductList Service");
-
-		if (category.equals("all") && subCategory.equals("all")) {
-
-			productList = productDAO.getAllProductList();
-
-		} else if (!category.equals("all") && subCategory.equals("all")) {
-
-			productVO(category, subCategory);
-
-		} else if (category.equals("all") && !subCategory.equals("all")) {
-
-			productVO(category, subCategory);
-
-		} else if (!category.equals("all") && !subCategory.equals("all")) {
-
-			productVO(category, subCategory);
-
-		}
-
-		return productList;
-	}
-
 	// ----------------- productSearch
 	public List<ProductVO> productSearch(String keyword) {
 		System.out.println("productSearch Service()");
 
 		return productDAO.productSearch(keyword);
-	}
-
-	// ----------------- productVO
-	public void productVO(String category, String subCategory) {
-
-		productVO.setCategory(category);
-		productVO.setSubCategory(subCategory);
-
-		productList = productDAO.getCategoryProductList(productVO);
 	}
 
 	// ---------------- 상품 정보 가져오기

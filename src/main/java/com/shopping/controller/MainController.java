@@ -39,7 +39,7 @@ public class MainController {
 			@RequestParam(value = "subCategory", required = false, defaultValue = "all") String subCategory) {
 		System.out.println("test()");
 
-		Map<String, Object> map = productService.getProductListTest(category, subCategory, cri);
+		Map<String, Object> map = productService.getProductList(category, subCategory, cri);
 
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		model.addAttribute("productList", map.get("productList"));
@@ -47,66 +47,25 @@ public class MainController {
 		model.addAttribute("category", category);
 		model.addAttribute("Criteria.subCategory", subCategory);
 
-		return "product/product2";
+		return "product/product";
 
 	}
 
 	// -------------- 카테고리 페이지
-	@RequestMapping(value = "/category2/{subCategory}", method = RequestMethod.GET)
+	@RequestMapping(value = "/category/{subCategory}", method = RequestMethod.GET)
 	public String category2(Model model, @ModelAttribute Criteria cri,
 			@RequestParam(value = "category", required = false, defaultValue = "all") String category,
 			@PathVariable("subCategory") String subCategory) {
 		System.out.println("category()");
 
-		Map<String, Object> map = productService.getProductListTest(category, subCategory, cri);
+		Map<String, Object> map = productService.getProductList(category, subCategory, cri);
 
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		model.addAttribute("productList", map.get("productList"));
-		model.addAttribute("view", "category2");
+		model.addAttribute("view", "category");
 		model.addAttribute("category", category);
 		model.addAttribute("subCategory", subCategory);
 		model.addAttribute("CriteriaSubCategory", subCategory);
-
-		return "product/product2";
-	}
-
-	/*
-	 * // --------------- all 페이지
-	 * 
-	 * @RequestMapping(value = "/all", method = RequestMethod.GET) public String
-	 * all(Model model,
-	 * 
-	 * @RequestParam(value = "category", required = false, defaultValue = "all")
-	 * String category,
-	 * 
-	 * @RequestParam(value = "subCategory", required = false, defaultValue = "all")
-	 * String subCategory) { System.out.println("all()");
-	 * 
-	 * List<ProductVO> productList = productService.getProductList(category,
-	 * subCategory);
-	 * 
-	 * model.addAttribute("productList", productList); model.addAttribute("view",
-	 * "all");
-	 * 
-	 * return "product/product";
-	 * 
-	 * }
-	 */
-
-	// -------------- 카테고리 페이지
-	@RequestMapping(value = "/category/{subCategory}", method = RequestMethod.GET)
-	public String category(Model model,
-			@RequestParam(value = "category", required = false, defaultValue = "all") String category,
-			@PathVariable("subCategory") String subCategory) {
-		System.out.println("category()");
-
-		List<ProductVO> productList = productService.getProductList(category, subCategory);
-
-		System.out.println(productList);
-
-		model.addAttribute("productList", productList);
-		model.addAttribute("view", "category");
-		model.addAttribute("subCategory", subCategory);
 
 		return "product/product";
 	}
