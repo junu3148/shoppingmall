@@ -46,26 +46,33 @@ public class ProductDAO {
 
 	// --------------- 상품 삭제
 	public int deleteProduct(int productNo) {
-		System.out.println("deleteProduct DAO");
+		System.out.println("deleteProduct DAO()");
 
 		return sqlSession.delete("product.deleteProduct", productNo);
 	}
 
 	// --------------- 상품 이미지 삭제
 	public int deleteProductImg(int productNo) {
-		System.out.println("deleteProductImg DAO");
+		System.out.println("deleteProductImg DAO()");
 
 		return sqlSession.delete("image.deleteProductImg", productNo);
 	}
 
-	// ---------------- 상품 전체리스트 가져오기
-	public List<ProductVO> getAllProductList() {
-		System.out.println("getAllProductList DAO");
+	// ---------------- 메인 롤링 리스트 가져오기
+	public List<ProductVO> mainProductList() {
+		System.out.println("mainProductList DAO()");
 
-		return sqlSession.selectList("product.getAllProductList2");
+		return sqlSession.selectList("product.mainProductList");
 	}
 
-	// ---------------- 상품 전체리스트 가져오기 테스트----------------------------
+	// ---------------- 관리자 페이지 상품 리스트 가져오기
+	public List<ProductVO> getAllProductList2(Criteria cri) {
+		System.out.println("getAllProductList DAO()");
+
+		return sqlSession.selectList("product.getAllProductList2",cri);
+	}
+
+	// ---------------- 전체 상품 리스트 가져오기 ----------------------------
 	public List<ProductVO> getAllProductList(Criteria cri) {
 		System.out.println("getAllProductList DAO()");
 
@@ -74,12 +81,12 @@ public class ProductDAO {
 
 	// ---------------- 카테고리 상품 리스트 가져오기
 	public List<ProductVO> getCategoryProductList(Criteria cri) {
-		System.out.println("getCategoryProductList DAO");
+		System.out.println("getCategoryProductList DAO()");
 
 		return sqlSession.selectList("product.getCategoryProductList", cri);
 	}
 
-	// ----------------- productSearch
+	// ----------------- 상품 검색
 	public List<ProductVO> productSearch(String keyword) {
 		System.out.println("productSearch DAO()");
 
@@ -88,12 +95,12 @@ public class ProductDAO {
 
 	// ---------------- 상품 정보 가져오기
 	public ProductVO getProduct(ProductVO vo) {
-		System.out.println("getProduct DAO");
+		System.out.println("getProduct DAO()");
 
 		return sqlSession.selectOne("product.getProduct", vo);
 	}
 
-	// ----------------- getTotal
+	// ----------------- 상품 수 가져오기
 	public int getTotal(Criteria cri) {
 		System.out.println("getTotal DAO()");
 
@@ -101,7 +108,7 @@ public class ProductDAO {
 
 	}
 
-	// ----------------- getTotalSubCategory
+	// ----------------- 서브카테고리 상품 수 가져오기
 	public int getTotalSubCategory(Criteria cri) {
 		System.out.println("getTotalSubCategory DAO()");
 

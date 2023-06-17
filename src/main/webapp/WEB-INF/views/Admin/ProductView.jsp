@@ -64,14 +64,14 @@
             <h1 class="display-6"><b>Product Management Page</b></h1><br><hr><br>
 
             <!--키워드 검색 폼-->
-            <form action="${pageContext.request.contextPath}/product/search">
+            <form action="${pageContext.request.contextPath}/product/searchProduct" method="get">
             <table>
                 <tr>
                     <td> 
-                        <select name="searchOption" class="form-select" >
+                        <select name="type" class="form-select" >
                             <option>선택</option>
-                            <option value="productName">제품명</option>
-                            <option value="productNo">제품코드</option>
+                            <option value="name">제품명</option>
+                            <option value="code">제품코드</option>
                         </select>
                     </td>
                     <td>

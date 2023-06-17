@@ -104,62 +104,14 @@
 				</p>
 			</div>
 			<div id="best_seller_div">
+				<c:forEach items="${productList}" var="product">
 				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
+					<a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}"> <img
+						src="${pageContext.request.contextPath}/upload/${product.saveName}" alt=""> <span class="tit">${product.productName}</span> <span
+						class="price">${product.price}원</span>
 					</a>
 				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
-				<div class="cont">
-					<a href="#none"> <img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168231592390378275.jpg?gif=1&w=360&h=360&c=c&q=0.8&webp=1"
-						alt=""> <span class="tit">반려동물 대리석</span> <span
-						class="price">30,000원</span>
-					</a>
-				</div>
+				</c:forEach>
 			</div>
 		</section>
 		<!-- /베스트셀러 -->

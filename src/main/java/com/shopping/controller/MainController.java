@@ -28,6 +28,10 @@ public class MainController {
 	@RequestMapping(value = "/")
 	public String main(Model model) {
 		System.out.println("main()");
+		
+		List<ProductVO> productList = productService.mainProductList();
+		
+		model.addAttribute("productList", productList);
 
 		return "main/main";
 	}

@@ -70,7 +70,7 @@
 
 	</select>
 
-	<!-- 상품수 가져오기 -->
+	<!-- 서브카테고리 상품수 가져오기 -->
 	<select id="getTotalSubCategory" parameterType="Criteria"
 		resultType="int">
 	
@@ -93,12 +93,13 @@
 
 	</select>
 
-	<!-- 상품리스트 가져오기 -->
-	<select id="getAllProductList2" resultType="ProductVO">
-	
-		<![CDATA[
+
+	<!-- 메인 롤링 리스트 가져오기 -->
+	<select id="mainProductList" resultType="ProductVO">
 		
-			SELECT
+		<![CDATA[
+	
+			SELECT  
 			      a.product_no as productNo,
 			      product_name as productName,
 			      product_ea as productEa,
@@ -113,14 +114,74 @@
 			      product a
 			      INNER JOIN product_image b 
 			      ON a.product_no = b.product_no
+            where rownum <= 5
 		  ORDER BY
-			      a.product_no DESC
+			      a.product_no DESC		
 		
 		]]>
-
+	
 	</select>
-
-	<!-- 상품리스트 가져오기 테스트 -->
+	
+	<!-- 관리자 페이지 상품 리스트 가져오기-->
+	<select id="getAllProductList2" parameterType="Criteria" resultType="ProductVO">
+	<![CDATA[
+		
+	         select 
+	                d.product_no as productNo,
+	                d.product_name as productName,
+	                d.product_ea as productEa,
+	                d.price,
+	                d.product_content as productContent,
+	                d.reg_date as regDate,
+	                d.category,
+	                d.subcategory as subCategory,
+	                d.save_name as saveName,
+	                d.image_no as imageNo   
+		     from(select  
+		                rownum as rn,
+		                c.product_no, 
+		                c.product_name,
+		                c.product_ea,
+		                c.price,
+		                c.product_content,
+		                c.reg_date,
+		                c.category,
+		                c.subcategory ,
+		                c.save_name ,
+		                c.image_no
+		            from (SELECT
+		                        a.product_no, 
+		                        a.product_name,
+		                        a.product_ea,
+		                        a.price,
+		                        a.product_content,
+		                        a.reg_date,
+		                        a.category,
+		                        a.subcategory ,
+		                        b.save_name ,
+		                        b.image_no 
+		                    FROM
+		                        product a inner join product_image b 
+		                      ON 
+		                        a.product_no = b.product_no
+		                   WHERE
+		                   		1 = 1
+					
+        ]]>
+		<if test="category != 'all'">
+			AND category = '${category}'
+		</if>
+	        		
+        <![CDATA[                                        
+                        order by a.product_no desc) c
+                        ) d
+            where d.rn > (#{pageNum}-1) * #{amount}
+            and d.rn <= #{pageNum} * #{amount}
+			
+		]]>
+	</select>
+	
+	<!-- 전체 상품 리스트 가져오기  -->
 	<select id="getAllProductList" parameterType="Criteria"	resultType="ProductVO">
 	
 		<![CDATA[
@@ -276,7 +337,7 @@
 	</select>
 
 
-	<!-- 상품 정보 가져오기 -->
+	<!-- 상품 상세정보 가져오기 -->
 	<select id="getProduct" parameterType="ProductVO"
 		resultType="ProductVO">
 	
@@ -309,7 +370,7 @@
 		
 		<![CDATA[
 		
-			update product 
+			update product
 					   set                  
 		                  product_name = #{productName},
 		                  product_ea = #{productEa},

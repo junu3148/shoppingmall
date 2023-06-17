@@ -1,7 +1,5 @@
 package com.shopping.vo;
 
-import java.util.Arrays;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,8 +17,6 @@ public class Criteria {
     /* 검색 타입 */
     private String type;
     
-    /* 검색 타입 배열 */
-    private String[] typeArr;
     
     private String category = "all";
     
@@ -84,23 +80,14 @@ public class Criteria {
 
 	public void setType(String type) {
 		this.type = type;
-		this.typeArr = type.split("");
-	}
-
-	public String[] getTypeArr() {
-		return typeArr;
-	}
-
-	public void setTypeArr(String[] typeArr) {
-		this.typeArr = typeArr;
 		
 	}
+
 
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", type=" + type
-				+ ", typeArr=" + Arrays.toString(typeArr) + ", category=" + category + ", subCategory=" + subCategory
-				+ "]";
+				+ ", category=" + category + ", subCategory=" + subCategory + "]";
 	}
 
 

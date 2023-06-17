@@ -41,24 +41,46 @@ public class ProductService {
 
 	// ----------------- 상품 삭제
 	public int deleteProduct(int productNo) {
-		System.out.println("deleteProduct Service");
+		System.out.println("deleteProduct Service()");
 
 		productDAO.deleteProductImg(productNo);
 
 		return productDAO.deleteProduct(productNo);
 	}
 
-	// ---------------- 상품 리스트 가져오기 
-	public Map<String, Object> getProductList(String category, 
-											  String subCategory, 
-											  Criteria cri) {
+	// ---------------- 메인 롤링 리스트 가져오기
+	public List<ProductVO> mainProductList() {
+		System.out.println("mainProductList Service()");
+
+		return productDAO.mainProductList();
+	}
+
+	// ---------------- 관리자 페이지 상품 리스트 가져오기
+	public Map<String, Object> getProductList(Criteria cri) {
+		System.out.println("getProductList Service()");
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		int total = productDAO.getTotal(cri);
+	
+		productList = productDAO.getAllProductList2(cri);
+		
+		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+		map.put("pageMaker", pageMaker);
+		map.put("productList", productList);
+
+		return map;
+	}
+
+	// ---------------- 상품 리스트 가져오기
+	public Map<String, Object> getProductList(String category, String subCategory, Criteria cri) {
 		System.out.println("Test Service()");
 
 		int total = 0;
 		List<ProductVO> productList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
-			// --------------- 상품 전체 리스트
+		// --------------- 상품 전체 리스트
 		if (category.equals("all") && subCategory.equals("all")) {
 			System.out.println("1.상품 전체 리스트");
 
@@ -99,16 +121,7 @@ public class ProductService {
 		return map;
 	}
 
-	// ---------------- 상품 리스트 가져오기
-	public List<ProductVO> getProductList(String category, String subCategory) {
-		System.out.println("getProductList Service");
-
-		productList = productDAO.getAllProductList();
-
-		return productList;
-	}
-
-	// ----------------- productSearch
+	// ----------------- 상품 검색
 	public List<ProductVO> productSearch(String keyword) {
 		System.out.println("productSearch Service()");
 
@@ -117,7 +130,7 @@ public class ProductService {
 
 	// ---------------- 상품 정보 가져오기
 	public ProductVO getProduct(ProductVO vo) {
-		System.out.println("getProduct Service");
+		System.out.println("getProduct Service()");
 
 		return productDAO.getProduct(vo);
 	}

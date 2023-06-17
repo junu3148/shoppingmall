@@ -1,6 +1,7 @@
 package com.shopping.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopping.service.ProductService;
+import com.shopping.vo.Criteria;
 import com.shopping.vo.ProductVO;
 
 @Controller
@@ -52,12 +54,12 @@ public class ProductController {
 
 	// ------------------- 상품정보 리스트
 	@RequestMapping(value = "/poductListForm", method = RequestMethod.GET)
-	public String PoductListForm(Model model) {
+	public String PoductListForm(Model model,@ModelAttribute Criteria cri) {
 		System.out.println("poductListForm()");
 
-		List<ProductVO> productList = productService.getProductList("all","all");
+		Map<String, Object> map = productService.getProductList(cri);
 
-		model.addAttribute("productList", productList);
+		model.addAttribute("productList", map.get("productList"));
 
 		return "Admin/ProductView";
 	}
@@ -76,12 +78,11 @@ public class ProductController {
 
 	// ------------------- 상품 수정
 	@RequestMapping(value = "/modifyPoduct", method = RequestMethod.POST)
-	public String modifyPoduct(@ModelAttribute ProductVO vo,
-							   @RequestParam("file") MultipartFile file) {
+	public String modifyPoduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("modifyPoduct()");
-	
+
 		int result = productService.modifyProduct(vo, file);
-		
+
 		return "redirect:/product/poductListForm";
 	}
 
@@ -89,14 +90,18 @@ public class ProductController {
 	@RequestMapping(value = "/deletePoduct/{no}", method = RequestMethod.GET)
 	public String deletePoduct(@PathVariable("no") int productNo) {
 		System.out.println("deletePoduct()");
-		
+
 		int result = productService.deleteProduct(productNo);
 
 		return "redirect:/product/poductListForm";
 	}
 
 	// -------------------- 상품 검색
-	public String searchProduct() {
+	@RequestMapping(value = "/searchProduct", method = RequestMethod.GET)
+	public String searchProduct(Model model, @ModelAttribute Criteria cri) {
+		System.out.println("searchProduct");
+
+		System.out.println(cri);
 
 		return "";
 	}
