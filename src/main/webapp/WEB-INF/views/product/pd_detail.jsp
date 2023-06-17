@@ -261,9 +261,8 @@
 		var price = $("#price").val()
 
 		var total_price = EAval * price;
-		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
-				',')
-				+ '원';
+		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원';
+		
 		$(".total_price").text(set_price);
 	}
 </script>
