@@ -53,18 +53,19 @@ public class MainController {
 
 	// -------------- 카테고리 페이지
 	@RequestMapping(value = "/category2/{subCategory}", method = RequestMethod.GET)
-	public String category2(Model model,
+	public String category2(Model model, @ModelAttribute Criteria cri,
 			@RequestParam(value = "category", required = false, defaultValue = "all") String category,
 			@PathVariable("subCategory") String subCategory) {
 		System.out.println("category()");
 
-		List<ProductVO> productList = productService.getProductList(category, subCategory);
+		Map<String, Object> map = productService.getProductListTest(category, subCategory, cri);
 
-		model.addAttribute("productList", productList);
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		model.addAttribute("productList", map.get("productList"));
 		model.addAttribute("view", "category2");
 		model.addAttribute("category", category);
 		model.addAttribute("subCategory", subCategory);
-		model.addAttribute("Criteria.subCategory", subCategory);
+		model.addAttribute("CriteriaSubCategory", subCategory);
 
 		return "product/product2";
 	}

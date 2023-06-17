@@ -49,33 +49,50 @@ public class ProductService {
 
 		return productDAO.deleteProduct(productNo);
 	}
- 
+
 	// ---------------- 상품 리스트 가져오기 테스트 ----------------------------------------
 	public Map<String, Object> getProductListTest(String category, String subCategory, Criteria cri) {
 		System.out.println("Test Service()");
-		
+
 		System.out.println(category);
 		System.out.println(subCategory);
 		System.out.println(cri);
-		
+
 		int total = 0;
 		List<ProductVO> productList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
 		// --------------- 상품 전체 리스트
 		if (category.equals("all") && subCategory.equals("all")) {
-
+			System.out.println("1.상품 전체 리스트");
 			total = productDAO.getTotal(cri);
+			System.out.println("1 :" + total);
 			productList = productDAO.getAllProductList(cri);
-		// --------------- 카테고리 상품 전체 리스트
+			// --------------- 카테고리 상품 전체 리스트
 		} else if (!category.equals("all") && subCategory.equals("all")) {
-			
+			System.out.println("2.카테고리 상품 전체 리스트");
 			total = productDAO.getTotal(cri);
-			
+			System.out.println("2 :" + total);
 			productList = productDAO.getAllProductList(cri);
-			System.out.println(productList);
-			// 여기서부터 페이징 처리 하는거 해야해~~ 조건문조건문
+
+			// ---------------- 서브 카테고리 전체 리스트
+		} else if (category.equals("all") && !subCategory.equals("all")) {
+			System.out.println("3.서브 카테고리 전체 리스트");
+			total = productDAO.getTotalSubCategory(cri);
+			System.out.println("3 :" + total);
 			
+			productList = productDAO.getCategoryProductListTest(cri);
+			System.out.println(productList.size());
+			
+			// ---------------- 서브카테고리별 카테고리 상품 리스트
+		} else if (!category.equals("all") && !subCategory.equals("all")) {
+			System.out.println("4.서브카테고리별 카테고리 상품 리스트");
+			total = productDAO.getTotalSubCategory(cri);
+			System.out.println("4 :" + total);
+			
+			productList = productDAO.getCategoryProductListTest(cri);
+			System.out.println(productList.size());
+
 		}
 
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
@@ -83,7 +100,7 @@ public class ProductService {
 		map.put("productList", productList);
 
 		return map;
-	}
+	}  
 
 	// ---------------- 상품 리스트 가져오기
 	public List<ProductVO> getProductList(String category, String subCategory) {
