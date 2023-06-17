@@ -57,7 +57,7 @@
                     <td><label for="check01"><input type="checkbox" name="chk" id="check01" ></label></td>
                     <td>
                    <input type ="hidden" value ="${product.price}">
-                        <a href="#none">
+                        <a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
                             <img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
                             <span>${product.productName}</span>
                         </a>
