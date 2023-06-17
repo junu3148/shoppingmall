@@ -1,3 +1,5 @@
+<!-- 카트 jsp -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -48,60 +50,46 @@
                     <th>주문 금액</th>
                     <th>배송 정보</th>
                 </tr>
-                <tr>
-                    <td><label for="check01"><input type="checkbox" name="chk" id="check01"></label></td>
+                
+                <c:forEach items = "${cartList}" var = "product"> 
+                
+                <tr id = "p${product.productNo}" class = "">
+                    <td><label for="check01"><input type="checkbox" name="chk" id="check01" ></label></td>
                     <td>
+                   <input type ="hidden" value ="${product.price}">
                         <a href="#none">
-                            <img src="${pageContext.request.contextPath }/assets/images/sns01.jpg" class="cart_pd" alt="">
-                            <span>전통라인 잎새문 다기 세트</span>
+                            <img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
+                            <span>${product.productName}</span>
                         </a>
                     </td>
                     <td>
                         <div class="count-wrap _count">
                             <button type="button" class="minus">-</button>
-                            <input type="text" class="inp" value="1" />
+                            <input type="text"  class="inp" value="${product.productEa}"/>
                             <button type="button" class="plus">+</button>
                         </div>
                     </td>
-                    <td>
-                        <p>152,000원</p>
+                    <td>					
+                        <span title = "order-price"><fmt:formatNumber type="number" maxFractionDigits="3"
+							value="${product.price * product.productEa}" />원</span>
                     </td>
                     <td>
                         <span>무료</span>(택배)
                     </td>
                 </tr>
-                <tr>
-                    <td><label for="check02"><input type="checkbox" name="chk" id="check02"></label></td>
-                    <td>
-                        <a href="#none">
-                            <img src="${pageContext.request.contextPath }/assets/images/sns01.jpg" class="cart_pd" alt="">
-                            <span>전통라인 잎새문 다기 세트</span>
-                        </a>
-                    </td>
-                    <td>
-                        <div class="count-wrap _count">
-                            <button type="button" class="minus">-</button>
-                            <input type="text" class="inp" value="1" />
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </td>
-                    <td>
-                        <p>152,000원</p>
-                    </td>
-                    <td>
-                        <span>무료</span>(택배)
-                    </td>
-                </tr>
+                
+                </c:forEach>
+                
             </table>
 
             <a href="#none" class="del">선택 상품 삭제</a>
             
 
             <div class="total_order">
-                <p class="total">총 주문 상품 <span>1</span>개</p>
+                <p class="total">총 주문 상품 <span id = "total_ea">0개</span></p>
                 <ul>
                     <li>
-                        <p>15,200원</p>
+                        <p class = "total_price">0원</p>
                         <span>상품 금액</span>
                     </li>
                     <li><p>+</p></li>
@@ -111,7 +99,7 @@
                     </li>
                     <li><p>=</p></li>
                     <li>
-                        <p class="total_price">15,200원</p>
+                        <p class="total_price">0원</p>
                         <span>총 주문 금액</span>
                     </li>
                 </ul>
@@ -122,111 +110,9 @@
             </div>
         </section>
 
-        <section class="mo">
-            <h3>장바구니</h3>
 
-            
-            <div class="line_01 clear">
-                <div>
-                    <input type="checkbox" id="cbx_chkAll_m" /><label for="cbx_chkAll_m">전체선택</label>
-                </div>
-                <a href="#none" class="del">선택상품 삭제</a>
-            </div>
-            <div class="pd_01">
-                <div class="line_02">
-                    <label for="check01_m"><input type="checkbox" name="chk_m" id="check01_m"></label>
-                    <br>
-                    <a href="#none">
-                        <img src="${pageContext.request.contextPath }/assets/images/sns01.jpg" class="cart_pd" alt="">
-                        <span>전통라인 잎새문 다기 세트</span>
-                    </a>
 
-                    <table>
-                        <tr class="pd_price">
-                            <td>주문금액</td>
-                            <td>152,000원</td>
-                        </tr>
-                        <tr class="pd_num">
-                            <td>상품갯수</td>
-                            <td>
-                                <div class="count-wrap _count">
-                                    <button type="button" class="minus">-</button>
-                                    <input type="text" class="inp" value="1" />
-                                    <button type="button" class="plus">+</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="pd_price">
-                            <td>상품금액</td>
-                            <td>152,000원</td>
-                        </tr>
-                        <tr class="delivery">
-                            <td>배송비</td>
-                        <td>무료</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
 
-            <div class="pd_02">
-                <div class="line_02">
-                    <label for="check02_m"><input type="checkbox" name="chk_m" id="check02_m"></label>
-                    <br>
-                    <a href="#none">
-                        <img src="${pageContext.request.contextPath }/assets/images/sns01.jpg" class="cart_pd" alt="">
-                        <span>전통라인 잎새문 다기 세트</span>
-                    </a>
-
-                    <table>
-                        <tr class="pd_price">
-                            <td>주문금액</td>
-                            <td>152,000원</td>
-                        </tr>
-                        <tr class="pd_num">
-                            <td>상품갯수</td>
-                            <td>
-                                <div class="count-wrap _count">
-                                    <button type="button" class="minus">-</button>
-                                    <input type="text" class="inp" value="1" />
-                                    <button type="button" class="plus">+</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="pd_price">
-                            <td>상품금액</td>
-                            <td>152,000원</td>
-                        </tr>
-                        <tr class="delivery">
-                            <td>배송비</td>
-                        <td>무료</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            
-            <table>
-                <tr class="pd_price">
-                    <td>상품금액 (총<span>1</span>개)</td>
-                    <td>152,000원</td>
-                </tr>
-                <tr class="delivery">
-                    <td>배송비</td>
-                    <td>무료</td>
-                </tr>
-                <tr class="total">
-                    <td>총 주문금액</td>
-                    <td>152,000원</td>
-                </tr>
-            </table>
-
-            <div class="btn_wrap">
-                <a href="#none" class="order_btn">주문하기</a>
-                <a href="#none" class="shopping_btn">쇼핑하기</a>
-            </div>
-            
-
-            
-        </section>
 
         
 

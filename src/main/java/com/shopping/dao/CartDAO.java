@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shopping.vo.CartVO;
+import com.shopping.vo.ProductVO;
 
 @Repository
 public class CartDAO {
@@ -16,13 +17,13 @@ public class CartDAO {
 	
 	
 	/*카트 리스트*/
-	public List<CartVO> getCartList(int customerNo){ 
+	public List<ProductVO> getCartList(int customerNo){ 
 			
-		//List<CartVO> cartList = sqlSession.selectList("cart.getCartList", customerNo);
+		List<ProductVO> cartList = sqlSession.selectList("cart.getCartList", customerNo);
 		
-		System.out.println("DAO 까지 오는지 확인 할거임 고객 번호 :" + customerNo);
+		System.out.println("DAO 까지 오는지 확인 할거임 고객 번호 :" + cartList);
 		
-		return null;
+		return cartList;
 	}
 
 	

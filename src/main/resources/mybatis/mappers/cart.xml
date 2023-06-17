@@ -48,4 +48,26 @@
 	]]>
 </insert>
 
+
+<select id ="getCartList" parameterType ="int" resultType = "ProductVO">
+	<![CDATA[
+		SELECT
+			d.product_no as productNo
+			,d.product_name as productName
+			,SUM(a.product_count) as productEa
+			,d.price as price
+			,e.save_name as saveName
+			,MAX(a.cart_detail_no) AS ordernum
+		FROM cart_detail a
+		JOIN cart c ON c.cart_no = a.cart_no
+		JOIN product d ON d.product_no = a.product_no
+		JOIN product_image e ON e.product_no = d.product_no
+		WHERE c.customer_no = #{customerNo}
+		GROUP BY d.product_no, d.product_name, c.customer_no, d.price, e.save_name
+		ORDER BY ordernum DESC
+	]]>
+</select>
+
+
+
 </mapper>

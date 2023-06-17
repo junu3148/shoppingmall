@@ -107,9 +107,32 @@ $(document).ready(function(){
     } );
 
 
+$("#cbx_chkAll").click(function() {
+  if($("#cbx_chkAll").is(":checked")) {
+    $("input[name=chk]").prop("checked", true);
+    updateValues();
+  } else {
+    $("input[name=chk]").prop("checked", false);
+    updateValues();
+  }
+});
+
+$("input[name=chk]").click(function() {
+  var total = $("input[name=chk]").length;
+  var checked = $("input[name=chk]:checked").length;
+  
+  if(total != checked) {
+    $("#cbx_chkAll").prop("checked", false);
+    updateValues();
+  } else {
+    $("#cbx_chkAll").prop("checked", true);
+    updateValues();
+  }
+});
 
 
     //장바구니페이지 수량 체크
+    //수량 체크하여 해당하는 제품 가격을 구해와 다시 값에 넣을 예정
     $('._count :button').on({
       'click' : function(e){
           e.preventDefault();
@@ -135,6 +158,11 @@ $(document).ready(function(){
           if(num != now){
               $count.val(num);
           }
+          
+           var hiddenValue = $(this).closest('tr').find('input[type="hidden"]').val(); //가격 가져오기
+          
+          var setPrice = hiddenValue * num;
+          $(this).closest('tr').find('span[title="order-price"]').text(setPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원');
       }
     });
 
@@ -169,7 +197,38 @@ $(document).ready(function(){
     
     
     
-    
+    function updateValues() {
+  // 업데이트된 값을 처리하는 로직을 작성하세요
+  var quantities = [];
+  var prices = [];
+  
+  $('input[name="chk"]:checked').each(function() {
+    var checkbox = $(this);
+    var row = checkbox.closest('tr');
+    var hiddenValue = row.find('input[type="hidden"]').val();
+    var inputValue = row.find('input[type="text"]').val();
+    quantity = parseInt(inputValue);
+    price = parseInt(hiddenValue);
+    totalprice = price * quantity;
+
+    quantities.push(quantity);
+    prices.push(totalprice);   
+  });
+
+  var totalQuantity = quantities.reduce(function(acc, val) {
+    return acc + val;
+  }, 0);
+
+  var totalPrice = prices.reduce(function(acc, val) {
+    return acc + val;
+  }, 0);
+
+  console.log("수량 배열의 총합: " + totalQuantity);
+  console.log("가격 배열의 총합: " + totalPrice);
+  
+  $('.total_price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
+  $('#total_ea').text(totalQuantity + "개");
+}
     
     
     

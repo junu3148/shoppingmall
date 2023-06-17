@@ -1,10 +1,13 @@
 package com.shopping.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shopping.dao.CartDAO;
 import com.shopping.vo.CartVO;
+import com.shopping.vo.ProductVO;
 
 @Service
 public class CartService {
@@ -13,11 +16,11 @@ public class CartService {
 	CartDAO cartDAO;
 	
 	
-	public int viewCart(int customerNo) { 
+	public List<ProductVO> viewCart(int customerNo) { 
 		
-		cartDAO.getCartList(customerNo);
+		List<ProductVO> cartList = cartDAO.getCartList(customerNo);
 		
-		return 0;
+		return cartList;
 	}
 	
 	

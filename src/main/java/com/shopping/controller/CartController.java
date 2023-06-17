@@ -1,7 +1,10 @@
 package com.shopping.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shopping.ajax.JasonResult;
 import com.shopping.service.CartService;
 import com.shopping.vo.CartVO;
+import com.shopping.vo.ProductVO;
 
 @RequestMapping("/cart")
 @Controller
@@ -21,12 +25,16 @@ public class CartController {
 	
 	
 	@RequestMapping(value ="/viewCart")
-	public String viewCart(@RequestParam("customerNo") int customerNo) { 
+	public String viewCart(@RequestParam("customerNo") int customerNo
+							, Model model) { 
 		
 		System.out.println("고객 넘버 잘 넘어오는지 확인" + customerNo);
-		cartService.viewCart(customerNo);
+		List<ProductVO> cartList = cartService.viewCart(customerNo);
 		
-		return "";
+		model.addAttribute("cartList", cartList);
+		
+		
+		return "product/cart";
 	}
 	
 	
