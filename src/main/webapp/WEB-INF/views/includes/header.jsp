@@ -10,7 +10,7 @@
 		<ul class="lnb">
 			<c:choose>
 				<c:when test="${authCustomer != null}">
-					<li class="login"><a href="#none">로그아웃</a></li>
+					<li class="login"><a href="${pageContext.request.contextPath }/customer/logout">로그아웃</a></li>
 					<li class="notice"><a
 						href="${pageContext.request.contextPath }/customer/modifyForm/${authCustomer.customerNo}">마이페이지</a></li>
 				</c:when>

@@ -1,5 +1,7 @@
 package com.shopping.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +14,18 @@ public class CartDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
+	
+	/*카트 리스트*/
+	public List<CartVO> getCartList(int customerNo){ 
+			
+		//List<CartVO> cartList = sqlSession.selectList("cart.getCartList", customerNo);
+		
+		System.out.println("DAO 까지 오는지 확인 할거임 고객 번호 :" + customerNo);
+		
+		return null;
+	}
 
+	
 	
 	public CartVO checkCart(CartVO cartVO) { 
 		

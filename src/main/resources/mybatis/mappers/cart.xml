@@ -7,7 +7,7 @@
 <mapper namespace="cart">
 
 
-<select resultType="CartVO" parameterType="CartVO" id="checkCart">
+<select id="checkCart" resultType="CartVO" parameterType="CartVO" >
 
 <![CDATA[
 		select 

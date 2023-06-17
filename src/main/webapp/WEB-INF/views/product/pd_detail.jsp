@@ -52,9 +52,11 @@
 	type="${pageContext.request.contextPath }/assets/text/javascript"
 	src="js/script3.js"></script>
 <!-- js -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- 모달용 부트 스트랩 -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- 모달용 부트 스트랩 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -76,7 +78,11 @@
 			<div class="info_wrap">
 				<div class="title">
 					<h4>${product.productName}</h4>
-					<p><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />원</p>
+					<p>
+						<fmt:formatNumber type="number" maxFractionDigits="3"
+							value="${product.price}" />
+						원
+					</p>
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>
@@ -85,37 +91,42 @@
 						<li class="clear"><strong>배송비</strong> <span>2,500원
 								(50,000원 이상 구매 시 무료)</span></li>
 						<li class="clear"><strong>배송 안내</strong> <span
-							class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수 있습니다.(+5,000원)</span></li>
-							<li>쇼핑에 참고 부탁드립니다. ^_^</li>
+							class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수
+								있습니다.(+5,000원)</span></li>
+						<li>쇼핑에 참고 부탁드립니다. ^_^</li>
 					</ul>
-					<input type = "text" value ="${product.price}" id = "price"> <!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
+					<input type="text" value="${product.price}" id="price">
+					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
 
 					<div class="pd_num clear">
 						<p>수량</p>
-						<div class="count-wrap _count">						
+						<div class="count-wrap _count">
 							<button type="button" class="minus">-</button>
-							<input type="text" class="inp" value="1" /><!-- 변경되는 숫자 -->
+							<input type="text" class="inp" value="1" />
+							<!-- 변경되는 숫자 -->
 							<button type="button" class="plus">+</button>
 						</div>
-						
-						
+
+
 						<!--  바뀔 금액 자리 -->
-						<span class ="total_price"></span>
+						<span class="total_price"></span>
 					</div>
 
 					<div class="total_price_wrap">
 						<p>
-							총 상품금액(<span id = "selectEA">1</span>개)
+							총 상품금액(<span id="selectEA">1</span>개)
 						</p>
-						
-						
+
+
 						<!--  바뀔 금액 자리 -->
-						<p class ="total_price" ></p>
+						<p class="total_price"></p>
 					</div>
 
 					<div class="btn_wrap">
-						<a href="#none" class="order_btn data-set">구매하기</a> 
-						<a href="#none" class="shopping_btn data-set" id = "cart-btn"  data-productno="${product.productNo}" data-cusno = "${authCustomer.customerNo}" >장바구니</a>
+						<a href="#none" class="order_btn data-set">구매하기</a> <a
+							href="#none" class="shopping_btn data-set" id="cart-btn"
+							data-productno="${product.productNo}"
+							data-cusno="${authCustomer.customerNo}">장바구니</a>
 					</div>
 
 
@@ -137,124 +148,124 @@
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
-<div class="modal" tabindex="-1" id = "Cart-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">알림</h5>
-      </div>
-      <div class="modal-body">
-        <p>물건을 성공적으로 카트에 추가했습니다!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 좀 더 둘러보기</button>
-        <button type="button" class="btn btn-primary">장바구니 이동하기</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="modal" tabindex="-1" id="Cart-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">알림</h5>
+				</div>
+				<div class="modal-body">
+					<span id="howAdd"></span>
+				</div>
+				<form action = "${pageContext.request.contextPath}/cart/viewCart">
+				<div class="modal-footer">
+					<input type ="text" value = "${authCustomer.customerNo}" name = "customerNo">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">좀 더 둘러보기</button>
+					<button type="submit" class="btn btn-primary">장바구니 이동하기</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
 </body>
 
 <script>
-
-$(window).on("load", function(){
-	
-	updateTotalPrice();
-
-	//플러스 버튼을 클릭했을 때 수량 증가
-	$(".plus").on("click", function() {
-		var EA = $(".inp");
-		var EAval = Number(EA.val()); // EAval을 숫자로 변환
-
-		EA.val(EAval + 1); // 증가된 값을 input 요소에 설정
+	$(window).on("load", function() {
 
 		updateTotalPrice();
-	}); //plus btn event end
 
-	// 마이너스 버튼을 클릭했을 때 수량 감소
-	$(".minus").on("click", function() {
-		var EA = $(".inp");
-		var EAval = Number(EA.val()); // EAval을 숫자로 변환
+		//플러스 버튼을 클릭했을 때 수량 증가
+		$(".plus").on("click", function() {
+			var EA = $(".inp");
+			var EAval = Number(EA.val()); // EAval을 숫자로 변환
 
-		if (EAval > 1) {
-			EA.val(EAval - 1); // 감소된 값을 input 요소에 설정
+			EA.val(EAval + 1); // 증가된 값을 input 요소에 설정
+
 			updateTotalPrice();
-		}
-	}); //minus btn event end
+		}); //plus btn event end
 
-	
-	/*장바구니 모달 만들거임*/
-	
-	$('#cart-btn').on("click", function(){
-		//장바구니 버튼이 눌리면 고객 no, productNo, productCnt 들어가야함
-		var cnt = Number($(".inp").val()); //제품 수량 가져오기
-		var proNo2 = $(this).data('productno')//제품 번호 가져오기
-		var cusNo = $(this).data('cusno');//로그인 중인고객 넘버
- 		
-		if(cusNo == ''){ alert('로그인 후 구매 가능합니다.')} /*모달창으로 변경 예정*/
-		if(cusNo != ''){
-			
-		CartVO = { 
-				customerNo : cusNo,
-				productNo : proNo2,
-				productCnt : cnt
-		};
-			
-			
-			console.log(CartVO)
-			
-			$.ajax({
-			//요청 세팅(보낼 때--!)
-			url : "${pageContext.request.contextPath}/cart/addCart",
-			type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
-			//  ㄴ---> 전송하는 데이터타입 지정 지금은 파라미터로 보내는 거라 사용 X
-			data : CartVO, //json형식으로 변환해서 보냄
-			
-			
-			dataType : "json",
-			success : function(jasonResult) {
-				
-				var result = jasonResult.data
-				if(result == true){ 
-				//$('#Cart-modal').modal('show');
-				console.log('true찍히나요')
-				}else {
-					
-				}
-				
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : "
-						+ error);
+		// 마이너스 버튼을 클릭했을 때 수량 감소
+		$(".minus").on("click", function() {
+			var EA = $(".inp");
+			var EAval = Number(EA.val()); // EAval을 숫자로 변환
+
+			if (EAval > 1) {
+				EA.val(EAval - 1); // 감소된 값을 input 요소에 설정
+				updateTotalPrice();
 			}
-		}); //ajax end	
-			
-			
-			
-					
+		}); //minus btn event end
+
+		/*장바구니 모달 만들거임*/
+
+		$('#cart-btn').on("click", function() {
+			//장바구니 버튼이 눌리면 고객 no, productNo, productCnt 들어가야함
+			var cnt = Number($(".inp").val()); //제품 수량 가져오기
+			var proNo2 = $(this).data('productno')//제품 번호 가져오기
+			var cusNo = $(this).data('cusno');//로그인 중인고객 넘버
+
+			if (cusNo == '') {
+				alert('로그인 후 구매 가능합니다.')
+			} /*모달창으로 변경 예정*/
+			if (cusNo != '') {
+
+				CartVO = {
+					customerNo : cusNo,
+					productNo : proNo2,
+					productCnt : cnt
+				};
+
+				console.log(CartVO)
+
+				$.ajax({
+					//요청 세팅(보낼 때--!)
+					url : "${pageContext.request.contextPath}/cart/addCart",
+					type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+					//  ㄴ---> 전송하는 데이터타입 지정 지금은 파라미터로 보내는 거라 사용 X
+					data : CartVO, //json형식으로 변환해서 보냄
+
+					dataType : "json",
+					success : function(jasonResult) {
+
+						var howAdd = jasonResult.data
+						$('#howAdd').text(howAdd + '개의 제품을 성공적으로 카트에 추가했습니다.');
+						$('#Cart-modal').modal('show');
+					},
+					error : function(XHR, status, error) {
+						console.error(status + " : " + error);
+					}
+				}); //ajax end	
+			}
+			;//if~login user addcart end
+		}); //addcart btn click event end
+
 		
-		};//if~login user addcart end
-	}); //addcart btn click event end
-	
-	
-	
-	
-	
-}); //window load event end
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}); //window load event end
 
 	//변동되는 숫자에 따라 금액을 조정하고, 조정된 금액에 ','와 '원'을 더해주는 function 
-	function updateTotalPrice() { 
+	function updateTotalPrice() {
 		var EAval = Number($(".inp").val());
 		var price = $("#price").val()
-		
+
 		var total_price = EAval * price;
-		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+				',')
+				+ '원';
 		$(".total_price").text(set_price);
 	}
-
-
 </script>
 
 </html>
