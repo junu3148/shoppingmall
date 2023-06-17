@@ -89,36 +89,37 @@
 				</c:forEach>
 			</ul>
 		</section>
+		<c:if test="${empty keyword}">
+			<ul class="paging pageInfo">
+				<c:if test="${pageMaker.prev}">
+					<li class="pageInfo_btn previous"><a
+						href="${pageMaker.startPage - 1}">◀</a></li>
+				</c:if>
 
-		<ul class="paging pageInfo">
-			<c:if test="${pageMaker.prev}">
-				<li class="pageInfo_btn previous"><a
-					href="${pageMaker.startPage - 1}">◀</a></li>
-			</c:if>
+				<!-- 각 번호 페이지 버튼 -->
+				<c:forEach var="num" begin="${pageMaker.startPage}"
+					end="${pageMaker.endPage}">
+					<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+						<a href="${num}">${num}</a>
+					</li>
+				</c:forEach>
 
-			<!-- 각 번호 페이지 버튼 -->
-			<c:forEach var="num" begin="${pageMaker.startPage}"
-				end="${pageMaker.endPage}">
-				<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
-					<a href="${num}">${num}</a>
-				</li>
-			</c:forEach>
-
-			<!-- 다음페이지 버튼 -->
-			<c:if test="${pageMaker.next}">
-				<li class="pageInfo_btn next"><a
-					href="${pageMaker.endPage + 1}">▶</a></li>
-			</c:if>
-		</ul>
-
+				<!-- 다음페이지 버튼 -->
+				<c:if test="${pageMaker.next}">
+					<li class="pageInfo_btn next"><a
+						href="${pageMaker.endPage + 1}">▶</a></li>
+				</c:if>
+			</ul>
+		</c:if>
 		<form id="moveForm"
-			action="${pageContext.request.contextPath}/main/${view}/${subCategory}" method="get">
+			action="${pageContext.request.contextPath}/main/${view}/${subCategory}"
+			method="get">
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="type" value="${pageMaker.cri.type}">
-			<input type="hidden" name="category" value="${category}"> 
-			<input type="hidden" name="subCategory" value="${CriteriaSubCategory}">
+			<input type="hidden" name="category" value="${category}"> <input
+				type="hidden" name="subCategory" value="${CriteriaSubCategory}">
 		</form>
 
 

@@ -112,10 +112,16 @@
 	<a href="#none" class="search_close"><img
 		src="${pageContext.request.contextPath}/assets/images/ver02/search_x.png" alt=""></a>
 	<div>
-		<input type="search" id="search" placeholder="검색어를 입력해주세요">
-		<button type="submit">
-			<img src="${pageContext.request.contextPath}/assets/images/ver02/search_w.png" alt="">
-		</button>
+		<form id="searchForm"
+			action="${pageContext.request.contextPath}/main/productSearch"
+			method="get">
+			<input type="search" name="keyword" placeholder="검색어를 입력해주세요">
+			<button type="submit">
+				<img
+					src="${pageContext.request.contextPath}/assets/images/ver02/search_w.png"
+					alt="">
+			</button>
+		</form>
 	</div>
 </div>
 

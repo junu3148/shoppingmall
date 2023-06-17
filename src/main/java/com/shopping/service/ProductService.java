@@ -23,8 +23,6 @@ public class ProductService {
 	String saveDir = "C:/shopping/img/upload/";
 	@Autowired
 	private ProductDAO productDAO;
-	@Autowired
-	private ProductVO productVO;
 	private Map<String, Object> prdouctImgMap = new HashMap<>();
 	private List<ProductVO> productList = new ArrayList<>();
 
@@ -50,48 +48,47 @@ public class ProductService {
 		return productDAO.deleteProduct(productNo);
 	}
 
-	// ---------------- 상품 리스트 가져오기 테스트 ----------------------------------------
-	public Map<String, Object> getProductList(String category, String subCategory, Criteria cri) {
+	// ---------------- 상품 리스트 가져오기 
+	public Map<String, Object> getProductList(String category, 
+											  String subCategory, 
+											  Criteria cri) {
 		System.out.println("Test Service()");
-
-		System.out.println(category);
-		System.out.println(subCategory);
-		System.out.println(cri);
 
 		int total = 0;
 		List<ProductVO> productList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
-		// --------------- 상품 전체 리스트
+			// --------------- 상품 전체 리스트
 		if (category.equals("all") && subCategory.equals("all")) {
 			System.out.println("1.상품 전체 리스트");
+
 			total = productDAO.getTotal(cri);
-			System.out.println("1 :" + total);
+
 			productList = productDAO.getAllProductList(cri);
+
 			// --------------- 카테고리 상품 전체 리스트
 		} else if (!category.equals("all") && subCategory.equals("all")) {
 			System.out.println("2.카테고리 상품 전체 리스트");
+
 			total = productDAO.getTotal(cri);
-			System.out.println("2 :" + total);
+
 			productList = productDAO.getAllProductList(cri);
 
 			// ---------------- 서브 카테고리 전체 리스트
 		} else if (category.equals("all") && !subCategory.equals("all")) {
 			System.out.println("3.서브 카테고리 전체 리스트");
+
 			total = productDAO.getTotalSubCategory(cri);
-			System.out.println("3 :" + total);
-			
-			productList = productDAO.getCategoryProductListTest(cri);
-			System.out.println(productList.size());
-			
+
+			productList = productDAO.getCategoryProductList(cri);
+
 			// ---------------- 서브카테고리별 카테고리 상품 리스트
 		} else if (!category.equals("all") && !subCategory.equals("all")) {
 			System.out.println("4.서브카테고리별 카테고리 상품 리스트");
+
 			total = productDAO.getTotalSubCategory(cri);
-			System.out.println("4 :" + total);
-			
-			productList = productDAO.getCategoryProductListTest(cri);
-			System.out.println(productList.size());
+
+			productList = productDAO.getCategoryProductList(cri);
 
 		}
 
@@ -100,7 +97,16 @@ public class ProductService {
 		map.put("productList", productList);
 
 		return map;
-	}  
+	}
+
+	// ---------------- 상품 리스트 가져오기
+	public List<ProductVO> getProductList(String category, String subCategory) {
+		System.out.println("getProductList Service");
+
+		productList = productDAO.getAllProductList();
+
+		return productList;
+	}
 
 	// ----------------- productSearch
 	public List<ProductVO> productSearch(String keyword) {

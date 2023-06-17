@@ -62,27 +62,21 @@ public class ProductDAO {
 	public List<ProductVO> getAllProductList() {
 		System.out.println("getAllProductList DAO");
 
-		return sqlSession.selectList("product.getAllProductList");
+		return sqlSession.selectList("product.getAllProductList2");
 	}
 
 	// ---------------- 상품 전체리스트 가져오기 테스트----------------------------
 	public List<ProductVO> getAllProductList(Criteria cri) {
-		System.out.println("Test DAO()");
+		System.out.println("getAllProductList DAO()");
 
-		return sqlSession.selectList("product.getAllProductListTest", cri);
+		return sqlSession.selectList("product.getAllProductList", cri);
 	}
 
 	// ---------------- 카테고리 상품 리스트 가져오기
-	public List<ProductVO> getCategoryProductList(ProductVO productVO) {
+	public List<ProductVO> getCategoryProductList(Criteria cri) {
 		System.out.println("getCategoryProductList DAO");
 
-		return sqlSession.selectList("product.getCategoryProductList", productVO);
-	}
-	// ---------------- 카테고리 상품 리스트 가져오기
-	public List<ProductVO> getCategoryProductListTest(Criteria cri) {
-		System.out.println("getCategoryProductListTest DAO");
-
-		return sqlSession.selectList("product.getCategoryProductListTest", cri);
+		return sqlSession.selectList("product.getCategoryProductList", cri);
 	}
 
 	// ----------------- productSearch

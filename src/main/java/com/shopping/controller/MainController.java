@@ -32,12 +32,12 @@ public class MainController {
 		return "main/main";
 	}
 
-	// --------------- all2 페이지
+	// --------------- all 페이지
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public String all2(Model model, @ModelAttribute Criteria cri,
+	public String all(Model model, @ModelAttribute Criteria cri,
 			@RequestParam(value = "category", required = false, defaultValue = "all") String category,
 			@RequestParam(value = "subCategory", required = false, defaultValue = "all") String subCategory) {
-		System.out.println("test()");
+		System.out.println("all()");
 
 		Map<String, Object> map = productService.getProductList(category, subCategory, cri);
 
@@ -53,7 +53,7 @@ public class MainController {
 
 	// -------------- 카테고리 페이지
 	@RequestMapping(value = "/category/{subCategory}", method = RequestMethod.GET)
-	public String category2(Model model, @ModelAttribute Criteria cri,
+	public String category(Model model, @ModelAttribute Criteria cri,
 			@RequestParam(value = "category", required = false, defaultValue = "all") String category,
 			@PathVariable("subCategory") String subCategory) {
 		System.out.println("category()");
@@ -85,15 +85,16 @@ public class MainController {
 	}
 
 	// -------------------- 상품 검색
-	@RequestMapping(value = "/productSearch", method = RequestMethod.POST)
-	public String productSearch(Model model, @RequestParam("keyword") String keyword) {
+	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
+	public String productSearch(Model model, @ModelAttribute Criteria cri) {
 		System.out.println("productSearch()");
 
-		List<ProductVO> productList = productService.productSearch(keyword);
+		List<ProductVO> productList = productService.productSearch(cri.getKeyword());
 
 		model.addAttribute("productList", productList);
 		model.addAttribute("view", "all");
 		model.addAttribute("Search", "Search");
+		model.addAttribute("keyword", cri.getKeyword());
 
 		return "product/product";
 	}
