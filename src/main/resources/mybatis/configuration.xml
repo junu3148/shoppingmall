@@ -6,12 +6,14 @@
 	<typeAliases>
 		<typeAlias alias="ProductVO" type="com.shopping.vo.ProductVO" />
 		<typeAlias alias="CustomerVO" type="com.shopping.vo.CustomerVO" />
+		<typeAlias type="com.shopping.vo.CartVO" alias="CartVO"/>
 		<typeAlias alias="Criteria" type="com.shopping.vo.Criteria" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mybatis/mappers/product.xml" />
 		<mapper resource="mybatis/mappers/customer.xml" />
+		<mapper resource="mybatis/mappers/cart.xml"/>
 		<mapper resource="mybatis/mappers/image.xml" />
 	</mappers>
 

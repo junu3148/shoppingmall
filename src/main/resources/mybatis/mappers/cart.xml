@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+
+<mapper namespace="cart">
+
+
+<select resultType="CartVO" parameterType="CartVO" id="checkCart">
+
+<![CDATA[
+		select 
+			cart_no as cartNo
+		from cart
+		where customer_no = #{customerNo}
+	]]>
+</select>
+
+
+<insert parameterType="CartVO" id="insertCart">
+
+<selectKey resultType="int" order="BEFORE" keyProperty="cartNo">select seq_cart_no.nextval from dual </selectKey>
+
+<![CDATA[
+			insert into cart 
+			(cart_no
+			,customer_no)
+				values (
+					#{cartNo},
+					#{customerNo}
+						)
+		]]>
+</insert>
+
+
+<insert parameterType="CartVO" id="insertCartDetail">
+
+<![CDATA[
+		insert into cart_detail
+		(cart_detail_no, cart_no, product_no, product_count)
+		values(
+			seq_cart_detail_no.nextval
+			,#{cartNo}
+			,#{productNo}
+			,#{productCnt}
+			)
+	]]>
+</insert>
+
+</mapper>
