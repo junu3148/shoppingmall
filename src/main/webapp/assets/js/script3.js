@@ -131,6 +131,7 @@ $("input[name=chk]").click(function() {
 });
 
 
+
     //장바구니페이지 수량 체크
     //수량 체크하여 해당하는 제품 가격을 구해와 다시 값에 넣을 예정
     $('._count :button').on({
@@ -163,6 +164,8 @@ $("input[name=chk]").click(function() {
           
           var setPrice = hiddenValue * num;
           $(this).closest('tr').find('span[title="order-price"]').text(setPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원');
+  
+  			updateValues();
       }
     });
 
@@ -196,9 +199,8 @@ $("input[name=chk]").click(function() {
     
     
     
-    
+    /* 총 주문 금액 업데이트하는 식*/
     function updateValues() {
-  // 업데이트된 값을 처리하는 로직을 작성하세요
   var quantities = [];
   var prices = [];
   
@@ -210,11 +212,14 @@ $("input[name=chk]").click(function() {
     quantity = parseInt(inputValue);
     price = parseInt(hiddenValue);
     totalprice = price * quantity;
-
+	
+	
+	/* 선택된 제품의 금액과 수량 체크*/
     quantities.push(quantity);
     prices.push(totalprice);   
   });
 
+	
   var totalQuantity = quantities.reduce(function(acc, val) {
     return acc + val;
   }, 0);
@@ -226,7 +231,9 @@ $("input[name=chk]").click(function() {
   console.log("수량 배열의 총합: " + totalQuantity);
   console.log("가격 배열의 총합: " + totalPrice);
   
+  
   $('.total_price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
+  $('[name = "totalPrice"]').val(totalPrice);
   $('#total_ea').text(totalQuantity + "개");
 }
     

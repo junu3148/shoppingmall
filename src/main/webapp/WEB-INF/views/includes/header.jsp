@@ -11,15 +11,14 @@
 			<c:choose>
 				<c:when test="${authCustomer != null}">
 					<li class="login"><a href="${pageContext.request.contextPath }/customer/logout">로그아웃</a></li>
-					<li class="notice"><a
-						href="${pageContext.request.contextPath }/customer/modifyForm/${authCustomer.customerNo}">마이페이지</a></li>
+					<li class="notice"><a href="${pageContext.request.contextPath }/customer/modifyForm/${authCustomer.customerNo}">마이페이지</a></li>
+					<li class="cart"><a href="${pageContext.request.contextPath }/cart/viewCart?customerNo=${authCustomer.customerNo}">장바구니</a></li>
 				</c:when>
 				<c:otherwise>
 					<li class="login"><a
 						href="${pageContext.request.contextPath }/customer/loginPage">로그인</a></li>
 				</c:otherwise>
 			</c:choose>
-			<li class="cart"><a href="#none">장바구니</a></li>
 			<li class="search"><a href="#none">검색</a></li>
 			<li class="notice"><a href="#none">커뮤니티</a></li>
 		</ul>

@@ -161,7 +161,7 @@
 				<div class="modal-footer">
 					<input type ="text" value = "${authCustomer.customerNo}" name = "customerNo">
 					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">좀 더 둘러보기</button>
+						data-bs-dismiss="modal" id = "more_see">좀 더 둘러보기</button>
 					<button type="submit" class="btn btn-primary">장바구니 이동하기</button>
 				</div>
 				</form>
@@ -243,15 +243,12 @@
 
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		/* 좀 더 둘러보기 클릭 시 modal 닫힘 */
+		$('#more_see').on("click", function(){
+			
+			$('#Cart-modal').modal('hide');	
+			
+		});
 		
 	}); //window load event end
 

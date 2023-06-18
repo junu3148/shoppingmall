@@ -39,7 +39,7 @@ public class CartController {
 	
 	
 	
-	
+	/*카트에 제품 추가*/
 	@ResponseBody
 	@RequestMapping(value ="/addCart", method = RequestMethod.POST )
 	public JasonResult addCart(@ModelAttribute CartVO cartVO) {
@@ -59,6 +59,19 @@ public class CartController {
 	}
 	
 	
-	
+	/* 카트에 있는 제품 삭제 */
+	@ResponseBody
+	@RequestMapping(value="/deleteList", method =RequestMethod.POST)
+	public JasonResult deleteList(@ModelAttribute CartVO cartVO) { 
+		
+		JasonResult jasonResult = new JasonResult();
+		
+		System.out.println("에이잭스 넘어오나 확인" + cartVO);
+		boolean result = cartService.deleteList(cartVO);
+		jasonResult.success(result);
+		System.out.println("jasonResult 확인" + jasonResult);
+		
+		return jasonResult;
+	}
 	
 }

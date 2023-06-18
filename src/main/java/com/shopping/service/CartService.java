@@ -45,7 +45,23 @@ public class CartService {
 		return cartVO.getProductCnt();
 	}
 	
-	
+	/* 카트 리스트 삭제. 고객의 카트 넘버 찾아서 삭제함*/
+	public boolean deleteList(CartVO cartVO) { 
+		boolean result = false;
+		
+		CartVO checkCartNo = cartDAO.checkCart(cartVO);
+		System.out.println(checkCartNo);
+		cartVO.setCartNo(checkCartNo.getCartNo());
+		
+		System.out.println("사용할 카트 객체 확인 " + cartVO);
+		int row = cartDAO.deleteList(cartVO);
+		System.out.println("삭제 여부 확인" + row);
+		if(row>0) {
+			result = true;
+		}
+		
+		return result;
+	}
 	
 	
 }

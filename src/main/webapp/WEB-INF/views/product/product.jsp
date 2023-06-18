@@ -91,7 +91,8 @@
 							<img
 							src="${pageContext.request.contextPath}/upload/${product.saveName}">
 							<span class="tit">${product.productName}</span> <span
-							class="price jb">${product.price}원</span>
+							class="price jb">	<fmt:formatNumber type="number" maxFractionDigits="3"
+							value="${product.price}" />원</span>
 					</a></li>
 				</c:forEach>
 			</ul>

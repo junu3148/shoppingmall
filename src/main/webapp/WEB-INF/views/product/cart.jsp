@@ -53,7 +53,7 @@
                 
                 <c:forEach items = "${cartList}" var = "product"> 
                 
-                <tr id = "p${product.productNo}" class = "">
+                <tr id = "p${product.productNo}" data-no ="${product.productNo}">
                     <td><label for="check01"><input type="checkbox" name="chk" id="check01" ></label></td>
                     <td>
                    <input type ="hidden" value ="${product.price}">
@@ -85,6 +85,7 @@
             <a href="#none" class="del">선택 상품 삭제</a>
             
 
+          <form action ="${pageContext.request.contextPath}/order/${authCustomer.customerNo}" method = "get">
             <div class="total_order">
                 <p class="total">총 주문 상품 <span id = "total_ea">0개</span></p>
                 <ul>
@@ -101,13 +102,16 @@
                     <li>
                         <p class="total_price">0원</p>
                         <span>총 주문 금액</span>
+                        <input type="text" name = "totalPrice">
                     </li>
                 </ul>
             </div>
             <div class="btn_wrap">
-                <a href="#none" class="order_btn">주문하기</a>
+            		<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
+                <button type  ="submit"class="order_btn">주문하기</button>
                 <a href="#none" class="shopping_btn">쇼핑하기</a>
             </div>
+	      </form>
         </section>
 
 
@@ -129,8 +133,69 @@
 	<!-- //Footer -->
 
 
-
-
 </body>
+
+<script>
+
+$('.order_btn').on("click")
+
+
+$('.del').on("click", function(){
+	alert('test'); 
+    /* 총 주문 금액 업데이트하는 식*/
+  	var productNoList = [];
+  
+  $('input[name="chk"]:checked').each(function() {
+    var tr = $(this).closest('tr');
+    var productNo = parseInt(tr.data('no'));
+	
+	/* 선택된 제품의 금액과 수량 체크*/
+    productNoList.push(productNo);
+ 	console.log(productNoList);
+ 	
+ 	
+  }); //체크된 체크 박스 값 가져오기
+
+ 	for(var i=0; i<productNoList.length; i++ ){
+ 		
+ 		var productNo = productNoList[i];
+ 		
+ 		CartVO = { 
+ 			customerNo : ${authCustomer.customerNo},
+ 			productNo : productNo
+ 		}
+ 		
+ 		console.log(CartVO)
+ 		
+ 		 $.ajax({
+	            
+	            //요청 세팅
+	            url : "${pageContext.request.contextPath}/cart/deleteList",      
+	            type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+	            data : CartVO,
+	            
+	            //응답 관련 세팅
+	            dataType : "json",
+	            success : function(jsonResult){
+	            
+	            	var data = jsonResult.data;
+					console.log(data)
+					if(data == true ){ 
+						alert('선택한 상품을 삭제했습니다.')
+						$('#p'+CartVO.productNo).remove();
+					}else{
+						alert('잠시후 다시 시도해주세요.')
+					}
+	            },
+	            error : function(XHR, status, error) {
+	            console.error(status + " : " + error);
+	            }
+					            
+	         });//ajax end
+ 	}; //반복문 수행
+});// 선택 상품 삭제 버튼 클릭 이벤트
+
+</script>
+
 
 </html>

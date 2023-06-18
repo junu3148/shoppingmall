@@ -55,4 +55,12 @@ public class CartDAO {
 		
 	}
 	
+	public int deleteList(CartVO cartVO) {
+		
+		System.out.println("DAO까지 넘어오는지 확인" + cartVO);
+		int row = sqlSession.delete("cart.deleteList", cartVO);
+		System.out.println("삭제 여부 확인" + row);
+		return row;
+	}
+	
 }
