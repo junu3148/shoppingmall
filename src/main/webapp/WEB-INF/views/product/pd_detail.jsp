@@ -159,7 +159,7 @@
 				</div>
 				<form action = "${pageContext.request.contextPath}/cart/viewCart">
 				<div class="modal-footer">
-					<input type ="text" value = "${authCustomer.customerNo}" name = "customerNo">
+					<input type ="hidden" value = "${authCustomer.customerNo}" name = "customerNo">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal" id = "more_see">좀 더 둘러보기</button>
 					<button type="submit" class="btn btn-primary">장바구니 이동하기</button>

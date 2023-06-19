@@ -2,6 +2,8 @@ package com.shopping.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,17 +27,15 @@ public class CartController {
 	
 	
 	@RequestMapping(value ="/viewCart")
-	public String viewCart(@RequestParam("customerNo") int customerNo
+	public String viewCart(@RequestParam(value = "customerNo", required = false, defaultValue= "0") int customerNo
 							, Model model) { 
-		
-		System.out.println("고객 넘버 잘 넘어오는지 확인" + customerNo);
-		List<ProductVO> cartList = cartService.viewCart(customerNo);
-		
-		model.addAttribute("cartList", cartList);
-		
-		
-		return "product/cart";
-	}
+		 
+			List<ProductVO> cartList = cartService.viewCart(customerNo);
+			
+			model.addAttribute("cartList", cartList);
+
+			return "product/cart";
+		}
 	
 	
 	
@@ -45,14 +45,11 @@ public class CartController {
 	public JasonResult addCart(@ModelAttribute CartVO cartVO) {
 		
 		JasonResult jasonResult = new JasonResult();
-		System.out.println("카트추가 넘어오는 거 확인" + cartVO);
 		
 		/* 추가한 제품 수량 리턴*/
 		int productCnt = cartService.addCart(cartVO);
 		
-		
 		jasonResult.success(productCnt);
-		System.out.println("컨트롤러로 넘어오는지 다시 확인" + productCnt);
 		
 		return jasonResult;
 		
@@ -66,10 +63,8 @@ public class CartController {
 		
 		JasonResult jasonResult = new JasonResult();
 		
-		System.out.println("에이잭스 넘어오나 확인" + cartVO);
 		boolean result = cartService.deleteList(cartVO);
 		jasonResult.success(result);
-		System.out.println("jasonResult 확인" + jasonResult);
 		
 		return jasonResult;
 	}

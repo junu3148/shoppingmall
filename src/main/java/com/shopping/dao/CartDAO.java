@@ -21,15 +21,12 @@ public class CartDAO {
 			
 		List<ProductVO> cartList = sqlSession.selectList("cart.getCartList", customerNo);
 		
-		System.out.println("DAO 까지 오는지 확인 할거임 고객 번호 :" + cartList);
-		
 		return cartList;
 	}
 
 	
 	
 	public CartVO checkCart(CartVO cartVO) { 
-		
 		
 		CartVO returnVO = sqlSession.selectOne("cart.checkCart", cartVO);
 		
@@ -40,7 +37,6 @@ public class CartDAO {
 	/* 카트 추가 */
 	public int insertCart(CartVO cartVO) { 
 		
-		System.out.println();
 		int row = sqlSession.insert("cart.insertCart", cartVO);
 		
 		return row;
@@ -48,7 +44,6 @@ public class CartDAO {
 	
 	public int insertCartDetail(CartVO cartVO) { 
 		
-		System.out.println("insertCartDetail 넘어온 값 확인" + cartVO);
 		int row = sqlSession.insert("cart.insertCartDetail", cartVO);
 		
 		return row;
@@ -57,9 +52,8 @@ public class CartDAO {
 	
 	public int deleteList(CartVO cartVO) {
 		
-		System.out.println("DAO까지 넘어오는지 확인" + cartVO);
 		int row = sqlSession.delete("cart.deleteList", cartVO);
-		System.out.println("삭제 여부 확인" + row);
+
 		return row;
 	}
 	

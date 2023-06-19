@@ -140,7 +140,6 @@
 
 
 $('.del').on("click", function(){
-	alert('test'); 
     /* 총 주문 금액 업데이트하는 식*/
   	var productNoList = [];
   

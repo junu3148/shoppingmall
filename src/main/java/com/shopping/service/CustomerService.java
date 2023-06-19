@@ -16,7 +16,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDAO customerDAO;
 	
-	
+	/*로그인*/
 	public CustomerVO login(CustomerVO customerVO) {
 		
 		CustomerVO returnVO = customerDAO.selectLoginVO(customerVO);
@@ -40,7 +40,6 @@ public class CustomerService {
 			
 		boolean result = false; //가입 불가 = false
 		
-		System.out.println("service로 아이디유효성 체크 오는지 확인 : " + customerVO);
 		CustomerVO returnVO = customerDAO.selectSameId(customerVO);	//동일한 아이디 있는지 체크
 		
 		if(returnVO == null) { 

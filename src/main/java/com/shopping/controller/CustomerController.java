@@ -26,12 +26,8 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	/* 로그인 페이지 이동 */
-
-	
 	@RequestMapping(value = "/loginPage")
 	public String loginForm() {
-			
-		System.out.println("loginPage Controller()");
 		
 		return "customer/login";
 	}
@@ -40,7 +36,6 @@ public class CustomerController {
 	///////////////////////////////////////////////
 	
 	/* 로그인 */
-
 	@RequestMapping(value = "/login" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String login(@ModelAttribute CustomerVO customerVO
 						,HttpSession session
@@ -48,8 +43,6 @@ public class CustomerController {
 		
 		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n<br> 입력하신 내용을 다시 확인해주세요.";
 
-	
-		System.out.println("login Controller()" + customerVO);
 		CustomerVO authCustomer = customerService.login(customerVO);
 		
 		if(authCustomer == null) {
@@ -65,10 +58,9 @@ public class CustomerController {
 	///////////////////////////////////////////////
 	
 	/* 로그아웃 */
-	
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) { 
-		System.out.println("logout Controller()");
+
 		session.removeAttribute("authCustomer");
 		session.invalidate();
 		
@@ -83,8 +75,6 @@ public class CustomerController {
 	@RequestMapping(value = "/joinPage")
 	public String joinForm() {
 		
-		System.out.println("JoinPage Controller()");
-		
 		return "customer/join";
 	}
 	
@@ -97,13 +87,7 @@ public class CustomerController {
 	@RequestMapping(value = "/join" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String join(@ModelAttribute CustomerVO customerVO) {
 		
-		System.out.println("join Controller" + customerVO);
-		
 		int joinRow = customerService.join(customerVO);
-		
-		if(joinRow > 0) { 
-			System.out.println("가입성공");
-		}
 		
 		return "redirect:/customer/loginPage";
 	}
@@ -121,7 +105,6 @@ public class CustomerController {
 		JasonResult jasonResult = new JasonResult();
 		
 		boolean result = customerService.checkId(customerVO);
-		System.out.println("Controller로 돌아온 정보" + result);
 		
 		jasonResult.success(result);
 		
@@ -161,7 +144,6 @@ public class CustomerController {
 		customerService.SearchCustomer(searchOption,keyword);
 		
 		List<CustomerVO> searchList = customerService.SearchCustomer(searchOption,keyword);
-		System.out.println(searchList.size());
 		
 		if(searchList.size() == 0) {
 			model.addAttribute("message", message);
@@ -180,7 +162,6 @@ public class CustomerController {
 	public String detailView(@PathVariable("customerNo") int customerNo
 							, Model model) {  
 		
-		System.out.println("컨트롤러로 온 고객 넘버 확인" + customerNo);
 		CustomerVO selectVO = customerService.customerByNo(customerNo);
 		model.addAttribute("customer",selectVO);
 		
@@ -194,7 +175,6 @@ public class CustomerController {
 	public String modifyForm(@PathVariable int customerNo
 							,Model model) {  
 		
-		System.out.println("넘어온 값 확인 in controller" + customerNo);
 		CustomerVO customerVO = customerService.customerByNo(customerNo);
 		model.addAttribute("customer", customerVO);
 		

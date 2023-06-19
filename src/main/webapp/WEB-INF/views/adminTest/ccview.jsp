@@ -220,9 +220,6 @@
 </body>
 
 <script>
-
-  
-
 	function updateMinRange(value) {
 		document.getElementById("minRangeInput").value = value;
 	}
