@@ -137,7 +137,6 @@
 
 <script>
 
-$('.order_btn').on("click")
 
 
 $('.del').on("click", function(){
