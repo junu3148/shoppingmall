@@ -20,7 +20,7 @@
 				</c:otherwise>
 			</c:choose>
 			<li class="search"><a href="#none">검색</a></li>
-			<li class="notice"><a href="#none">커뮤니티</a></li>
+			<li class="notice"><a href="${pageContext.request.contextPath }/QnA/QnAForm">커뮤니티</a></li>
 		</ul>
 	</div>
 	<div id="header">
