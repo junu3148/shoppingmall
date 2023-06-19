@@ -45,17 +45,16 @@ form {
 	<section class="pc">
 		<br> <br>
 		<h3>문의</h3>
-		<form action="${pageContext.request.contextPath }/QnA/insertQnA" method="get">
-			<input type="radio" name="boardType" value="">비밀 
-			<input type="radio" name="boardType" value="">안비밀
-			<br> 
-			제목 : <input type="text" name="title" value="">
-			<br>
-			내용<br>
+		<form action="${pageContext.request.contextPath}/QnA/insertQnA"
+			method="GET">
+			<input type="text" name="customerNo" value="${authCustomer.customerNo}">
+			<label for="Y">비밀</label> <input id="Y" type="radio" name="boardType" value="1"> 
+			<label for="N">안비밀</label><input id ="N" type="radio" name="boardType" value="2"> <br> 제목:
+			<input type="text" name="title"> <br> 내용:<br>
 			<textarea name="content" style="width: 580px; height: 100px;"></textarea>
 
 			<div class="btn_wrap">
-				<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
+				<!-- 제출을 위해 <a> 태그 대신 <button>으로 변경했습니다 -->
 				<button type="submit" class="order_btn">문의하기</button>
 				<a href="#none" class="shopping_btn">취소</a>
 			</div>
