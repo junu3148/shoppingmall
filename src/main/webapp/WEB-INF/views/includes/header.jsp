@@ -68,11 +68,11 @@
 		</ul>
 		<ul class="icon_menu">
 			<li class="search"><a href="#none"><img
-					src="images/search.png" alt="">검색</a></li>
-			<li class="cart"><a href="#none"><img src="images/cart.png"
+					src="${pageContext.request.contextPath}/assets/images/search.png" alt="">검색</a></li>
+			<li class="cart"><a href="#none"><img src="${pageContext.request.contextPath}/assets/images/cart.png"
 					alt="">장바구니</a></li>
 			<li class="cart"><a href="#none"><img
-					src="images/search.png" alt="">??</a></li>
+					src="${pageContext.request.contextPath}/assets/images/search.png" alt="">??</a></li>
 			<li class="cart"><a href="#none"><img
 					src="images/search.png" alt="">??</a></li>
 		</ul>

@@ -9,6 +9,7 @@
 		<typeAlias type="com.shopping.vo.CartVO" alias="CartVO"/>
 		<typeAlias alias="Criteria" type="com.shopping.vo.Criteria" />
 		<typeAlias alias="QnAVO" type="com.shopping.vo.QnAVO" />
+		<typeAlias alias="PagingVO" type="com.shopping.vo.PagingVO" />
 	</typeAliases>
 
 	<mappers>

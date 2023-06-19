@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shopping.vo.CustomerVO;
+import com.shopping.vo.PagingVO;
 
 @Repository
 public class CustomerDAO {
@@ -45,23 +46,45 @@ public class CustomerDAO {
 	}
 	
 	
-	/*고객 전체 리스트*/
+//	/*고객 전체 리스트*/
+//	
+//	public List<CustomerVO> getAllCustomer(){ 
+//		
+//		List<CustomerVO> Customerlist = sqlSession.selectList("customer.customerAllList");
+//		
+//		return Customerlist;
+//	}
 	
-	public List<CustomerVO> getAllCustomer(){ 
+	/* 고객 총 수 */
+	public int getCustomerCnt(Map<String,Object> cnt) {
 		
-		List<CustomerVO> Customerlist = sqlSession.selectList("customer.customerAllList");
+		int customerCnt = sqlSession.selectOne("customer.getCustomerCnt",cnt);
 		
-		return Customerlist;
+		System.out.println("DAO에서 결과체크" + customerCnt);
+		
+		return customerCnt;
 	}
 	
-	/* 고객 리스트 검색 */
-	
-	public List<CustomerVO> getCustomerList(Map<String, Object> searchInfo){ 
+	/* 고객 리스트 불러오기*/
+	public List<CustomerVO> getCustomerList(PagingVO pagingVO){ 
 		
-		List<CustomerVO> list = sqlSession.selectList("customer.getCustomerList", searchInfo);
+		List<CustomerVO> customerList = sqlSession.selectList("customer.getCustomerList", pagingVO);
 		
-		return list;
+		System.out.println("DAO까지 넘어오는지 페이징 확인" + customerList);
+		
+		return customerList;
 	}
+	
+	
+	
+//	/* 고객 리스트 검색 */ 삭제 예쩡
+//	
+//	public List<CustomerVO> getCustomerList(Map<String, Object> searchInfo){ 
+//		
+//		List<CustomerVO> list = sqlSession.selectList("customer.getCustomerList", searchInfo);
+//		
+//		return list;
+//	}
 	
 	/* 고객 정보 받아오기*/
 	public CustomerVO getCustomerByNo(int customerNo) { 

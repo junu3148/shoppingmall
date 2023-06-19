@@ -1,6 +1,6 @@
 package com.shopping.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -87,7 +87,9 @@ public class CustomerController {
 	@RequestMapping(value = "/join" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String join(@ModelAttribute CustomerVO customerVO) {
 		
-		int joinRow = customerService.join(customerVO);
+
+			customerService.join(customerVO);
+
 		
 		return "redirect:/customer/loginPage";
 	}
@@ -115,44 +117,42 @@ public class CustomerController {
 	
 	
 	/* 고객 정보 리스트*/
-	
-	
 	@RequestMapping(value = "/customerView" , method = {RequestMethod.POST, RequestMethod.GET})	
-	public String customerView(Model model) {
+	public String customerView(@RequestParam( value = "selectPage", required = false, defaultValue = "1")int selectPage
+							,@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
+							,@RequestParam(value ="searchOption", required = false, defaultValue ="all") String searchOption
+							,Model model) {
 			
 		
-		System.out.println("customerView Controller");
-		
-		List<CustomerVO> customerList = customerService.selectAllCustomer();
-		
-		model.addAttribute("customerList", customerList);
+		Map<String, Object> pageInfo = customerService.getCustomerList(selectPage, keyword,searchOption);
+		model.addAttribute("pageInfo", pageInfo);
 		
 		
 		return "adminTest/ccview";
 	}
 
-	///////////////////////////////////////////////
-	
-	/*고객 검색*/
-	@RequestMapping(value = "/search" , method = {RequestMethod.POST, RequestMethod.GET})	
-	public String customerSearch(@RequestParam("searchOption") String searchOption
-								 ,@RequestParam("keyword") String keyword
-								 ,Model model) {
-		
-		String message = "<br>검색결과가 확인되지 않습니다. "; //검색결과 없을 시 출력될 메세지
-		
-		customerService.SearchCustomer(searchOption,keyword);
-		
-		List<CustomerVO> searchList = customerService.SearchCustomer(searchOption,keyword);
-		
-		if(searchList.size() == 0) {
-			model.addAttribute("message", message);
-			return "adminTest/ccview";
-		}else { 
-			model.addAttribute("customerList", searchList);
-			return "adminTest/ccview";
-		}
-	}
+//	///////////////////////////////////////////////
+//	
+//	/*고객 검색* 삭제 예정/
+//	@RequestMapping(value = "/search" , method = {RequestMethod.POST, RequestMethod.GET})	
+//	public String customerSearch(@RequestParam("searchOption") String searchOption
+//								 ,@RequestParam("keyword") String keyword
+//								 ,Model model) {
+//		
+//		String message = "<br>검색결과가 확인되지 않습니다. "; //검색결과 없을 시 출력될 메세지
+//		
+//		customerService.SearchCustomer(searchOption,keyword);
+//		
+//		List<CustomerVO> searchList = customerService.SearchCustomer(searchOption,keyword);
+//		
+//		if(searchList.size() == 0) {
+//			model.addAttribute("message", message);
+//			return "adminTest/ccview";
+//		}else { 
+//			model.addAttribute("customerList", searchList);
+//			return "adminTest/ccview";
+//		}
+//	}
 	
 	///////////////////////////////////////////////
 	

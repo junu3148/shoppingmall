@@ -13,7 +13,7 @@
 <!--css 등록해야함-->
 <link href="${pageContext.request.contextPath}/assets/css/app.css" rel="stylesheet">
 <!--css 등록해야함-->
-
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script> <!-- 제이쿼리 최신버전 js -->
 
 <!--컨텐츠 상단 폰트-->
 <link
@@ -132,15 +132,15 @@
 										<br>
 
 										<!--키워드 검색 폼-->
-										<form action="${pageContext.request.contextPath}/customer/search">
+										<form action="${pageContext.request.contextPath}/customer/customerView">
 											<table>
 												<tr>
 													<td><select name="searchOption" class="form-select">
-															<option>--옵션 선택--</option>
+															<option value = "all">--옵션 선택--</option>
 															<option value="customerName">고객명</option>
 															<option value="customerId">고객아이디</option>
 													</select></td>
-													<td>: <input type="text" name="keyword" />
+													<td>: <input type="text" name="keyword"  value ="${pageInfo.pagingInfo.keyword}"/>
 														<button type="submit" class="btn btn-secondary">Search</button>
 													</td>
 												</tr>
@@ -169,8 +169,8 @@
 													</tr>
 												</c:if>
 												
-											<c:if test = "${customerList != null}">
-												<c:forEach items="${customerList}" var="customer">
+											<c:if test = "${pageInfo.customerList != null}">
+												<c:forEach items="${pageInfo.customerList}" var="customer">
 													<tr>
 														<td style="width: 20%; text-align: center;">${customer.customerId}</td>
 														<td style="width: 30%; text-align: center;">${customer.customerName}</td>
@@ -183,6 +183,21 @@
 												</c:if>
 											</table>
 										</div>
+										<!-- 여기다가 넘버링할 거임 -->
+										<c:if test = "${pageInfo.pagingInfo.selectPage >10}">
+										<a class = "paging" href = "${pageContext.request.contextPath}/customer/customerView?selectPage=${pageInfo.pagingInfo.startPageNum - 1}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}"> ◀ </a>
+										</c:if>
+										
+										<c:forEach begin = "${pageInfo.pagingInfo.startPageNum}" end = "${pageInfo.pagingInfo.endPageNum}"  var = "page">
+											<c:if test = "${page <= pageInfo.pagingInfo.finalPage}">
+											<a class = "paging" href ="${pageContext.request.contextPath}/customer/customerView?selectPage=${page}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">${page}</a>
+											</c:if>
+										</c:forEach>
+										<c:if test = "${pageInfo.pagingInfo.next == true}">
+										<a class = "paging" href ="${pageContext.request.contextPath}/customer/customerView?selectPage=${pageInfo.pagingInfo.endPageNum + 1}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}"> ▶ </a>
+										</c:if>
+										
+										
 									</div>
 								</div>
 							</div>
@@ -220,6 +235,14 @@
 </body>
 
 <script>
+	
+	$('.paging').on("click", function(){
+		  $('.paging').removeClass('active');
+		  
+		  $(this).addClass('active');
+		
+	})
+	
 	function updateMinRange(value) {
 		document.getElementById("minRangeInput").value = value;
 	}

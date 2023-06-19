@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.shopping.dao.CustomerDAO;
 import com.shopping.vo.CustomerVO;
+import com.shopping.vo.PagingVO;
 
 @Service
 public class CustomerService {
@@ -50,31 +51,54 @@ public class CustomerService {
 	}
 	
 	
-	/*고객 전체 리스트*/
+//	/*고객 전체 리스트*/
+//	
+//	public List<CustomerVO> selectAllCustomer() {
+//		
+//		
+//		List<CustomerVO> customerList = customerDAO.getAllCustomer();
+//		
+//		
+//		return customerList;
+//	}
+//	/* 고객 검색 */
+//	
+//	public List<CustomerVO> SearchCustomer(String searchOption,String keyword){ 
+//		
+//		Map<String, Object> searchInfo = new HashMap<>();
+//		
+//		searchInfo.put("searchOption", searchOption);
+//		searchInfo.put("keyword", keyword);
+//		
+//		List<CustomerVO> Searchlist = customerDAO.getCustomerList(searchInfo);
+//		
+//		
+//		return Searchlist;
+//	}
 	
-	public List<CustomerVO> selectAllCustomer() {
+	
+	public Map<String,Object> getCustomerList(int selectPage, String keyword, String searchOption){ 
 		
+		Map<String, Object> cnt = new HashMap<String, Object>();
+		cnt.put("keyword", keyword);
+		cnt.put("searchOption", searchOption);
 		
-		List<CustomerVO> customerList = customerDAO.getAllCustomer();
+		int totalCnt = customerDAO.getCustomerCnt(cnt);
 		
+		PagingVO pagingVO = new PagingVO(selectPage, totalCnt, keyword, searchOption);
+		List<CustomerVO> customerList = customerDAO.getCustomerList(pagingVO);
 		
-		return customerList;
+		Map<String,Object> pageInfo = new HashMap<String, Object>();
+		pageInfo.put("customerList", customerList);
+		pageInfo.put("pagingInfo",pagingVO);
+		
+		System.out.println("Service에서 확인 :" + pageInfo);
+		
+		return pageInfo;
 	}
 	
-	/* 고객 검색 */
 	
-	public List<CustomerVO> SearchCustomer(String searchOption,String keyword){ 
-		
-		Map<String, Object> searchInfo = new HashMap<>();
-		
-		searchInfo.put("searchOption", searchOption);
-		searchInfo.put("keyword", keyword);
-		
-		List<CustomerVO> Searchlist = customerDAO.getCustomerList(searchInfo);
-		
-		
-		return Searchlist;
-	}
+	
 	
 	/* 고객넘버로 고객 정보 가져오기*/
 	

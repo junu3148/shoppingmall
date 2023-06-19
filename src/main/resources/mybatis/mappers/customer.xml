@@ -43,7 +43,7 @@
 		]]>
 	</select>
 	
-	<!--고객 전체 리스트-->
+	<!--고객 전체 리스트 삭제 예정-->
 	
 	<select id ="customerAllList" resultType ="CustomerVO">
 		<![CDATA[
@@ -56,30 +56,67 @@
 		]]>
 	</select>
 	
-	<!-- 고객 검색 -->
+	<!-- 고객 총 수 -->
 	
-	<select id = "getCustomerList" parameterType ="map" resultType ="CustomerVO">
+	<select id = "getCustomerCnt" parameterType ="map" resultType = "int">
 		<![CDATA[
-			select 
-				customer_no as customerNo
-				,customer_id as customerId
-				,customer_name as customerName
-				,customer_role as customerRole
+			select count(*)
 			from customer
+			where 1 = 1
 		]]>
-		<if test = "searchOption == '고객명'" >
-		where customer_name like '%' ||  #{keyword} || '%'
+		<if test = "searchOption == 'all' and keyword != ''">
+			and customer_id like '%' || #{keyword} || '%' or customer_name like '%' || #{keyword} || '%'
 		</if>
-		<if test = "searchOption == '고객아이디'" >
-		where customer_id like '%' ||  #{keyword} || '%'
+		<if test = "searchOption == 'customerName' and keyword != ''">
+			and customer_name like '%' || #{keyword} || '%'
 		</if>
-		<if test = "searchOption == '--옵션 선택--'" >
-		where customer_id like  '%' ||  #{keyword} || '%' or customer_name like  '%' ||  #{keyword} || '%'
+		<if test = "searchOption == 'customerId' and keyword != ''">
+			and customer_id like '%' || #{keyword} || '%'
 		</if>
-		<![CDATA[
-		 order by customer_no desc
-		]]>
 	</select>
+		
+	
+	<select id = "getCustomerList" parameterType ="PagingVO" resultType ="CustomerVO">
+		<![CDATA[
+		select 
+			customer_no as customerNo
+    		,customer_id as customerId
+    		,customer_name as customerName
+   			,customer_role as customerRole
+		from (
+ 			 select
+   				 rownum as rn,
+   				 customer_no,
+  				 customer_id,
+   				 customer_name,
+    			 customer_role
+  			from (
+    			select
+      				customer_no,
+      				customer_id,
+      				customer_name,
+      				customer_role
+    				from customer
+   				where 1 = 1 
+   		]]>
+     			<if test = "searchOption == 'all' and keyword != ''">
+				and customer_id like '%' || #{keyword} || '%' or customer_name like '%' || #{keyword} || '%'
+				</if>
+				<if test = "searchOption == 'customerName' and keyword != ''">
+				and customer_name like '%' || #{keyword} || '%'
+				</if>
+				<if test = "searchOption == 'customerId' and keyword != ''">
+				and customer_id like '%' || #{keyword} || '%'
+				</if>
+			<![CDATA[		
+   				 order by customer_no desc
+ 				 )
+					)
+				where rn between #{boardNumStart} and #{boardNumEnd}		
+			]]>
+	</select>
+
+
 	
 	
 	<!-- 고객 번호로 정보 가져오기 -->	
