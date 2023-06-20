@@ -8,14 +8,15 @@ import org.springframework.stereotype.Component;
 public class QnAVO {
 
 	private int qnANo, customerNo, boardType, hit;
-	private String title, content;
-	private Date regDate;
+	private String title, content, adminContent ;
+	private Date regDate, adminRegDate;
 
 	public QnAVO() {
 		super();
 	}
 
-	public QnAVO(int qnANo, int customerNo, int boardType, int hit, String title, String content, Date regDate) {
+	public QnAVO(int qnANo, int customerNo, int boardType, int hit, String title, String content, String adminContent,
+			Date regDate, Date adminRegDate) {
 		super();
 		this.qnANo = qnANo;
 		this.customerNo = customerNo;
@@ -23,7 +24,9 @@ public class QnAVO {
 		this.hit = hit;
 		this.title = title;
 		this.content = content;
+		this.adminContent = adminContent;
 		this.regDate = regDate;
+		this.adminRegDate = adminRegDate;
 	}
 
 	public int getQnANo() {
@@ -74,6 +77,14 @@ public class QnAVO {
 		this.content = content;
 	}
 
+	public String getAdminContent() {
+		return adminContent;
+	}
+
+	public void setAdminContent(String adminContent) {
+		this.adminContent = adminContent;
+	}
+
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -82,10 +93,19 @@ public class QnAVO {
 		this.regDate = regDate;
 	}
 
+	public Date getAdminRegDate() {
+		return adminRegDate;
+	}
+
+	public void setAdminRegDate(Date adminRegDate) {
+		this.adminRegDate = adminRegDate;
+	}
+
 	@Override
 	public String toString() {
-		return "QnAVO [QnANo=" + qnANo + ", customerNo=" + customerNo + ", boardType=" + boardType + ", hit=" + hit
-				+ ", title=" + title + ", content=" + content + ", regDate=" + regDate + "]";
+		return "QnAVO [qnANo=" + qnANo + ", customerNo=" + customerNo + ", boardType=" + boardType + ", hit=" + hit
+				+ ", title=" + title + ", content=" + content + ", adminContent=" + adminContent + ", regDate="
+				+ regDate + ", adminRegDate=" + adminRegDate + "]";
 	}
 
 }
