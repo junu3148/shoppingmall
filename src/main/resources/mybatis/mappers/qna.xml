@@ -4,6 +4,7 @@
 <!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="qna">
 
+	<!-- 문의 등록 -->
 	<insert id="insertQnA" parameterType="QnAVO">
 		
 		<![CDATA[
@@ -26,6 +27,39 @@
 		]]>
 
 	</insert>
+	
+	<!-- 문의 삭제 -->
+	<delete id="deleteQnA" parameterType="QnAVO">
+	
+		<![CDATA[
+		
+			DELETE FROM qna WHERE qna_no = #{qnANo} 	
+		
+		]]>
+			
+	</delete>
+	
+	<!-- 관리자 문의 등록 -->
+	<insert id="insertQnAAdmin" parameterType="QnAVO">
+		
+		<![CDATA[
+		
+			INSERT INTO qna_comment (
+							 qna_no ,
+						 	 content							 
+							 )
+					 VALUES (
+							 #{qnANo},
+							 #{content}
+							 )		
+		
+		]]>
+
+	</insert>
 
 
 </mapper>
+
+
+
+

@@ -11,10 +11,28 @@ public class QnAService {
 
 	@Autowired
 	private QnADAO qnADAO;
-
+	
+	// ----------------- 문의 등록
 	public int insertQnA(QnAVO vo) {
 		System.out.println("insertQnA Service()");
 
 		return qnADAO.insertQnA(vo);
 	}
+	
+	// ----------------- 문의 삭제
+	public int deleteQnA(QnAVO vo) {
+		System.out.println("deleteQnA Service()");
+		
+		return qnADAO.deleteQnA(vo);
+		
+	}
+	
+	// ----------------- 관리자 문의 등록
+	public int insertQnAAdmin(QnAVO vo) {
+		System.out.println("insertQnAAdmin Service()");
+		
+		return qnADAO.insertQnAAdmin(vo);
+	}
+	
+	
 }

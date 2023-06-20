@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shopping.ajax.JasonResult;
 import com.shopping.service.QnAService;
 import com.shopping.vo.QnAVO;
 
@@ -31,5 +33,38 @@ public class QnAController {
 
 		return "";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteQnA", method = RequestMethod.POST)
+	public JasonResult deleteQnA(@ModelAttribute QnAVO vo) {
+		System.out.println("deleteQnA()");
+		
+		int result =0;
+				
+		JasonResult jasonResult = new JasonResult();
+		
+		jasonResult.success(result);
+		
+		return jasonResult;
+		
+	}
+	
+	@RequestMapping(value = "/insertQnAAdmin" , method = RequestMethod.POST)
+	public String insertQnAAdmin(@ModelAttribute QnAVO vo) {
+		System.out.println("insertQnAAdmin()");
+		
+		
+		
+		return "";
+	}
 
 }
+
+
+
+
+
+
+
+
+

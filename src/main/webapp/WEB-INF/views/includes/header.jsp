@@ -67,8 +67,8 @@
 			<!-- 사용자 로그인 시 마이페이지로 변경 -->
 		</ul>
 		<ul class="icon_menu">
-			<li class="search"><a href="#none"><img
-					src="${pageContext.request.contextPath}/assets/images/search.png" alt="">검색</a></li>
+			<li class="search"><a href="#none">
+			<img src="${pageContext.request.contextPath}/assets/images/search.png" alt="">검색</a></li>
 			<li class="cart"><a href="#none"><img src="${pageContext.request.contextPath}/assets/images/cart.png"
 					alt="">장바구니</a></li>
 			<li class="cart"><a href="#none"><img
