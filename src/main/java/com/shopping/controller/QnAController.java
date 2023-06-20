@@ -54,7 +54,7 @@ public class QnAController {
 		System.out.println("insertQnAAdmin()");
 		
 		
-		
+		  
 		return "";
 	}
 
