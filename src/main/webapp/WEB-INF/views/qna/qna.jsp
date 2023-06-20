@@ -47,10 +47,11 @@ form {
 		<h3>문의</h3>
 		<form action="${pageContext.request.contextPath}/QnA/insertQnA"
 			method="GET">
-			<input type="text" name="customerNo" value="${authCustomer.customerNo}">
-			<label for="Y">비밀</label> <input id="Y" type="radio" name="boardType" value="1"> 
-			<label for="N">안비밀</label><input id ="N" type="radio" name="boardType" value="2"> <br> 제목:
-			<input type="text" name="title"> <br> 내용:<br>
+			<input type="text" name="customerNo" value="${authCustomer.customerNo}"><br> 
+			<label name="boardType">비밀글</label><input type="checkbox" name="boardType" value="1"> 
+			<br> 제목: <input type="text" name="title"><br>
+			내용: 
+			<br> 
 			<textarea name="content" style="width: 580px; height: 100px;"></textarea>
 
 			<div class="btn_wrap">
