@@ -27,7 +27,7 @@ public class QnAController {
 		
 		List<QnAVO> qnAList = qnAService.getQnAList();
 		 System.out.println(qnAList.get(0));
-		//model.addAttribute("qnAList", qnAList);
+		model.addAttribute("qnAList", qnAList);
 		
 		return "qna/qnaList";
 	}

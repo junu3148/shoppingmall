@@ -34,6 +34,11 @@ form {
 	margin-right: auto;
 	width: 600px;
 }
+
+table td {
+	padding: 10px;
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -45,21 +50,34 @@ form {
 	<section class="pc">
 		<br> <br>
 		<h3>문의</h3>
-		<c:forEach items="QnAList" var="Qna">
-			<table>
+		<table style="width: 700">
 			<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+				<th style="width: 10%">게시판번호</th>
+				<th style="width: 10%">유저번호</th>
+				<th style="width: 10%">비밀</th>
+				<th style="width: 10%">조회수</th>
+				<th style="width: 20%">제목</th>
+				<th style="width: 30%">내용</th>
+				<th style="width: 10%">날짜</th>
 			</tr>
-			
-			
-			</table>
-		</c:forEach>
+			<c:forEach items="${qnAList}" var="Qna">
+				<tr>
+					<td>${Qna.qnANo}</td>
+					<td>${Qna.customerNo}</td>
+					<td>${Qna.boardType}</td>
+					<td>${Qna.hit}</td>
+					<td>${Qna.title}</td>
+					<td>${Qna.content}</td>
+					<td>${Qna.regDate}</td>
+
+				</tr>
+				<tr>
+
+					<td colspan="6" style="text-align: left;">---------------->${Qna.adminContent}</td>
+					<td>${Qna.adminRegDate}</td>
+				</tr>
+			</c:forEach>
+		</table>
 
 	</section>
 
