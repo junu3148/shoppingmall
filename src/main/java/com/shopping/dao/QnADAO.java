@@ -35,6 +35,14 @@ public class QnADAO {
 		return sqlSession.delete("qna.deleteQnA", vo);
 
 	}
+	
+	// ----------------- 문의 답변 삭제
+	public int deleteQnAComment(QnAVO vo) {
+		System.out.println("deleteQnAComment DAO()");
+
+		return sqlSession.delete("qna.deleteQnAComment", vo);
+
+	}
 
 	// ----------------- 관리자 문의 등록
 	public int insertQnAAdmin(QnAVO vo) {

@@ -32,7 +32,9 @@ public class QnAService {
 	// ----------------- 문의 삭제
 	public int deleteQnA(QnAVO vo) {
 		System.out.println("deleteQnA Service()");
-
+		
+		qnADAO.deleteQnAComment(vo); 
+		
 		return qnADAO.deleteQnA(vo);
 
 	}
