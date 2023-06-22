@@ -29,7 +29,7 @@ public class QnAController {
 		 System.out.println(qnAList.get(0));
 		model.addAttribute("qnAList", qnAList);
 		
-		return "qna/qnaList";
+		return "qna/qnaList2";
 	}
 	
 	@RequestMapping(value = "/QnAForm", method = RequestMethod.GET)
@@ -42,8 +42,10 @@ public class QnAController {
 	@RequestMapping(value = "/insertQnA", method = RequestMethod.GET)
 	public String insertQnA(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnA()");
+		
+		System.out.println(vo);
 
-		int result = qnAService.insertQnA(vo);
+		//int result = qnAService.insertQnA(vo);
 
 		return "";
 	}
