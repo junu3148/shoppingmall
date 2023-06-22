@@ -196,17 +196,17 @@ $(document).ready(function(){
 
     //문의 글 쓰기
     $('#inquiry .inquiry_ > .btn_wrap > a').click(function() {
-      $('.inquiry_popup').show();
+      $('#inquiry_popup').show();
       $('body').addClass('no-scroll');
     });
     $('#inquiry .inquiry_popup .btn_wrap .shopping_btn').click(function() {
-      $('.inquiry_popup').hide();
-      $('.inquiry_popup').find('*').val(''); //문의 글쓰기 창 닫았을 때 문의글 초기화
+      $('#inquiry_popup').hide();
+      $('#inquiry_popup').find('*').val(''); //문의 글쓰기 창 닫았을 때 문의글 초기화
       $('body').removeClass('no-scroll');
     });   
     $('#inquiry .inquiry_popup .inquiry_close').click(function() {
-      $('.inquiry_popup').hide();
-      $('.inquiry_popup').find('*').val(''); //문의 글쓰기 창 닫았을 때 문의글 초기화
+      $('#inquiry_popup').hide();
+      $('#inquiry_popup').find('*').val(''); //문의 글쓰기 창 닫았을 때 문의글 초기화
       $('body').removeClass('no-scroll');
     });  
     $('#inquiry_cont').keyup(function (e) {

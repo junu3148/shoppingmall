@@ -82,12 +82,14 @@
 		<![CDATA[
 		
 			INSERT INTO qna_comment (
-							 qna_no ,
-						 	 content							 
+							 QNA_NO ,
+						 	 CONTENT ,
+						 	 REG_DATE							 
 							 )
 					 VALUES (
 							 #{qnANo},
-							 #{content}
+							 #{content},
+							 sysdate
 							 )		
 		
 		]]>

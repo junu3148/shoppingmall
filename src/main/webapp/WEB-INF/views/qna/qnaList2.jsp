@@ -146,16 +146,32 @@
 							<div class="qna">
 								<ul class="list">
 									<li class="no">${Qna.qnANo}</li>
-									<li class="tit">${Qna.title}</li>
+									<c:if test="${Qna.boardType ==0}">
+										<li class="tit">${Qna.title}</li>
+									</c:if>
+									<c:if
+										test="${Qna.boardType == 1 && Qna.customerNo != authCustomer.customerNo}">
+										<li class="tit secret">비밀글 입니다</li>
+									</c:if>
+									<c:if
+										test="${Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo}">
+										<li class="tit">${Qna.title}</li>
+									</c:if>
 									<li class="date">${Qna.regDate}</li>
 								</ul>
 								<ul class="text_wrap">
-									<li class="q_area">
-										<p class="no">Q</p>
-										<p class="question tit">${Qna.content}</p>
-										<p class="question_date date">2023.06.14</p>
-									</li>
-									<c:if test="${!empty Qna.adminContent}">
+									<li class="q_area"><c:if
+											test="${Qna.boardType == 0 || Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo}">
+											<p class="no">Q</p>
+											<p class="question tit">${Qna.content}</p>
+											<div class="btn_wrap">
+												<a href="#none" class="order_btn insertQnAAdmin"
+													data-no="${Qna.qnANo}">문의하기</a>
+											</div>
+										</c:if></li>
+									<c:if
+										test="${!empty Qna.adminContent && Qna.boardType == 0
+									 || !empty Qna.adminContent && Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo}">
 										<li class="a_area">
 											<p class="no">A</p>
 											<p class="answer tit">${Qna.adminContent}</p>
@@ -193,7 +209,9 @@
 			</div>
 		</section>
 
-		<section class="inquiry_popup" style="display: none;">
+		<!-- 고객 문의 창 -->
+		<section id="inquiry_popup" class="inquiry_popup"
+			style="display: none;">
 			<a href="#none" class="inquiry_close"><img
 				src="images/ver02/close.png" alt=""></a>
 			<div class="inquiry_write">
@@ -210,7 +228,7 @@
 
 							<th>비밀글 여부</th>
 							<td><input type="checkbox" id="secret_write_Y"
-								name="secret_write"> <label for="secret_write_Y">YES</label>
+								name="boardType" value="1"> <label for="secret_write_Y">YES</label>
 								<input type="hidden" name="customerNo"
 								value="${authCustomer.customerNo}"></td>
 						</tr>
@@ -221,7 +239,8 @@
 						</tr>
 						<tr>
 							<th><label for="inquiry_cont">문의 내용</label></th>
-							<td><textarea name="content" id="inquiry_cont" placeholder="700자 이하 입력가능" required></textarea>
+							<td><textarea name="content" id="inquiry_cont"
+									placeholder="700자 이하 입력가능" required></textarea>
 								<div class="textLengthWrap">
 									<span class="textCount">0자</span> <span class="textTotal">/
 										700자</span>
@@ -230,8 +249,44 @@
 					</table>
 
 					<div class="btn_wrap">
-						<a id="submitqna" href="#none" class="order_btn">문의</a> <a href="#none"
-							class="shopping_btn">취소</a>
+						<a id="submitqna" href="#none" class="order_btn">문의</a> <a
+							href="#none" class="shopping_btn">취소</a>
+					</div>
+				</form>
+			</div>
+		</section>
+
+
+		<!-- 문의 답글 창 -->
+		<section id="inquiry_popup2" class="inquiry_popup"
+			style="display: none;">
+			<a href="#none" class="inquiry_close"><img
+				src="images/ver02/close.png" alt=""></a>
+			<div class="inquiry_write">
+				<h3>문의</h3>
+				<form id="moveForm2"
+					action="${pageContext.request.contextPath}/QnA/insertQnAAdmin"
+					method="get">
+					<table>
+						<colgroup>
+							<col width="20%">
+							<col width="80%">
+						</colgroup>
+						<tr>
+							<th><label for="inquiry_cont">답변내용</label></th>
+							<td><input id="customerNo" type="hidden" name="qnANo"
+								value=""> <textarea name="content" id="inquiry_cont"
+									required></textarea>
+								<div class="textLengthWrap">
+									<span class="textCount">0자</span> <span class="textTotal">/
+										700자</span>
+								</div></td>
+						</tr>
+					</table>
+
+					<div class="btn_wrap">
+						<a id="submitqna2" href="#none" class="order_btn">문의</a> <a
+							href="#none" class="shopping_btn">취소</a>
 					</div>
 				</form>
 			</div>
@@ -253,10 +308,32 @@
 
 </body>
 <script>
+	//문의글 등록
 	$("#submitqna").on("click", function() {
-	
 		$("#moveForm").submit();
-		
 	});
+
+	//문의 답글 등록
+	$("#submitqna2").on("click", function() {
+		$("#moveForm2").submit();
+	});
+	
+	
+	// 문의 답글창 띄우기
+	$(".insertQnAAdmin").on("click", function() {
+		let customerNo = $(this).data("no");
+		$("#inquiry_popup2").show();
+		$("#customerNo").val(customerNo);
+	});
+	 
+	//문의 답글창 취소버튼
+	$("#inquiry_popup2 .btn_wrap .shopping_btn").on("click", function() {
+		$('#inquiry_popup2').hide();
+		$('#inquiry_popup2 input[type="text"], #inquiry_popup2 textarea').val(''); // Clear input fields
+		$('body').removeClass('no-scroll');
+	});
+	
+	
+	
 </script>
 </html>

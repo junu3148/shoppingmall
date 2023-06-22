@@ -47,8 +47,8 @@ public class QnADAO {
 	// ----------------- 관리자 문의 등록
 	public int insertQnAAdmin(QnAVO vo) {
 		System.out.println("insertQnAAdmin Service()");
-
-		return sqlSession.insert(null);
+		System.out.println(vo);
+		return sqlSession.insert("qna.insertQnAAdmin",vo);
 	}
 
 }

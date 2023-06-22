@@ -26,7 +26,7 @@ public class QnAController {
 		System.out.println("QnAList()");
 		
 		List<QnAVO> qnAList = qnAService.getQnAList();
-		 System.out.println(qnAList.get(0));
+	
 		model.addAttribute("qnAList", qnAList);
 		
 		return "qna/qnaList2";
@@ -64,11 +64,13 @@ public class QnAController {
 
 	}
 
-	@RequestMapping(value = "/insertQnAAdmin", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertQnAAdmin", method = RequestMethod.GET)
 	public String insertQnAAdmin(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnAAdmin()");
+		
+		int result = qnAService.insertQnAAdmin(vo);
 
-		return "";
+		return "redirect:/QnA/QnAList";
 	}
 
 }

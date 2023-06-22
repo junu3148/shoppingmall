@@ -20,13 +20,14 @@
 				</c:otherwise>
 			</c:choose>			
 			<li class="search"><a href="#none">검색</a></li>
-			
-			<c:if test="${!empty authCustomer}">
+			<c:choose>
+			<c:when test="${!empty authCustomer}">
 			<li class="notice"><a href="${pageContext.request.contextPath }/QnA/QnAList">커뮤니티</a></li>
-			</c:if>
-			<c:if test="${empty authCustomer}">
+			</c:when>
+			<c:otherwise>
 			<li class="notice"><a href="${pageContext.request.contextPath }/customer/loginPage">커뮤니티</a></li>
-			</c:if>
+			</c:otherwise>
+			</c:choose>	
 		</ul>
 	</div>
 	<div id="header">
