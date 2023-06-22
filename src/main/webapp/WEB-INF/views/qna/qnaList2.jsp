@@ -221,8 +221,7 @@
 						</tr>
 						<tr>
 							<th><label for="inquiry_cont">문의 내용</label></th>
-							<td><textarea name="inquiry_cont" id="inquiry_cont"
-									name="content" placeholder="700자 이하 입력가능" required></textarea>
+							<td><textarea name="content" id="inquiry_cont" placeholder="700자 이하 입력가능" required></textarea>
 								<div class="textLengthWrap">
 									<span class="textCount">0자</span> <span class="textTotal">/
 										700자</span>
@@ -231,7 +230,7 @@
 					</table>
 
 					<div class="btn_wrap">
-						<a href="#none" class="order_btn">문의</a> <a href="#none"
+						<a id="submitqna" href="#none" class="order_btn">문의</a> <a href="#none"
 							class="shopping_btn">취소</a>
 					</div>
 				</form>
@@ -253,15 +252,11 @@
 
 
 </body>
-<!-- <script>
-	$(document).ready(function() {
-
-		$(".btn_wrap a").on("click", function(e) {
-			e.preventDefault();
-			
-			$("#moveForm").submit();
-		});
-
+<script>
+	$("#submitqna").on("click", function() {
+	
+		$("#moveForm").submit();
+		
 	});
-</script> -->
+</script>
 </html>

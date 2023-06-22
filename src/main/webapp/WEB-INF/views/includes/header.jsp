@@ -18,9 +18,15 @@
 					<li class="login"><a
 						href="${pageContext.request.contextPath }/customer/loginPage">로그인</a></li>
 				</c:otherwise>
-			</c:choose>
+			</c:choose>			
 			<li class="search"><a href="#none">검색</a></li>
+			
+			<c:if test="${!empty authCustomer}">
 			<li class="notice"><a href="${pageContext.request.contextPath }/QnA/QnAList">커뮤니티</a></li>
+			</c:if>
+			<c:if test="${empty authCustomer}">
+			<li class="notice"><a href="${pageContext.request.contextPath }/customer/loginPage">커뮤니티</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div id="header">

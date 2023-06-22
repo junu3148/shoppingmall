@@ -42,12 +42,11 @@ public class QnAController {
 	@RequestMapping(value = "/insertQnA", method = RequestMethod.GET)
 	public String insertQnA(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnA()");
+	
+		int result = qnAService.insertQnA(vo);
 		
-		System.out.println(vo);
-
-		//int result = qnAService.insertQnA(vo);
-
-		return "";
+		return "redirect:/QnA/QnAList";
+		
 	}
 
 	@ResponseBody
