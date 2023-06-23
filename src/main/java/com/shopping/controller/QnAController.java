@@ -23,27 +23,17 @@ public class QnAController {
 	@Autowired
 	private QnAService qnAService;
 
+	
 	@RequestMapping(value="/QnAList", method = RequestMethod.GET)
-	public String QnAList(Model model) {
-		System.out.println("QnAList()");
-		
-		List<QnAVO> qnAList = qnAService.getQnAList();
-	
-		model.addAttribute("qnAList", qnAList);
-		
-		return "qna/qnaList2";
-	}
-	
-	@RequestMapping(value="/QnAList2", method = RequestMethod.GET)
 	public String QnAList2(Model model,Criteria cri) {
 		System.out.println("QnAList()");
 			
-		Map<String, Object> map = qnAService.getQnAList2(cri);
+		Map<String, Object> map = qnAService.getQnAList(cri);
 		
 		model.addAttribute("qnAList", map.get("qnAList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 			
-		return "qna/qnaList3";
+		return "qna/qnaList";
 	}
 	
 	@RequestMapping(value = "/QnAForm", method = RequestMethod.GET)

@@ -22,7 +22,7 @@
 			<li class="search"><a href="#none">검색</a></li>
 			<c:choose>
 			<c:when test="${!empty authCustomer}">
-			<li class="notice"><a href="${pageContext.request.contextPath }/QnA/QnAList2">커뮤니티</a></li>
+			<li class="notice"><a href="${pageContext.request.contextPath }/QnA/QnAList">커뮤니티</a></li>
 			</c:when>
 			<c:otherwise>
 			<li class="notice"><a href="${pageContext.request.contextPath }/customer/loginPage">커뮤니티</a></li>

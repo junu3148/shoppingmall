@@ -15,18 +15,12 @@ public class QnADAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// ----------------- 문의 리스트
-	public List<QnAVO> getQnAList() {
-		System.out.println("getQnAList DAO()");
-
-		return sqlSession.selectList("qna.getQnAList");
-	}
 
 	// ----------------- 문의 리스트
-	public List<QnAVO> getQnAList2(Criteria cri) {
+	public List<QnAVO> getQnAList(Criteria cri) {
 		System.out.println("getQnAList DAO()");
 			
-		return sqlSession.selectList("qna.getQnAList2",cri);
+		return sqlSession.selectList("qna.getQnAList",cri);
 	}
 	// ----------------- 문의글 갯수
 	public int getTotal() {

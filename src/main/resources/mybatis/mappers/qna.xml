@@ -6,32 +6,7 @@
 
 
 	<!-- 문의 리스트 -->
-	<select id="getQnAList" resultType="QnAVO">
-	
-		<![CDATA[
-		
-			  SELECT
-				    a.qna_no AS qnaNo,
-				    a.customer_no AS customerNo,
-				    a.board_type AS boardType,
-				    a.title,
-				    a.content,
-				    a.reg_date AS regDate,
-				    a.hit,
-				    b.content AS adminContent,
-				    b.reg_date AS adminRegDate
-				FROM
-				    qna a
-				    LEFT OUTER JOIN qna_comment b ON a.qna_no = b.qna_no
-				ORDER BY
-				    a.qna_no DESC
-		
-		]]>
-
-	</select>
-	
-	<!-- 문의 리스트 -->
-	<select id="getQnAList2" parameterType="Criteria" resultType="QnAVO">
+	<select id="getQnAList" parameterType="Criteria" resultType="QnAVO">
 	
 		<![CDATA[
 		
