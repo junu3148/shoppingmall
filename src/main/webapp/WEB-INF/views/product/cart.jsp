@@ -193,6 +193,110 @@ $('.del').on("click", function(){
  	}; //반복문 수행
 });// 선택 상품 삭제 버튼 클릭 이벤트
 
+
+
+$("#cbx_chkAll").click(function() {
+  if($("#cbx_chkAll").is(":checked")) {
+    $("input[name=chk]").prop("checked", true);
+    updateValues();
+  } else {
+    $("input[name=chk]").prop("checked", false);
+    updateValues();
+  }
+});
+
+$("input[name=chk]").click(function() {
+  var total = $("input[name=chk]").length;
+  var checked = $("input[name=chk]:checked").length;
+  
+  if(total != checked) {
+    $("#cbx_chkAll").prop("checked", false);
+    updateValues();
+  } else {
+    $("#cbx_chkAll").prop("checked", true);
+    updateValues();
+  }
+});
+
+
+
+   //장바구니페이지 수량 체크
+    //수량 체크하여 해당하는 제품 가격을 구해와 다시 값에 넣을 예정
+    $('._count :button').on({
+      'click' : function(e){
+          e.preventDefault();
+          var $count = $(this).parent('._count').find('.inp');
+          var now = parseInt($count.val());
+          var min = 1;
+          var max = 999;
+          var num = now;
+          if($(this).hasClass('minus')){
+              var type = 'm';
+          }else{
+              var type = 'p';
+          }
+          if(type=='m'){
+              if(now>min){
+                  num = now - 1;
+              }
+          }else{
+              if(now<max){
+                  num = now + 1;
+              }
+          }
+          if(num != now){
+              $count.val(num);
+          }
+          
+           var hiddenValue = $(this).closest('tr').find('input[type="hidden"]').val(); //가격 가져오기
+          
+          var setPrice = hiddenValue * num;
+          $(this).closest('tr').find('span[title="order-price"]').text(setPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원');
+  
+  			updateValues();
+      }
+    });
+    
+
+/* 총 주문 금액 업데이트하는 식*/
+function updateValues() {
+var quantities = [];
+var prices = [];
+
+$('input[name="chk"]:checked').each(function() {
+var checkbox = $(this);
+var row = checkbox.closest('tr');
+var hiddenValue = row.find('input[type="hidden"]').val();
+var inputValue = row.find('input[type="text"]').val();
+quantity = parseInt(inputValue);
+price = parseInt(hiddenValue);
+totalprice = price * quantity;
+
+
+/* 선택된 제품의 금액과 수량 체크*/
+quantities.push(quantity);
+prices.push(totalprice);   
+});
+
+
+var totalQuantity = quantities.reduce(function(acc, val) {
+return acc + val;
+}, 0);
+
+var totalPrice = prices.reduce(function(acc, val) {
+return acc + val;
+}, 0);
+
+console.log("수량 배열의 총합: " + totalQuantity);
+console.log("가격 배열의 총합: " + totalPrice);
+
+
+$('.total_price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
+$('[name = "totalPrice"]').val(totalPrice);
+$('#total_ea').text(totalQuantity + "개");
+}
+
+
 </script>
 
 
