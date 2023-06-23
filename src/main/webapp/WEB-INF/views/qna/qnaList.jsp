@@ -48,7 +48,7 @@
 <!-- 슬릭슬라이더 js -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
-
+ 
 <style>
 #buttoncss {
 	padding: 15px 28px;
