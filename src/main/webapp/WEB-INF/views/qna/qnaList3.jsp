@@ -194,22 +194,36 @@
 
 			</div>
 
-			<ul class="paging">
-				<li class="first"><a href="#none"></a></li>
-				<li class="pre"><a href="#none"></a></li>
-				<li class="on"><a href="#none">1</a></li>
-				<li><a href="#none">2</a></li>
-				<li><a href="#none">3</a></li>
-				<li><a href="#none">4</a></li>
-				<li><a href="#none">5</a></li>
-				<li><a href="#none">6</a></li>
-				<li><a href="#none">7</a></li>
-				<li><a href="#none">8</a></li>
-				<li><a href="#none">9</a></li>
-				<li><a href="#none">10</a></li>
-				<li class="next"><a href="#none"></a></li>
-				<li class="last"><a href="#none"></a></li>
-			</ul>
+			<c:if test="${empty keyword}">
+				<ul class="paging pageInfo">
+					<c:if test="${pageMaker.prev}">
+						<li class="pageInfo_btn previous"><a
+							href="${pageMaker.startPage - 1}">◀</a></li>
+					</c:if>
+
+					<!-- 각 번호 페이지 버튼 -->
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}">
+						<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+							<a href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+
+					<!-- 다음페이지 버튼 -->
+					<c:if test="${pageMaker.next}">
+						<li class="pageInfo_btn next"><a
+							href="${pageMaker.endPage + 1}">▶</a></li>
+					</c:if>
+				</ul>
+			</c:if>
+			<form id="moveForm"
+				action="${pageContext.request.contextPath}/QnA/QnAList2"
+				method="get">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+				<input type="hidden" name="type" value="${pageMaker.cri.type}">
+			</form>
 
 			<div class="btn_wrap">
 				<a href="#none" class="order_btn">문의하기</a>
@@ -316,6 +330,17 @@
 
 </body>
 <script>
+	//페이징
+	$(document).ready(function() {
+
+		$(".pageInfo a").on("click", function(e) {
+			e.preventDefault();
+			var pageNum = $(this).attr("href");
+			$("#moveForm input[name='pageNum']").val(pageNum);
+			$("#moveForm").submit();
+		});
+
+	});
 	//문의글 등록
 	$("#submitqna").on("click", function() {
 		$("#moveForm").submit();

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.shopping.vo.Criteria;
 import com.shopping.vo.QnAVO;
 
 @Repository
@@ -21,6 +22,20 @@ public class QnADAO {
 		return sqlSession.selectList("qna.getQnAList");
 	}
 
+	// ----------------- 문의 리스트
+	public List<QnAVO> getQnAList2(Criteria cri) {
+		System.out.println("getQnAList DAO()");
+			
+		return sqlSession.selectList("qna.getQnAList2",cri);
+	}
+	// ----------------- 문의글 갯수
+	public int getTotal() {
+		System.out.println("getTotal DAO()");
+		
+		return sqlSession.selectOne("qna.getTotal");
+		
+	}
+	
 	// ----------------- 문의 등록
 	public int insertQnA(QnAVO vo) {
 		System.out.println("insertQnA DAO()");

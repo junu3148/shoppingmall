@@ -1,6 +1,7 @@
 package com.shopping.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shopping.ajax.JasonResult;
 import com.shopping.service.QnAService;
+import com.shopping.vo.Criteria;
 import com.shopping.vo.QnAVO;
 
 @Controller
@@ -30,6 +32,18 @@ public class QnAController {
 		model.addAttribute("qnAList", qnAList);
 		
 		return "qna/qnaList2";
+	}
+	
+	@RequestMapping(value="/QnAList2", method = RequestMethod.GET)
+	public String QnAList2(Model model,Criteria cri) {
+		System.out.println("QnAList()");
+			
+		Map<String, Object> map = qnAService.getQnAList2(cri);
+		
+		model.addAttribute("qnAList", map.get("qnAList"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+			
+		return "qna/qnaList3";
 	}
 	
 	@RequestMapping(value = "/QnAForm", method = RequestMethod.GET)
