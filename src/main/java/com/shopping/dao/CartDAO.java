@@ -57,4 +57,10 @@ public class CartDAO {
 		return row;
 	}
 	
+	public void insertOrder(ProductVO productVO) {
+		
+		System.out.println(productVO +"가 DAO까지도 오네요.");
+		
+	}
+	
 }

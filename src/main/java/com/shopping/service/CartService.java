@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shopping.dao.CartDAO;
 import com.shopping.vo.CartVO;
+import com.shopping.vo.CustomerVO;
 import com.shopping.vo.ProductVO;
 
 @Service
@@ -57,5 +58,15 @@ public class CartService {
 		return result;
 	}
 	
+	/* 주문상태 완료(2)인 주문 테이블만 있으면 주문하나 만듬.*/
+	/* 주문상태인(1) 주문 테이블 있으면 해당 테이블에 추가 */
+	public void addOrder(ProductVO productVO, CustomerVO customerVO) {
+		
+		
+		System.out.println("Service까지 옴" + productVO);
+		System.out.println(customerVO);
+		cartDAO.insertOrder(productVO);
+		
+	}
 	
 }

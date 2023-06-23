@@ -56,7 +56,7 @@
                 <tr id = "p${product.productNo}" data-no ="${product.productNo}">
                     <td><label for="check01"><input type="checkbox" name="chk" id="check01" ></label></td>
                     <td>
-                   <input type ="hidden" value ="${product.price}">
+                   <input type ="hidden" name  ="product_price" value ="${product.price}">
                         <a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
                             <img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
                             <span>${product.productName}</span>
@@ -65,7 +65,7 @@
                     <td>
                         <div class="count-wrap _count">
                             <button type="button" class="minus">-</button>
-                            <input type="text"  class="inp" value="${product.productEa}"/>
+                            <input type="text"  class="inp"  name = "product_count" value="${product.productEa}"/>
                             <button type="button" class="plus">+</button>
                         </div>
                     </td>
@@ -108,7 +108,7 @@
             </div>
             <div class="btn_wrap">
             		<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
-                <button type  ="submit"class="order_btn">주문하기</button>
+                <a class="order_btn" id = "order_btn">주문하기</a>
                 <a href="#none" class="shopping_btn">쇼핑하기</a>
             </div>
 	      </form>
@@ -137,7 +137,47 @@
 
 <script>
 
+/*주문하기 버튼 눌리면*/
+$('#order_btn').on("click", function(){
+	
+	
+	/*값을 가져감*/
+	 $('input[name="chk"]:checked').each(function() {
 
+		 var productEa =  parseInt($(this).closest('tr').find('input[name = "product_count"]').val());
+		 var productPrice =  parseInt($(this).closest('tr').find('input[name  ="product_price"]').val());
+		 var productNo =  parseInt($(this).closest('tr').data('no'));
+  
+		 console.log(productEa +' 와 ' + productNo + '가격값 :' + productPrice);
+		 
+		 var ProductVO = {
+				 productNo : productNo,
+				 productEa : productEa,
+				 price : productPrice 
+		 }
+		 
+	 $.ajax({
+         
+         //요청 세팅
+         url : "${pageContext.request.contextPath}/cart/addOrder",      
+         type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+         data : ProductVO,
+         
+         //응답 관련 세팅
+         dataType : "json",
+         success : function(jsonResult){
+         
+
+         },
+         error : function(XHR, status, error) {
+         console.error(status + " : " + error);
+         }
+				            
+      });//ajax end
+
+	 });//값 받아오기
+	
+}); //주문하기 버튼 클릭 end
 
 $('.del').on("click", function(){
     /* 총 주문 금액 업데이트하는 식*/
@@ -286,9 +326,6 @@ return acc + val;
 var totalPrice = prices.reduce(function(acc, val) {
 return acc + val;
 }, 0);
-
-console.log("수량 배열의 총합: " + totalQuantity);
-console.log("가격 배열의 총합: " + totalPrice);
 
 
 $('.total_price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");

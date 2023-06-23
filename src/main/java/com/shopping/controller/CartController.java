@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shopping.ajax.JasonResult;
 import com.shopping.service.CartService;
 import com.shopping.vo.CartVO;
+import com.shopping.vo.CustomerVO;
 import com.shopping.vo.ProductVO;
 
 @RequestMapping("/cart")
@@ -68,5 +69,19 @@ public class CartController {
 		
 		return jasonResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
+	public JasonResult addOrder(@ModelAttribute ProductVO productVO
+								,HttpSession session) {
+		
+		JasonResult jasonResult = new JasonResult();
+		jasonResult.success(null);
+		System.out.println(productVO);
+		cartService.addOrder(productVO, (CustomerVO)session.getAttribute("authCustomer"));
+	    
+		return jasonResult;
+	}
+	
 	
 }
