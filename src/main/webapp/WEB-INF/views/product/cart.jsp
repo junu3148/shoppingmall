@@ -140,43 +140,56 @@
 /*주문하기 버튼 눌리면*/
 $('#order_btn').on("click", function(){
 	
+		var productList = [];
 	
 	/*값을 가져감*/
 	 $('input[name="chk"]:checked').each(function() {
 
 		 var productEa =  parseInt($(this).closest('tr').find('input[name = "product_count"]').val());
-		 var productPrice =  parseInt($(this).closest('tr').find('input[name  ="product_price"]').val());
+		 var price =  parseInt($(this).closest('tr').find('input[name  ="product_price"]').val());
+		 var productPrice = price*productEa;
 		 var productNo =  parseInt($(this).closest('tr').data('no'));
   
 		 console.log(productEa +' 와 ' + productNo + '가격값 :' + productPrice);
 		 
+		 /*productNo, productEA, product total price */
 		 var ProductVO = {
 				 productNo : productNo,
 				 productEa : productEa,
 				 price : productPrice 
 		 }
 		 
+		 
+		 productList.push(ProductVO);
+		 
+
+	 });//값 받아오기
+	
+	 /* 객체 배열을 JSON으로 받기 위한 메서드 --> 배열을 String 으로 변환하기에 controller에서 string으로 받아야 함*/
+	 var ProductData = JSON.stringify(productList);
+	    jQuery.ajaxSettings.traditional = true;
+	 
 	 $.ajax({
          
          //요청 세팅
          url : "${pageContext.request.contextPath}/cart/addOrder",      
          type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
-         data : ProductVO,
+         data : {"jsonData" : ProductData},
          
          //응답 관련 세팅
          dataType : "json",
          success : function(jsonResult){
          
-
+			if(jsonResult.data == true){
+				window.location.href = "${pageContext.request.contextPath}/cart/orderPage/${authCustomer.customerNo}";
+			}
+        	 
          },
          error : function(XHR, status, error) {
          console.error(status + " : " + error);
          }
 				            
       });//ajax end
-
-	 });//값 받아오기
-	
 }); //주문하기 버튼 클릭 end
 
 $('.del').on("click", function(){

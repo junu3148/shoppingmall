@@ -77,5 +77,67 @@
 	]]>
 </delete>
 
+<select id ="checkOrder" parameterType ="String" resultType = "OrderVO">
+	<![CDATA[
+		select 
+			order_no as orderNo
+			,total_price as totalPrice
+		from orders 
+		where customer_no = #{customerNo}  and order_stat = 1
+	]]>
+</select>
+
+<insert id ="insertOrder" parameterType ="OrderVO">
+	<selectKey resultType="int" order="BEFORE" keyProperty="orderNo">
+		select SEQ_ORDER_NO.nextval from dual 
+	</selectKey>
+	<![CDATA[
+		insert into orders (ORDER_NO, CUSTOMER_NO, ORDER_STAT, total_price)
+		values (#{orderNo},#{customerNo},1, #{totalPrice})
+	]]>
+</insert>
+
+<insert id = "insertOrderDetail" parameterType ="map">
+	<![CDATA[
+        insert into order_detail 
+        	(detail_no, order_no, product_no, product_count)
+        values (
+        		SEQ_DETAIL_NO.nextval
+        		, #{orderNo}
+        		, #{orderProduct.productNo}
+        		,#{orderProduct.productEa}
+        		)
+	]]>
+</insert>
+
+<delete id ="deleteOrder" parameterType ="int">
+	<![CDATA[
+		delete orders
+		where order_no = #{orderNo}
+	]]>
+</delete>
+
+<delete id ="deleteOrderDetail" parameterType ="int">
+	<![CDATA[
+		delete order_detail
+		where order_no = #{orderNo}
+	]]>
+</delete>
+
+<select id = "getOrderDetail" parameterType ="OrderVO" resultType ="ProductVO">
+	<![CDATA[
+		SELECT
+   			 a.product_no as productNo
+   			 ,a.product_count as productEa
+   			 ,b.price * a.product_count  as  price
+    		 ,b.product_name as productName
+  			 ,c.save_name as saveName
+		FROM
+    	order_detail a join product b
+    	on a.product_no = b.product_no
+    	join product_image c on b.product_no  = c.product_no
+    	where a.order_no = #{orderNo}
+	]]>
+</select>
 
 </mapper>
