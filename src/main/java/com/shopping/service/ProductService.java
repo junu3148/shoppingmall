@@ -19,8 +19,8 @@ import com.shopping.vo.ProductVO;
 
 @Service
 public class ProductService {
-
-	String saveDir = "C:/shopping/img/upload/";
+	//String saveDir = "Users/yangjun-u/upload/";
+	String saveDir = "C:/shopping/img/upload/"; 
 	@Autowired
 	private ProductDAO productDAO;
 	private Map<String, Object> prdouctImgMap = new HashMap<>();
