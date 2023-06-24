@@ -57,8 +57,8 @@
 
 	<!-- url매핑 -->
 	<mvc:resources mapping="/upload/**"
-		 location="file:C:/shopping/img/upload/" /> 
-		<!-- location="file:/Users/yangjun-u/upload/" /> -->
+     location="file:C:/shopping/img/upload/" /> 
+		<!--  location="file:/Users/yangjun-u/upload/" />  -->
 	<!-- 기본 뷰 리졸버 설정 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

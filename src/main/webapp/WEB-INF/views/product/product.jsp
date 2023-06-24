@@ -58,6 +58,11 @@
 <style>
 .active {
 	background: Lightgray;
+	
+}
+
+#kv{
+
 }
 </style>
 
@@ -72,7 +77,7 @@
 
 
 	<main id="product">
-		<section id="kv"></section>
+		<section id="kv"> <img src="${pageContext.request.contextPath}/assets/images/ver02/${view}${subCategory}.png"></section>
 		<c:if test="${empty Search}">
 			<ul class="category">
 				<li class="on"><a

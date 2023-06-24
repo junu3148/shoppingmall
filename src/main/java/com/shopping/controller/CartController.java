@@ -98,7 +98,7 @@ public class CartController {
 	                System.out.println("obj에는 뭔 값이 있는데" + obj);
 	                
 	        productVO.setProductNo((int)obj.get("productNo"));
-	        productVO.setProductEa((int)obj.get("productNo"));
+	        productVO.setProductEa((int)obj.get("productEa"));
 	        productVO.setPrice((int)obj.get("price"));
 	        totalPrice += (int)obj.get("price");
 	        
