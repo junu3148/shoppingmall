@@ -77,6 +77,8 @@ public class CartController {
 		return jasonResult;
 	}
 	
+	/* 이식합시다. */
+	
 	/*주문 데이터 추가*/
 	@ResponseBody
 	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
@@ -118,6 +120,9 @@ public class CartController {
 		return jasonResult;
 	}
 
+	
+	
+	/*이식 중*------------------------------------------------------------*/
 	@RequestMapping(value ="/orderPage/{customerNo}", method = RequestMethod.GET)
 	public String orderPage(@PathVariable String customerNo
 							, Model model) {

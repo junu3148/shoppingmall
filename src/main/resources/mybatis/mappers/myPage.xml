@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<mapper namespace="myPage">
+	<!-- 고객 번호로 정보 가져오기 -->
+	
+	
+<select id = "getCustomerByNo" parameterType = "int" resultType = "CustomerVO">
+	<![CDATA[
+		select 
+			customer_no as customerNo
+			,customer_id as customerId
+			,customer_name as customerName
+			,customer_role as customerRole
+		from customer 
+		where customer_no = #{customerNo}
+	]]>
+</select>
+
+<select id ="getOrderCnt" parameterType ="int" resultType ="int">
+	<![CDATA[
+		select 
+			count(detail_no) 
+		from order_detail a join orders b 
+		on a.order_no = b.order_no 
+		where b.customer_no = #{customerNo} 
+	]]>
+</select>
+
+<select id ="getOrderList" parameterType ="PagingVO" resultType ="ProductVO">
+	<![CDATA[
+		select
+    		rownum
+   			,productEa
+   			,regDate
+    		,ProductNo
+    		,price
+    		,saveName
+    		,productName
+		from
+			(SELECT 
+        		b.product_count as productEa
+      			,a.order_date as regDate
+       		 	, b.product_no as ProductNo
+        		, p.price * b.product_count AS price
+       	   		, pi.save_name as saveName
+        		, p.product_name as productName
+			FROM orders a
+			JOIN order_detail b ON a.order_no = b.order_no
+			JOIN product p ON p.product_no = b.product_no
+			JOIN product_image pi ON pi.product_no = b.product_no
+			WHERE a.customer_no = #{keyword}
+  			AND a.order_stat = 2
+		    order by a.order_no desc)
+  		where rownum  between #{boardNumStart} and #{boardNumEnd}
+	]]>
+</select>
+
+</mapper>

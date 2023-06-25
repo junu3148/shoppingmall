@@ -20,6 +20,8 @@
 		<mapper resource="mybatis/mappers/cart.xml"/>
 		<mapper resource="mybatis/mappers/image.xml" />
 		<mapper resource="mybatis/mappers/qna.xml" />
+		<mapper resource="mybatis/mappers/payment.xml" />
+		<mapper resource="mybatis/mappers/myPage.xml" />
 	</mappers>
 
 

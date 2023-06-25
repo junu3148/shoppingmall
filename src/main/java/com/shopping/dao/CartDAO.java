@@ -71,6 +71,9 @@ public class CartDAO {
 		return orderVO;
 	}
 
+	/////////////////////////////////////////////////////////////////////////
+	
+	
 	/*새로운 주문 생성 selectKey로 주문번호 받아올 거임*/
 	public int insertOrder(OrderVO orderVO) {
 		
@@ -88,7 +91,9 @@ public class CartDAO {
 		
 		return row;
 	}
+
 	
+	///////////////////////////////////////////////////////////
 	public int deleteOrder(int orderNo) {
 		int row =0;
 			
@@ -97,6 +102,8 @@ public class CartDAO {
 		return row;
 	}
 	
+	////////////////////////////////////////////////////////////
+	
 	public int deleteOrderDetail(int orderNo) {
 		int row = 0;
 		
@@ -104,6 +111,11 @@ public class CartDAO {
 		
 		return row;
 	}
+	
+	/////////////////////////////////////////////////////
+	
+	
+	
 	/*오더 디테일 정보를 가져옴 단, 주문상태 1이여야 함*/
 	public List<ProductVO> getOrderList(OrderVO orderVO){
 		

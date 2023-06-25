@@ -131,75 +131,8 @@ public class CustomerController {
 		return "adminTest/ccview";
 	}
 
-//	///////////////////////////////////////////////
-//	
-//	/*고객 검색* 삭제 예정/
-//	@RequestMapping(value = "/search" , method = {RequestMethod.POST, RequestMethod.GET})	
-//	public String customerSearch(@RequestParam("searchOption") String searchOption
-//								 ,@RequestParam("keyword") String keyword
-//								 ,Model model) {
-//		
-//		String message = "<br>검색결과가 확인되지 않습니다. "; //검색결과 없을 시 출력될 메세지
-//		
-//		customerService.SearchCustomer(searchOption,keyword);
-//		
-//		List<CustomerVO> searchList = customerService.SearchCustomer(searchOption,keyword);
-//		
-//		if(searchList.size() == 0) {
-//			model.addAttribute("message", message);
-//			return "adminTest/ccview";
-//		}else { 
-//			model.addAttribute("customerList", searchList);
-//			return "adminTest/ccview";
-//		}
-//	}
-	
-	///////////////////////////////////////////////
-	
-	/*고객 상세정보 페이지*/
-	//고객 넘버로 고객 정보 뿌려줄 예정임
-	@RequestMapping(value = "/detailInfo/{customerNo}")
-	public String detailView(@PathVariable("customerNo") int customerNo
-							, Model model) {  
-		
-		CustomerVO selectVO = customerService.customerByNo(customerNo);
-		model.addAttribute("customer",selectVO);
-		
-		return "adminTest/ccUpdate";
-	}
 
-	///////////////////////////////////////////////
 	
-	/* 회원정보 수정창 이동*/
-	@RequestMapping(value ="modifyForm/{customerNo}")
-	public String modifyForm(@PathVariable int customerNo
-							,Model model) {  
-		
-		CustomerVO customerVO = customerService.customerByNo(customerNo);
-		model.addAttribute("customer", customerVO);
-		
-		return "adminTest/CustomerModify";
-	}
-	
-	///////////////////////////////////////////////
-	
-	/* 회원정보 수정*/
-	@RequestMapping(value ="/modify", method = {RequestMethod.POST, RequestMethod.GET})
-	public String modifyForm(@ModelAttribute CustomerVO customerVO
-							,Model model) {
-		System.out.println(customerVO);
 
-		String success = "정보 수정에 성공했습니다!";
-		String fail = "정보 수정에 실패했습니다.";
-		
-		boolean result = customerService.modifyCustomer(customerVO);
-		
-		if(result == true) {
-			model.addAttribute("Message", success);
-			return "customer/modifyForm/"+customerVO.getCustomerNo();
-		}else{
-			model.addAttribute("Message", fail);
-			return "customer/modifyForm/"+customerVO.getCustomerNo();
-		}
-	}
+
 }

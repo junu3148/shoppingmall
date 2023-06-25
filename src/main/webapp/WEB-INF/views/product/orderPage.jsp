@@ -21,10 +21,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css"> <!-- 서브 css -->
 
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script><!-- iamport.payment.js -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script> <!-- 제이쿼리 최신버전 js -->
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> <!-- 스와이퍼 js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script> <!-- 슬릭슬라이더 js -->
     <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/script3.js"></script> <!-- js -->
+    
 <style>
 #wrap { width: 80%; height: 100%; margin-left:10%; margin-right:10%; margin-top: 10%;display: flex; font-size: 20px; }
 #address-form { width: 20%; margin-top: 3%; margin-bottom: 3%; margin-right: 0%;}
@@ -83,7 +85,7 @@ table{ border : 1px solid black;}
 			
 			<table id="address-form">
 				<tr>
-					<td colspan ="4">
+					<td colspan ="4" id = "orderNo" data-orderno ="${orderInfo.orderNo}" >
 						주문번호 : ${orderInfo.orderNo}
 					</td>
 				</tr>
@@ -199,7 +201,7 @@ table{ border : 1px solid black;}
             </div>
             <div class="btn_wrap">
             		<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
-                <a class="click-btn" id ="pay-btn">결제하기</a>
+                <button type ="button" class="click-btn" id ="pay-btn">결제하기</button>
             </div>
 	      </form>
         </section>
@@ -254,6 +256,14 @@ table{ border : 1px solid black;}
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+	$('#pay-btn').on("click", function(){
+		iamport();
+
+	}); //결제하기 버튼 클릭 이벤트 end
+
+
+	
+
 
 	$('.newAddress-btn').on("click", function(){
 		console.log('test');
@@ -449,6 +459,67 @@ table{ border : 1px solid black;}
 		
 		$('#address-Area').prepend(str);
 	}
+	
+	/*결제용 function*/
+	function iamport(){
+		//가맹점 식별코드
+		var orderNo = $('#orderNo').data('orderno');
+		IMP.init('imp85336870');
+		
+		
+		IMP.request_pay({
+		    pg : 'danal_tpay',
+		    pay_method : 'card',
+		    merchant_uid : orderNo,
+		    name : 'test용' , //결제창에서 보여질 이름
+		    amount : 100, //실제 결제되는 가격
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울 강남구 도곡동',
+		    buyer_postcode : '123-456'
+		}, function(rsp) {
+			console.log(rsp);
+		    if ( rsp.success ) {
+		    	alert('결제가 완료되었습니다.');
+		    	/*AJAX처리하고 메인으로 이동해야함*/
+		    			         
+		         orderVO = {
+		        		 orderNo : orderNo,
+		        		 customerNo : ${authCustomer.customerNo}
+		         }
+		         
+		         console.log(orderVO);
+		         
+				 $.ajax({
+			         
+			         //요청 세팅
+			         url : "${pageContext.request.contextPath}/payment/paymentSuccess",      
+			         type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+			         data : orderVO,
+			         
+			         //응답 관련 세팅
+			         dataType : "json",
+			         success : function(jsonResult){
+						
+			        	 window.location.href = "${pageContext.request.contextPath}/main/";
+			        	 
+			         },
+			         error : function(XHR, status, error) {
+			         console.error(status + " : " + error);
+			         }
+							            
+			      });//ajax end
+		    	
+		    	
+		    } else {
+		    	 var msg = '결제에 실패하였습니다.';
+		         msg += '에러내용 : ' + rsp.error_msg;
+		    	 alert(msg);
+
+		    }//else end
+		}); //request_pay end
+	}//function end
 	
 </script>
 

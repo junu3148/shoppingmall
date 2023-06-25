@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.PagingVO;
+import com.shopping.vo.ProductVO;
 
 @Repository
 public class CustomerDAO {
@@ -76,32 +77,5 @@ public class CustomerDAO {
 	}
 	
 	
-	
-//	/* 고객 리스트 검색 */ 삭제 예쩡
-//	
-//	public List<CustomerVO> getCustomerList(Map<String, Object> searchInfo){ 
-//		
-//		List<CustomerVO> list = sqlSession.selectList("customer.getCustomerList", searchInfo);
-//		
-//		return list;
-//	}
-	
-	/* 고객 정보 받아오기*/
-	public CustomerVO getCustomerByNo(int customerNo) { 
-		
-		CustomerVO returnVO = sqlSession.selectOne("customer.getCustomerByNo", customerNo);
-		
-		return returnVO;
-	}
-	
-	/*고객정보 업데이트*/
-	
-	public int updateCustomer(CustomerVO customerVO) { 
-		
-		int row = sqlSession.update("customer.updateInfo", customerVO);
-		
-		return row;
-	}
-	
-	
+
 }

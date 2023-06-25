@@ -61,6 +61,10 @@ public class CartService {
 		return result;
 	}
 	
+	
+	/*order로 이식작업 중*/
+	
+	
 	/* 주문상태 완료(2)인 주문 테이블만 있으면 주문하나 만듬.*/
 	/* 주문상태인(1) 주문 테이블 있으면 해당 테이블에 추가 */
 	public boolean addOrder(OrderVO orderVO) {
@@ -92,6 +96,12 @@ public class CartService {
 			return result;
 			
 	}//addOrder end
+	
+	
+	///////////////////////////////////////
+	
+	
+	
 	
 	/*고객의 주문 페이지 정보를 불러옴*/
 	/*주문 디테일 제품 리스트와 주문 정보가 들어가 있는 orderVO + 고객의 주소 정보*/
