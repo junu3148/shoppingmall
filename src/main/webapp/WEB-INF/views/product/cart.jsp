@@ -173,7 +173,7 @@ $('#order_btn').on("click", function(){
          
          //요청 세팅
          url : "${pageContext.request.contextPath}/cart/addOrder",      
-         type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+         type : "post",
          data : {"jsonData" : ProductData},
          
          //응답 관련 세팅

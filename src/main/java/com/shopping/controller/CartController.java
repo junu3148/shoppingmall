@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shopping.ajax.JasonResult;
 import com.shopping.service.CartService;
+import com.shopping.vo.AddressVO;
 import com.shopping.vo.CartVO;
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.OrderVO;
@@ -125,8 +126,23 @@ public class CartController {
 		Map<String, Object> orderInfo = cartService.getOrderInfo(customerNo);
 		
 		model.addAttribute("orderInfo", orderInfo.get("orderInfo"));
+		model.addAttribute("addressList", orderInfo.get("addressList"));
 		
 		
 		return "/product/orderPage";
 	}//orderPage
+
+	
+	@ResponseBody
+	@RequestMapping(value ="/addAddress", method = RequestMethod.POST)
+	public JasonResult addAddress(@ModelAttribute AddressVO addressVO) {
+		
+		JasonResult jasonResult = new JasonResult();
+		boolean result = cartService.addAdress(addressVO);
+		
+		jasonResult.success(result);
+		
+		return jasonResult;
+	}
+
 }

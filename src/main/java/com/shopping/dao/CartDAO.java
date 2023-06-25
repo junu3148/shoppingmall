@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.shopping.vo.AddressVO;
 import com.shopping.vo.CartVO;
 import com.shopping.vo.OrderVO;
 import com.shopping.vo.ProductVO;
@@ -113,4 +114,37 @@ public class CartDAO {
 		
 		return productList;
 	}
+	
+	public List<AddressVO> getCustomerAddress(String customerNo){
+		
+		System.out.println("DAO까지 오는지 확인");
+		List<AddressVO> addressList = sqlSession.selectList("cart.getAddressList", customerNo);
+		System.out.println("넘어온 주소 리스트 확인" + addressList);
+		
+		return addressList; 
+	}
+	
+	public int addressCount(AddressVO addressVO) {
+		
+		int cnt = sqlSession.selectOne("cart.AddressCnt", addressVO);
+		System.out.println("넘어온 cnt 확인" + cnt +"개");
+
+		return cnt;
+	}
+	
+	   public int deleteOldAddress(AddressVO addressVO) {
+		      
+		      int rows = sqlSession.delete("cart.deleteAddress",addressVO);
+		      System.out.println("delete를 위해 DAO에 넘어온 객체 정보" + addressVO);
+		      System.out.println("성공여부 확인 " + rows);
+		      return rows;
+		   }
+	   
+	   
+	   public int insertAddress(AddressVO addressVO) {
+
+		      int row = sqlSession.insert("cart.insertAddress", addressVO);
+		      System.out.println("insert를 위해 넘어온 객체정보" + addressVO);
+		      return row;
+		   }
 }

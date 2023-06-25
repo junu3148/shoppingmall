@@ -11,6 +11,7 @@
 		<typeAlias alias="QnAVO" type="com.shopping.vo.QnAVO" />
 		<typeAlias alias="PagingVO" type="com.shopping.vo.PagingVO" />
 		<typeAlias alias="OrderVO" type="com.shopping.vo.OrderVO" />
+		<typeAlias alias="AddressVO" type="com.shopping.vo.AddressVO" />
 	</typeAliases>
 
 	<mappers>

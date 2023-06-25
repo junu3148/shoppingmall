@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shopping.dao.CartDAO;
+import com.shopping.vo.AddressVO;
 import com.shopping.vo.CartVO;
 import com.shopping.vo.OrderVO;
 import com.shopping.vo.ProductVO;
@@ -102,14 +103,28 @@ public class CartService {
 		List<ProductVO> orderList =  cartDAO.getOrderList(orderVO);
 		orderVO.setProductList(orderList);
 		
+		List<AddressVO> addressList = cartDAO.getCustomerAddress(customerNo);
 		
 		
 		orderInfo.put("orderInfo", orderVO);
+		orderInfo.put("addressList", addressList);
 		
 		
 		System.out.println("완성된 orderVO 확인 :"  +  orderVO);
 		
 		return orderInfo;
 	}
+	
+	public boolean addAdress(AddressVO addressVO) {
+			
+		boolean result = false;
+		
+		int cnt = cartDAO.addressCount(addressVO);
+		if(cnt>2) {cartDAO.deleteOldAddress(addressVO);}
+		int insertRows  = cartDAO.insertAddress(addressVO);
+		
+		if(insertRows>0) {result = true;}
+		
+		return result;	}
 	
 }

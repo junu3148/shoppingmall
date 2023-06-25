@@ -139,5 +139,57 @@
     	where a.order_no = #{orderNo}
 	]]>
 </select>
+<select id="getAddressList" parameterType ="String" resultType ="AddressVO">
+	<![CDATA[
+		select	
+			tell as tel
+			,reci_name as name
+			,post_num as postNum
+			,address
+			,address_detail as addressDetail
+			,email
+		from address
+		where customer_no = #{customerNo}
+	]]>
+</select>
+
+
+<select id = "AddressCnt" parameterType ="AddressVO" resultType = "int">
+	<![CDATA[
+		 select
+         	count(*)
+         from address
+         where customer_no = #{customerNo}
+	]]>
+</select>
+
+<delete id ="deleteAddress" parameterType ="AddressVO">
+   <![CDATA[
+      delete address
+           where address_no  =
+              (select
+                  min(address_no)
+               from address
+               where customer_no = #{customerNo})
+   ]]>
+</delete>
+
+<insert id = "insertAddress" parameterType ="AddressVO">
+   <![CDATA[
+      insert into address
+         (address_no, customer_no, address,tell, post_num, address_detail, reci_name, email)
+      values(
+            seq_address_no.nextval
+            ,#{customerNo}
+            ,#{address}
+            ,#{tel}
+            ,#{postNum}
+            ,#{addressDetail}
+            ,#{name}
+            ,#{email}
+            )
+   ]]>
+</insert>
+
 
 </mapper>
