@@ -32,9 +32,18 @@ public class MyPageController {
 		model.addAttribute("orderList", myPageInfo.get("orderList"));
 		model.addAttribute("paging", myPageInfo.get("paging"));
 		
-		return "customer/myPage";
+		return "myPage/myPage";
 	}
-	
 
 	
+	@RequestMapping(value = "/writeReview/{productNo}")
+	public String reviewForm(@PathVariable int productNo) {
+			
+		System.out.println("넘어온 넘버 확인" + productNo);
+		
+		return "myPage/reviewForm";
+	}
+	
 }
+
+

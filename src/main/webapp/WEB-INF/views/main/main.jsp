@@ -108,7 +108,7 @@
 				<div class="cont">
 					<a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}"> <img
 						src="${pageContext.request.contextPath}/upload/${product.saveName}" alt=""> <span class="tit">${product.productName}</span> <span
-						class="price">${product.price}원</span>
+						class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />원</span>
 					</a>
 				</div>
 				</c:forEach>
@@ -131,20 +131,20 @@
 		<section id="sns">
 			<h2 class="en">sns</h2>
 			<ul class="clear">
-				<li><a href="#none"><img
-						src="${pageContext.request.contextPath }/assets/images/sns01.jpg"
+				<li><a href="https://www.instagram.com/p/Ct6vJ5CPalQ/?igshid=YzcxN2Q2NzY0OA=="><img
+						src="${pageContext.request.contextPath }/assets/images/sns1.png"
 						alt=""></a></li>
-				<li><a href="#none"><img
-						src="${pageContext.request.contextPath }/assets/images/sns02.jpg"
+				<li><a href="https://www.instagram.com/p/Ct6vJluv3AM/?igshid=YzcxN2Q2NzY0OA=="><img
+						src="${pageContext.request.contextPath }/assets/images/sns2.png"
 						alt=""></a></li>
-				<li><a href="#none"><img
-						src="${pageContext.request.contextPath }/assets/images/sns03.jpg"
+				<li><a href="https://www.instagram.com/p/Ct6vLeYvc2v/?igshid=YzcxN2Q2NzY0OA=="><img
+						src="${pageContext.request.contextPath }/assets/images/sns3.png"
 						alt=""></a></li>
-				<li><a href="#none"><img
-						src="${pageContext.request.contextPath }/assets/images/sns04.jpg"
+				<li><a href="https://www.instagram.com/p/Ct6vK37vZ3k/?igshid=YzcxN2Q2NzY0OA=="><img
+						src="${pageContext.request.contextPath }/assets/images/sns4.png"
 						alt=""></a></li>
-				<li><a href="#none"><img
-						src="${pageContext.request.contextPath }/assets/images/sns05.jpg"
+				<li><a href="https://www.instagram.com/p/Ct6vKbnPOWW/?igshid=YzcxN2Q2NzY0OA=="><img
+						src="${pageContext.request.contextPath }/assets/images/sns5.png"
 						alt=""></a></li>
 			</ul>
 		</section>

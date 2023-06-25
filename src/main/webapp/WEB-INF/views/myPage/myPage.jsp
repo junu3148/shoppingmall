@@ -104,16 +104,16 @@ table td {  vertical-align: middle;}
 										<td>${product.productName}</td>
 										<td>${product.productEa}개</td>
 										<td>
-										<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />
+										<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />원
 										</td>
 										<td>${product.regDate}</td>
-										<td><a href ="${pageContext.request.contextPath}/myPage/writeReview/${product.productNo}/${authCustomer.customerNo}" class="review-btn">리뷰쓰기</a></td>
+										<td><a href ="${pageContext.request.contextPath}/myPage/writeReview/${product.productNo}" class="review-btn">리뷰쓰기</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						
-									<!-- 여기다가 넘버링할 거임 -->
+									<!-- 페이징 -->
 										<c:if test = "${paging.selectPage >10}">
 										<a class = "paging" href = "${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}"> ◀ </a>
 										</c:if>
