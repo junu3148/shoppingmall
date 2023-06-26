@@ -15,7 +15,7 @@ public class testController {
 		System.out.println("다시 수정했습니다.");
 		System.out.println("다시다시다시다 수정했습니다.");
 		
-		return "adminTest/ss";
+		return "product/pd_detail3(s)";
 	}
 	
 

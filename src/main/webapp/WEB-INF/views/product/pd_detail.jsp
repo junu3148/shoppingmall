@@ -102,7 +102,7 @@
 					</ul>
 					<input type="hidden" value="${product.price}" id="price">
 					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
-				<form action ="" method = "get">
+				<form action ="${pageContext.request.contextPath}/cart/addOrderOne" method = "get" class ="addOrderOne">
 					<div class="pd_num clear">
 						<p>수량</p>
 						<div class="count-wrap _count">
@@ -170,7 +170,7 @@
 				<div class="modal-body">
 					<span id="howAdd"></span>
 				</div>
-				<form action = "${pageContext.request.contextPath}/cart/addOrder">
+				<form action = "${pageContext.request.contextPath}/cart/viewCart" method ="GET" >
 				<div class="modal-footer">
 					<input type ="hidden" value = "${authCustomer.customerNo}" name = "customerNo">
 					<button type="button" class="btn btn-secondary"
@@ -186,6 +186,7 @@
 </body>
 
 <script>
+
 	$(window).on("load", function() {
 
 		updateTotalPrice();
@@ -254,6 +255,15 @@
 			;//if~login user addcart end
 		}); //addcart btn click event end
 
+		
+		
+		$('.addOrderOne').on("submit", function(){
+				
+			if(${authCustomer ==null}){
+				alert('로그인 후 구매 가능합니다.');
+				return false;
+			}
+		});//주문하기 버튼 누르면 일어나는 이벤트
 		
 		
 		/* 좀 더 둘러보기 클릭 시 modal 닫힘 */

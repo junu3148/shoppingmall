@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.PagingVO;
 import com.shopping.vo.ProductVO;
+import com.shopping.vo.ReviewVO;
 
 @Repository
 public class MyPageDAO {
@@ -41,5 +42,44 @@ public class MyPageDAO {
 		System.out.println("불러온 결과 확인" + orderList);
 		
 		return orderList;
+	}
+	
+	public ProductVO getProductInfo(int productNo) {
+		
+		System.out.println("DAO까지 오는지 확인" + productNo);
+		ProductVO returnVO = sqlSession.selectOne("myPage.getProductInfo", productNo);
+		System.out.println("DB에서 받은 제품 정보:" + returnVO);
+		return returnVO;
+	}
+	
+	public int insertReview(ReviewVO reviewVO) {
+			
+		sqlSession.insert("myPage.insertReview", reviewVO);
+		
+		return 0;
+	}
+	
+	public int insertReviewImage(ReviewVO reviewVO) {
+		
+		sqlSession.insert("myPage.insertReviewImage", reviewVO);
+		
+		return 0;
+	}
+	
+	public int getMyReviewCnt(String customerNo) {
+		
+		System.out.println("여기까지 오나 확인");
+		int cnt = sqlSession.selectOne("myPage.cntMyReview", customerNo);
+		System.out.println("카운트 확인" + cnt);
+		return cnt;
+	}
+	
+	public List<ReviewVO> getMyReviewList(PagingVO pagingVO){
+		
+		System.out.println("넘어온 정보 확인 : " + pagingVO);
+		List<ReviewVO> reviewList = sqlSession.selectList("myPage.getReviewList", pagingVO);
+		System.out.println("넘어온 리스트 확인 : " + reviewList);
+		
+		return reviewList;
 	}
 }

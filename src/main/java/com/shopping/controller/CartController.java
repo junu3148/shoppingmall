@@ -120,7 +120,22 @@ public class CartController {
 		return jasonResult;
 	}
 	
-
+	@RequestMapping(value ="/addOrderOne" , method = RequestMethod.GET)
+	public String addOrderOne(@ModelAttribute ProductVO productVO
+							,@ModelAttribute OrderVO orderVO) {
+		
+		System.out.println("넘어오는지 확인 : " + productVO);
+		System.out.println("넘어오는지 확인" + orderVO);
+		
+		List<ProductVO> list = new ArrayList<>();
+		list.add(productVO);
+		orderVO.setProductList(list);
+		boolean result = cartService.addOrder(orderVO);
+		if(result == true) {System.out.println("오더 추가 성공");};
+		
+		
+		return "redirect:orderPage/"+ orderVO.getCustomerNo() ;
+	}
 	
 	
 	@RequestMapping(value ="/orderPage/{customerNo}", method = RequestMethod.GET)

@@ -57,6 +57,17 @@
 <!-- 모달용 부트 스트랩 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+	.review_box{
+  margin : 13%;
+  
+	}
+.review_table{
+	margin-top : 100px;
+}
+</style>
+
 </head>
 
 <body>
@@ -135,16 +146,17 @@
 				<div style="height: 100px"></div>
 			</div>
 		</section>
-				<div class="review "  style = "margin : 10%">
-					<h1><b>리뷰</b></h1>
-					<table style ="border : 1px; black">
+			<div class="review_box">
+				<div class="review_list"  style = "margin : auto">
+					<hr><br><h3><b>구매평</b></h3><p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p><br><hr>
+					<table class ="review_table">
 						<tr>
 							<td>아미아미아미아미암</td>
 							<td>아아아아아아ㅏㅇ</td>
 						</tr>
 					</table>
 				</div><!-- review end -->
-
+			</div>
 
 
 

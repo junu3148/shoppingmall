@@ -6,8 +6,7 @@ import java.util.List;
 public class OrderVO {
 
 	private List<ProductVO>  productList;
-	private int productNo;
-	private int productEa;
+
 	private String customerNo;
 	private int orderNo;
 	private int orderState;
@@ -22,21 +21,6 @@ public class OrderVO {
 	}
 	public void setProductList(List<ProductVO> productList) {
 		this.productList = productList;
-	}
-	
-	
-	
-	public int getProductNo() {
-		return productNo;
-	}
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
-	}
-	public int getProductEa() {
-		return productEa;
-	}
-	public void setProductEa(int productEa) {
-		this.productEa = productEa;
 	}
 	public String getCustomerNo() {
 		return customerNo;
@@ -70,8 +54,7 @@ public class OrderVO {
 	}
 	@Override
 	public String toString() {
-		return "OrderVO [productList=" + productList + ", productNo=" + productNo + ", productEa=" + productEa
-				+ ", customerNo=" + customerNo + ", orderNo=" + orderNo + ", orderState=" + orderState + ", totalPrice="
+		return "OrderVO [productList=" + productList + ", productNo=" + ", customerNo=" + customerNo + ", orderNo=" + orderNo + ", orderState=" + orderState + ", totalPrice="
 				+ totalPrice + ", orderDate=" + orderDate + "]";
 	}
 

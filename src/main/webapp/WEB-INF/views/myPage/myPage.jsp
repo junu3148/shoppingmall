@@ -64,7 +64,7 @@ table td {  vertical-align: middle;}
 			<div id="aside">
 				<ul>
 					<li><a href=""></a></li>
-					<li><a href="">My리뷰</a></li>
+					<li><a href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}">My리뷰</a></li>
 					<li><a href="">정보 수정</a></li>
 				</ul>
 			</div>
@@ -124,7 +124,7 @@ table td {  vertical-align: middle;}
 											</c:if>
 										</c:forEach>
 										<c:if test = "${paging.next == true}">
-										<a class = "paging" href ="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${pageInfo.pagingInfo.endPageNum + 1}"> ▶ </a>
+										<a class = "paging" href ="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}"> ▶ </a>
 										</c:if>
 						
 					</div>

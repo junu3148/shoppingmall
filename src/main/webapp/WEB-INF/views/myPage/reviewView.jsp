@@ -103,14 +103,11 @@
 table td {
 	vertical-align: middle;
 }
-
+review_table{ height:70px;}
 .category {
 	background-color: #eee;
 }
 
-.product_list {
-	height: 100px;
-}
 
 #aside ul {
 	list-style: none;
@@ -137,22 +134,12 @@ table td {
 	height: 60px;
 	font-size :20px;
 }
-
-#review_table {
-	margin: 1%;
-	border: 1px solid #eee;
-	width: 1100px;
-	margin-left: 5px;
-	margin: 0 auto;
-	border-collapse: separate;
-	height: 700px;
-	padding: 1%;
+.review_content{
+	background-color : #ddd;
+	height : 50px;
 }
-#btn_area{text-align : center;}
-[name="content"] {width: 100%; height:550px;}
-[name="title"] { width:100%;  height:30px;}
-input.reviewForm {
-  border-color: #eee; /* 원하는 테두리 색상으로 변경 */
+.review_img{
+height : 100px;
 }
 </style>
 <body>
@@ -179,7 +166,7 @@ input.reviewForm {
 
 		<div class=customer_info>
 			<div class="customer_profile">
-				<h3>리뷰 쓰기</h3>
+				<h3>내가 쓴 리뷰 확인하기</h3>
 			</div>
 		</div>
 		<div id="board">
@@ -189,44 +176,44 @@ input.reviewForm {
 				<table class="review_product table">
 					<thead>
 						<tr class="category">
-							<th colspan="2">리뷰 제품</th>
+							<th>리뷰 번호</th>
+							<th>리뷰 제목</th>
+							<th>작성일</th>
+							<th>좋아요</th>
 						</tr>
 					</thead>
+					<c:forEach items = "${reviewList}" var = "review">
 					<tbody>
-
-						<tr class="product_list">
-							<td><a
-								href="${pageContext.request.contextPath}/main/productDetal/"><img
-									src="${pageContext.request.contextPath}/upload/${reviewProduct.saveName}"
-									class="product-img"></a></td>
-							<td>${reviewProduct.productName}</td>
+						<tr class="review_list">
+							<td>${review.reviewNo}</td>
+							<td>${review.title}</td>
+							<td>${review.regDate}</td>
+							<td>${review.likeCnt}</td>
 						</tr>
-
+						<tr class= "review_content">
+							<td><c:if test ="${review.saveName != null}">
+							<img src="${pageContext.request.contextPath}/upload/${review.saveName}"  class = "review_img">
+							</c:if></td>
+							<td colspan = "3">${review.content}</td>
+						</tr>
 					</tbody>
+						</c:forEach>
 				</table>
-				<form  action ="${pageContext.request.contextPath}/myPage/writeReview"  method = "POST" enctype="multipart/form-data">
-				<div id="review_form">
-					<table id="review_table">
-						<tr>
-							<td><img src="" class="product-img"></td>
-							<td><input type="file" class ="review_Form" name ="file"></td>
-						</tr>
-						<tr>
-							<td colspan ="2"><br><input type ="text" name ="title"class ="review_Form"></td>
-						</tr>
-						<tr>
-							<td colspan ="2"><br><textarea name ="content" id ="content" class ="review_Form" placeholder ="20자 이상 200자 미만으로 입력하세요."></textarea>
-							<input type ="text" name = "customerNo" value ="${authCustomer.customerNo}">
-							<input type ="text" name = productNo value ="${reviewProduct.productNo}">
-							</td>
-						</tr>
-						<tr id ="btn_area">
-							
-							<td colspan ="2"><br><button type ="submit" class="review_btn"> 리뷰 등록</button></td>
-						</tr>
-					</table>
-				</div>
-				</form>
+												<!-- 페이징 -->
+										<c:if test = "${paging.selectPage >10}">
+										<a class = "paging" href = "${pageContext.request.contextPath}/myReview/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}"> ◀ </a>
+										</c:if>
+										
+										<c:forEach begin = "${paging.startPageNum}" end = "${paging.endPageNum}"  var = "page">
+											<c:if test = "${page <= paging.finalPage}">
+											<a class = "paging" href ="${pageContext.request.contextPath}/myReview/${authCustomer.customerNo}?selectPage=${page}">${page}</a>
+											</c:if>
+										</c:forEach>
+										<c:if test = "${paging.next == true}">
+										<a class = "paging" href ="${pageContext.request.contextPath}/myReview/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}"> ▶ </a>
+										</c:if>
+			
+			
 			</div>
 		</div>
 	</div>

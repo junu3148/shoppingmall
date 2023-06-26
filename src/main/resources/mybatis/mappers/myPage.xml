@@ -57,4 +57,85 @@
 	]]>
 </select>
 
+<select id ="getProductInfo" parameterType ="int" resultType ="ProductVO">
+	<![CDATA[
+		select  
+			a.product_no as productNo
+			,product_name as productName
+			,save_name as saveName
+		from product a join product_image b 
+		on a.product_no = b.product_no 
+		where a.product_no = #{productNo}
+	]]>
+</select>
+
+<insert id ="insertReview" parameterType ="ReviewVO">
+	<selectKey resultType="int" order="BEFORE" keyProperty="reviewNo">
+		select seq_review_no.nextval from dual 
+	</selectKey>
+		<![CDATA[
+			insert into review
+				(review_no, customer_no, product_no, title, content, reg_date, like_cnt)
+			values(
+				#{reviewNo}
+				, #{customerNo}
+				, #{productNo}
+				, #{title}
+				, #{content}
+				, sysdate
+				, 0)
+		]]>
+</insert>
+
+
+<insert id = "insertReviewImage" parameterType ="ReviewVO">
+	<![CDATA[
+		insert into review_image
+			(review_no, save_name)
+		values(
+			#{reviewNo}
+			,#{saveName}
+			)
+	]]>
+</insert>
+
+
+<select id = "cntMyReview" parameterType ="String" resultType ="int">
+	<![CDATA[
+		select 
+			count(*) 
+		from review 
+		where customer_no = #{customerNo}
+	]]>
+</select>
+
+<select id = "getReviewList" parameterType ="PagingVO" resultType ="ReviewVO">
+	<![CDATA[
+	
+	
+		select 
+    		rownum
+    		,review_no as reviewNo
+    		,title
+    		,content
+    		,reg_date as regDate
+    		,like_cnt as likeCnt
+    		,saveName
+    	from
+   			 (
+       			 select 
+       			 	review_no
+       			 	, title
+       			 	, content
+       			 	, reg_date
+       			 	, like_cnt
+       			 	,(select save_name from review_image where review_no = a.review_no) as saveName
+        		from review a
+        		where customer_no = #{keyword}
+       			order by review_no desc
+    		 ) 
+    	where rownum between #{boardNumStart} and #{boardNumEnd}
+	]]>
+</select>
+
 </mapper>

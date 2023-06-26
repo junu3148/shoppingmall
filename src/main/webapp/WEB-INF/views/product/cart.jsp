@@ -102,14 +102,14 @@
                     <li>
                         <p class="total_price">0원</p>
                         <span>총 주문 금액</span>
-                        <input type="text" name = "totalPrice">
+                        <input type="hidden" name = "totalPrice">
                     </li>
                 </ul>
             </div>
             <div class="btn_wrap">
             		<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
                 <a class="order_btn" id = "order_btn">주문하기</a>
-                <a href="#none" class="shopping_btn">쇼핑하기</a>
+                <a href="${pageContext.request.contextPath }/main/all" class="shopping_btn">쇼핑하기</a>
             </div>
 	      </form>
         </section>
@@ -248,6 +248,12 @@ $('.del').on("click", function(){
 
 
 
+$('.inp').on("keyup", function(){
+	
+    updateValues();
+	
+});//
+
 $("#cbx_chkAll").click(function() {
   if($("#cbx_chkAll").is(":checked")) {
     $("input[name=chk]").prop("checked", true);
@@ -340,7 +346,7 @@ var totalPrice = prices.reduce(function(acc, val) {
 return acc + val;
 }, 0);
 
-
+if(totalprice == 0){$('.total_price').text("0원");}
 $('.total_price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
 $('[name = "totalPrice"]').val(totalPrice);
 $('#total_ea').text(totalQuantity + "개");
