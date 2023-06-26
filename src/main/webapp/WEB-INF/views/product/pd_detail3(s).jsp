@@ -59,13 +59,37 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-	.review_box{
-  margin : 13%;
-  
-	}
-.review_table{
-	margin-top : 100px;
+div{border: 1px solid black;}
+.review_box {
+  margin: 13%;
 }
+
+.black_line {
+  width: 100%;
+  height: 1px;
+  background-color: #bbbbbb;
+}
+
+.review_box {
+  margin-bottom: 300px;
+  border: 1px solid black;
+}
+
+.black_line {
+  width: 100%;
+  height: 1px;
+  background-color: #bbbbbb;
+}
+
+.horizontal_div::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.reviewer_info{float: left; width: 30%;}
+.review_content{float: left; width: 70%;}
+.comment_cnt{height : 50px; font-size : 15px;}
+.comment{height : 100px;}
 </style>
 
 </head>
@@ -146,19 +170,44 @@
 				<div style="height: 100px"></div>
 			</div>
 		</section>
-			<div class="review_box">
-				<div class="review_list"  style = "margin : auto">
-					<hr><br><h3><b>구매평</b></h3><p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p><br><hr>
-					<table class ="review_table">
-						<tr>
-							<td>아미아미아미아미암</td>
-							<td>아아아아아아ㅏㅇ</td>
-						</tr>
-					</table>
-				</div><!-- review end -->
+		
+		<!-- 리뷰 공간 -->
+		<div class="review_box">
+				<div class="black_line"></div>
+			<div class="review_list">
+				<br>
+				<br>
+				<h2>
+					<b>구매평</b>
+				</h2>
+				<p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p>
+				<br>
+				<br>
+				<div class="black_line"></div>
+			</div>
+			<div>
+    <div class ="review_content"><!-- 리뷰 컨텐츠. 안에 그 모냐.. 댓글도 들어감 -->
+    	<div class ="review_area"><!-- review 영역 -->
+    	ㅇㄹㅇㄴ
+    	</div>
+    	<div class= "comment_area"><!-- comment 영역 -->
+    	<div class= "comment_cnt">
+    	<p>댓글 0 개</p>
+    	</div>
+    	<div class="comment"><!-- 작성된 댓글 영역 -->
+    	작성된 됏글
+    	</div>
+    	<div class="write_comment_form">
+    	<div class="write_comment" style ="margin : 2% height : 50px; ">댓글댓글</div>
+    	</div>
+    	</div>
+    
+    </div><!-- review_content_end -->
+    <div class ="reviewer_info" style ="height : 100%">sdf</div>
 			</div>
 
-
+				<!-- review end -->
+		</div>
 
 		<!-- 탑버튼 -->
 		<a href="#none" class="top_btn"><img

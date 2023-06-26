@@ -53,6 +53,8 @@
 <!-- 슬릭슬라이더 js -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
+<!-- 부트스트랩 -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
 <!-- js -->
 </head>
 <style>
@@ -139,7 +141,7 @@ review_table{ height:70px;}
 	height : 50px;
 }
 .review_img{
-height : 100px;
+height : 30px;
 }
 </style>
 <body>
@@ -192,7 +194,9 @@ height : 100px;
 						</tr>
 						<tr class= "review_content">
 							<td><c:if test ="${review.saveName != null}">
-							<img src="${pageContext.request.contextPath}/upload/${review.saveName}"  class = "review_img">
+							<div class="image_area">
+							<img src ="${pageContext.request.contextPath }/assets/images/photo.png" class = "review_img">
+							</div>
 							</c:if></td>
 							<td colspan = "3">${review.content}</td>
 						</tr>
@@ -221,15 +225,11 @@ height : 100px;
 
 	<!-- 탑버튼 -->
 	<a href="#none" class="top_btn"><img
-		src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+		src="${pageContext.request.contextPath}/assets/images/ver02/top_btn.png"
 		alt=""></a>
 	<!-- /탑버튼 -->
 
 
-
-
 </body>
-
-
 
 </html>
