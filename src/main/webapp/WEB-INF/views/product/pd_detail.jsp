@@ -57,6 +57,11 @@
 <!-- 모달용 부트 스트랩 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<style>
+.order_btn{background: #4982cf; border: 1px solid #4982cf; color: #fff; padding: 15px 50px; margin: 0 5px; font-weight: 600;}
+</style>	
+	
 </head>
 
 <body>
@@ -95,14 +100,14 @@
 								있습니다.(+5,000원)</span></li>
 						<li>쇼핑에 참고 부탁드립니다. ^_^</li>
 					</ul>
-					<input type="text" value="${product.price}" id="price">
+					<input type="hidden" value="${product.price}" id="price">
 					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
-
+				<form action ="" method = "get">
 					<div class="pd_num clear">
 						<p>수량</p>
 						<div class="count-wrap _count">
 							<button type="button" class="minus">-</button>
-							<input type="text" class="inp" value="1" />
+							<input type="text" class="inp" name = "productEa" value="1" />
 							<!-- 변경되는 숫자 -->
 							<button type="button" class="plus">+</button>
 						</div>
@@ -120,14 +125,19 @@
 
 						<!--  바뀔 금액 자리 -->
 						<p class="total_price"></p>
+						<input type ="hidden" name ="totalPrice" id="total_price">
+						<input type ="hidden" name ="productNo" id="productNo" value="${product.productNo}">
+						<input type ="hidden" name ="customerNo" id="customerNo" value="${authCustomer.customerNo}">
 					</div>
 
 					<div class="btn_wrap">
-						<a href="#none" class="order_btn data-set">구매하기</a> <a
+						<button type ="submit"  class="order_btn data-set">구매하기</button>
+						<a
 							href="#none" class="shopping_btn data-set" id="cart-btn"
 							data-productno="${product.productNo}"
 							data-cusno="${authCustomer.customerNo}">장바구니</a>
 					</div>
+						</form>
 
 
 				</div>
@@ -148,6 +158,9 @@
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
+
+
+	<!-- 모달창 -->
 	<div class="modal" tabindex="-1" id="Cart-modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -157,7 +170,7 @@
 				<div class="modal-body">
 					<span id="howAdd"></span>
 				</div>
-				<form action = "${pageContext.request.contextPath}/cart/viewCart">
+				<form action = "${pageContext.request.contextPath}/cart/addOrder">
 				<div class="modal-footer">
 					<input type ="hidden" value = "${authCustomer.customerNo}" name = "customerNo">
 					<button type="button" class="btn btn-secondary"
@@ -260,7 +273,9 @@
 		var total_price = EAval * price;
 		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원';
 		
+		$('#total_price').val(total_price);
 		$(".total_price").text(set_price);
+		
 	}
 </script>
 

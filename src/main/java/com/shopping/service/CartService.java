@@ -62,7 +62,7 @@ public class CartService {
 	}
 	
 	
-	/*order로 이식작업 중*/
+
 	
 	
 	/* 주문상태 완료(2)인 주문 테이블만 있으면 주문하나 만듬.*/

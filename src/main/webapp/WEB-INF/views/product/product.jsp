@@ -60,9 +60,12 @@
 	background: Lightgray;
 	
 }
-
 #kv{
-
+	margin:auto;
+	text-align: center;
+}
+element.style {
+    height: 250px;
 }
 </style>
 

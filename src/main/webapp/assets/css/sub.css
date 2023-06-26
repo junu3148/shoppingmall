@@ -95,7 +95,7 @@ header.mo #header .middle_menu ul li a::before{content: "-"; margin-right: 5px;}
 
 
 /* 상품페이지 */
-#product section#kv{background: #eee;}
+#product section#kv{background: #fafcff;}
 /* 상품페이지 카테고리 */
 #product .category{width: 1200px; display: flex; justify-content: center; margin: 60px auto 0;}
 #product .category li{ margin: 0 5px;}
