@@ -36,7 +36,7 @@
 		</h1>
 		<!-- 메뉴 (gnb) -->
 		<ul id="nav">
-			<li class="on"><a
+			<li ><a
 				href="${pageContext.request.contextPath}/main/all">All</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/main/category/간식">사료/간식</a></li>

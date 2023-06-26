@@ -56,16 +56,19 @@
 <!-- js -->
 
 <style>
-.active {
-	background: Lightgray;
-	
+.active #anum{
+	color: #4982cf;
+	font-weight: bold;
+	font-size: 15px;
 }
-#kv{
-	margin:auto;
+
+#kv {
+	margin: auto;
 	text-align: center;
 }
+
 element.style {
-    height: 250px;
+	height: 250px;
 }
 </style>
 
@@ -80,10 +83,13 @@ element.style {
 
 
 	<main id="product">
-		<section id="kv"> <img src="${pageContext.request.contextPath}/assets/images/ver02/${view}${subCategory}.png"></section>
+		<section id="kv">
+			<img
+				src="${pageContext.request.contextPath}/assets/images/ver02/${view}${subCategory}.png">
+		</section>
 		<c:if test="${empty Search}">
 			<ul class="category">
-				<li  ><a
+				<li><a
 					href="${pageContext.request.contextPath}/main/${view}/${subCategory}">전체</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
@@ -99,8 +105,9 @@ element.style {
 							<img
 							src="${pageContext.request.contextPath}/upload/${product.saveName}">
 							<span class="tit">${product.productName}</span> <span
-							class="price jb">	<fmt:formatNumber type="number" maxFractionDigits="3"
-							value="${product.price}" />원</span>
+							class="price jb"> <fmt:formatNumber type="number"
+									maxFractionDigits="3" value="${product.price}" />원
+						</span>
 					</a></li>
 				</c:forEach>
 			</ul>
@@ -117,7 +124,7 @@ element.style {
 				<c:forEach var="num" begin="${pageMaker.startPage}"
 					end="${pageMaker.endPage}">
 					<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
-						<a href="${num}">${num}</a>
+						<a id="anum" href="${num}">${num}</a>
 					</li>
 				</c:forEach>
 
@@ -135,8 +142,10 @@ element.style {
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="type" value="${pageMaker.cri.type}">
-			<input type="hidden" name="category" value="${category}"> <input
-				type="hidden" name="subCategory" value="${CriteriaSubCategory}">
+			<input type="hidden" id="category" name="category"
+				value="${category}"> <input type="hidden"
+				id="CriteriaSubCategory" name="subCategory"
+				value="${CriteriaSubCategory}">
 		</form>
 
 
@@ -158,24 +167,44 @@ element.style {
 </body>
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(
+			function() {
+				//네비클릭스 포커스
+				let CriteriaSubCategory = $("#CriteriaSubCategory").val() + '';
 
-		$(".pageInfo a").on("click", function(e) {
-			e.preventDefault();
-			var pageNum = $(this).attr("href");
-			$("#moveForm input[name='pageNum']").val(pageNum);
-			$("#moveForm").submit();
-		});
+				if (CriteriaSubCategory == '') {
+					$("#nav li").eq(0).addClass("on");
+				} else {
+					var subCategoryIndex = [ '간식', '배변용품', '미용', '장난감', '가구' ]
+							.indexOf(CriteriaSubCategory);
+					if (subCategoryIndex >= 0) {
+						$("#nav li").eq(subCategoryIndex + 1).addClass("on");
+					}
+				}
 
-	});
-	
-	
-	$(".category li").on("click",function(){
-		
-		
-		$(this).addClass("on");
-		
-	});
+				//카테고리 클릭시 포커스
+
+				let category = $("#category").val();
+				const categoryIndex = {
+					'all' : 0,
+					'강아지' : 1,
+					'고양이' : 2
+				};
+
+				if (category in categoryIndex) {
+					$(".category li").eq(categoryIndex[category])
+							.addClass("on");
+				}
+
+				//페이징 처리
+				$(".pageInfo a").on("click", function(e) {
+					e.preventDefault();
+					var pageNum = $(this).attr("href");
+					$("#moveForm input[name='pageNum']").val(pageNum);
+					$("#moveForm").submit();
+				});
+
+			});
 </script>
 
 </html>
