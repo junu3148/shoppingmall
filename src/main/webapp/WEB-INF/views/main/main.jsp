@@ -53,8 +53,13 @@
 	src="${pageContext.request.contextPath}/assets/js/script3.js"></script>
 <!-- js -->
 
-
-
+<style>
+.i img{
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+</style>
 </head>
 
 <body>
@@ -94,13 +99,12 @@
 		<!-- 베스트셀러 -->
 		<section id="best_seller">
 			<h2 class="en">best seller</h2>
-			<div class="best_kv">
+			<div class="best_kv" style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/a.jpg); background-size: 100%;">
 				<h3>
-					자연으로 빚은 그릇 <span>청송백자</span>
+					 <span>CATDOG</span>
 				</h3>
 				<p>
-					오백년 전통의 생활자기라는 가치를 계승하며 과거 청송백자의 형태에서<br> 착안한 디자인으로 현대인들의
-					식탁에서도 자연스럽게 어우러지는 기품 있는<br> 생활 자기로 거듭나고 있습니다.
+				반려 동물을 위한 프리미엄 쇼핑<br>
 				</p>
 			</div>
 			<div id="best_seller_div">
@@ -118,11 +122,12 @@
 
 		<!-- 메뉴 버튼 -->
 		<section id="menu_link">
-			<ul class="">
-				<li><a href="#none"><span>사료</span></a></li>
-				<li><a href="#none"><span>미용용품</span></a></li>
-				<li><a href="#none"><span>장난감</span></a></li>
-				<li><a href="#none"><span>가구</span></a></li>
+			<ul class="i">
+				<li><a href="${pageContext.request.contextPath}/main/category/간식" ><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category간식.png); background-size: cover; background-position: right;">사료/간식</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/main/category/배변용품"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category배변용품.png); background-size: cover; background-position: right;">배변용품</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/main/category/미용"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category미용.png); background-size: cover; background-position: right;">미용</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/main/category/장난감"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category장난감.png); background-size: cover; background-position: right;">장난감</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/main/category/가구"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category가구.png); background-size: cover; background-position: right;">가구</span></a></li>
 			</ul>
 		</section>
 		<!-- /메뉴 버튼 -->

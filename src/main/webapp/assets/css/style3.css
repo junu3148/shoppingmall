@@ -99,7 +99,7 @@ main .swiper .swiper-pagination-clickable .swiper-pagination-bullet.swiper-pagin
 .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{bottom:30px;}
 
 /* 베스트셀러 */
-#best_seller .best_kv{width: 100%; height: 280px; background: url('https://cdn.imweb.me/thumbnail/20230118/47a92f340b550.jpg') center/cover no-repeat; display: flex; justify-content: center; align-items: center; flex-direction:column;}
+#best_seller .best_kv{width: 100%; height: 280px; display: flex; justify-content: center; align-items: center; flex-direction:column;}
 #best_seller .best_kv h3{font-size: 26px; margin-bottom: 20px; font-weight: 500;}
 #best_seller .best_kv h3 span{color:#4982cf}
 #best_seller .best_kv p{text-align: center; line-height: 1.3; font-size: 17px; font-weight: 400;}

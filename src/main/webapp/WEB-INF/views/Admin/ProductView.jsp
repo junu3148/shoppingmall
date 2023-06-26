@@ -57,7 +57,7 @@
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/main"><b>Manager
+					href="${pageContext.request.contextPath}/product/productListForm"><b>Manager
 						Page</b></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -72,7 +72,7 @@
 							href="${pageContext.request.contextPath}/product/productListForm">Product</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/customerView">Customer</a>
+							href="${pageContext.request.contextPath}/customer/customerView">Customer</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/salesView">Sales</a></li>

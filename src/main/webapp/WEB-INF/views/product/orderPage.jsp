@@ -470,7 +470,7 @@ table{ border : 1px solid black;}
 		IMP.request_pay({
 		    pg : 'danal_tpay',
 		    pay_method : 'card',
-		    merchant_uid : orderNo,
+		    merchant_uid : 'n'+orderNo,
 		    name : 'test용' , //결제창에서 보여질 이름
 		    amount : 100, //실제 결제되는 가격
 		    buyer_email : 'iamport@siot.do',

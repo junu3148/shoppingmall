@@ -54,9 +54,7 @@
 	padding: 15px 28px;
 	margin: -40px 30px 10px;
 }
-.active {
-	background: Lightgray;
-}
+
 </style>
 
 </head>

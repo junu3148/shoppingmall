@@ -36,7 +36,7 @@ input {
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand"
-					href="${pageContext.request.contextPath}/main"><b>Manager
+					href="${pageContext.request.contextPath}/product/productListForm"><b>Manager
 						Page</b></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -48,10 +48,10 @@ input {
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath}/productView">Product</a>
+							href="${pageContext.request.contextPath}/product/productListForm">Product</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/customerView">Customer</a>
+							href="${pageContext.request.contextPath}/customer/customerView">Customer</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/salesView">Sales</a></li>

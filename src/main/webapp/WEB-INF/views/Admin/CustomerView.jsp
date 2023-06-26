@@ -28,10 +28,10 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/productView">Product</a>
+                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/product/productListForm">Product</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/customerView">Customer</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/customer/customerView">Customer</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/salesView">Sales</a>

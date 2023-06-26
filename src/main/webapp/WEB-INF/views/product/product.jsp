@@ -83,7 +83,7 @@ element.style {
 		<section id="kv"> <img src="${pageContext.request.contextPath}/assets/images/ver02/${view}${subCategory}.png"></section>
 		<c:if test="${empty Search}">
 			<ul class="category">
-				<li class="on"><a
+				<li  ><a
 					href="${pageContext.request.contextPath}/main/${view}/${subCategory}">전체</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
@@ -167,6 +167,14 @@ element.style {
 			$("#moveForm").submit();
 		});
 
+	});
+	
+	
+	$(".category li").on("click",function(){
+		
+		
+		$(this).addClass("on");
+		
 	});
 </script>
 
