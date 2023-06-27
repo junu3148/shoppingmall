@@ -75,7 +75,7 @@
 	</selectKey>
 		<![CDATA[
 			insert into review
-				(review_no, customer_no, product_no, title, content, reg_date, like_cnt)
+				(review_no, customer_no, product_no, title, content, reg_date, like_cnt, grade)
 			values(
 				#{reviewNo}
 				, #{customerNo}
@@ -83,7 +83,9 @@
 				, #{title}
 				, #{content}
 				, sysdate
-				, 0)
+				, 0
+				,#{grade}
+				)
 		]]>
 </insert>
 

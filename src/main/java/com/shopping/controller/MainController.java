@@ -77,15 +77,17 @@ public class MainController {
 	// -------------------- 상품 상세페이지
 	@RequestMapping(value = "/productDetal/{productNo}", method = RequestMethod.GET)
 	public String productDetal(Model model, @PathVariable("productNo") int productNo
-								,@RequestParam(value ="selectReviewPage", required =false, defaultValue ="1")int selectSelectPage) {
+								,@RequestParam(value ="selectReviewPage", required =false, defaultValue ="1")int selectReviewPage) {
 		System.out.println("productDetal");
 		productVO.setProductNo(productNo);
 
-		ProductVO product = productService.getProduct(productVO);
+		Map<String, Object> detailViewInfo = productService.productPageInfo(productVO,selectReviewPage);
 
-		model.addAttribute("product", product);
-
-		return "product/pd_detail";
+		model.addAttribute("product", detailViewInfo.get("product"));
+		model.addAttribute("paging", detailViewInfo.get("paging"));
+		model.addAttribute("review", detailViewInfo.get("review"));
+		
+		return "product/pd_detail3(s)";
 
 	}
 

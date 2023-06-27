@@ -11,7 +11,7 @@ public class ReviewVO {
 	private int productNo;
 	private String title;
 	private String content;
-	private Date RegDate;
+	private Date regDate;
 	private int likeCnt;
 	private int grade;
 	private String saveName;
@@ -63,10 +63,10 @@ public class ReviewVO {
 		this.content = content;
 	}
 	public Date getRegDate() {
-		return RegDate;
+		return regDate;
 	}
 	public void setRegDate(Date regDate) {
-		RegDate = regDate;
+		this.regDate = regDate;
 	}
 	public int getLikeCnt() {
 		return likeCnt;
@@ -91,7 +91,7 @@ public class ReviewVO {
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", customerName=" + customerName
-				+ ", productNo=" + productNo + ", title=" + title + ", content=" + content + ", RegDate=" + RegDate
+				+ ", productNo=" + productNo + ", title=" + title + ", content=" + content + ", regDate=" + regDate
 				+ ", likeCnt=" + likeCnt + ", grade=" + grade + ", saveName=" + saveName + ", comment=" + comment + "]";
 	}
 

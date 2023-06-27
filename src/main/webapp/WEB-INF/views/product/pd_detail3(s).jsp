@@ -219,38 +219,45 @@
 			</div>
 	
 		<!-- 반복될 리뷰 창 -->
-
-			<div class="review_content_box">
+		<c:forEach items= "${review}" var ="review">
+ 			<div class="review_content_box">
 				<div class="content">
 					<div class="left">
-						<div>별 별 별 별 별</div>
-						<h1>제목</h1>
-						<div>사진</div>
-						<div>어우 너무 맛있다아~</div>
+						<div>
+						<c:set var="endValue" value="${review.grade-1}" />
+						<c:forEach begin = "0" end = "${endValue}">
+						<c:if test = "${review.grade != 0}"> 
+							<img src = "${pageContext.request.contextPath}/assets/images/star.png" style ="width:20px;">
+							</c:if>
+						</c:forEach>						
+						</div>
+						<h1>${review.title}</h1>
+						<div><img src = "${pageContext.request.contextPath}/upload/${review.saveName}" ></div>
+						<div>${review.content}</div>
 						<div class="reple">
 							<div class="text">
-								<p>댓글 0</p>
+								<p>댓글</p>
 								<textarea class= "add_comment">로그인이 필요합니다</textarea>
 								<button>응애</button>
 							</div>
 							<div class="reple-child">
 								<ul>
-									<li>이름</li>
-									<li>댓글</li>
+									<c:forEach items = "${review.comment}" var = "comment">
+									<li>${comment.customerName} : ${comment.content}</li>
+									</c:forEach>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="right">
-						<p>이름</p>
-						<p>2023-04-19 19:27</p>
+						<p>${review.customerName}</p>
+						<p>${review.regDate}</p>
 					</div>
 				</div>
 					<div class= "black_line"></div>
-		
-		<!-- 반복될 리뷰들 end -->
-
 			</div>
+			</c:forEach>
+		<!-- 반복될 리뷰들 end -->
 			<!-- 리뷰 넣을 공간 -->
 		</div>
 

@@ -13,6 +13,7 @@
 		<typeAlias alias="OrderVO" type="com.shopping.vo.OrderVO" />
 		<typeAlias alias="AddressVO" type="com.shopping.vo.AddressVO" />
 		<typeAlias alias="ReviewVO" type="com.shopping.vo.ReviewVO" />
+		<typeAlias alias="CommentVO" type="com.shopping.vo.CommentVO" />
 	</typeAliases>
 
 	<mappers>
@@ -23,6 +24,7 @@
 		<mapper resource="mybatis/mappers/qna.xml" />
 		<mapper resource="mybatis/mappers/payment.xml" />
 		<mapper resource="mybatis/mappers/myPage.xml" />
+		<mapper resource="mybatis/mappers/review.xml" />
 	</mappers>
 
 

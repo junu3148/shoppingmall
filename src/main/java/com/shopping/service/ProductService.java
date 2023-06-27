@@ -13,9 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopping.dao.ProductDAO;
+import com.shopping.dao.ReviewDAO;
+import com.shopping.vo.CommentVO;
 import com.shopping.vo.Criteria;
 import com.shopping.vo.PageMakerDTO;
+import com.shopping.vo.PagingVO;
 import com.shopping.vo.ProductVO;
+import com.shopping.vo.ReviewVO;
 
 @Service
 public class ProductService {
@@ -23,6 +27,8 @@ public class ProductService {
 	String saveDir = "C:/shopping/img/upload/"; 
 	@Autowired
 	private ProductDAO productDAO;
+	@Autowired
+	private ReviewDAO reviewDAO;
 	private Map<String, Object> prdouctImgMap = new HashMap<>();
 	private List<ProductVO> productList = new ArrayList<>();
 
@@ -150,6 +156,31 @@ public class ProductService {
 		return result;
 	}
 
+	public Map<String,Object> productPageInfo(ProductVO productVO, int selectReviewPage){
+		
+		Map<String, Object> productPageInfo = new HashMap<>();
+		ProductVO productInfo = productDAO.getProduct(productVO);
+		/* paging 을 위해 productNo의 리뷰 cnt 를 알아와야 함*/
+		/* 알아온 다음 페이징 객체를 이용하여 리뷰 리스트 가져옴*/
+		/* 돌아온 리뷰 리스트 사이즈만큼 for문을 돌려서 리뷰 객체에 해당하는 코멘트 객체를 넣음*/
+		int totalCnt = reviewDAO.getReviewCnt(productVO);
+		PagingVO pagingVO = new PagingVO(selectReviewPage, totalCnt, productVO.getProductNo() + "",null);
+		System.out.println("리뷰 페이징 정보 확인" + pagingVO);
+		List<ReviewVO> reviewList = reviewDAO.getReviewList(pagingVO);
+		for(int i = 0; i<reviewList.size(); i++) {
+		List<CommentVO> commentList = reviewDAO.getReviewComment(reviewList.get(i));
+		reviewList.get(i).setComment(commentList);
+		}
+		
+		productPageInfo.put("product", productInfo);
+		productPageInfo.put("paging", pagingVO);
+		productPageInfo.put("review",reviewList);
+		
+		
+		return productPageInfo;
+	}
+	
+	
 	// ------------- 파일체크 & 맵 치환
 	public void fileCheck(ProductVO vo, MultipartFile file) {
 
@@ -188,5 +219,7 @@ public class ProductService {
 			System.out.println("No file uploaded.");
 		}
 	}
+	
+	
 
 }

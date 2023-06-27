@@ -222,7 +222,6 @@ margin-top : 5%;
 						</tr>
 						<tr>
 							<td><select name = "grade" class="grade">
-								<option value ="0">☆☆☆☆☆</option>
 								<option value ="1">★☆☆☆☆</option>
 								<option value ="2">★★☆☆☆</option>
 								<option value ="3">★★★☆☆</option>

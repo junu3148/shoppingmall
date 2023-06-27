@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<mapper namespace="review">
+
+<select id ="getReviewCnt" parameterType ="ProductVO" resultType ="int">
+	<![CDATA[
+		select 
+			count(review_no) 
+		from review 
+		where product_no = #{productNo}	
+	]]>
+</select>
+
+
+<select id = "getReviewList" parameterType ="PagingVO" resultType ="ReviewVO">
+	<![CDATA[
+		select
+   			 rownum
+    		,customer_name as customerName
+   			 ,grade
+   			 ,review_no as reviewNo
+    		,like_cnt as likeCnt
+   			 ,title
+    		,content
+    		,REG_DATE  as regDate
+		from
+			(select
+   				 customer_name
+    			 ,grade
+   				 ,review_no
+    			 ,like_cnt
+   				 ,title
+   				 ,content
+  				 ,reg_date
+       		 from review a join customer b 
+        	on a.customer_no = b.customer_no
+        	where product_no = #{keyword}
+        	order by review_no desc)
+       		 where rownum between #{boardNumStart} and #{ boardNumEnd}	
+	]]>
+</select>
+
+<select id ="getCommentList" parameterType ="ReviewVO" resultType ="CommentVO">
+	<![CDATA[
+		select
+    		review_comment_no as commentNo
+   		 	,c.customer_name as customerName
+    		,a.content as content
+    		,a.reg_date as regDate
+    	from review_comment a join review b on a.review_no = b.review_no
+    	join customer c on b.customer_no = c.customer_no
+   		 where a.review_no = #{reviewNo}
+    	order by review_comment_no desc
+	]]>
+</select>
+
+</mapper>
