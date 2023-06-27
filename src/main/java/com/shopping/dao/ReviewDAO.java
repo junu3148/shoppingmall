@@ -41,4 +41,10 @@ public class ReviewDAO {
 //		return null;
 	}
 	
+	public void insertComment(CommentVO commentVO) {
+		
+		//int row = session.insert("review.insertReview", commentVO);
+		System.out.println("여기까지 넘어오나요 확인? " + commentVO);
+		
+	}
 }

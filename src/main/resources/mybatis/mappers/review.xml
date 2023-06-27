@@ -25,15 +25,17 @@
    			 ,title
     		,content
     		,REG_DATE  as regDate
+            ,saveName
 		from
 			(select
    				 customer_name
     			 ,grade
-   				 ,review_no
+   				 ,a.review_no
     			 ,like_cnt
    				 ,title
    				 ,content
   				 ,reg_date
+                 ,( select save_name from review_image where review_no = a.review_no) as saveName
        		 from review a join customer b 
         	on a.customer_no = b.customer_no
         	where product_no = #{keyword}
@@ -55,5 +57,6 @@
     	order by review_comment_no desc
 	]]>
 </select>
+
 
 </mapper>

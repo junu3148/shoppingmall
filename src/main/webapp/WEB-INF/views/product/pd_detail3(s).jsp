@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -89,6 +89,7 @@
       .content {
         display: flex;
         justify-content: space-between;
+        font-size:20px;
       }
 
       .left {
@@ -108,24 +109,29 @@
       .reple {
         display: none;
       }
-      .reple-child {
+      .reple_child {
         margin-top: 20px;
       }
       .text{
         position: relative;        
       }
-      button{
+      .add_comment_btn{
         position: absolute;
         bottom: 5px;
-        margin-bottom: 5px;
-        left:45%;
+        margin-bottom: 0;
+        left:72%;
+	 	background: #4982cf; 
+	 	border: 1px solid #4982cf; 
+	 	color: #fff;      
       }
+      
+  
       .add_comment{
        width:50%;
       }
-
-
-
+#review_img{ width:100px;}
+#grade_star{width:20px;}
+.comment_cnt{color:#4982cf;}
 </style>
 
 </head>
@@ -223,24 +229,32 @@
  			<div class="review_content_box">
 				<div class="content">
 					<div class="left">
+						<div class="review_area">
 						<div>
 						<c:set var="endValue" value="${review.grade-1}" />
 						<c:forEach begin = "0" end = "${endValue}">
 						<c:if test = "${review.grade != 0}"> 
-							<img src = "${pageContext.request.contextPath}/assets/images/star.png" style ="width:20px;">
+							<img src = "${pageContext.request.contextPath}/assets/images/star.png" id = "grade_star" >
 							</c:if>
 						</c:forEach>						
 						</div>
 						<h1>${review.title}</h1>
-						<div><img src = "${pageContext.request.contextPath}/upload/${review.saveName}" ></div>
+						<hr>
+						<div>
+						<c:if test="${review.saveName != null}">
+						<img src = "${pageContext.request.contextPath}/upload/${review.saveName}" id ="review_img" >
+						</c:if>
+						</div>
 						<div>${review.content}</div>
+						<input type ="hidden" name = "review_no" value ="${review.reviewNo}">
+						</div>
 						<div class="reple">
 							<div class="text">
-								<p>댓글</p>
-								<textarea class= "add_comment">로그인이 필요합니다</textarea>
-								<button>응애</button>
+								<p>댓글 <span class="comment_cnt">(${fn:length(review.comment)})</span></p>
+								<textarea class= "add_comment" style ="width:70%; height:100%"></textarea>
+								<button class ="add_comment_btn" >등록</button>
 							</div>
-							<div class="reple-child">
+							<div class="reple_child">
 								<ul>
 									<c:forEach items = "${review.comment}" var = "comment">
 									<li>${comment.customerName} : ${comment.content}</li>
@@ -309,29 +323,62 @@
 </body>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var content = document.querySelector(".content");
-    var reple = document.querySelector(".reple");
-    var text = document.querySelector(".reple .text");
 
-    content.addEventListener("click", function (event) {
-      if (!text.contains(event.target)) {
-        if (reple.style.display === "none") {
-          reple.style.display = "block";
-        } else {
-          reple.style.display = "none";
-        }
-      }
-    });
+$('.add_comment_btn').on("click", function(){
+	
+	var content = $('.add_comment').val()
+	var customerNo = ${authCustomer.customerNo}
+	var reviewNo = $(this).closest('.review_area').find('input[name="review_no"]').val();
+	 console.log(reviewNo);
+	console.log(reviewNo);
+	
+	if(content.length < 3){
+		alert('댓글은 네 글자 이상 입력해주세요.');
+	}else{
+		
+		CommentVO = {
+			content : content,
+			customerNo : customerNo,
+			reviewNo : reviewNo
+		}
+		console.log(CommentVO)
+	
+		$.ajax({
+			//요청 세팅(보낼 때--!)
+			url : "${pageContext.request.contextPath}/review/addComment",
+			type : "post", 
+			data : CommentVO,
+			dataType : "json",
+			success : function(jsonResult) {
 
-    text.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
 
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		}); //ajax end	
+	
+	}//댓글 글자수 검증 end
+}); //리플 추가 에이잭스
+	
+	$('.review_area').on("click", function(){
+		
+		console.log('test');
+		var reple	=	$(this).siblings('.reple');
+		var img = $(this).find('#review_img');
+		
+		if(reple.css('display')== "none"){
+			reple.css('display', 'block');
+			img.css("width", '100%');
+		}else{
+			reple.css('display', 'none');
+			img.css("width", '100px');
+		}
+	}); //content 클래스 클릭 이벤트 발생
 
 
 	$(window).on("load", function() {
+		
 
 		updateTotalPrice();
 
@@ -378,16 +425,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				console.log(CartVO)
 
 				$.ajax({
-					//요청 세팅(보낼 때--!)
 					url : "${pageContext.request.contextPath}/cart/addCart",
-					type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
-					//  ㄴ---> 전송하는 데이터타입 지정 지금은 파라미터로 보내는 거라 사용 X
-					data : CartVO, //json형식으로 변환해서 보냄
+					type : "post",
+					data : CartVO,
 
 					dataType : "json",
-					success : function(jasonResult) {
+					success : function(jsonResult) {
 
-						var howAdd = jasonResult.data
+						var howAdd = jsonResult.data
 						$('#howAdd').text(howAdd + '개의 제품을 성공적으로 카트에 추가했습니다.');
 						$('#Cart-modal').modal('show');
 					},
