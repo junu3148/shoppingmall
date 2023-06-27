@@ -1,116 +1,209 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>제품 수정 페이지?</title>
-    <!--부트 스트랩 코드-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  </head>
-  <body>
-    <!--부트 스트랩 코드-->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-      
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제품 수정 페이지?</title>
+<!--부트 스트랩 코드-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/reset.css"
+	type="text/css">
+<!-- 초기화 css -->
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<!-- 구글폰트 -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 구글폰트 -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
+<!-- 구글폰트 -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
+	rel="stylesheet">
+<!-- 서브 css -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/sub.css"
+	type="text/css">
 
-      <!-- Top Nav Bar  include로 뺄 예정임-->
-      <div name = "top bar">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="${pageContext.request.contextPath}/main"><b>Manager Page</b></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/product/productListForm">Product</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/customer/customerView">Customer</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/salesView">Sales</a>
-              </li>
-            </ul>
-            <span class="navbar-text">
-              안녕하세요! 000님  <a class="btn btn-secondary disabled" role="button" aria-disabled="true" href="${pageContext.request.contextPath}/logout">Logout</a>
-            </span>
-          </div>
-        </div>
-    </nav>
-</div>
-    <!--Top Nav Bar End-->
+<!--부트 스트랩 코드-->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+	crossorigin="anonymous"></script>
+<!--js 코드-->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<!--css 등록해야함-->
+<link href="${pageContext.request.contextPath}/assets/css/app.css"
+	rel="stylesheet">
+<!--css 등록해야함-->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 제이쿼리 최신버전 js -->
 
-    <div class="p-3 mb-2 bg-body text-body">    <!--배경색 start-->
-        <br>
+<!--컨텐츠 상단 폰트-->
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+	rel="stylesheet">
 
-        
-        <div align ="center" style ="margin: 5%;">
-            <h1 class="display-6"><b>Product Management Page</b></h1><br><hr><br>
+<style>
+.content {
+	margin-top: auto;
+}
 
-            <!--키워드 검색 폼-->
-            <form action="${pageContext.request.contextPath}/customerSearch">
-            <table>
-                <tr>
-                    <td> 
-                        <select name="searchOption" class="form-select" >
-                            <option>선택</option>
-                            <option value="CustomerName">고객명</option>
-                            <option value="CustomerId">고객아이디</option>
-                        </select>
-                    </td>
-                    <td>
-                        : <input type="text" name="keyword" /> <button type="submit" class="btn btn-secondary">Search</button>
-                    </td>
-                </tr>
+.footer {
+	text-align: center;
+}
+.footer .container-fluid {
+	height: 30px;
+}
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Top Nav Bar  include로 뺄 예정임-->
+		<c:import url="/WEB-INF/views/includes/admin-header.jsp"></c:import>
 
-            </table>
-        </form><!-- 검색어 마지막-->
-    <br>
-       
+		<!---------------------------------top nav----------------------------------------->
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<c:if test="${authCustomer != null}">
+							<c:if test="${authCustomer.customerRole != 1}">
+             		 안녕하세요! ${authCustomer.customerName}님&nbsp;&nbsp;
+              		 <a class="btn btn-secondary disabled" role="button"
+									aria-disabled="true"
+									href="${pageContext.request.contextPath}/customer/logout">Logout</a>
+							</c:if>
+						</c:if>
+						<c:if test="${authCustomer == null}">
+            			로그인이 필요합니다.&nbsp;&nbsp;
+            				<a
+								href="${pageContext.request.contextPath}/customer/loginPage">Login</a>
+						</c:if>
+					</ul>
+				</div>
+			</nav>
 
-    <!--고객 리스트 나열-->
+			<!---------------------------------//top nav//----------------------------------------->
 
-            <bR>
-                <div>
-                <table  class="table table-striped" >
-                    <tr >
-                        <td style="width: 30%; text-align: center;">고객 아이디</td>
-                        <td style="width: 20%; text-align: center;">이름</td>
-                        <td style="width: 40%; text-align: center;">고객 번호</td>
-                        <td style="width: 10%; text-align: center;"></td>
-                    </tr>
-                    <c:forEach items="${customerList}" var="customer">
-                        <tr>
-                            <td style="width: 30%; text-align: center;">${customer.customerId}</td>
-                            <td style="width: 20%; text-align: center;">${customer.name}</td>
-                            <td style="width: 40%; text-align: center;">${customer.customerNumbers}</td>
-                            <td style="width: 10%; text-align: center;">
-                           <a href="${pageContext.request.contextPath}/customerUpdateForm/${customer.customerId}" class="btn btn-primary">수정</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
-        </div>
+			<div class="p-3 mb-2 bg-body text-body">
+				<!--배경색 start-->
+				<br>
+				<main class="content">
+					<div align="center" style="margin: 5%;">
+						<h1 class="display-6">
+							<b>고객 조회</b>
+						</h1>
+						<br>
+						<hr>
+						<br>
+						<!--키워드 검색 폼-->
+						<form
+							action="${pageContext.request.contextPath}/customer/customerView">
+							<table>
+								<tr>
+									<td><select name="searchOption" class="form-select">
+											<option value="all">--옵션 선택--</option>
+											<option value="customerName">고객명</option>
+											<option value="customerId">고객아이디</option>
+									</select></td>
+									<td>: <input type="text" name="keyword"
+										value="${pageInfo.pagingInfo.keyword}" />
+										<button type="submit" class="btn btn-secondary">Search</button>
+									</td>
+								</tr>
 
-    <!--고객 리스트 나열 end-->
+							</table>
+						</form>
+						<!-- 검색어 마지막-->
+						<br> <bR>
+						<div>
+							<table class="table table-striped">
+								<tr>
+									<td style="width: 20%; text-align: center;">고객 아이디</td>
+									<td style="width: 30%; text-align: center;">이름</td>
+									<td style="width: 10%; text-align: center;">고객번호</td>
+									<td style="width: 10%; text-align: center;"></td>
+								</tr>
+								<c:if test="${message != null}">
+									<tr>
+										<td></td>
+										<td style="text-align: center;"><p>${message}</p></td>
+										<td></td>
+									</tr>
+								</c:if>
+
+								<c:if test="${pageInfo.customerList != null}">
+									<c:forEach items="${pageInfo.customerList}" var="customer">
+										<tr>
+											<td style="width: 20%; text-align: center;">${customer.customerId}</td>
+											<td style="width: 30%; text-align: center;">${customer.customerName}</td>
+											<td style="width: 10%; text-align: center;">${customer.customerNo}</td>
+											<td style="width: 10%; text-align: center;"><a
+												href="${pageContext.request.contextPath}/customer/detailInfo/${customer.customerNo}"
+												class="btn btn-primary">상세정보</a></td>
+										</tr>
+									</c:forEach>
+								</c:if>
+							</table>
+						</div>
+						<!-- 여기다가 넘버링할 거임 -->
+						<c:if test="${pageInfo.pagingInfo.selectPage >10}">
+							<a class="paging"
+								href="${pageContext.request.contextPath}/customer/customerView?selectPage=${pageInfo.pagingInfo.startPageNum - 1}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">
+								◀ </a>
+						</c:if>
+
+						<c:forEach begin="${pageInfo.pagingInfo.startPageNum}"
+							end="${pageInfo.pagingInfo.endPageNum}" var="page">
+							<c:if test="${page <= pageInfo.pagingInfo.finalPage}">
+								<a class="paging"
+									href="${pageContext.request.contextPath}/customer/customerView?selectPage=${page}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">${page}</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageInfo.pagingInfo.next == true}">
+							<a class="paging"
+								href="${pageContext.request.contextPath}/customer/customerView?selectPage=${pageInfo.pagingInfo.endPageNum + 1}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">
+								▶ </a>
+						</c:if>
+					</div>
+				</main>
+			</div>
+
+			<c:import url="/WEB-INF/views/includes/admin-footer.jsp"></c:import>
+
+		</div>
+	</div>
+
+</body>
 
 
+<script>
+	$('.paging').on("click", function() {
+		$('.paging').removeClass('active');
 
+		$(this).addClass('active');
 
+	})
 
-
-
-
-    </div><!--배경색 end-->
-
-
-
-  </body>
+	function updateMinRange(value) {
+		document.getElementById("minRangeInput").value = value;
+	}
+	function updateMaxRange(value) {
+		document.getElementById("maxRangeInput").value = value;
+	}
+</script>
 </html>

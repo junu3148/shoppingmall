@@ -54,7 +54,7 @@
 	padding: 15px 28px;
 	margin: -40px 30px 10px;
 }
-.active #anum{
+.active .anum{
 	color: #4982cf;
 	font-weight: bold;
 	font-size: 15px;
@@ -211,7 +211,7 @@
 					<c:forEach var="num" begin="${pageMaker.startPage}"
 						end="${pageMaker.endPage}">
 						<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
-							<a id="anum" href="${num}">${num}</a>
+							<a class="anum" href="${num}">${num}</a>
 						</li>
 					</c:forEach>
 

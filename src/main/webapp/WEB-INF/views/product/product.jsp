@@ -56,7 +56,8 @@
 <!-- js -->
 
 <style>
-.active #anum{
+
+.active .anum {
 	color: #4982cf;
 	font-weight: bold;
 	font-size: 15px;
@@ -75,95 +76,95 @@ element.style {
 </head>
 
 <body>
+	<div class="wrapper">
+
+		<!-- 헤더 -->
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
+		<!-- //헤더 -->
 
 
-	<!-- 헤더 -->
-	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-	<!-- //헤더 -->
-
-
-	<main id="product">
-		<section id="kv">
-			<img
-				src="${pageContext.request.contextPath}/assets/images/ver02/${view}${subCategory}.png">
-		</section>
-		<c:if test="${empty Search}">
-			<ul class="category">
-				<li><a
-					href="${pageContext.request.contextPath}/main/${view}/${subCategory}">전체</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=고양이&subCategory=${subCategory}">고양이</a></li>
-			</ul>
-		</c:if>
-		<section>
-			<ul>
-				<c:forEach items="${productList}" var="product">
+		<main id="product">
+			<section id="kv">
+				<img
+					src="${pageContext.request.contextPath}/assets/images/ver02/${view}${subCategory}.png">
+			</section>
+			<c:if test="${empty Search}">
+				<ul class="category">
 					<li><a
-						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
-							<img
-							src="${pageContext.request.contextPath}/upload/${product.saveName}">
-							<span class="tit">${product.productName}</span> <span
-							class="price jb"> <fmt:formatNumber type="number"
-									maxFractionDigits="3" value="${product.price}" />원
-						</span>
-					</a></li>
-				</c:forEach>
-			</ul>
-		</section>
+						href="${pageContext.request.contextPath}/main/${view}/${subCategory}">전체</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=강아지&subCategory=${subCategory}">강아지</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/main/${view}/${subCategory}?category=고양이&subCategory=${subCategory}">고양이</a></li>
+				</ul>
+			</c:if>
+			<section>
+				<ul>
+					<c:forEach items="${productList}" var="product">
+						<li><a
+							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
+								<img
+								src="${pageContext.request.contextPath}/upload/${product.saveName}">
+								<span class="tit">${product.productName}</span> <span
+								class="price jb"> <fmt:formatNumber type="number"
+										maxFractionDigits="3" value="${product.price}" />원
+							</span>
+						</a></li>
+					</c:forEach>
+				</ul>
+			</section>
 
-		<c:if test="${empty keyword}">
-			<ul class="paging pageInfo">
-				<c:if test="${pageMaker.prev}">
-					<li class="pageInfo_btn previous"><a
-						href="${pageMaker.startPage - 1}">◀</a></li>
-				</c:if>
+			<c:if test="${empty keyword}">
+				<ul class="paging pageInfo">
+					<c:if test="${pageMaker.prev}">
+						<li class="pageInfo_btn previous"><a
+							href="${pageMaker.startPage - 1}">◀</a></li>
+					</c:if>
 
-				<!-- 각 번호 페이지 버튼 -->
-				<c:forEach var="num" begin="${pageMaker.startPage}"
-					end="${pageMaker.endPage}">
-					<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
-						<a id="anum" href="${num}">${num}</a>
-					</li>
-				</c:forEach>
+					<!-- 각 번호 페이지 버튼 -->
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}">
+						<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+							<a class="anum" href="${num}">${num}</a>
+						</li>
+					</c:forEach>
 
-				<!-- 다음페이지 버튼 -->
-				<c:if test="${pageMaker.next}">
-					<li class="pageInfo_btn next"><a
-						href="${pageMaker.endPage + 1}">▶</a></li>
-				</c:if>
-			</ul>
-		</c:if>
-		<form id="moveForm"
-			action="${pageContext.request.contextPath}/main/${view}/${subCategory}"
-			method="get">
-			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-			<input type="hidden" name="type" value="${pageMaker.cri.type}">
-			<input type="hidden" id="category" name="category"
-				value="${category}"> <input type="hidden"
-				id="CriteriaSubCategory" name="subCategory"
-				value="${CriteriaSubCategory}">
-		</form>
-
-
-
-		<!-- 탑버튼 -->
-		<a href="#none" class="top_btn"><img
-			src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
-			alt=""></a>
-		<!-- /탑버튼 -->
-
-	</main>
+					<!-- 다음페이지 버튼 -->
+					<c:if test="${pageMaker.next}">
+						<li class="pageInfo_btn next"><a
+							href="${pageMaker.endPage + 1}">▶</a></li>
+					</c:if>
+				</ul>
+			</c:if>
+			<form id="moveForm"
+				action="${pageContext.request.contextPath}/main/${view}/${subCategory}"
+				method="get">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+				<input type="hidden" name="type" value="${pageMaker.cri.type}">
+				<input type="hidden" id="category" name="category"
+					value="${category}"> <input type="hidden"
+					id="CriteriaSubCategory" name="subCategory"
+					value="${CriteriaSubCategory}">
+			</form>
 
 
 
-	<!-- Footer -->
-	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
-	<!-- //Footer -->
+			<!-- 탑버튼 -->
+			<a href="#none" class="top_btn"><img
+				src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+				alt=""></a>
+			<!-- /탑버튼 -->
 
+		</main>
+
+
+
+		<!-- Footer -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+		<!-- //Footer -->
+	</div>
 </body>
 
 <script>
