@@ -128,9 +128,23 @@ public class CustomerController {
 		model.addAttribute("pageInfo", pageInfo);
 		
 		
-		return "adminTest/ccview";
+		return "Admin/CustomerView";
 	}
 
+	/* 고객 정보 리스트*/
+	@RequestMapping(value = "/customerView2" , method = {RequestMethod.POST, RequestMethod.GET})	
+	public String customerView2(@RequestParam( value = "selectPage", required = false, defaultValue = "1")int selectPage
+							,@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
+							,@RequestParam(value ="searchOption", required = false, defaultValue ="all") String searchOption
+							,Model model) {
+			
+		
+		Map<String, Object> pageInfo = customerService.getCustomerList(selectPage, keyword,searchOption);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		
+		return "adminTest/ccview";
+	}
 
 	
 

@@ -40,7 +40,7 @@ public class ProductController {
 
 		return "Admin/ProductInsert";
 	}
-
+	
 	// ----------------- 상품 등록
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
 	public String insertProduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
@@ -63,6 +63,7 @@ public class ProductController {
 
 		return "Admin/ProductView";
 	}
+	
 
 	// ------------------- 상품 수정폼
 	@RequestMapping(value = "/modifyProductForm", method = RequestMethod.GET)
