@@ -76,7 +76,8 @@ public class MainController {
 
 	// -------------------- 상품 상세페이지
 	@RequestMapping(value = "/productDetal/{productNo}", method = RequestMethod.GET)
-	public String productDetal(Model model, @PathVariable("productNo") int productNo) {
+	public String productDetal(Model model, @PathVariable("productNo") int productNo
+								,@RequestParam(value ="selectReviewPage", required =false, defaultValue ="1")int selectSelectPage) {
 		System.out.println("productDetal");
 		productVO.setProductNo(productNo);
 

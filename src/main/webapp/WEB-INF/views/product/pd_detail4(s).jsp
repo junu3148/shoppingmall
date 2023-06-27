@@ -59,73 +59,38 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-
-
+table{border: 1px solid black;}
+div{border: 1px solid black;}
 .review_box {
-	margin: 13%;
+  margin: 13%;
 }
 
 .black_line {
-	width: 100%;
-	height: 1px;
-	background-color: #bbbbbb;
+  width: 100%;
+  height: 1px;
+  background-color: #bbbbbb;
 }
 
 .review_box {
-	margin-bottom: 300px;
+  margin-bottom: 300px;
+  border: 1px solid black;
 }
 
 .black_line {
-	width: 100%;
-	height: 1px;
-	background-color: #bbbbbb;
+  width: 100%;
+  height: 1px;
+  background-color: #bbbbbb;
 }
 
 .horizontal_div::after {
-	content: "";
-	display: table;
-	clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
-      .content {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .left {
-        flex: 1;
-        padding:1%;
-      }
-
-      .right {
-        margin-left: auto;
-        padding: 20px;
-      }
-
-      .reple {
-        display: none;
-      }
-
-      .reple {
-        display: none;
-      }
-      .reple-child {
-        margin-top: 20px;
-      }
-      .text{
-        position: relative;        
-      }
-      button{
-        position: absolute;
-        bottom: 5px;
-        margin-bottom: 5px;
-        left:45%;
-      }
-      .add_comment{
-       width:50%;
-      }
-
-
-
+.reviewer_info{float: left; width: 30%;}
+.review_content{float: left; width: 70%;}
+.comment_cnt{height : 50px; font-size : 15px;}
+.comment{height : 100px;}
 </style>
 
 </head>
@@ -142,7 +107,9 @@
 
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
-				<img src="${pageContext.request.contextPath}/upload/${product.saveName}" alt="${product.productName}">
+				<img
+					src="${pageContext.request.contextPath}/upload/${product.saveName}"
+					alt="${product.productName}">
 			</div>
 			<div class="info_wrap">
 				<div class="title">
@@ -204,61 +171,44 @@
 				<div style="height: 100px"></div>
 			</div>
 		</section>
-
+		
 		<!-- 리뷰 공간 -->
 		<div class="review_box">
-			<div class="black_line"></div>
+				<div class="black_line"></div>
 			<div class="review_list">
-				<br> <br>
+				<br>
+				<br>
 				<h2>
 					<b>구매평</b>
 				</h2>
 				<p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p>
-				<br> <br>
+				<br>
+				<br>
 				<div class="black_line"></div>
 			</div>
-	
-		<!-- 반복될 리뷰 창 -->
-
-			<div class="review_content_box">
-				<div class="content">
-					<div class="left">
-						<div>별 별 별 별 별</div>
-						<h1>제목</h1>
-						<div>사진</div>
-						<div>어우 너무 맛있다아~</div>
-						<div class="reple">
-							<div class="text">
-								<p>댓글 0</p>
-								<textarea class= "add_comment">로그인이 필요합니다</textarea>
-								<button>응애</button>
-							</div>
-							<div class="reple-child">
-								<ul>
-									<li>이름</li>
-									<li>댓글</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="right">
-						<p>이름</p>
-						<p>2023-04-19 19:27</p>
-					</div>
-				</div>
-					<div class= "black_line"></div>
-		
-		<!-- 반복될 리뷰들 end -->
-
+			<div>
+    <div class ="review_content"><!-- 리뷰 컨텐츠. 안에 그 모냐.. 댓글도 들어감 -->
+    	<div class ="review_area"><!-- review 영역 -->
+    	ㅇㄹㅇㄴ
+    	</div>
+    	<div class= "comment_area"><!-- comment 영역 -->
+    	<div class= "comment_cnt">
+    	<p>댓글 0 개</p>
+    	</div>
+    	<div class="comment"><!-- 작성된 댓글 영역 -->
+    	작성된 됏글
+    	</div>
+    	<div class="write_comment_form">
+    	<div class="write_comment" style ="margin : 2% height : 50px; ">댓글댓글</div>
+    	</div>
+    	</div>
+    
+    </div><!-- review_content_end -->
+    <div class ="reviewer_info" style ="height : 100%">sdf</div>
 			</div>
-			<!-- 리뷰 넣을 공간 -->
+
+				<!-- review end -->
 		</div>
-
-
-
-
-
-
 
 		<!-- 탑버튼 -->
 		<a href="#none" class="top_btn"><img
@@ -302,28 +252,6 @@
 </body>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var content = document.querySelector(".content");
-    var reple = document.querySelector(".reple");
-    var text = document.querySelector(".reple .text");
-
-    content.addEventListener("click", function (event) {
-      if (!text.contains(event.target)) {
-        if (reple.style.display === "none") {
-          reple.style.display = "block";
-        } else {
-          reple.style.display = "none";
-        }
-      }
-    });
-
-    text.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
-
-
-
 	$(window).on("load", function() {
 
 		updateTotalPrice();

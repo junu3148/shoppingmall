@@ -143,6 +143,7 @@ review_table{ height:70px;}
 .review_img{
 height : 30px;
 }
+
 </style>
 <body>
 
@@ -205,16 +206,16 @@ height : 30px;
 				</table>
 												<!-- 페이징 -->
 										<c:if test = "${paging.selectPage >10}">
-										<a class = "paging" href = "${pageContext.request.contextPath}/myReview/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}"> ◀ </a>
+										<a class = "paging" href = "${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}"> ◀ </a>
 										</c:if>
 										
 										<c:forEach begin = "${paging.startPageNum}" end = "${paging.endPageNum}"  var = "page">
 											<c:if test = "${page <= paging.finalPage}">
-											<a class = "paging" href ="${pageContext.request.contextPath}/myReview/${authCustomer.customerNo}?selectPage=${page}">${page}</a>
+											<a class = "paging" href ="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${page}">${page}</a>
 											</c:if>
 										</c:forEach>
 										<c:if test = "${paging.next == true}">
-										<a class = "paging" href ="${pageContext.request.contextPath}/myReview/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}"> ▶ </a>
+										<a class = "paging" href ="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}"> ▶ </a>
 										</c:if>
 			
 			

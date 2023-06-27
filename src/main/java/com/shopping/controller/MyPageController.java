@@ -2,7 +2,6 @@ package com.shopping.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopping.service.MyPageService;
-import com.shopping.vo.CustomerVO;
 import com.shopping.vo.ProductVO;
 import com.shopping.vo.ReviewVO;
 
@@ -65,19 +63,18 @@ public class MyPageController {
 		
 		return "redirect:/myPage/" + reviewVO.getCustomerNo();
 	}
+	
 	@RequestMapping(value ="/myReview/{customerNo}")
 	public String myReviewPage(@PathVariable String customerNo
 								,@RequestParam (value ="selectPage", required =false, defaultValue ="1") int selectPage
 								,Model model) {
-		
+		System.out.println("왜 안 넘어오지");
 		Map<String, Object> reviewList = myPageService.getReviewList(customerNo,selectPage);
 		model.addAttribute("reviewList", reviewList.get("reviewList"));
 		model.addAttribute("paging",reviewList.get("pagingVO"));
 		
-		
 		return "myPage/reviewView";
 	}
-
 	
 }
 

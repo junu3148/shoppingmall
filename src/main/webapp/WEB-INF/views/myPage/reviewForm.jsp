@@ -139,7 +139,7 @@ table td {
 }
 
 #review_table {
-	margin: 1%;
+	margin: 0%;
 	border: 1px solid #eee;
 	width: 1100px;
 	margin-left: 5px;
@@ -153,6 +153,12 @@ table td {
 [name="title"] { width:100%;  height:30px;}
 input.reviewForm {
   border-color: #eee; /* 원하는 테두리 색상으로 변경 */
+}
+.grade{
+width:50%;
+height:100%;
+font-size : 20px;
+margin-top : 5%;
 }
 </style>
 <body>
@@ -212,10 +218,20 @@ input.reviewForm {
 							<td><input type="file" class ="review_Form" name ="file"></td>
 						</tr>
 						<tr>
-							<td colspan ="2"><br><input type ="text" name ="title"class ="review_Form"></td>
+							<td colspan ="2"><br><input type ="text" name ="title"class ="review_Form" 	required></td>
 						</tr>
 						<tr>
-							<td colspan ="2"><br><textarea name ="content" id ="content" class ="review_Form" placeholder ="20자 이상 200자 미만으로 입력하세요."></textarea>
+							<td><select name = "grade" class="grade">
+								<option value ="0">☆☆☆☆☆</option>
+								<option value ="1">★☆☆☆☆</option>
+								<option value ="2">★★☆☆☆</option>
+								<option value ="3">★★★☆☆</option>
+								<option value ="4">★★★★☆</option>
+								<option value ="5">★★★★★</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td colspan ="2"><br><textarea name ="content" id ="content" class ="review_Form" placeholder ="20자 이상 200자 미만으로 입력하세요." required></textarea>
 							<input type ="text" name = "customerNo" value ="${authCustomer.customerNo}">
 							<input type ="text" name = productNo value ="${reviewProduct.productNo}">
 							</td>

@@ -7,13 +7,15 @@ public class ReviewVO {
 	
 	private int reviewNo;
 	private int customerNo;
+	private String customerName;
 	private int productNo;
 	private String title;
 	private String content;
 	private Date RegDate;
 	private int likeCnt;
+	private int grade;
 	private String saveName;
-	private List<String> comment;
+	private List<CommentVO> comment;
 	public ReviewVO() {
 		super();
 	}
@@ -28,6 +30,19 @@ public class ReviewVO {
 	}
 	public void setCustomerNo(int customerNo) {
 		this.customerNo = customerNo;
+	}
+	
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 	public int getProductNo() {
 		return productNo;
@@ -65,19 +80,19 @@ public class ReviewVO {
 	public void setSaveName(String saveName) {
 		this.saveName = saveName;
 	}
-	public List<String> getComment() {
+	
+	
+	public List<CommentVO> getComment() {
 		return comment;
 	}
-	public void setComment(List<String> comment) {
+	public void setComment(List<CommentVO> comment) {
 		this.comment = comment;
 	}
 	@Override
 	public String toString() {
-		return "ReviewVO [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", productNo=" + productNo + ", title="
-				+ title + ", content=" + content + ", RegDate=" + RegDate + ", likeCnt=" + likeCnt + ", saveName="
-				+ saveName + ", comment=" + comment + "]";
+		return "ReviewVO [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", customerName=" + customerName
+				+ ", productNo=" + productNo + ", title=" + title + ", content=" + content + ", RegDate=" + RegDate
+				+ ", likeCnt=" + likeCnt + ", grade=" + grade + ", saveName=" + saveName + ", comment=" + comment + "]";
 	}
-	
-	
-	
+
 }
