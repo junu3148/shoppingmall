@@ -52,6 +52,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 제이쿼리 최신버전 js -->
 
+
+
+
 <!--컨텐츠 상단 폰트-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
@@ -61,6 +64,7 @@
 .pageInfo_btn a {
 	color: black;
 }
+
 .active .anum {
 	color: #4982cf;
 	font-weight: bold;
@@ -78,6 +82,11 @@
 .footer .container-fluid {
 	height: 30px;
 }
+
+#inquiry_popup input{
+width: 300px;
+}
+
 </style>
 </head>
 <body>
@@ -113,7 +122,7 @@
 			<div class="p-3 mb-2 bg-body text-body">
 				<!--배경색 start-->
 				<br>
-				<main class="content">
+				<main id="inquiry" class="content">
 					<div align="center" style="margin: 5%;">
 						<h1 class="display-6">
 							<b>Product Management Page</b>
@@ -198,8 +207,16 @@
 										<td style="width: 30%; text-align: center;"><fmt:formatNumber
 												value="${product.price}" pattern="#,##0원" /></td>
 										<td style="width: 10%; text-align: center;"><a
-											href="${pageContext.request.contextPath}/product/modifyProductForm?productNo=${product.productNo}"
-											class="btn btn-primary">수정</a></td>
+											href="#none" class="btn btn-primary"
+											data-no="${product.productNo}"
+											data-name="${product.productName}"
+											data-ea="${product.productEa}"
+											data-price="${product.price}"
+											data-content="${product.productContent}"
+											data-category="${product.category}"
+											data-subcategory="${product.subCategory}"
+											data-savename="${product.saveName}"
+											>수정</a></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -240,6 +257,64 @@
 								name="maxPrice" value="${pageMaker.cri.maxPrice}">
 						</form>
 					</div>
+
+					<!-- 고객 문의 창 -->
+					<section id="inquiry_popup" class="inquiry_popup"
+						style="display: none;">
+						<a href="#none" class="inquiry_close"><img
+							src="images/ver02/close.png" alt=""></a>
+						<div class="inquiry_write">
+							<h3>상품정보 수정</h3>
+							<form id="modifyProductForm"
+								action="${pageContext.request.contextPath}/product/modifyProduct"
+								method="POST"
+								enctype="multipart/form-data">
+								<table>
+									<tr>
+										<td rowspan="8" width="25%"><img id="preview"
+											src="${pageContext.request.contextPath}/assets/images/sns4.png"
+											width="100%"></td>
+										<td style="text-align: center;">제품번호</td>
+										<td><input type="text" id="productNo" name="productNo" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">제품명</td>
+										<td><input type="text" id="productName" name="productName" required></td>
+									</tr>
+
+									<tr>
+										<td style="text-align: center;">수량</td>
+										<td><input type="number" id="productEa" name="productEa" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">가격</td>
+										<td><input type="number" id="price" name="price" min="3000" step="100" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">상품 정보</td>
+										<td><input type="text" id="productContent" name="productContent" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">카테고리</td>
+										<td><input type="text" id="category" name="category" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">서브 카테고리</td>
+										<td><input type="text" id="subCategory" name="subCategory" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">제품사진</td>
+										<td><input id="file" type="file" name="file" required></td>
+									</tr>
+								</table>
+								<div class="btn_wrap">
+									<a id="modifyProduct" href="#none" class="order_btn">등록</a> <a
+										href="#none" class="shopping_btn">취소</a>
+								</div>
+
+							</form>
+						</div>
+					</section>
 				</main>
 			</div>
 			<c:import url="/WEB-INF/views/includes/admin-footer.jsp"></c:import>
@@ -248,9 +323,10 @@
 
 	<!--배경색 end-->
 
+
+
+
 </body>
-
-
 
 
 <script>
@@ -261,6 +337,7 @@
 		document.getElementById("maxRangeInput").value = value;
 	}
 
+	
 	$(document).ready(function() {
 
 		//페이징 이벤트처리 submit
@@ -285,6 +362,87 @@
 		});
 
 	});
+
+	// 상품 수정창 띄우기
+	$(".btn-primary").on("click", function() {
+		
+		
+		let productNo = $(this).data("no");
+		let productName = $(this).data("name");
+		let productEa = $(this).data("ea");
+		let price = $(this).data("price");
+		let productContent = $(this).data("content");
+		let category = $(this).data("category");
+		let subCategory = $(this).data("subcategory");
+		let saveName = $(this).data("savename");
+		
+		$("#productNo").val(productNo);
+		$("#productName").val(productName);
+		$("#productEa").val(productEa);
+		$("#price").val(price);
+		$("#productContent").val(productContent);
+		$("#category").val(category);
+		$("#subCategory").val(subCategory);
+		$("#preview").attr("src", "${pageContext.request.contextPath}/upload/" + saveName);
+		
+		$("#inquiry_popup").show();
+	
+		
+		
+	});
+	
+	//상품 수정 등록
+	$("#modifyProduct").on("click", function() {
+		$("#modifyProductForm").submit();
+	});
+	
+	//상품 수정창 취소버튼
+	$(".btn_wrap .shopping_btn").on("click",function() {
+		$('#inquiry_popup').hide();
+		$('#inquiry_popup input[type="text"], #inquiry_popup2 textarea').val(''); 
+		$('body').removeClass('no-scroll');
+		$("#file").val("");
+		
+	});
+
+	
+	// 파일 미리보기 이벤트
+	$("#file").on("change", function(event) {
+		console.log("파일 체인지");
+
+		var file = event.target.files[0];
+
+		// 확장자 확인
+		if (!isImageFile(file)) {
+			alert("사진 파일만 올려주세요");
+
+			// 파일 사이즈 확인
+			if (isOverSize(file)) {
+				alert("파일 사이즈가 너무 큽니다.");
+
+			}
+		} else {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+
+				$("#preview").attr("src", e.target.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	});
+
+	// 확장자가 이미지 파일인지 확인
+	function isImageFile(file) {
+		var ext = file.name.split(".").pop().toLowerCase(); // 파일명에서 확장자를 가져온다.
+		return [ "jpg", "jpeg", "gif", "png" ].includes(ext);
+	}
+
+	// 파일의 최대 사이즈 확인
+	function isOverSize(file) {
+		var maxSize = 3 * 1024 * 1024; // 3MB로 제한
+		return file.size > maxSize;
+	}
 </script>
 
 </html>

@@ -73,6 +73,8 @@ input {
 .footer .container-fluid {
 	height: 30px;
 }
+
+
 </style>
 </head>
 <body>
@@ -108,7 +110,7 @@ input {
 			<div class="p-3 mb-2 bg-body text-body">
 				<!--배경색 start-->
 				<br>
-				<main class="content">
+				<main id="inquiry"class="content">
 					<div align="center" style="margin: 5%;">
 						<h1 class="display-6">
 							<b>Product Insert Page</b>
@@ -120,7 +122,7 @@ input {
 						<form
 							action="${pageContext.request.contextPath}/product/insertProduct"
 							method="POST" enctype="multipart/form-data">
-							<table width="700px">
+							<table >
 								<tr>
 									<td colspan="4" bgcolor="lightgray"><b>제품등록창</b></td>
 								</tr>
@@ -140,7 +142,7 @@ input {
 								</tr>
 								<tr>
 									<td style="text-align: center;">가격</td>
-									<td><input type="number" name="price" min="3000" required></td>
+									<td><input type="number" name="price" min="3000" step="100" required></td>
 								</tr>
 								<tr>
 									<td style="text-align: center;">상품 정보</td>

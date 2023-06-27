@@ -65,6 +65,7 @@
 </head>
 
 <body>
+
 	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->

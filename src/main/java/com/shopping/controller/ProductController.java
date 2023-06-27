@@ -65,23 +65,11 @@ public class ProductController {
 	}
 	
 
-	// ------------------- 상품 수정폼
-	@RequestMapping(value = "/modifyProductForm", method = RequestMethod.GET)
-	public String modifyPoductForm(Model model, @ModelAttribute ProductVO vo) {
-		System.out.println("modifyProductForm()");
-
-		productVO = productService.getProduct(vo);
-
-		model.addAttribute("product", productVO);
-
-		return "Admin/ProductUpdate";
-	}
-
 	// ------------------- 상품 수정
 	@RequestMapping(value = "/modifyProduct", method = RequestMethod.POST)
 	public String modifyPoduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("modifyProduct()");
-
+				
 		int result = productService.modifyProduct(vo, file);
 
 		return "redirect:/product/productListForm";
