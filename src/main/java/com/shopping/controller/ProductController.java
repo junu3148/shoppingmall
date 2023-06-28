@@ -45,7 +45,7 @@ public class ProductController {
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
 	public String insertProduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("insertProduct()");
-
+		
 		int result = productService.insertProduct(vo, file);
 
 		return "redirect:/product/productListForm";
@@ -69,6 +69,7 @@ public class ProductController {
 	@RequestMapping(value = "/modifyProduct", method = RequestMethod.POST)
 	public String modifyPoduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("modifyProduct()");
+		
 				
 		int result = productService.modifyProduct(vo, file);
 

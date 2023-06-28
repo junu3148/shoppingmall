@@ -28,12 +28,6 @@
 			</a></li>
 
 			<li class="sidebar-item"><a class="sidebar-link"
-				href="${pageContext.request.contextPath}/product/insertProductForm">
-					<i class="align-middle" data-feather="user"></i> <span
-					class="align-middle">제품등록</span>
-			</a></li>
-
-			<li class="sidebar-item"><a class="sidebar-link"
 				href="${pageContext.request.contextPath}/customer/customerView">
 					<i class="align-middle" data-feather="log-in"></i> <span
 					class="align-middle">고객조회</span>

@@ -40,7 +40,7 @@ public class ProductDAO {
 	// --------------- 상품 이미지 수정
 	public int modifyProductImg(Map<String, Object> prdouctImgMap) {
 		System.out.println("modifyProductImg DAO()");
-
+		System.out.println(prdouctImgMap);
 		return sqlSession.update("image.modifyProductImg", prdouctImgMap);
 	}
 

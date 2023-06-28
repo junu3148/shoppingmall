@@ -42,7 +42,7 @@
 			
 			update product_image set
                         			save_name = #{saveName}  
-                 			  where image_no = #{imageNo}
+                 			  where PRODUCT_NO = #{productNo}
 		
 		]]>
 	

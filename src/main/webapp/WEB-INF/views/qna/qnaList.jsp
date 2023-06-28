@@ -247,7 +247,7 @@
 				src="images/ver02/close.png" alt=""></a>
 			<div class="inquiry_write">
 				<h3>문의</h3>
-				<form id="moveForm"
+				<form id="moveForm1"
 					action="${pageContext.request.contextPath}/QnA/insertQnA"
 					method="get">
 					<table>
@@ -306,7 +306,7 @@
 						<tr>
 							<th><label for="inquiry_cont">답변내용</label></th>
 							<td><input id="customerNo" type="hidden" name="qnANo"
-								value=""> <textarea name="content" id="inquiry_cont"
+								value=""> <textarea name="content" id="inquiry_cont2"
 									required></textarea>
 								<div class="textLengthWrap">
 									<span class="textCount">0자</span> <span class="textTotal">/
@@ -352,12 +352,25 @@
 	});
 	//문의글 등록
 	$("#submitqna").on("click", function() {
-		$("#moveForm").submit();
+		
+		event.preventDefault(); 
+		if ($("#inquiry_tit").val() != ""
+			&& $("#inquiry_cont").val() != "") {
+		$("#moveForm1").submit();
+		}else {
+			alert("내용을 입력해주세요.");
+		}
+	
 	});
 
 	//문의 답글 등록
 	$("#submitqna2").on("click", function() {
+		
+		if ($("#inquiry_cont2").val() != "") {
 		$("#moveForm2").submit();
+		}else {
+			alert("내용을 입력해주세요.");
+		}
 	});
 
 	// 문의 답글창 띄우기
@@ -368,15 +381,10 @@
 	});
 
 	//문의 답글창 취소버튼
-	$("#inquiry_popup2 .btn_wrap .shopping_btn")
-			.on(
-					"click",
-					function() {
-						$('#inquiry_popup2').hide();
-						$(
-								'#inquiry_popup2 input[type="text"], #inquiry_popup2 textarea')
-								.val(''); // Clear input fields
-						$('body').removeClass('no-scroll');
-					});
+	$("#inquiry_popup2 .btn_wrap .shopping_btn").on("click",function() {
+		$('#inquiry_popup2').hide();
+		$('#inquiry_popup2 input[type="text"], #inquiry_popup2 textarea').val(''); // Clear input fields
+		$('body').removeClass('no-scroll');
+	});
 </script>
 </html>

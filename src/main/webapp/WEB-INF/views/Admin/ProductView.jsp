@@ -86,6 +86,9 @@
 #inquiry_popup input {
 	width: 450px;
 }
+#inquiry_popup2 input {
+	width: 450px;
+}
 </style>
 </head>
 <body>
@@ -147,8 +150,8 @@
 										value="${pageMaker.cri.keyword}" />
 										<button type="submit" class="btn btn-secondary" id="Search">Search</button>
 									</td>
-									<td><a class="btn btn-primary"
-										href="${pageContext.request.contextPath}/product/insertProductForm"
+									<td><a class="btn btn-primary" id="Insert"
+										href="#none"
 										role="button">Insert</a></td>
 								</tr>
 
@@ -253,6 +256,70 @@
 								name="maxPrice" value="${pageMaker.cri.maxPrice}">
 						</form>
 					</div>
+					
+					
+					<!-- 상품 등록 -->
+					<section id="inquiry_popup2" class="inquiry_popup inquiry_popup2"
+						style="display: none;">
+						<a href="#none" class="inquiry_close"><img
+							src="images/ver02/close.png" alt=""></a>
+						<div class="inquiry_write inquiry_write2">
+							<h3>상품 등록</h3>
+							<form id="insertProductForm"
+								action="${pageContext.request.contextPath}/product/insertProduct"
+								method="POST" enctype="multipart/form-data">
+								<table>
+									<tr>
+										<td rowspan="8" width="30%" style="text-align: center;"><img
+											id="preview2"
+											src="${pageContext.request.contextPath}/assets/images/sns4.png"
+											width="100%"><br> <br> <br> <b>이미지
+												미리보기</b></td>									
+									</tr>
+									<tr>
+										<td style="text-align: center;">제품명</td>
+										<td><input type="text" id="productName2"
+											name="productName" required></td>
+									</tr>
+
+									<tr>
+										<td style="text-align: center;">수량</td>
+										<td><input type="number" id="productEa2" name="productEa"
+											min="1"	required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">가격</td>
+										<td><input type="number" id="price2" name="price"
+											min="3000" step="100" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">상품 정보</td>
+										<td><input type="text" id="productContent2"
+											name="productContent" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">카테고리</td>
+										<td><input type="text" id="category2" name="category"
+											required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">서브 카테고리</td>
+										<td><input type="text" id="subCategory2"
+											name="subCategory" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">제품사진</td>
+										<td><input id="file2" type="file" name="file" required></td>
+									</tr>
+								</table>
+								<div class="btn_wrap">
+									<a id="insertProduct" href="#none" class="order_btn">등록</a> <a
+										href="#none" class="shopping_btn">취소</a>
+								</div>
+
+							</form>
+						</div>
+					</section>
 
 					<!-- 상품정보 수정 -->
 					<section id="inquiry_popup" class="inquiry_popup"
@@ -268,12 +335,12 @@
 									<tr>
 										<td rowspan="8" width="30%" style="text-align: center;"><img
 											id="preview"
-											src="${pageContext.request.contextPath}/assets/images/sns4.png"
+											src=""
 											width="100%"><br> <br> <br> <b>이미지
 												미리보기</b></td>
 										<td style="text-align: center;">제품번호</td>
-										<td><input type="text" id="productNo" name="productNo"
-											required></td>
+										<td ><input type="text" id="productNo" name="productNo"
+											readonly></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">제품명</td>
@@ -284,7 +351,7 @@
 									<tr>
 										<td style="text-align: center;">수량</td>
 										<td><input type="number" id="productEa" name="productEa"
-											required></td>
+											min="1"	required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">가격</td>
@@ -312,10 +379,10 @@
 									</tr>
 								</table>
 								<div class="btn_wrap">
-									<a id="modifyProduct" href="#none" class="order_btn">등록</a> <a
-										href="#none" class="shopping_btn">취소</a>
+									<a id="modifyProduct" href="#none" class="order_btn">수정</a>
+									<a id="deleteProduct" href="#none" class="order_btn">삭제</a>
+									<a href="#none" class="shopping_btn">취소</a>
 								</div>
-
 							</form>
 						</div>
 					</section>
@@ -350,6 +417,8 @@
 			$("#moveForm input[name='pageNum']").val(pageNum);
 			$("#moveForm").submit();
 		});
+		
+		//------------------------------------- 검색 제이쿼리 ----------------
 		//옵션 변경시 검색어 비우기
 		$(".form-select").on('click', function() {
 
@@ -374,9 +443,95 @@
 			alert("검색 옵션을 선택해 주세요");
 		}
 	});
+	
+	//------------------------------------- 상품 등록 제이쿼리 ----------------
+	
+	//상품 등록창 열기
+	$("#Insert").on("click",function(){
+		
+		$("#inquiry_popup2").show();
+		
+	});
+	
+	//상품 등록창 취소버튼
+	$(".btn_wrap .shopping_btn").on("click",function() {
+		$('#inquiry_popup2').hide();
+		$('body').removeClass('no-scroll');
+		$("#productName2").val("");
+		$("#productEa2").val("");
+		$("#price2").val("");
+		$("#productContent2").val("");
+		$("#category2").val("");
+		$("#subCategory2").val("");
+		$("#file2").val("");
+		$("#preview2").attr("src", "${pageContext.request.contextPath}/assets/images/sns4.png");
+	});
+	
+	//상품 등록
+	$("#insertProduct").on("click", function(event) {
+		event.preventDefault(); 
+		if ($("#productName2").val() != ""
+			&& $("#productEa2").val() != ""
+			&& $("#price2").val() != ""
+			&& $("#productContent2").val() != ""
+			&& $("#category2").val() != ""
+			&& $("#subCategory2").val() != ""
+			&& $("#file2").val() != "") {
+			console.log("dd");
+		$("#insertProductForm").submit();
+		}else {
+			if ($("#file2").val() == "") {
+				alert("파일을 등록해주세요.");
+			} else {
+				alert("내용을 입력해주세요.");
+			}
+		}
+	
+	});
+	
+	// 파일 미리보기 이벤트
+	$("#file2").on("change", function(event) {
+		console.log("파일 체인지");
 
+		var file = event.target.files[0];
+
+		// 확장자 확인
+		if (!isImageFile(file)) {
+			alert("사진 파일만 올려주세요");
+
+			// 파일 사이즈 확인
+			if (isOverSize(file)) {
+				alert("파일 사이즈가 너무 큽니다.");
+
+			}
+		} else {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+
+				$("#preview2").attr("src", e.target.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	});
+
+	// 확장자가 이미지 파일인지 확인
+	function isImageFile(file) {
+		var ext = file.name.split(".").pop().toLowerCase(); // 파일명에서 확장자를 가져온다.
+		return [ "jpg", "jpeg", "gif", "png" ].includes(ext);
+	}
+
+	// 파일의 최대 사이즈 확인
+	function isOverSize(file) {
+		var maxSize = 3 * 1024 * 1024; // 3MB로 제한
+		return file.size > maxSize;
+	}
+	
+
+	//------------------------------------- 상품 수정 제이쿼리 ----------------
+	
 	// 상품 수정창 띄우기
-	$(".btn-primary").on(
+	$(".table-striped .btn-primary").on(
 			"click",
 			function() {
 
@@ -396,34 +551,39 @@
 				$("#productContent").val(productContent);
 				$("#category").val(category);
 				$("#subCategory").val(subCategory);
-				$("#preview")
-						.attr(
-								"src",
-								"${pageContext.request.contextPath}/upload/"
-										+ saveName);
+				$("#preview").attr("src","${pageContext.request.contextPath}/upload/"+ saveName);
+				$("#deleteProduct").attr("href","${pageContext.request.contextPath}/product/deleteProduct/"+productNo);
 
 				$("#inquiry_popup").show();
 
 			});
-
+	
 	//상품 수정 등록
 	$("#modifyProduct").on("click", function() {
+		
+		event.preventDefault(); 
+		if ($("#productName").val() != ""
+			&& $("#productEa").val() != ""
+			&& $("#price").val() != ""
+			&& $("#productContent").val() != ""
+			&& $("#category").val() != ""
+			&& $("#subCategory").val() != "") {
+	
 		$("#modifyProductForm").submit();
+		}else {
+			alert("내용을 입력해주세요.");
+		}
+		
+		
 	});
 
 	//상품 수정창 취소버튼
-	$(".btn_wrap .shopping_btn")
-			.on(
-					"click",
-					function() {
-						$('#inquiry_popup').hide();
-						$(
-								'#inquiry_popup input[type="text"], #inquiry_popup2 textarea')
-								.val('');
-						$('body').removeClass('no-scroll');
-						$("#file").val("");
-
-					});
+	$(".btn_wrap .shopping_btn").on("click",function() {
+		$('#inquiry_popup').hide();
+		$('#inquiry_popup input[type="text"], #inquiry_popup2 textarea').val('');
+		$('body').removeClass('no-scroll');
+		$("#file").val("");
+	});
 
 	// 파일 미리보기 이벤트
 	$("#file").on("change", function(event) {

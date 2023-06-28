@@ -46,6 +46,7 @@ public class QnAController {
 	@RequestMapping(value = "/insertQnA", method = RequestMethod.GET)
 	public String insertQnA(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnA()");
+		System.out.println(vo);
 	
 		int result = qnAService.insertQnA(vo);
 		

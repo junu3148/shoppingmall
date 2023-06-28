@@ -204,6 +204,7 @@ header.mo #header .middle_menu ul li a::before{content: "-"; margin-right: 5px;}
 #inquiry .inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
 #inquiry .inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
 #inquiry .inquiry_popup .inquiry_write td textarea#inquiry_cont{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+#inquiry .inquiry_popup .inquiry_write td textarea#inquiry_cont2{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
 #inquiry .inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
 
 
