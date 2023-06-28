@@ -160,18 +160,26 @@ public class ProductService {
 		
 		Map<String, Object> productPageInfo = new HashMap<>();
 		ProductVO productInfo = productDAO.getProduct(productVO);
+		
 		/* paging 을 위해 productNo의 리뷰 cnt 를 알아와야 함*/
 		/* 알아온 다음 페이징 객체를 이용하여 리뷰 리스트 가져옴*/
 		/* 돌아온 리뷰 리스트 사이즈만큼 for문을 돌려서 리뷰 객체에 해당하는 코멘트 객체를 넣음*/
-		int totalCnt = reviewDAO.getReviewCnt(productVO);
-		PagingVO pagingVO = new PagingVO(selectReviewPage, totalCnt, productVO.getProductNo() + "",null);
-		System.out.println("리뷰 페이징 정보 확인" + pagingVO);
-		List<ReviewVO> reviewList = reviewDAO.getReviewList(pagingVO);
-		for(int i = 0; i<reviewList.size(); i++) {
-		List<CommentVO> commentList = reviewDAO.getReviewComment(reviewList.get(i));
+		
+		int totalCnt = reviewDAO.getReviewCnt(productVO); // 페이징 객체 사용을 위한 
+		PagingVO pagingVO = new PagingVO(selectReviewPage, totalCnt, productVO.getProductNo() + "",null); //페이징 객체 생성
+
+		List<ReviewVO> reviewList = reviewDAO.getReviewList(pagingVO); //페이징 처리된 리뷰 리스트 받아옴
+		
+		for(int i = 0; i<reviewList.size(); i++) { // 돌아온 리뷰 리스트 사이즈만큼 반복문 돌림
+		
+		//ReviewVO 안의 ReviewNo 으로 comment 리스트 불러와서
+		List<CommentVO> commentList = reviewDAO.getReviewComment(reviewList.get(i)); 
+		//ReviewVO 안에 담아준다.
 		reviewList.get(i).setComment(commentList);
+		
 		}
 		
+		//내보내기
 		productPageInfo.put("product", productInfo);
 		productPageInfo.put("paging", pagingVO);
 		productPageInfo.put("review",reviewList);
