@@ -58,5 +58,41 @@
 	]]>
 </select>
 
+<insert id ="insertReview" parameterType ="CommentVO" >
+	<selectKey resultType="int" order="BEFORE" keyProperty="commentNo">
+		select seq_review_comment_no.nextval from dual 
+	</selectKey>
+		<![CDATA[
+			insert into review_comment 
+				(review_comment_no
+				,review_no
+				,customer_no
+				,content
+				,reg_date
+				)
+			values 
+				(
+				#{commentNo}
+				,#{reviewNo}
+				,#{customerNo}
+				,#{content}
+				,sysdate
+				)
+		]]>
+</insert>
+
+<select id ="getReviewComment" parameterType ="CommentVO" resultType ="CommentVO">
+	<![CDATA[
+		select 
+			review_comment_no as commentNo
+			,a.customer_no as customerNo
+			, customer_name as customerName
+			, content
+			, reg_date as  regDate
+		from review_comment a join customer b 
+		on a.customer_no = b.customer_no 
+		where review_comment_no = #{commentNo}
+	]]>
+</select>
 
 </mapper>

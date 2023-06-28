@@ -26,6 +26,8 @@ public class ReviewController {
 		
 		CommentVO returnVO = reviewService.addComment(commentVO);
 		
+		jsonResult.success(returnVO);
+		
 		return jsonResult;
 	}
 	

@@ -17,9 +17,9 @@ public class ReviewService {
 		System.out.println("서비스까지 넘어온 코멘트 객체 " + commentVO);
 		/*insert 해서 받아온 객체 no을 이용해 다시 불러올 예정임*/
 		reviewDAO.insertComment(commentVO);
+		CommentVO returnVO = reviewDAO.getReviewComment(commentVO);
 		
-		
-		return null;
+		return returnVO;
 	}
 	
 }

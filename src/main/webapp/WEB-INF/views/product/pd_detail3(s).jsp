@@ -238,7 +238,7 @@
 							</c:if>
 						</c:forEach>						
 						</div>
-						<h1>${review.title}</h1>
+						<h3>${review.title}</h3>
 						<hr>
 						<div>
 						<c:if test="${review.saveName != null}">
@@ -246,20 +246,20 @@
 						</c:if>
 						</div>
 						<div>${review.content}</div>
-						<input type ="hidden" name = "review_no" value ="${review.reviewNo}">
 						</div>
 						<div class="reple">
+						<input type ="hidden" name = "review_no" value ="${review.reviewNo}">
 							<div class="text">
 								<p>댓글 <span class="comment_cnt">(${fn:length(review.comment)})</span></p>
 								<textarea class= "add_comment" style ="width:70%; height:100%"></textarea>
 								<button class ="add_comment_btn" >등록</button>
 							</div>
 							<div class="reple_child">
-								<ul>
 									<c:forEach items = "${review.comment}" var = "comment">
-									<li>${comment.customerName} : ${comment.content}</li>
-									</c:forEach>
+								<ul>
+									<li>${comment.customerName} : ${comment.content}</li>		
 								</ul>
+									</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -328,9 +328,18 @@ $('.add_comment_btn').on("click", function(){
 	
 	var content = $('.add_comment').val()
 	var customerNo = ${authCustomer.customerNo}
-	var reviewNo = $(this).closest('.review_area').find('input[name="review_no"]').val();
-	 console.log(reviewNo);
-	console.log(reviewNo);
+	var reviewNo = $(this).closest('.reple').find('input[name="review_no"]').val();
+	var reple_render = 	$(this).closest(".reple").find(".reple_child");
+	var commentCnt = 	$(this).closest(".reple").find(".comment_cnt");
+	var commentCntInt = parseInt($(this).closest(".reple").find(".comment_cnt").text());
+	var result = parseInt(commentCnt);
+	var result2 = commentCnt + 1;
+	
+	
+	 console.log(commentCntInt  + "이건 왜 [/..]");
+	console.log(commentCnt  + '코멘트 숫자 선택자 확인');
+	console.log(result  + '코멘트 숫자 선택자 확인');
+	console.log(result2  + '코멘트 숫자 선택자 확인');
 	
 	if(content.length < 3){
 		alert('댓글은 네 글자 이상 입력해주세요.');
@@ -350,8 +359,21 @@ $('.add_comment_btn').on("click", function(){
 			data : CommentVO,
 			dataType : "json",
 			success : function(jsonResult) {
-
-
+				
+				var comment = jsonResult.data;
+					
+				
+				console.log(comment);					
+				console.log(reple_render);		
+			
+				var str = "";
+				str += "<ul class= 'reple_child'>";		
+				str += "<li>";		
+				str += comment.customerName + " : " + comment.content + "</li>";
+				str += "</ul>";		
+				
+				reple_render.prepend(str);
+				commentCnt1.text(commentCntInt+1);
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
@@ -465,6 +487,10 @@ $('.add_comment_btn').on("click", function(){
 
 		$(".total_price").text(set_price);
 	}
+	
+	
+	
+	
 </script>
 
 </html>

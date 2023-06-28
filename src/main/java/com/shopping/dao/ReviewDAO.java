@@ -43,8 +43,18 @@ public class ReviewDAO {
 	
 	public void insertComment(CommentVO commentVO) {
 		
-		//int row = session.insert("review.insertReview", commentVO);
+		int row = session.insert("review.insertReview", commentVO);
 		System.out.println("여기까지 넘어오나요 확인? " + commentVO);
+		System.out.println("인서트 성공했나요 확인 : " + row);
+	}
+	
+	public CommentVO getReviewComment(CommentVO commentVO) {
 		
+		System.out.println("리뷰 코멘트 가져올 객체 정보 확인 : " + commentVO);
+		CommentVO returnVO = session.selectOne("review.getReviewComment", commentVO);
+		
+		System.out.println("에이잭스로 그릴 코멘트 객체 정보 확인 : " + returnVO);
+		
+		return returnVO;
 	}
 }
