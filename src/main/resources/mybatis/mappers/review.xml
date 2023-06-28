@@ -19,6 +19,8 @@
 		select
    			 rownum
     		,customer_name as customerName
+    		,product_no as productNo
+    		,customer_no as customerNo
    			 ,grade
    			 ,review_no as reviewNo
     		,like_cnt as likeCnt
@@ -29,6 +31,8 @@
 		from
 			(select
    				 customer_name
+   				 ,product_no
+   				 ,a.customer_no
     			 ,grade
    				 ,a.review_no
     			 ,like_cnt
@@ -48,6 +52,7 @@
 	<![CDATA[
 		select
     		review_comment_no as commentNo
+    		,a.customer_no as customerNo
    		 	,c.customer_name as customerName
     		,a.content as content
     		,a.reg_date as regDate
@@ -94,5 +99,25 @@
 		where review_comment_no = #{commentNo}
 	]]>
 </select>
+
+<delete id ="deleteReview" parameterType ="ReviewVO">
+	<![CDATA[
+		delete review where review_no = #{reviewNo}
+	]]>
+</delete>
+
+<delete id = "deleteComment" parameterType ="CommentVO">
+	<![CDATA[
+		delete review_comment where review_comment_no = #{commentNo}
+	]]>
+</delete>
+
+<update id ="addLikeCnt" parameterType ="ReviewVO">
+	<![CDATA[
+		update review 
+			set like_cnt = like_cnt + 1 
+		where review_no = #{reviewNo}
+	]]>
+</update>
 
 </mapper>

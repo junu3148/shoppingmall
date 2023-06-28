@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -59,8 +59,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-
-
 .review_box {
 	margin: 13%;
 }
@@ -86,52 +84,90 @@
 	display: table;
 	clear: both;
 }
-      .content {
-        display: flex;
-        justify-content: space-between;
-        font-size:20px;
-      }
 
-      .left {
-        flex: 1;
-        padding:1%;
-      }
+.content {
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+}
 
-      .right {
-        margin-left: auto;
-        padding: 20px;
-      }
+.left {
+	flex: 1;
+	padding: 1%;
+}
 
-      .reple {
-        display: none;
-      }
+.right {
+	margin-left: auto;
+	padding: 20px;
+}
 
-      .reple {
-        display: none;
-      }
-      .reple_child {
-        margin-top: 20px;
-      }
-      .text{
-        position: relative;        
-      }
-      .add_comment_btn{
-        position: absolute;
-        bottom: 5px;
-        margin-bottom: 0;
-        left:72%;
-	 	background: #4982cf; 
-	 	border: 1px solid #4982cf; 
-	 	color: #fff;      
-      }
-      
-  
-      .add_comment{
-       width:50%;
-      }
-#review_img{ width:100px;}
-#grade_star{width:20px;}
-.comment_cnt{color:#4982cf;}
+.reple {
+	display: none;
+}
+
+.reple {
+	display: none;
+}
+
+.reple_child {
+	margin-top: 20px;
+}
+
+.text {
+	position: relative;
+}
+
+.add_comment_btn {
+	position: absolute;
+	bottom: 5px;
+	margin-bottom: 0;
+	left: 72%;
+	background: #4982cf;
+	border: 1px solid #4982cf;
+	color: #fff;
+}
+
+.order_btn {
+	background: #4982cf;
+	border: 1px solid #4982cf;
+	color: #fff;
+	padding: 15px 50px;
+	margin: 0 5px;
+	font-weight: 600;
+}
+
+.add_comment {
+	width: 50%;
+}
+
+#review_img {
+	width: 100px;
+}
+
+#grade_star {
+	width: 20px;
+}
+
+.comment_cnt {
+	color: #4982cf;
+}
+
+.delete_icon {
+	width: 20px;
+}
+
+.delete_icon2 {
+	width: 15px;
+	margin-left: auto;
+	align-items: center;
+}
+
+.review_paging {
+	margin: 10%;
+	text-align: center;
+}
+.like_cnt{float: right;}
+.heart_icon{width:20px;}
 </style>
 
 </head>
@@ -143,12 +179,13 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
 
-
 	<main id="pd_detail">
 
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
-				<img src="${pageContext.request.contextPath}/upload/${product.saveName}" alt="${product.productName}">
+				<img
+					src="${pageContext.request.contextPath}/upload/${product.saveName}"
+					alt="${product.productName}">
 			</div>
 			<div class="info_wrap">
 				<div class="title">
@@ -170,39 +207,46 @@
 								있습니다.(+5,000원)</span></li>
 						<li>쇼핑에 참고 부탁드립니다. ^_^</li>
 					</ul>
-					<input type="text" value="${product.price}" id="price">
+					<input type="hidden" value="${product.price}" id="price">
 					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
+					<form action="${pageContext.request.contextPath}/cart/addOrderOne"
+						method="get" class="addOrderOne">
+						<div class="pd_num clear">
+							<p>수량</p>
+							<div class="count-wrap _count">
+								<button type="button" class="minus">-</button>
+								<input type="text" class="inp" name="productEa" value="1" />
+								<!-- 변경되는 숫자 -->
+								<button type="button" class="plus">+</button>
+							</div>
 
-					<div class="pd_num clear">
-						<p>수량</p>
-						<div class="count-wrap _count">
-							<button type="button" class="minus">-</button>
-							<input type="text" class="inp" value="1" />
-							<!-- 변경되는 숫자 -->
-							<button type="button" class="plus">+</button>
+
+							<!--  바뀔 금액 자리 -->
+							<span class="total_price"></span>
 						</div>
 
-
-						<!--  바뀔 금액 자리 -->
-						<span class="total_price"></span>
-					</div>
-
-					<div class="total_price_wrap">
-						<p>
-							총 상품금액(<span id="selectEA">1</span>개)
-						</p>
+						<div class="total_price_wrap">
+							<p>
+								총 상품금액(<span id="selectEA">1</span>개)
+							</p>
 
 
-						<!--  바뀔 금액 자리 -->
-						<p class="total_price"></p>
-					</div>
+							<!--  바뀔 금액 자리 -->
+							<p class="total_price"></p>
+							<input type="hidden" name="totalPrice" id="total_price">
+							<input type="hidden" name="productNo" id="productNo"
+								value="${product.productNo}"> <input type="hidden"
+								name="customerNo" id="customerNo"
+								value="${authCustomer.customerNo}">
+						</div>
 
-					<div class="btn_wrap">
-						<a href="#none" class="order_btn data-set">구매하기</a> <a
-							href="#none" class="shopping_btn data-set" id="cart-btn"
-							data-productno="${product.productNo}"
-							data-cusno="${authCustomer.customerNo}">장바구니</a>
-					</div>
+						<div class="btn_wrap">
+							<button type="submit" class="order_btn data-set">구매하기</button>
+							<a href="#none" class="shopping_btn data-set" id="cart-btn"
+								data-productno="${product.productNo}"
+								data-cusno="${authCustomer.customerNo}">장바구니</a>
+						</div>
+					</form>
 
 
 				</div>
@@ -223,57 +267,118 @@
 				<br> <br>
 				<div class="black_line"></div>
 			</div>
-	
-		<!-- 반복될 리뷰 창 -->
-		<c:forEach items= "${review}" var ="review">
- 			<div class="review_content_box">
-				<div class="content">
-					<div class="left">
-						<div class="review_area">
-						<div>
-						<c:set var="endValue" value="${review.grade-1}" />
-						<c:forEach begin = "0" end = "${endValue}">
-						<c:if test = "${review.grade != 0}"> 
-							<img src = "${pageContext.request.contextPath}/assets/images/star.png" id = "grade_star" >
-							</c:if>
-						</c:forEach>						
-						</div>
-						<h3>${review.title}</h3>
-						<hr>
-						<div>
-						<c:if test="${review.saveName != null}">
-						<img src = "${pageContext.request.contextPath}/upload/${review.saveName}" id ="review_img" >
-						</c:if>
-						</div>
-						<div>${review.content}</div>
-						</div>
-						<div class="reple">
-						<input type ="hidden" name = "review_no" value ="${review.reviewNo}">
-							<div class="text">
-								<p>댓글 <span class="comment_cnt">(${fn:length(review.comment)})</span></p>
-								<textarea class= "add_comment" style ="width:70%; height:100%"></textarea>
-								<button class ="add_comment_btn" >등록</button>
-							</div>
-							<div class="reple_child">
-									<c:forEach items = "${review.comment}" var = "comment">
-								<ul>
-									<li>${comment.customerName} : ${comment.content}</li>		
-								</ul>
+
+			<!-- 반복될 리뷰 창 -->
+
+			<c:forEach items="${review}" var="review">
+				<div class="review_content_box">
+					<div class="content">
+						<div class="left">
+							<div class="review_area">
+								<div>
+									<c:set var="endValue" value="${review.grade-1}" />
+									<c:forEach begin="0" end="${endValue}">
+										<c:if test="${review.grade != 0}">
+											<img
+												src="${pageContext.request.contextPath}/assets/images/star.png"
+												id="grade_star">
+										</c:if>
 									</c:forEach>
+								</div>
+								<h3>${review.title}</h3>
+								<hr>
+								<div>
+									<c:if test="${review.saveName != null}">
+										<img
+											src="${pageContext.request.contextPath}/upload/${review.saveName}"
+											id="review_img">
+									</c:if>
+								</div>
+								<div>${review.content} 
+								
+								<!-- 좋아요 누르기 -->
+								
+								<span class = "like_cnt" data-reviewno = "${review.reviewNo}">  
+									<img src="${pageContext.request.contextPath}/assets/images/heart.png" class= "heart_icon">
+  										<span class="like_cnt_ea">${review.likeCnt}</span></span>
+								</div>
+							</div>
+							<div class="reple">
+								<input type="hidden" name="review_no" value="${review.reviewNo}">
+								<div class="text">
+									<p>
+										댓글 <span class="comment_cnt">(${fn:length(review.comment)})</span>
+									</p>
+									<textarea class="add_comment" style="width: 70%; height: 100%"></textarea>
+									<button class="add_comment_btn" data-authno = ${authCustomer.customerNo}>등록</button>
+								</div>
+								<div class="reple_child">
+									<c:forEach items="${review.comment}" var="comment">
+										<ul id = "c${comment.commentNo}">
+											<li>${comment.customerName}: ${comment.content}
+												<c:if test= "${comment.customerNo == authCustomer.customerNo}"> 
+												<a class="comment_delete_modal_btn" data-commentno = "${comment.commentNo}"> 
+													<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png" class="delete_icon2">
+												</a>
+												</c:if>
+											</li>
+										</ul>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
+						<div class="right">
+							<p>${review.customerName}
+								&nbsp; &nbsp; &nbsp;
+								<c:if test="${authCustomer.customerNo == review.customerNo}">
+									<!-- 리뷰 삭제하기 X 버튼  //  로그인한 유저넘버와 리뷰를 작성한 유저 넘버가 같을 때 볼 수 있다.-->
+									<a class="delete_review_button"
+										data-reviewno="${review.reviewNo}"
+										data-productno="${review.productNo}"> <img
+										src="${pageContext.request.contextPath}/assets/images/delete.png"
+										class="delete_icon">
+									</a>
+									<!-- 리뷰 삭제하기 X 버튼 -->
+								</c:if>
+							</p>
+							<p>${review.regDate}</p>
+						</div>
 					</div>
-					<div class="right">
-						<p>${review.customerName}</p>
-						<p>${review.regDate}</p>
-					</div>
+					<div class="black_line"></div>
 				</div>
-					<div class= "black_line"></div>
-			</div>
 			</c:forEach>
-		<!-- 반복될 리뷰들 end -->
+			<!-- 반복될 리뷰들 end -->
 			<!-- 리뷰 넣을 공간 -->
+
+			<!-- 리뷰 페이징 시작 -->
+			<div class="review_paging">
+
+				<c:if test="${paging.selectPage >10}">
+					<a class="review_paging"
+						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.startPageNum - 1}">
+						◀ </a>
+				</c:if>
+
+				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}"
+					var="page">
+					<c:if test="${page <= paging.finalPage}">
+						<a class="review_paging"
+							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${page}">${page}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${paging.next == true}">
+					<a class="review_paging"
+						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.endPageNum + 1}">
+						▶ </a>
+				</c:if>
+
+			</div>
+			<!-- 리뷰 페이징 끝 -->
+
+
+
 		</div>
+		<!-- review_box end -->
 
 
 
@@ -293,6 +398,8 @@
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
+
+	<!-- 장바구니 추가 모달 -->
 	<div class="modal" tabindex="-1" id="Cart-modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -314,20 +421,165 @@
 			</div>
 		</div>
 	</div>
+	<!-- 장바구니 추가 모달 -->
+
+	<!-- 리뷰 삭제 확인 모달 -->
+	<div class="modal" tabindex="-1" id="review_modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">알림</h5>
+				</div>
+				<div class="modal-body">
+					<span id="howAdd">정말 삭제하시겠습니까? <br> 삭제한 리뷰는 다시 복구할 수
+						없습니다.
+					</span>
+				</div>
+				<form
+					action="${pageContext.request.contextPath}/review/deleteReview">
+					<div class="modal-footer">
+						<input type="text" value="" name="reviewNo" id="delete_No">
+						<input type="text" value="" name="productNo" id="product_No">
+						<button type="submit" class="btn btn-primary">글 삭제하기</button>
+						<button type="button" class="btn btn-secondary close_modal"
+							data-bs-dismiss="modal">닫기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
+	<!-- 리뷰 삭제 확인 모달 -->
+	
+	<!-- 리뷰 코멘트 삭제 모달 -->
+	<div class="modal" tabindex="-1" id="comment_modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">알림</h5>
+				</div>
+				<div class="modal-body">
+					<span id="howAdd">정말 삭제하시겠습니까? <br> 삭제한 댓글은 다시 복구할 수
+						없습니다.
+					</span>
+				</div>
 
-
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary comment_delete_btn">글 삭제하기</button>
+						<button type="button" class="btn btn-secondary close_modal"
+							data-bs-dismiss="modal">닫기</button>
+					</div>
+			</div>
+		</div>
+	</div>
+<!-- 리뷰 코멘트 삭제 모달 -->
 
 
 </body>
 
 <script>
 
+$('.like_cnt').on("click", function(){
+	
+	var reviewNo = $(this).data('reviewno');
+	var updateCnt = parseInt($(this).find('.like_cnt_ea').text()) + 1;
+	var likeCnt = $(this).find('.like_cnt_ea')
+	
+	console.log(reviewNo);
+	console.log(updateCnt);
+	
+	ReviewVO = {
+			
+			reviewNo : reviewNo
+	}
+	
+	$.ajax({
+		//요청 세팅(보낼 때--!)
+		url : "${pageContext.request.contextPath}/review/addLikeCount",
+		type : "post", 
+		data : ReviewVO,
+		dataType : "json",
+		success : function(jsonResult) {
+		
+			if(jsonResult.data == true){
+				likeCnt.text(updateCnt);
+			}
+
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	}); //ajax end	
+	
+	
+});
+
+
+$('.comment_delete_modal_btn').on("click", function(){
+	
+		$('#comment_modal').modal('show');
+	    var commentNo =	$(this).data('commentno');
+	    $('.comment_delete_btn').attr("data-commentno",commentNo);
+	    
+});
+
+$('.comment_delete_btn').on("click", function(){
+	
+	var commentNo =	$(this).data('commentno');
+	
+	console.log(commentNo);
+	
+	CommentVO = {
+			commentNo : commentNo
+	}
+
+	$.ajax({
+		//요청 세팅(보낼 때--!)
+		url : "${pageContext.request.contextPath}/review/deleteComment",
+		type : "post", 
+		data : CommentVO,
+		dataType : "json",
+		success : function(jsonResult) {
+			
+			if(jsonResult.data == true){
+				$('#comment_modal').modal('hide');
+				$('#c'+ commentNo).remove();
+				alert('삭제되었습니다.')
+			}
+
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	}); //ajax end	
+	
+});
+
+
+$('.delete_review_button').on("click", function(){
+	
+	var reviewNo = $(this).data('reviewno');
+	var productNo = $(this).data('productno');
+	console.log(reviewNo)
+	
+	$('#review_modal').modal('show');
+	$('#delete_No').val(reviewNo);
+	$('#product_No').val(productNo);
+	
+}); //리뷰 삭제 버튼 클릭 이벤트 end
+
+$('.close_modal').on("click", function(){
+	$('#review_modal').modal('hide');
+	$('#comment_modal').modal('hide');
+	
+});
+
 $('.add_comment_btn').on("click", function(){
 	
 	var content = $('.add_comment').val()
-	var customerNo = ${authCustomer.customerNo}
+	var  customerNo = $(this).data('authno');
+	//var customerNo = ${authCustomer.customerNo}
 	var reviewNo = $(this).closest('.reple').find('input[name="review_no"]').val();
 	var reple_render = 	$(this).closest(".reple").find(".reple_child");
 	var commentCnt = 	$(this).closest(".reple").find(".comment_cnt");
@@ -335,8 +587,8 @@ $('.add_comment_btn').on("click", function(){
 	var result = parseInt(commentCnt);
 	var result2 = commentCnt + 1;
 	
-	
-	 console.log(commentCntInt  + "이건 왜 [/..]");
+	console.log('가져온 data 확인' + customerNo)
+	console.log(commentCntInt  + "이건 왜 [/..]");
 	console.log(commentCnt  + '코멘트 숫자 선택자 확인');
 	console.log(result  + '코멘트 숫자 선택자 확인');
 	console.log(result2  + '코멘트 숫자 선택자 확인');
@@ -365,15 +617,22 @@ $('.add_comment_btn').on("click", function(){
 				
 				console.log(comment);					
 				console.log(reple_render);		
-			
+
 				var str = "";
-				str += "<ul class= 'reple_child'>";		
+				str += "<ul id='c" + comment.commentNo + "'>";		
 				str += "<li>";		
-				str += comment.customerName + " : " + comment.content + "</li>";
+				str += comment.customerName + " : " + comment.content;
+				str += "<c:if test='${comment.customerNo == authCustomer.customerNo}'>";
+				str += "<a class='comment_delete_modal_btn' data-commentno='" + comment.commentNo + "'>"; 
+				str += "<img src='${pageContext.request.contextPath}/assets/images/delete_gray.png' class='delete_icon2'>";
+				str += "</a>";		
+				str += "</c:if>";		
+				str += "</li>";		
 				str += "</ul>";		
 				
 				reple_render.prepend(str);
 				commentCnt1.text(commentCntInt+1);
+
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
@@ -383,7 +642,8 @@ $('.add_comment_btn').on("click", function(){
 	}//댓글 글자수 검증 end
 }); //리플 추가 에이잭스
 	
-	$('.review_area').on("click", function(){
+
+$('.review_area').on("click", function(){
 		
 		console.log('test');
 		var reple	=	$(this).siblings('.reple');
@@ -398,9 +658,7 @@ $('.add_comment_btn').on("click", function(){
 		}
 	}); //content 클래스 클릭 이벤트 발생
 
-
 	$(window).on("load", function() {
-		
 
 		updateTotalPrice();
 
@@ -447,14 +705,16 @@ $('.add_comment_btn').on("click", function(){
 				console.log(CartVO)
 
 				$.ajax({
+					//요청 세팅(보낼 때--!)
 					url : "${pageContext.request.contextPath}/cart/addCart",
-					type : "post",
-					data : CartVO,
+					type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+					//  ㄴ---> 전송하는 데이터타입 지정 지금은 파라미터로 보내는 거라 사용 X
+					data : CartVO, //json형식으로 변환해서 보냄
 
 					dataType : "json",
-					success : function(jsonResult) {
+					success : function(jasonResult) {
 
-						var howAdd = jsonResult.data
+						var howAdd = jasonResult.data
 						$('#howAdd').text(howAdd + '개의 제품을 성공적으로 카트에 추가했습니다.');
 						$('#Cart-modal').modal('show');
 					},
@@ -466,13 +726,24 @@ $('.add_comment_btn').on("click", function(){
 			;//if~login user addcart end
 		}); //addcart btn click event end
 
+		
+		
+		$('.addOrderOne').on("submit", function(){
+				
+			if(${authCustomer ==null}){
+				alert('로그인 후 구매 가능합니다.');
+				return false;
+			}
+		});//주문하기 버튼 누르면 일어나는 이벤트
+		
+		
 		/* 좀 더 둘러보기 클릭 시 modal 닫힘 */
-		$('#more_see').on("click", function() {
-
-			$('#Cart-modal').modal('hide');
-
+		$('#more_see').on("click", function(){
+			
+			$('#Cart-modal').modal('hide');	
+			
 		});
-
+		
 	}); //window load event end
 
 	//변동되는 숫자에 따라 금액을 조정하고, 조정된 금액에 ','와 '원'을 더해주는 function 
@@ -481,11 +752,11 @@ $('.add_comment_btn').on("click", function(){
 		var price = $("#price").val()
 
 		var total_price = EAval * price;
-		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
-				',')
-				+ '원';
-
+		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원';
+		
+		$('#total_price').val(total_price);
 		$(".total_price").text(set_price);
+		
 	}
 	
 	

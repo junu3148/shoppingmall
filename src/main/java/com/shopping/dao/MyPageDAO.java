@@ -78,7 +78,7 @@ public class MyPageDAO {
 		
 		System.out.println("넘어온 정보 확인 : " + pagingVO);
 		List<ReviewVO> reviewList = sqlSession.selectList("myPage.getReviewList", pagingVO);
-		System.out.println("넘어온 리스트 확인 : " + reviewList);
+		System.out.println("넘어온 리스트 확인 리뷰 리뷰리뷰리뷰리뷰 : " + reviewList);
 		
 		return reviewList;
 	}

@@ -118,6 +118,7 @@
 		select 
     		rownum
     		,review_no as reviewNo
+    		,customer_no as customerNo
     		,title
     		,content
     		,reg_date as regDate
@@ -127,6 +128,7 @@
    			 (
        			 select 
        			 	review_no
+       			 	,customer_no
        			 	, title
        			 	, content
        			 	, reg_date

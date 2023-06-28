@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -60,6 +60,7 @@
 	
 <style>
 .order_btn{background: #4982cf; border: 1px solid #4982cf; color: #fff; padding: 15px 50px; margin: 0 5px; font-weight: 600;}
+
 </style>	
 	
 </head>

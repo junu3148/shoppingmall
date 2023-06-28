@@ -57,4 +57,31 @@ public class ReviewDAO {
 		
 		return returnVO;
 	}
+	
+	public int deleteReview(ReviewVO reviewVO) {
+		
+		System.out.println("DAO까지객체 오는지 호가인함 : " + reviewVO);
+		
+		int rows = session.delete("review.deleteReview", reviewVO);
+
+		return rows;
+	}
+	
+	public int deleteReviewComment(CommentVO commentVO) {
+		
+		int   row = 0;
+		
+		System.out.println("DAO까지 넘어오는 객체값 확인 코멘트 : " +commentVO);
+		row = session.delete("review.deleteComment", commentVO);	
+		
+		return row;
+	}
+	
+	public int addLikeCnt(ReviewVO reviewVO) {
+		
+		System.out.println("라이크카운트 DAO 넘어온 객체 정보" + reviewVO);
+		
+		int  row = session.update("review.addLikeCnt", reviewVO);
+		return row;
+	}
 }
