@@ -48,18 +48,18 @@
 <!-- 슬릭슬라이더 js -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
- 
+
 <style>
 #buttoncss {
 	padding: 15px 28px;
 	margin: -40px 30px 10px;
 }
-.active .anum{
+
+.active .anum {
 	color: #4982cf;
 	font-weight: bold;
 	font-size: 15px;
 }
-
 </style>
 
 </head>
@@ -160,33 +160,36 @@
 							<div class="qna">
 								<ul class="list">
 									<li class="no">${Qna.qnANo}</li>
-									<c:if test="${Qna.boardType ==0}">
+									<c:if
+										test="${Qna.boardType == 0 
+									|| (Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo)
+									|| authCustomer.customerRole == 99}">
 										<li class="tit">${Qna.title}</li>
 									</c:if>
 									<c:if
-										test="${Qna.boardType == 1 && Qna.customerNo != authCustomer.customerNo}">
+										test="${Qna.boardType == 1 && Qna.customerNo != authCustomer.customerNo && authCustomer.customerRole != 99}">
 										<li class="tit secret">비밀글 입니다</li>
-									</c:if>
-									<c:if
-										test="${Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo}">
-										<li class="tit">${Qna.title}</li>
 									</c:if>
 									<li class="date">${Qna.regDate}</li>
 								</ul>
 								<ul class="text_wrap">
 									<li class="q_area"><c:if
-											test="${Qna.boardType == 0 || Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo}">
+											test="${Qna.boardType == 0 || (Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo)
+											|| authCustomer.customerRole == 99}">
 											<p class="no">Q</p>
 											<p class="question tit">${Qna.content}</p>
 											<div class="btn_wrap">
-												<a href="#none" id="buttoncss"
-													class="order_btn insertQnAAdmin" data-no="${Qna.qnANo}">답글달기</a>
+												<c:if test="${empty Qna.adminContent && authCustomer.customerRole == 99}">
+													<a href="#none" id="buttoncss"
+														class="order_btn insertQnAAdmin" data-no="${Qna.qnANo}">답글달기</a>
+												</c:if>
 											</div>
 
 										</c:if></li>
 									<c:if
 										test="${!empty Qna.adminContent && Qna.boardType == 0
-									 || !empty Qna.adminContent && Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo}">
+									 || !empty Qna.adminContent && Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo
+									 || !empty Qna.adminContent && authCustomer.customerRole == 99}">
 										<li class="a_area">
 											<p class="no">A</p>
 											<p class="answer tit">${Qna.adminContent}</p>
@@ -224,8 +227,7 @@
 				</ul>
 			</c:if>
 			<form id="moveForm"
-				action="${pageContext.request.contextPath}/QnA/QnAList"
-				method="get">
+				action="${pageContext.request.contextPath}/QnA/QnAList" method="get">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">

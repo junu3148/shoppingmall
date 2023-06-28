@@ -44,6 +44,7 @@ public class CustomerController {
 		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n<br> 입력하신 내용을 다시 확인해주세요.";
 
 		CustomerVO authCustomer = customerService.login(customerVO);
+		System.out.println(authCustomer);
 		
 		if(authCustomer == null) {
 			model.addAttribute("message", message);
@@ -130,22 +131,6 @@ public class CustomerController {
 		
 		return "Admin/CustomerView";
 	}
-
-	/* 고객 정보 리스트*/
-	@RequestMapping(value = "/customerView2" , method = {RequestMethod.POST, RequestMethod.GET})	
-	public String customerView2(@RequestParam( value = "selectPage", required = false, defaultValue = "1")int selectPage
-							,@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
-							,@RequestParam(value ="searchOption", required = false, defaultValue ="all") String searchOption
-							,Model model) {
-			
-		
-		Map<String, Object> pageInfo = customerService.getCustomerList(selectPage, keyword,searchOption);
-		model.addAttribute("pageInfo", pageInfo);
-		
-		
-		return "adminTest/ccview";
-	}
-
 	
 
 

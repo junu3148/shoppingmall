@@ -107,7 +107,7 @@
 						<p>수량</p>
 						<div class="count-wrap _count">
 							<button type="button" class="minus">-</button>
-							<input type="text" class="inp" name = "productEa" value="1" />
+							<input type="text" class="inp" name = "productEa" value="1"/>
 							<!-- 변경되는 숫자 -->
 							<button type="button" class="plus">+</button>
 						</div>

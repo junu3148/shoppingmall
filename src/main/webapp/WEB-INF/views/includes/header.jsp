@@ -8,6 +8,9 @@
 	<!--웹에서의 헤더-->
 	<div id="lnb">
 		<ul class="lnb">
+			<c:if test="${authCustomer.customerRole == 99}">
+			<li class="admin"><a href="${pageContext.request.contextPath }/product/productListForm"><b>관리페이지</b></a></li>
+			</c:if>
 			<c:choose>
 				<c:when test="${authCustomer != null}">
 					<li class="login"><a href="${pageContext.request.contextPath }/customer/logout">로그아웃</a></li>

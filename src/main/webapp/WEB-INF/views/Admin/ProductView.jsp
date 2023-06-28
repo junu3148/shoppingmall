@@ -83,10 +83,9 @@
 	height: 30px;
 }
 
-#inquiry_popup input{
-width: 300px;
+#inquiry_popup input {
+	width: 450px;
 }
-
 </style>
 </head>
 <body>
@@ -101,9 +100,8 @@ width: 300px;
 					<ul class="navbar-nav navbar-align">
 						<c:if test="${authCustomer != null}">
 							<c:if test="${authCustomer.customerRole != 1}">
-             		 안녕하세요! ${authCustomer.customerName}님&nbsp;&nbsp;
-              		 <a class="btn btn-secondary disabled" role="button"
-									aria-disabled="true"
+             		 안녕하세요! ${authCustomer.customerId}님&nbsp;&nbsp;
+              		 <a
 									href="${pageContext.request.contextPath}/customer/logout">Logout</a>
 							</c:if>
 						</c:if>
@@ -138,7 +136,7 @@ width: 300px;
 							<table>
 								<tr>
 									<td><select name="type" class="form-select">
-											<option
+											<option id="none"
 												<c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>선택</option>
 											<option value="name"
 												<c:out value="${pageMaker.cri.type eq 'name'?'selected':'' }"/>>제품명</option>
@@ -147,7 +145,7 @@ width: 300px;
 									</select></td>
 									<td>: <input type="text" id="searchKeyword" name="keyword"
 										value="${pageMaker.cri.keyword}" />
-										<button type="submit" class="btn btn-secondary">Search</button>
+										<button type="submit" class="btn btn-secondary" id="Search">Search</button>
 									</td>
 									<td><a class="btn btn-primary"
 										href="${pageContext.request.contextPath}/product/insertProductForm"
@@ -210,13 +208,11 @@ width: 300px;
 											href="#none" class="btn btn-primary"
 											data-no="${product.productNo}"
 											data-name="${product.productName}"
-											data-ea="${product.productEa}"
-											data-price="${product.price}"
+											data-ea="${product.productEa}" data-price="${product.price}"
 											data-content="${product.productContent}"
 											data-category="${product.category}"
 											data-subcategory="${product.subCategory}"
-											data-savename="${product.saveName}"
-											>수정</a></td>
+											data-savename="${product.saveName}">수정</a></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -258,49 +254,57 @@ width: 300px;
 						</form>
 					</div>
 
-					<!-- 고객 문의 창 -->
+					<!-- 상품정보 수정 -->
 					<section id="inquiry_popup" class="inquiry_popup"
 						style="display: none;">
 						<a href="#none" class="inquiry_close"><img
 							src="images/ver02/close.png" alt=""></a>
-						<div class="inquiry_write">
+						<div class="inquiry_write inquiry_write2">
 							<h3>상품정보 수정</h3>
 							<form id="modifyProductForm"
 								action="${pageContext.request.contextPath}/product/modifyProduct"
-								method="POST"
-								enctype="multipart/form-data">
+								method="POST" enctype="multipart/form-data">
 								<table>
 									<tr>
-										<td rowspan="8" width="25%"><img id="preview"
+										<td rowspan="8" width="30%" style="text-align: center;"><img
+											id="preview"
 											src="${pageContext.request.contextPath}/assets/images/sns4.png"
-											width="100%"></td>
+											width="100%"><br> <br> <br> <b>이미지
+												미리보기</b></td>
 										<td style="text-align: center;">제품번호</td>
-										<td><input type="text" id="productNo" name="productNo" required></td>
+										<td><input type="text" id="productNo" name="productNo"
+											required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">제품명</td>
-										<td><input type="text" id="productName" name="productName" required></td>
+										<td><input type="text" id="productName"
+											name="productName" required></td>
 									</tr>
 
 									<tr>
 										<td style="text-align: center;">수량</td>
-										<td><input type="number" id="productEa" name="productEa" required></td>
+										<td><input type="number" id="productEa" name="productEa"
+											required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">가격</td>
-										<td><input type="number" id="price" name="price" min="3000" step="100" required></td>
+										<td><input type="number" id="price" name="price"
+											min="3000" step="100" required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">상품 정보</td>
-										<td><input type="text" id="productContent" name="productContent" required></td>
+										<td><input type="text" id="productContent"
+											name="productContent" required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">카테고리</td>
-										<td><input type="text" id="category" name="category" required></td>
+										<td><input type="text" id="category" name="category"
+											required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">서브 카테고리</td>
-										<td><input type="text" id="subCategory" name="subCategory" required></td>
+										<td><input type="text" id="subCategory"
+											name="subCategory" required></td>
 									</tr>
 									<tr>
 										<td style="text-align: center;">제품사진</td>
@@ -337,7 +341,6 @@ width: 300px;
 		document.getElementById("maxRangeInput").value = value;
 	}
 
-	
 	$(document).ready(function() {
 
 		//페이징 이벤트처리 submit
@@ -363,49 +366,65 @@ width: 300px;
 
 	});
 
-	// 상품 수정창 띄우기
-	$(".btn-primary").on("click", function() {
-		
-		
-		let productNo = $(this).data("no");
-		let productName = $(this).data("name");
-		let productEa = $(this).data("ea");
-		let price = $(this).data("price");
-		let productContent = $(this).data("content");
-		let category = $(this).data("category");
-		let subCategory = $(this).data("subcategory");
-		let saveName = $(this).data("savename");
-		
-		$("#productNo").val(productNo);
-		$("#productName").val(productName);
-		$("#productEa").val(productEa);
-		$("#price").val(price);
-		$("#productContent").val(productContent);
-		$("#category").val(category);
-		$("#subCategory").val(subCategory);
-		$("#preview").attr("src", "${pageContext.request.contextPath}/upload/" + saveName);
-		
-		$("#inquiry_popup").show();
-	
-		
-		
+	// 검색 옵션 미선택시
+	$("#Search").on("click", function() {
+		let none = $("#none");
+
+		if (none.prop("selected")) {
+			alert("검색 옵션을 선택해 주세요");
+		}
 	});
-	
+
+	// 상품 수정창 띄우기
+	$(".btn-primary").on(
+			"click",
+			function() {
+
+				let productNo = $(this).data("no");
+				let productName = $(this).data("name");
+				let productEa = $(this).data("ea");
+				let price = $(this).data("price");
+				let productContent = $(this).data("content");
+				let category = $(this).data("category");
+				let subCategory = $(this).data("subcategory");
+				let saveName = $(this).data("savename");
+
+				$("#productNo").val(productNo);
+				$("#productName").val(productName);
+				$("#productEa").val(productEa);
+				$("#price").val(price);
+				$("#productContent").val(productContent);
+				$("#category").val(category);
+				$("#subCategory").val(subCategory);
+				$("#preview")
+						.attr(
+								"src",
+								"${pageContext.request.contextPath}/upload/"
+										+ saveName);
+
+				$("#inquiry_popup").show();
+
+			});
+
 	//상품 수정 등록
 	$("#modifyProduct").on("click", function() {
 		$("#modifyProductForm").submit();
 	});
-	
-	//상품 수정창 취소버튼
-	$(".btn_wrap .shopping_btn").on("click",function() {
-		$('#inquiry_popup').hide();
-		$('#inquiry_popup input[type="text"], #inquiry_popup2 textarea').val(''); 
-		$('body').removeClass('no-scroll');
-		$("#file").val("");
-		
-	});
 
-	
+	//상품 수정창 취소버튼
+	$(".btn_wrap .shopping_btn")
+			.on(
+					"click",
+					function() {
+						$('#inquiry_popup').hide();
+						$(
+								'#inquiry_popup input[type="text"], #inquiry_popup2 textarea')
+								.val('');
+						$('body').removeClass('no-scroll');
+						$("#file").val("");
+
+					});
+
 	// 파일 미리보기 이벤트
 	$("#file").on("change", function(event) {
 		console.log("파일 체인지");

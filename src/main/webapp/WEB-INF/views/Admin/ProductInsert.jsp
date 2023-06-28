@@ -73,8 +73,6 @@ input {
 .footer .container-fluid {
 	height: 30px;
 }
-
-
 </style>
 </head>
 <body>
@@ -110,64 +108,73 @@ input {
 			<div class="p-3 mb-2 bg-body text-body">
 				<!--배경색 start-->
 				<br>
-				<main id="inquiry"class="content">
+				<main id="inquiry" class="content">
 					<div align="center" style="margin: 5%;">
 						<h1 class="display-6">
 							<b>Product Insert Page</b>
 						</h1>
 						<br>
 						<hr>
-						<br>
+						<br> <a href="#none" class="inquiry_close"><img
+							src="images/ver02/close.png" alt=""></a>
+						<div class="inquiry_write">
+							<form
+								action="${pageContext.request.contextPath}/product/insertProduct"
+								method="POST" enctype="multipart/form-data">
+								<table>
+									<tr>
+										<td rowspan="8" width="30%" style="text-align: center;"><img
+											id="preview"
+											src="${pageContext.request.contextPath}/assets/images/sns4.png"
+											width="100%"><br> <br> <br> <b>이미지
+												미리보기</b></td>
+										<td style="text-align: center;">제품번호</td>
+										<td><input type="text" id="productNo" name="productNo"
+											required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">제품명</td>
+										<td><input type="text" id="productName"
+											name="productName" required></td>
+									</tr>
 
-						<form
-							action="${pageContext.request.contextPath}/product/insertProduct"
-							method="POST" enctype="multipart/form-data">
-							<table >
-								<tr>
-									<td colspan="4" bgcolor="lightgray"><b>제품등록창</b></td>
-								</tr>
-								<tr>
-									<td colspan="2" rowspan="8" width=25%><img id="preview"
-										src="https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTVfMTE2/MDAxNjE4NDU0MTU0Nzc5.pHUtY9vre2Blb2nNcKSdHTdcDyOITCuiGBJg8DQYzEIg.CZS_8DFgrsm1gZFFkZpZ9zYwd-lXLfy-urxhoxwwbRYg.JPEG.jj_ssong/1216_%EC%86%8C%EB%A6%AC_%EC%A6%9D%EB%AA%85.jpg?type=w800"
-										width="100%"> 사진 영역(미리보기)</td>
-								</tr>
+									<tr>
+										<td style="text-align: center;">수량</td>
+										<td><input type="number" id="productEa" name="productEa"
+											required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">가격</td>
+										<td><input type="number" id="price" name="price"
+											min="3000" step="100" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">상품 정보</td>
+										<td><input type="text" id="productContent"
+											name="productContent" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">카테고리</td>
+										<td><input type="text" id="category" name="category"
+											required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">서브 카테고리</td>
+										<td><input type="text" id="subCategory"
+											name="subCategory" required></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">제품사진</td>
+										<td><input id="file" type="file" name="file" required></td>
+									</tr>
+								</table>
+								<div class="btn_wrap">
+									<a id="modifyProduct" href="#none" class="order_btn">등록</a> <a
+										href="#none" class="shopping_btn">취소</a>
+								</div>
 
-								<tr>
-									<td style="text-align: center;">제품명</td>
-									<td><input type="text" name="productName" required></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">수량</td>
-									<td><input type="number" name="productEa" required></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">가격</td>
-									<td><input type="number" name="price" min="3000" step="100" required></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">상품 정보</td>
-									<td><input type="text" name="productContent" required></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">카테고리</td>
-									<td><input type="text" name="category" required></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">서브 카테고리</td>
-									<td><input type="text" name="subCategory" required></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">제품사진</td>
-									<td><input id="file" type="file" name="file" required></td>
-								</tr>
-
-								<tr>
-									<td colspan="4" rowspan="2" style="text-align: right;">
-										<button type="submit">등록</button>
-									</td>
-								</tr>
-							</table>
-						</form>
+							</form>
+						</div>
 					</div>
 				</main>
 			</div>
