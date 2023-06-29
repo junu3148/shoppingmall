@@ -68,7 +68,7 @@ public class ProductService {
 		Map<String, Object> map = new HashMap<>();
 		
 		int total = productDAO.getTotal(cri);
-	
+				
 		productList = productDAO.getAllProductList2(cri);
 		
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
