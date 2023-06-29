@@ -15,14 +15,14 @@ import com.shopping.vo.ProductVO;
 public class CustomerDAO {
 	
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession session;
 	
 	
 	/*로그인*/
 	
 	public CustomerVO selectLoginVO(CustomerVO customerVO) { 
 		
-		CustomerVO returnVO = sqlSession.selectOne("customer.selectLoginVO", customerVO);
+		CustomerVO returnVO = session.selectOne("customer.selectLoginVO", customerVO);
 		
 		return returnVO;
 	}
@@ -32,7 +32,7 @@ public class CustomerDAO {
 	
 	public int insertCustomer(CustomerVO customerVO) { 
 		
-		int row  = sqlSession.insert("customer.insertCustomer", customerVO);
+		int row  = session.insert("customer.insertCustomer", customerVO);
 		
 		return row;
 	}
@@ -41,7 +41,7 @@ public class CustomerDAO {
 	
 	public CustomerVO selectSameId(CustomerVO customerVO) {  
 		
-		CustomerVO returnVO = sqlSession.selectOne("customer.selectSameId", customerVO);
+		CustomerVO returnVO = session.selectOne("customer.selectSameId", customerVO);
 		
 		return returnVO;
 	}
@@ -59,7 +59,7 @@ public class CustomerDAO {
 	/* 고객 총 수 */
 	public int getCustomerCnt(Map<String,Object> cnt) {
 		
-		int customerCnt = sqlSession.selectOne("customer.getCustomerCnt",cnt);
+		int customerCnt = session.selectOne("customer.getCustomerCnt",cnt);
 		
 		System.out.println("DAO에서 결과체크" + customerCnt);
 		
@@ -69,13 +69,30 @@ public class CustomerDAO {
 	/* 고객 리스트 불러오기*/
 	public List<CustomerVO> getCustomerList(PagingVO pagingVO){ 
 		
-		List<CustomerVO> customerList = sqlSession.selectList("customer.getCustomerList", pagingVO);
+		List<CustomerVO> customerList = session.selectList("customer.getCustomerList", pagingVO);
 		
 		System.out.println("DAO까지 넘어오는지 페이징 확인" + customerList);
 		
 		return customerList;
 	}
 	
+	public CustomerVO getDetailInfo(CustomerVO customerVO) {
+		
+		System.out.println("DAO까지 넘어온 customerVO + " + customerVO);
+		CustomerVO returnVO = session.selectOne("customer.getDetailInfo", customerVO);
+		
+		System.out.println("DB에서 넘어온 customer 객체 : " + returnVO);
+		
+		return returnVO;
+	}
 	
+	public int updateCustomer(CustomerVO customerVO) {
+		
+		System.out.println("DAO 에서 업데이트 위해 넘어온 객체 : " + customerVO);
+		int row = session.update("customer.updateCustomerRole", customerVO);
+		
+		
+		return row;
+	}
 
 }

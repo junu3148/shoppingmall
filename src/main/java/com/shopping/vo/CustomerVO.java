@@ -7,6 +7,7 @@ public class CustomerVO {
 	private String customerPassword;
 	private String customerName;
 	private String customerRole;
+	private int totalPayment;
 	
 	public CustomerVO() {
 		super();
@@ -52,11 +53,20 @@ public class CustomerVO {
 		this.customerRole = customerRole;
 	}
 
+	public int getTotalPayment() {
+		return totalPayment;
+	}
+
+	public void setTotalPayment(int totalPayment) {
+		this.totalPayment = totalPayment;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomerVO [customerNo=" + customerNo + ", customerId=" + customerId + ", customerPassword="
-				+ customerPassword + ", customerName=" + customerName + ", customerRole=" + customerRole + "]";
+				+ customerPassword + ", customerName=" + customerName + ", customerRole=" + customerRole
+				+ ", totalPayment=" + totalPayment + "]";
 	}
-	
+
 	
 }

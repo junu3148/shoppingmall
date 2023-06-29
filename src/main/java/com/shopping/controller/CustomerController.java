@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -132,6 +131,29 @@ public class CustomerController {
 		return "Admin/CustomerView";
 	}
 	
-
+	@ResponseBody
+	@RequestMapping(value ="/customerDetailInfo", method = RequestMethod.POST)
+	public JasonResult customerDetailInfo(@ModelAttribute CustomerVO customerVO) {
+		
+		JasonResult jsonResult = new JasonResult();
+		
+		System.out.println("고객 정보 불러오기 넘어온 정보 확인  : "  +  customerVO);
+		CustomerVO returnVO = customerService.getDetailCInfo(customerVO);
+		
+		jsonResult.success(returnVO);
+		
+		return jsonResult;
+	}
+	
+	
+	@RequestMapping(value ="/modify", method = RequestMethod.GET)
+	public String modifyCustomer(@ModelAttribute CustomerVO customerVO) {
+		
+		System.out.println("수정폼에서 넘어온 객체 확인" + customerVO);
+		int row = customerService.modifyCustomer(customerVO);
+		
+		
+		return "redirect:/customer/customerView";
+	}
 
 }
