@@ -54,8 +54,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
 	rel="stylesheet">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/adminProduct.js"></script>
 
 <style>
+.pageInfo{margin-top:60px}
 .pageInfo_btn a {color: black;}
 .active .anum {color: #4982cf; font-weight: bold; font-size: 15px;}
 .content {margin-top: auto;}
@@ -71,6 +74,7 @@
 </head>
 <body>
 	<div class="wrapper">
+	
 		<!-- Top Nav Bar  include로 뺄 예정임-->
 		<c:import url="/WEB-INF/views/includes/admin-header.jsp"></c:import>
 
@@ -96,8 +100,6 @@
 			</nav>
 
 			<!---------------------------------//top nav//----------------------------------------->
-
-
 			<div class="p-3 mb-2 bg-body text-body">
 				<!--배경색 start-->
 				<br>
@@ -109,7 +111,6 @@
 						<br>
 						<hr>
 						<br>
-
 						<!--키워드 검색 폼-->
 						<form
 							action="${pageContext.request.contextPath}/product/searchProduct"
@@ -131,7 +132,6 @@
 									<td><a class="btn btn-primary" id="Insert" href="#none"
 										role="button">Insert</a></td>
 								</tr>
-
 							</table>
 						</form>
 						<!-- 검색어 마지막-->
@@ -161,9 +161,7 @@
 							</form>
 						</div>
 						<!--금액대별 검색 end-->
-
-
-						<bR>
+						<br>
 						<div>
 							<table class="table table-striped">
 								<tr>
@@ -193,14 +191,12 @@
 								</c:forEach>
 							</table>
 						</div>
-
-
+						<!-- 페이징 -->
 						<ul class="paging pageInfo">
 							<c:if test="${pageMaker.prev}">
 								<li class="pageInfo_btn previous"><a
 									href="${pageMaker.startPage - 1}">◀</a></li>
 							</c:if>
-
 							<!-- 각 번호 페이지 버튼 -->
 							<c:forEach var="num" begin="${pageMaker.startPage}"
 								end="${pageMaker.endPage}">
@@ -208,14 +204,12 @@
 									<a class="anum" href="${num}">${num}</a>
 								</li>
 							</c:forEach>
-
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
 								<li class="pageInfo_btn next"><a
 									href="${pageMaker.endPage + 1}">▶</a></li>
 							</c:if>
 						</ul>
-
 						<form id="moveForm"
 							action="${pageContext.request.contextPath}/product/productListForm"
 							method="get">
@@ -229,7 +223,6 @@
 								name="maxPrice" value="${pageMaker.cri.maxPrice}">
 						</form>
 					</div>
-
 
 					<!-- 상품 등록 -->
 					<section id="inquiry_popup2" class="inquiry_popup inquiry_popup2"
@@ -351,7 +344,7 @@
 								</table>
 								<div class="btn_wrap">
 									<a id="modifyProduct" href="#none" class="order_btn">수정</a> <a
-										id="deleteProduct" href="#none" class="order_btn">삭제</a> <a
+										id="deleteProduct" href="" class="order_btn">삭제</a> <a
 										href="#none" class="shopping_btn">취소</a>
 								</div>
 							</form>
@@ -359,248 +352,61 @@
 					</section>				
 				</main>
 			</div>
+			
+			<!-- footer -->
 			<c:import url="/WEB-INF/views/includes/admin-footer.jsp"></c:import>
+			
 		</div>
 	</div>
-
-	<!--배경색 end-->
-
-
-
-
 </body>
 
 
 <script>
-	function updateMinRange(value) {
-		document.getElementById("minRangeInput").value = value;
-	}
-	function updateMaxRange(value) {
-		document.getElementById("maxRangeInput").value = value;
-	}
 
-	$(document).ready(function() {
+// 상품 수정창 띄우기 -- 이미지경로&삭제경로 때문에 스크립트로 못뺌...
+$(".table-striped .btn-primary").on("click", function() {
 
-		//페이징 이벤트처리 submit
-		$(".pageInfo a").on("click", function(e) {
-			e.preventDefault();
-			var pageNum = $(this).attr("href");
-			$("#moveForm input[name='pageNum']").val(pageNum);
-			$("#moveForm").submit();
-		});
+	let productNo = $(this).data("no");
+	let productName = $(this).data("name");
+	let productEa = $(this).data("ea");
+	let price = $(this).data("price");
+	let productContent = $(this).data("content");
+	let category = $(this).data("category");
+	let subCategory = $(this).data("subcategory");
+	let saveName = $(this).data("savename");
 
-		//------------------------------------- 검색 제이쿼리 ----------------
-		//옵션 변경시 검색어 비우기
-		$(".form-select").on('click', function() {
+	$("#productNo").val(productNo);
+	$("#productName").val(productName);
+	$("#productEa").val(productEa);
+	$("#price").val(price);
+	$("#productContent").val(productContent);
+	$("#category").val(category);
+	$("#subCategory").val(subCategory);
+	$("#preview").attr("src", "${pageContext.request.contextPath}/upload/" + saveName);
+	$("#deleteProduct").attr("href", "${pageContext.request.contextPath}/product/deleteProduct/" + productNo);
 
-			$("#searchKeyword").val("");
-		});
+	$("#inquiry_popup").show();
 
-		//금액별 상품 검색일때 옵션정리
-		$("#searchPrice").on("click", function() {
+});
 
-			$(".form-select option").first().prop("selected", true);
-			$("#searchKeyword").val("");
+//상품 등록창 취소버튼 -- 이미지경로 때문에 스크립트로 못뺌...
+$(".btn_wrap .shopping_btn").on("click", function() {
 
-		});
+	$('#inquiry_popup2').hide();
+	$('body').removeClass('no-scroll');
+	$("#productName2").val("");
+	$("#productEa2").val("");
+	$("#price2").val("");
+	$("#productContent2").val("");
+	$("#category2").val("");
+	$("#subCategory2").val("");
+	$("#file2").val("");
+	$("#preview2").attr("src", "${pageContext.request.contextPath}/assets/images/sns4.png");
 
-	});
+});
 
-	// 검색 옵션 미선택시
-	$("#Search").on("click", function() {
-		let none = $("#none");
 
-		if (none.prop("selected")) {
-			alert("검색 옵션을 선택해 주세요");
-		}
-	});
 
-	//------------------------------------- 상품 등록 제이쿼리 ----------------
-
-	//상품 등록창 열기
-	$("#Insert").on("click", function() {
-
-		$("#inquiry_popup2").show();
-
-	});
-
-	//상품 등록창 취소버튼
-	$(".btn_wrap .shopping_btn").on("click",function() {
-		
-		$('#inquiry_popup2').hide();
-		$('body').removeClass('no-scroll');
-		$("#productName2").val("");
-		$("#productEa2").val("");
-		$("#price2").val("");
-		$("#productContent2").val("");
-		$("#category2").val("");
-		$("#subCategory2").val("");
-		$("#file2").val("");
-		$("#preview2").attr("src","${pageContext.request.contextPath}/assets/images/sns4.png");
-		
-	});
-
-	//상품 등록
-	$("#insertProduct").on("click",function(event) {
-		event.preventDefault();
-		if ($("#productName2").val() != ""
-			&& $("#productEa2").val() != ""
-			&& $("#price2").val() != ""
-			&& $("#productContent2").val() != ""
-			&& $("#category2").val() != ""
-			&& $("#subCategory2").val() != ""
-			&& $("#file2").val() != "") {
-		
-			$("#insertProductForm").submit();
-		} else {
-			if ($("#file2").val() == "") {
-				alert("파일을 등록해주세요.");
-			} else {
-				alert("내용을 입력해주세요.");
-			}
-		}
-
-	});
-
-	// 파일 미리보기 이벤트
-	$("#file2").on("change", function(event) {
-		console.log("파일 체인지");
-
-		var file = event.target.files[0];
-
-		// 확장자 확인
-		if (!isImageFile(file)) {
-			alert("사진 파일만 올려주세요");
-
-			// 파일 사이즈 확인
-			if (isOverSize(file)) {
-				alert("파일 사이즈가 너무 큽니다.");
-
-			}
-		} else {
-			var reader = new FileReader();
-
-			reader.onload = function(e) {
-
-				$("#preview2").attr("src", e.target.result);
-			};
-			reader.readAsDataURL(file);
-		}
-	});
-
-	// 확장자가 이미지 파일인지 확인
-	function isImageFile(file) {
-		var ext = file.name.split(".").pop().toLowerCase(); // 파일명에서 확장자를 가져온다.
-		return [ "jpg", "jpeg", "gif", "png" ].includes(ext);
-	}
-
-	// 파일의 최대 사이즈 확인
-	function isOverSize(file) {
-		var maxSize = 3 * 1024 * 1024; // 3MB로 제한
-		return file.size > maxSize;
-	}
-
-	//------------------------------------- 상품 수정 제이쿼리 ----------------
-
-	// 상품 수정창 띄우기
-	$(".table-striped .btn-primary").on("click",function() {
-
-		let productNo = $(this).data("no");
-		let productName = $(this).data("name");
-		let productEa = $(this).data("ea");
-		let price = $(this).data("price");
-		let productContent = $(this).data("content");
-		let category = $(this).data("category");
-		let subCategory = $(this).data("subcategory");
-		let saveName = $(this).data("savename");
-
-		$("#productNo").val(productNo);
-		$("#productName").val(productName);
-		$("#productEa").val(productEa);
-		$("#price").val(price);
-		$("#productContent").val(productContent);
-		$("#category").val(category);
-		$("#subCategory").val(subCategory);
-		$("#preview").attr("src","${pageContext.request.contextPath}/upload/" + saveName);
-		$("#deleteProduct").attr("href","${pageContext.request.contextPath}/product/deleteProduct/"	+ productNo);
-
-		$("#inquiry_popup").show();
-
-	});
-
-	//상품 삭제 
-	$("#deleteProduct").on("click", function(event) {
-		let result = confirm("정말 삭제 하시겠습니까?");
-
-		if (!result) {
-			event.preventDefault();
-			$('#inquiry_popup').hide();
-		}
-
-	});
-
-	//상품 수정 등록
-	$("#modifyProduct").on("click",function() {
-		event.preventDefault();
-		if ($("#productName").val() != ""
-				&& $("#productEa").val() != ""
-				&& $("#price").val() != ""
-				&& $("#productContent").val() != ""
-				&& $("#category").val() != ""
-				&& $("#subCategory").val() != "") {
-
-			$("#modifyProductForm").submit();
-		} else {
-			alert("내용을 입력해주세요.");
-		}
-
-	});
-
-	//상품 수정창 취소버튼
-	$(".btn_wrap .shopping_btn").on("click",function() {
-		$('#inquiry_popup').hide();
-	    $('body').removeClass('no-scroll');
-		$("#file").val("");
-	});
-
-	// 파일 미리보기 이벤트
-	$("#file").on("change", function(event) {
-		console.log("파일 체인지");
-
-		var file = event.target.files[0];
-
-		// 확장자 확인
-		if (!isImageFile(file)) {
-			alert("사진 파일만 올려주세요");
-
-			// 파일 사이즈 확인
-			if (isOverSize(file)) {
-				alert("파일 사이즈가 너무 큽니다.");
-
-			}
-		} else {
-			var reader = new FileReader();
-
-			reader.onload = function(e) {
-
-				$("#preview").attr("src", e.target.result);
-			};
-			reader.readAsDataURL(file);
-		}
-	});
-
-	// 확장자가 이미지 파일인지 확인
-	function isImageFile(file) {
-		var ext = file.name.split(".").pop().toLowerCase(); // 파일명에서 확장자를 가져온다.
-		return [ "jpg", "jpeg", "gif", "png" ].includes(ext);
-	}
-
-	// 파일의 최대 사이즈 확인
-	function isOverSize(file) {
-		var maxSize = 3 * 1024 * 1024; // 3MB로 제한
-		return file.size > maxSize;
-	}
-	
 </script>
 
 </html>
