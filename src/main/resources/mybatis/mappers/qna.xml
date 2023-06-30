@@ -92,28 +92,6 @@
 
 	</insert>
 
-	<!-- 문의 삭제 -->
-	<delete id="deleteQnA" parameterType="QnAVO">
-	
-		<![CDATA[
-		
-			DELETE FROM qna WHERE qna_no = #{qnANo} 	
-		
-		]]>
-
-	</delete>
-
-	<!-- 문의 답글 삭제 -->
-	<delete id="deleteQnAComment" parameterType="QnAVO">
-	
-		<![CDATA[
-		
-			DELETE FROM qna_comment WHERE qna_no = #{qnANo} 	
-		
-		]]>
-
-	</delete>
-
 	<!-- 관리자 문의 등록 -->
 	<insert id="insertQnAAdmin" parameterType="QnAVO">
 		

@@ -18,17 +18,16 @@ public class QnAService {
 	@Autowired
 	private QnADAO qnADAO;
 
-
 	// ----------------- 문의 리스트
 	public Map<String, Object> getQnAList(Criteria cri) {
 		System.out.println("getQnAList DAO()");
-		
+
 		Map<String, Object> map = new HashMap<>();
-		
+
 		int total = qnADAO.getTotal();
-			
+
 		List<QnAVO> qnAList = qnADAO.getQnAList(cri);
-		
+
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
 		map.put("pageMaker", pageMaker);
 		map.put("qnAList", qnAList);
@@ -41,16 +40,6 @@ public class QnAService {
 		System.out.println("insertQnA Service()");
 
 		return qnADAO.insertQnA(vo);
-	}
-
-	// ----------------- 문의 삭제
-	public int deleteQnA(QnAVO vo) {
-		System.out.println("deleteQnA Service()");
-
-		qnADAO.deleteQnAComment(vo);
-
-		return qnADAO.deleteQnA(vo);
-
 	}
 
 	// ----------------- 관리자 문의 등록

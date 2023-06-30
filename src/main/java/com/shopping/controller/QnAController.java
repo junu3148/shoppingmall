@@ -1,6 +1,5 @@
 package com.shopping.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,64 +22,38 @@ public class QnAController {
 	@Autowired
 	private QnAService qnAService;
 
-	
-	@RequestMapping(value="/QnAList", method = RequestMethod.GET)
-	public String QnAList2(Model model,Criteria cri) {
+	// ------------------- 문의리스트
+	@RequestMapping(value = "/QnAList", method = RequestMethod.GET)
+	public String QnAList2(Model model, Criteria cri) {
 		System.out.println("QnAList()");
-			
+
 		Map<String, Object> map = qnAService.getQnAList(cri);
-		
+
 		model.addAttribute("qnAList", map.get("qnAList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-			
+
 		return "qna/qnaList";
 	}
-	
-	@RequestMapping(value = "/QnAForm", method = RequestMethod.GET)
-	public String QnAForm() {
-		System.out.println("QnAForm()");
 
-		return "qna/qnaInsert";
-	}
-
+	// ------------------- 문의 등록
 	@RequestMapping(value = "/insertQnA", method = RequestMethod.GET)
 	public String insertQnA(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnA()");
-		System.out.println(vo);
-	
-		int result = qnAService.insertQnA(vo);
-		
+
+		qnAService.insertQnA(vo);
+
 		return "redirect:/QnA/QnAList";
-		
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/deleteQnA", method = RequestMethod.POST)
-	public JasonResult deleteQnA(@ModelAttribute QnAVO vo) {
-		System.out.println("deleteQnA()");
-
-		int result = 0;
-
-		JasonResult jasonResult = new JasonResult();
-
-		jasonResult.success(result);
-
-		return jasonResult;
 
 	}
 
+	// ------------------- 문의 답글 등록
 	@RequestMapping(value = "/insertQnAAdmin", method = RequestMethod.GET)
 	public String insertQnAAdmin(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnAAdmin()");
-		
-		int result = qnAService.insertQnAAdmin(vo);
+
+		qnAService.insertQnAAdmin(vo);
 
 		return "redirect:/QnA/QnAList";
 	}
 
 }
-
-
-
-
-

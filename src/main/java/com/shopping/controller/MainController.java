@@ -67,9 +67,9 @@ public class MainController {
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		model.addAttribute("productList", map.get("productList"));
 		model.addAttribute("view", "category");
-		model.addAttribute("category", category);
-		model.addAttribute("subCategory", subCategory);
-		model.addAttribute("CriteriaSubCategory", subCategory);
+		model.addAttribute("category", category);//카테고리 유지
+		model.addAttribute("subCategory", subCategory);//all페이지 서브카테고리 없이표현하기위한장치
+		model.addAttribute("CriteriaSubCategory", subCategory);//페이징을 위한 장치
 
 		return "product/product";
 	}
@@ -101,7 +101,7 @@ public class MainController {
 		model.addAttribute("productList", productList);
 		model.addAttribute("view", "all");
 		model.addAttribute("Search", "Search");
-		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("keyword", cri.getKeyword());//키워드 유지
 
 		return "product/product";
 	}
