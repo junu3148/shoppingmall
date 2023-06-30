@@ -2,12 +2,13 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="customer">
-	
-	
+
+
 	<!-- 로그인 -->
-	<select id ="selectLoginVO"  parameterType ="CustomerVO" resultType ="CustomerVO">
+	<select id="selectLoginVO" parameterType="CustomerVO"
+		resultType="CustomerVO">
 		<![CDATA[
 			select
 				CUSTOMER_NO as customerNo
@@ -15,11 +16,11 @@
 				,CUSTOMER_ROLE as customerRole
 			from customer
 			where CUSTOMER_ID = #{customerId} and CUSTOMER_PASSWORD = #{customerPassword}
-		]]>	
+		]]>
 	</select>
-	
+
 	<!-- 회원가입 -->
-	<insert id = "insertCustomer" parameterType  ="CustomerVO" >
+	<insert id="insertCustomer" parameterType="CustomerVO">
 		<![CDATA[
 			insert into customer (customer_no, customer_id, customer_password, customer_name, customer_role)
 				values(
@@ -29,23 +30,24 @@
     				 ,#{customerName}
     				 ,1
     				)
-		]]>	
+		]]>
 	</insert>
-	
-	
+
+
 	<!-- 아이디 유효성 체크 -->
 
-	<select id ="selectSameId" parameterType ="CustomerVO" resultType ="CustomerVO">
+	<select id="selectSameId" parameterType="CustomerVO"
+		resultType="CustomerVO">
 		<![CDATA[
 		  SELECT customer_name AS customerName
 			FROM customer
 		  WHERE customer_id = #{customerId}
 		]]>
 	</select>
-	
-	<!--고객 전체 리스트 삭제 예정-->
-	
-	<select id ="customerAllList" resultType ="CustomerVO">
+
+	<!--고객 전체 리스트 삭제 예정 -->
+
+	<select id="customerAllList" resultType="CustomerVO">
 		<![CDATA[
 			select 
 				customer_no as customerNo
@@ -55,28 +57,29 @@
 			from customer order by customer_no desc	
 		]]>
 	</select>
-	
+
 	<!-- 고객 총 수 -->
-	
-	<select id = "getCustomerCnt" parameterType ="map" resultType = "int">
+	<select id="getCustomerCnt" parameterType="map" resultType="int">
 		<![CDATA[
 			select count(*)
 			from customer
 			where 1 = 1
 		]]>
-		<if test = "searchOption == 'all' and keyword != ''">
-			and customer_id like '%' || #{keyword} || '%' or customer_name like '%' || #{keyword} || '%'
+		<if test="searchOption == 'all' and keyword != ''">
+			and customer_id like '%' || #{keyword} || '%' or
+			customer_name like '%' || #{keyword} || '%'
 		</if>
-		<if test = "searchOption == 'customerName' and keyword != ''">
+		<if test="searchOption == 'customerName' and keyword != ''">
 			and customer_name like '%' || #{keyword} || '%'
 		</if>
-		<if test = "searchOption == 'customerId' and keyword != ''">
+		<if test="searchOption == 'customerId' and keyword != ''">
 			and customer_id like '%' || #{keyword} || '%'
 		</if>
 	</select>
-		
-	
-	<select id = "getCustomerList" parameterType ="PagingVO" resultType ="CustomerVO">
+
+	<!-- 고객 리스트 가져오기 -->
+	<select id="getCustomerList" parameterType="PagingVO"
+		resultType="CustomerVO">
 		<![CDATA[
 		select 
 			customer_no as customerNo
@@ -99,15 +102,16 @@
     				from customer
    				where 1 = 1 
    		]]>
-     			<if test = "searchOption == 'all' and keyword != ''">
-				and customer_id like '%' || #{keyword} || '%' or customer_name like '%' || #{keyword} || '%'
-				</if>
-				<if test = "searchOption == 'customerName' and keyword != ''">
-				and customer_name like '%' || #{keyword} || '%'
-				</if>
-				<if test = "searchOption == 'customerId' and keyword != ''">
-				and customer_id like '%' || #{keyword} || '%'
-				</if>
+		<if test="searchOption == 'all' and keyword != ''">
+			and customer_id like '%' || #{keyword} || '%' or customer_name like '%'
+			|| #{keyword} || '%'
+		</if>
+		<if test="searchOption == 'customerName' and keyword != ''">
+			and customer_name like '%' || #{keyword} || '%'
+		</if>
+		<if test="searchOption == 'customerId' and keyword != ''">
+			and customer_id like '%' || #{keyword} || '%'
+		</if>
 			<![CDATA[		
    				 order by customer_no desc
  				 )
@@ -115,8 +119,10 @@
 				where rn between #{boardNumStart} and #{boardNumEnd}		
 			]]>
 	</select>
-
-<select id ="getDetailInfo" parameterType ="CustomerVO" resultType ="CustomerVO">
+	
+	<!-- 고객 상세정보  가져오기 -->
+	<select id="getDetailInfo" parameterType="CustomerVO"
+		resultType="CustomerVO">
 	<![CDATA[
 		select
 			customer_no 
@@ -126,15 +132,16 @@
     		,(select sum(total_price) from orders where order_stat = 2 and customer_no = a.customer_no) as totalPayment
     	from customer a where customer_no = #{customerNo}
 	]]>
-</select>
-
-<update id = "updateCustomerRole" parameterType ="CustomerVO">
+	</select>
+	
+	<!-- 고객 권한 업데이트 -->
+	<update id="updateCustomerRole" parameterType="CustomerVO">
 	<![CDATA[
 		update customer 
 			set customer_role = #{customerRole}
 		where customer_no = #{customerNo}
 	]]>
-</update>
-	
-	
+	</update>
+
+
 </mapper>

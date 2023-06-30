@@ -16,32 +16,29 @@ public class PaymentDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
+	/*주문한 */
 	public void getOrderList(OrderVO orderVO){
-		
+		System.out.println("getOrderList DAO()");
 		List<ProductVO> orderList = sqlSession.selectList("payment.getOrderList", orderVO);
 		orderVO.setProductList(orderList);
 	}
 	
 	public int deleteCartDetail(Map<String, Object> list) {
-		
-		System.out.println("넘어온 map의 정보 : " + list);
+		System.out.println("deleteCartDetail DAO()");
 		int row = sqlSession.delete("payment.deleteCartDetail", list);
-		System.out.println("카트 디테일 삭제 성공 여부 확인 " + row);
 		
 		return row;
 	}
 	
 	public int updateProductEa(Map<String, Object> list) {
-		
-		
+		System.out.println("updateProductEa DAO()");
 		int row = sqlSession.update("payment.updateProductEa", list);
-		System.out.println("업데이트될 제품 정보" + list.get("Product"));
-		System.out.println("업데이트된 제품 갯수 " + row);
+		
 		return row;
 	}
 	
 	public int updateOrderStat(OrderVO orderVO) {
-		
+		System.out.println("updateOrderStat DAO()");
 		sqlSession.update("payment.updateOrderStat", orderVO);
 		
 		return 0;

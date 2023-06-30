@@ -38,9 +38,10 @@ public class CartController {
 	@RequestMapping(value ="/viewCart")
 	public String viewCart(@RequestParam(value = "customerNo", required = false, defaultValue= "0") int customerNo
 							, Model model) { 
-		 
+			System.out.println("viewCart()");
+		
+		
 			List<ProductVO> cartList = cartService.viewCart(customerNo);
-			
 			model.addAttribute("cartList", cartList);
 
 			return "product/cart";
@@ -53,11 +54,11 @@ public class CartController {
 	@RequestMapping(value ="/addCart", method = RequestMethod.POST )
 	public JasonResult addCart(@ModelAttribute CartVO cartVO) {
 		
+		System.out.println("addCart()");
 		JasonResult jasonResult = new JasonResult();
 		
 		/* 추가한 제품 수량 리턴*/
 		int productCnt = cartService.addCart(cartVO);
-		
 		jasonResult.success(productCnt);
 		
 		return jasonResult;
@@ -70,6 +71,7 @@ public class CartController {
 	@RequestMapping(value="/deleteList", method =RequestMethod.POST)
 	public JasonResult deleteList(@ModelAttribute CartVO cartVO) { 
 		
+		System.out.println("deleteList()");
 		JasonResult jasonResult = new JasonResult();
 		
 		boolean result = cartService.deleteList(cartVO);
@@ -85,6 +87,7 @@ public class CartController {
 	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
 	public JasonResult addOrders(@RequestParam String jsonData
 								,HttpSession session) {
+		System.out.println("addOrders()");
 		JasonResult jasonResult = new JasonResult();
 
 	    //직렬화 시켜 가져온 오브젝트 배열을 JSONArray 형식으로 바꿔준다.
@@ -123,15 +126,12 @@ public class CartController {
 	public String addOrderOne(@ModelAttribute ProductVO productVO
 							,@ModelAttribute OrderVO orderVO) {
 		
-		System.out.println("넘어오는지 확인 : " + productVO);
-		System.out.println("넘어오는지 확인" + orderVO);
+		System.out.println("addOrderOne()");
 		
 		List<ProductVO> list = new ArrayList<>();
 		list.add(productVO);
 		orderVO.setProductList(list);
 		boolean result = cartService.addOrder(orderVO);
-		if(result == true) {System.out.println("오더 추가 성공");};
-		
 		
 		return "redirect:orderPage/"+ orderVO.getCustomerNo() ;
 	}
@@ -141,7 +141,6 @@ public class CartController {
 	@RequestMapping(value ="/orderPage/{customerNo}", method = RequestMethod.GET)
 	public String orderPage(@PathVariable String customerNo
 							, Model model) {
-		/*주문상품 정보 가져오고~... 해야지..*/
 		
 		Map<String, Object> orderInfo = cartService.getOrderInfo(customerNo);
 		

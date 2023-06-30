@@ -31,7 +31,7 @@ public class MyPageController {
 	public String modifyForm(@PathVariable int customerNo
 							,@RequestParam (value ="selectPage",  required = false, defaultValue = "1") int selectPage
 							,Model model) {  
-		
+		System.out.println("modifyForm()");
 		Map<String, Object> myPageInfo = myPageService.myPageInfoByNo(customerNo, selectPage);
 		
 		model.addAttribute("customerInfo", myPageInfo.get("customerInfo"));
@@ -41,12 +41,11 @@ public class MyPageController {
 		return "myPage/myPage";
 	}
 
-	
+	/* 리뷰 작성 양식*/
 	@RequestMapping(value = "/writeReview/{productNo}")
 	public String reviewForm(@PathVariable int productNo
 							,Model model) {
-			
-		System.out.println("넘어온 넘버 확인" + productNo);
+		System.out.println("reviewForm()");
 		ProductVO productVO = myPageService.getProductInfo(productNo);
 		
 		model.addAttribute("reviewProduct", productVO);
@@ -54,21 +53,23 @@ public class MyPageController {
 		return "myPage/reviewForm";
 	}
 	
+	/*리뷰 작성*/
 	@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
 	public String writeReview(@RequestParam("file") MultipartFile file
 							,@ModelAttribute ReviewVO reviewVO ) {
-		System.out.println("넘어온 값 : " + file +"  " +  reviewVO );
+		System.out.println("writeReview()");
 		myPageService.addReview(file, reviewVO);
 		
 		
 		return "redirect:/myPage/" + reviewVO.getCustomerNo();
 	}
 	
+	/*내가 작성한 리뷰 보기 페이지*/
 	@RequestMapping(value ="/myReview/{customerNo}")
 	public String myReviewPage(@PathVariable String customerNo
 								,@RequestParam (value ="selectPage", required =false, defaultValue ="1") int selectPage
 								,Model model) {
-		System.out.println("왜 안 넘어오지");
+		System.out.println("myReviewPage()");
 		Map<String, Object> reviewList = myPageService.getReviewList(customerNo,selectPage);
 		model.addAttribute("reviewList", reviewList.get("reviewList"));
 		model.addAttribute("paging",reviewList.get("pagingVO"));

@@ -20,16 +20,16 @@ public class CustomerService {
 	
 	/*로그인*/
 	public CustomerVO login(CustomerVO customerVO) {
-		
+		System.out.println("login Service()");
 		CustomerVO returnVO = customerDAO.selectLoginVO(customerVO);
 		
 		return returnVO;
 	}
 	
 	
-	//회원가입 기능 구현
+	/*회원가입 기능 구현*/
 	public int join(CustomerVO customerVO) { 
-		
+		System.out.println("join Service()");
 		int row = customerDAO.insertCustomer(customerVO);
 		
 		return row;
@@ -39,7 +39,7 @@ public class CustomerService {
 	/* 아이디 유효성 체크 구현 AJAX */
 	//아이디 체크 후 가입 불가인 경우 false 리턴함
 	public boolean checkId(CustomerVO customerVO) { 
-			
+		System.out.println("checkId Service()");
 		boolean result = false; //가입 불가 = false
 		
 		CustomerVO returnVO = customerDAO.selectSameId(customerVO);	//동일한 아이디 있는지 체크
@@ -51,35 +51,9 @@ public class CustomerService {
 		return result;
 	}
 	
-	
-//	/*고객 전체 리스트*/
-//	
-//	public List<CustomerVO> selectAllCustomer() {
-//		
-//		
-//		List<CustomerVO> customerList = customerDAO.getAllCustomer();
-//		
-//		
-//		return customerList;
-//	}
-//	/* 고객 검색 */
-//	
-//	public List<CustomerVO> SearchCustomer(String searchOption,String keyword){ 
-//		
-//		Map<String, Object> searchInfo = new HashMap<>();
-//		
-//		searchInfo.put("searchOption", searchOption);
-//		searchInfo.put("keyword", keyword);
-//		
-//		List<CustomerVO> Searchlist = customerDAO.getCustomerList(searchInfo);
-//		
-//		
-//		return Searchlist;
-//	}
-	
-	
+	/*고객 리스트 가져오기*/
 	public Map<String,Object> getCustomerList(int selectPage, String keyword, String searchOption){ 
-		
+		System.out.println("getCustomerList Service()");
 		Map<String, Object> cnt = new HashMap<String, Object>();
 		cnt.put("keyword", keyword);
 		cnt.put("searchOption", searchOption);
@@ -93,20 +67,20 @@ public class CustomerService {
 		pageInfo.put("customerList", customerList);
 		pageInfo.put("pagingInfo",pagingVO);
 		
-		System.out.println("Service에서 확인 :" + pageInfo);
-		
 		return pageInfo;
 	}
 	
+	/*고객 상세정보 가져오기*/
 	public CustomerVO getDetailCInfo(CustomerVO customerVO){
-		/*필요 정보 : 고객 이름, 아이디, 핸드폰번호, 등급, 누적 구매 금액*/
+		System.out.println("getDetailCInfo Service()");
 		CustomerVO returnVO = customerDAO.getDetailInfo(customerVO);
 		
 		return returnVO;
 	}
 	
+	/*고객 정보 수정*/
 	public int modifyCustomer(CustomerVO customerVO) {
-		
+		System.out.println("modifyCustomer Service()");
 		int row = customerDAO.updateCustomer(customerVO);
 		
 		return row;

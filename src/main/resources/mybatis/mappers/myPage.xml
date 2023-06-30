@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="myPage">
+
 	<!-- 고객 번호로 정보 가져오기 -->
-	
-	
-<select id = "getCustomerByNo" parameterType = "int" resultType = "CustomerVO">
+	<select id="getCustomerByNo" parameterType="int"
+		resultType="CustomerVO">
 	<![CDATA[
 		select 
 			customer_no as customerNo
@@ -16,9 +16,10 @@
 		from customer 
 		where customer_no = #{customerNo}
 	]]>
-</select>
+	</select>
 
-<select id ="getOrderCnt" parameterType ="int" resultType ="int">
+	<!-- 내 주문내역 갯수 가져오기 -->
+	<select id="getOrderCnt" parameterType="int" resultType="int">
 	<![CDATA[
 		select 
 			count(detail_no) 
@@ -26,9 +27,11 @@
 		on a.order_no = b.order_no 
 		where b.customer_no = #{customerNo} 
 	]]>
-</select>
+	</select>
 
-<select id ="getOrderList" parameterType ="PagingVO" resultType ="ProductVO">
+	<!-- 내 주문내역 가져오기 -->
+	<select id="getOrderList" parameterType="PagingVO"
+		resultType="ProductVO">
 	<![CDATA[
 		select
     		rownum
@@ -55,9 +58,11 @@
 		    order by a.order_no desc)
   		where rownum  between #{boardNumStart} and #{boardNumEnd}
 	]]>
-</select>
-
-<select id ="getProductInfo" parameterType ="int" resultType ="ProductVO">
+	</select>
+	
+	<!-- 주문한 제품 정보 가져오기 -->
+	<select id="getProductInfo" parameterType="int"
+		resultType="ProductVO">
 	<![CDATA[
 		select  
 			a.product_no as productNo
@@ -67,12 +72,15 @@
 		on a.product_no = b.product_no 
 		where a.product_no = #{productNo}
 	]]>
-</select>
+	</select>
 
-<insert id ="insertReview" parameterType ="ReviewVO">
-	<selectKey resultType="int" order="BEFORE" keyProperty="reviewNo">
-		select seq_review_no.nextval from dual 
-	</selectKey>
+
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="ReviewVO">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="reviewNo">
+			select seq_review_no.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into review
 				(review_no, customer_no, product_no, title, content, reg_date, like_cnt, grade)
@@ -87,10 +95,11 @@
 				,#{grade}
 				)
 		]]>
-</insert>
+	</insert>
 
 
-<insert id = "insertReviewImage" parameterType ="ReviewVO">
+	<!-- 리뷰 이미지 등록 -->
+	<insert id="insertReviewImage" parameterType="ReviewVO">
 	<![CDATA[
 		insert into review_image
 			(review_no, save_name)
@@ -99,22 +108,23 @@
 			,#{saveName}
 			)
 	]]>
-</insert>
+	</insert>
 
 
-<select id = "cntMyReview" parameterType ="String" resultType ="int">
+	<!-- 내가 쓴 리뷰 갯수 확인 -->
+	<select id="cntMyReview" parameterType="String" resultType="int">
 	<![CDATA[
 		select 
 			count(*) 
 		from review 
 		where customer_no = #{customerNo}
 	]]>
-</select>
+	</select>
 
-<select id = "getReviewList" parameterType ="PagingVO" resultType ="ReviewVO">
+	<!-- 내가 쓴 리뷰 리스트 -->
+	<select id="getReviewList" parameterType="PagingVO"
+		resultType="ReviewVO">
 	<![CDATA[
-	
-	
 		select 
     		rownum
     		,review_no as reviewNo
@@ -140,6 +150,6 @@
     		 ) 
     	where rownum between #{boardNumStart} and #{boardNumEnd}
 	]]>
-</select>
+	</select>
 
 </mapper>

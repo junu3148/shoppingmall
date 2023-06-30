@@ -25,6 +25,7 @@ public class MainController {
 	@Autowired
 	private ProductVO productVO;
 
+	// --------------- Main 페이지
 	@RequestMapping(value = "/")
 	public String main(Model model) {
 		System.out.println("main()");
@@ -78,7 +79,7 @@ public class MainController {
 	@RequestMapping(value = "/productDetal/{productNo}", method = RequestMethod.GET)
 	public String productDetal(Model model, @PathVariable("productNo") int productNo
 								,@RequestParam(value ="selectReviewPage", required =false, defaultValue ="1")int selectReviewPage) {
-		System.out.println("productDetal");
+		System.out.println("productDetail()");
 		productVO.setProductNo(productNo);
 
 		

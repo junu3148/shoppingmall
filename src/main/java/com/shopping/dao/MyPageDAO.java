@@ -19,66 +19,63 @@ public class MyPageDAO {
 	
 	/* 고객 정보 받아오기*/
 	public CustomerVO getCustomerByNo(int customerNo) { 
-		
+		System.out.println("getCustomerByNo DAO()");
 		CustomerVO returnVO = sqlSession.selectOne("myPage.getCustomerByNo", customerNo);
-		
-		System.out.println("정보 넘어오는지 DAO에서 확인 " + customerNo);
 		
 		return returnVO;
 	}
+	
 	/*총 구매수량 확인*/
 	public int getOrderCnt(int customerNo) {
-		
-		System.out.println("총 total 수를 알기 위해 넘어온 no" + customerNo);
+		System.out.println("getOrderCnt DAO()");
 		int totalCnt = sqlSession.selectOne("myPage.getOrderCnt", customerNo);
 		
 		return totalCnt;
 	}
 	
+	/*결제한 주문내역 확인*/
 	public List<ProductVO> getOrderList(PagingVO pagingVO){
-		 
-		System.out.println("페이징 위해 DAO로 넘어온 정보 : " + pagingVO);
+		System.out.println("getOrderList DAO()");
 		List<ProductVO> orderList = sqlSession.selectList("myPage.getOrderList", pagingVO);
-		System.out.println("불러온 결과 확인" + orderList);
 		
 		return orderList;
 	}
 	
+	/*주문한 제품 정보 받아오기*/
 	public ProductVO getProductInfo(int productNo) {
-		
-		System.out.println("DAO까지 오는지 확인" + productNo);
+		System.out.println("getProductInfo DAO()");
 		ProductVO returnVO = sqlSession.selectOne("myPage.getProductInfo", productNo);
-		System.out.println("DB에서 받은 제품 정보:" + returnVO);
+
 		return returnVO;
 	}
 	
+	/*리뷰 추가*/
 	public int insertReview(ReviewVO reviewVO) {
-			
-		sqlSession.insert("myPage.insertReview", reviewVO);
+		System.out.println("insertReview DAO()");
+		int row = sqlSession.insert("myPage.insertReview", reviewVO);
 		
-		return 0;
+		return row;
 	}
 	
+	/*리뷰 이미지 테이블에 이미지 추가*/
 	public int insertReviewImage(ReviewVO reviewVO) {
+		System.out.println("insertReviewImage DAO()");
+		int row = sqlSession.insert("myPage.insertReviewImage", reviewVO);
 		
-		sqlSession.insert("myPage.insertReviewImage", reviewVO);
-		
-		return 0;
+		return row;
 	}
 	
+	/*내가 쓴 리뷰 갯수 확인*/
 	public int getMyReviewCnt(String customerNo) {
-		
-		System.out.println("여기까지 오나 확인");
+		System.out.println("getMyReviewCnt DAO()");
 		int cnt = sqlSession.selectOne("myPage.cntMyReview", customerNo);
-		System.out.println("카운트 확인" + cnt);
 		return cnt;
 	}
 	
+	/*내가 쓴 리뷰 리스트*/
 	public List<ReviewVO> getMyReviewList(PagingVO pagingVO){
-		
-		System.out.println("넘어온 정보 확인 : " + pagingVO);
+		System.out.println("getMyReviewList DAO()");
 		List<ReviewVO> reviewList = sqlSession.selectList("myPage.getReviewList", pagingVO);
-		System.out.println("넘어온 리스트 확인 리뷰 리뷰리뷰리뷰리뷰 : " + reviewList);
 		
 		return reviewList;
 	}

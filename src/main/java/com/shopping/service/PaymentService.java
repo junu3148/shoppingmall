@@ -23,9 +23,8 @@ public class PaymentService {
 	//2. 카트 디테일에 있는 제품 삭제
 	//3. 제품 재고에서도 차감
 	//4. 오더 테이블의 stat를 2로 변경함
-	
 	public boolean paymentSuccess(OrderVO orderVO) {
-			
+		System.out.println("paymentSuccess Service()");
 		boolean result = false;
 		
 		paymentDAO.getOrderList(orderVO);

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="payment">
 
-<select id ="getOrderList" parameterType ="OrderVO" resultType ="ProductVO">
+	<!--주문 리스트 가져오기 -->
+	<select id="getOrderList" parameterType="OrderVO"
+		resultType="ProductVO">
 	<![CDATA[
 		select 
 			a.product_no as productNo
@@ -13,9 +15,10 @@
 		on a.order_no = b.order_no 
 		where a.order_no = #{orderNo}
 	]]>
-</select>
+	</select>
 
-<delete id ="deleteCartDetail" parameterType ="map">
+	<!--장바구니 상세내역 삭제 -->
+	<delete id="deleteCartDetail" parameterType="map">
 	<![CDATA[
 		 delete 
 		 from cart_detail 
@@ -26,20 +29,22 @@
 		 		on a.cart_no = b.cart_no 
 		 		where b.customer_no = #{customerNo} and product_no = #{Product.productNo})
 	]]>
-</delete>
+	</delete>
 
-<update id = "updateProductEa" parameterType = "map">
+	<!--제품 재고 업데이트 -->
+	<update id="updateProductEa" parameterType="map">
 	<![CDATA[
 		 update 
 		 	product set 
 		 		product_ea = product_ea - #{Product.productEa}
 		 	where product_no = #{Product.productNo}
 	]]>
-</update>
+	</update>
 
-<update id ="updateOrderStat" parameterType ="OrderVO">
+	<!--주문 상태 업데이트 -->
+	<update id="updateOrderStat" parameterType="OrderVO">
 	<![CDATA[
 		   update orders set order_stat = 2 where order_no = #{orderNo}
 	]]>
-</update>
+	</update>
 </mapper>

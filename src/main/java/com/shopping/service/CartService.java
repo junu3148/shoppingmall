@@ -19,16 +19,18 @@ public class CartService {
 	@Autowired	
 	CartDAO cartDAO;
 	
-	
+	/*장바구니 보기*/
 	public List<ProductVO> viewCart(int customerNo) { 
+		System.out.println("viewCart Service()");
 		
 		List<ProductVO> cartList = cartDAO.getCartList(customerNo);
 		
 		return cartList;
 	}
 	
-	
+	/*장바구니 추가*/
 	public int addCart(CartVO cartVO) { 
+		System.out.println("addCart Service()");
 		
 		CartVO returnVO = cartDAO.checkCart(cartVO);
 
@@ -45,8 +47,10 @@ public class CartService {
 		return cartVO.getProductCnt();
 	}
 	
-	/* 카트 리스트 삭제. 고객의 카트 넘버 찾아서 삭제함*/
+	/* 장바구니 리스트 삭제. 고객의 카트 넘버 찾아서 삭제함*/
 	public boolean deleteList(CartVO cartVO) { 
+		System.out.println("deleteList Service()");
+		
 		boolean result = false;
 		
 		CartVO checkCartNo = cartDAO.checkCart(cartVO);
@@ -68,10 +72,9 @@ public class CartService {
 	/* 주문상태 완료(2)인 주문 테이블만 있으면 주문하나 만듬.*/
 	/* 주문상태인(1) 주문 테이블 있으면 해당 테이블에 추가 */
 	public boolean addOrder(OrderVO orderVO) {
-		
+		System.out.println("addOrder Service()");
 		boolean result = false;
 		
-		System.out.println("Service까지 오나요?" + orderVO);
 		OrderVO ordersCheck = cartDAO.checkOrder(orderVO.getCustomerNo());
 		
 		/*결제 진행 중 상태인 주문건(상태 1)이 있으면~해당 주문 삭제함*/
@@ -100,13 +103,11 @@ public class CartService {
 	
 	///////////////////////////////////////
 	
-	
-	
-	
+
 	/*고객의 주문 페이지 정보를 불러옴*/
 	/*주문 디테일 제품 리스트와 주문 정보가 들어가 있는 orderVO + 고객의 주소 정보*/
 	public Map<String, Object> getOrderInfo(String customerNo){
-		
+		System.out.println("getOrderInfo Service()");
 		Map<String,Object> orderInfo = new HashMap<>();
 		
 		OrderVO orderVO = cartDAO.checkOrder(customerNo);
@@ -115,18 +116,15 @@ public class CartService {
 		
 		List<AddressVO> addressList = cartDAO.getCustomerAddress(customerNo);
 		
-		
 		orderInfo.put("orderInfo", orderVO);
 		orderInfo.put("addressList", addressList);
-		
-		
-		System.out.println("완성된 orderVO 확인 :"  +  orderVO);
 		
 		return orderInfo;
 	}
 	
+	/*주소 추가*/
 	public boolean addAdress(AddressVO addressVO) {
-			
+		System.out.println("addAdress Service()");
 		boolean result = false;
 		
 		int cnt = cartDAO.addressCount(addressVO);

@@ -6,22 +6,21 @@
 
 <mapper namespace="cart">
 
-
-<select id="checkCart" resultType="CartVO" parameterType="CartVO" >
-
+	<!-- 장바구니 체크 -->
+	<select id="checkCart" resultType="CartVO"
+		parameterType="CartVO">
 	<![CDATA[
 		select 
 			cart_no as cartNo
 		from cart
 		where customer_no = #{customerNo}
 	]]>
-</select>
+	</select>
 
-
-<insert parameterType="CartVO" id="insertCart">
-
-<selectKey resultType="int" order="BEFORE" keyProperty="cartNo">select seq_cart_no.nextval from dual </selectKey>
-
+	<!-- 장바구니 추가 -->
+	<insert parameterType="CartVO" id="insertCart">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="cartNo">select seq_cart_no.nextval from dual </selectKey>
 	<![CDATA[
 			insert into cart 
 			(cart_no
@@ -31,11 +30,11 @@
 					#{customerNo}
 						)
 		]]>
-</insert>
+	</insert>
 
 
-<insert parameterType="CartVO" id="insertCartDetail">
-
+	<!-- 장바구니 상세정보 추가 -->
+	<insert parameterType="CartVO" id="insertCartDetail">
 	<![CDATA[
 		insert into cart_detail
 		(cart_detail_no, cart_no, product_no, product_count)
@@ -46,10 +45,12 @@
 			,#{productCnt}
 			)
 	]]>
-</insert>
+	</insert>
 
 
-<select id ="getCartList" parameterType ="int" resultType = "ProductVO">
+	<!-- 장바구니 리스트 가져오기 -->
+	<select id="getCartList" parameterType="int"
+		resultType="ProductVO">
 	<![CDATA[
 		SELECT
 			d.product_no as productNo
@@ -66,18 +67,21 @@
 		GROUP BY d.product_no, d.product_name, c.customer_no, d.price, e.save_name
 		ORDER BY ordernum DESC
 	]]>
-</select>
+	</select>
 
 
-<delete id ="deleteList" parameterType ="CartVO">
+	<!-- 장바구니 상세 내역 삭제 -->
+	<delete id="deleteList" parameterType="CartVO">
 	<![CDATA[
 		delete cart_detail 
 		where cart_no = #{cartNo} 
 		and product_no = #{productNo}
 	]]>
-</delete>
+	</delete>
 
-<select id ="checkOrder" parameterType ="String" resultType = "OrderVO">
+	<!-- 주문 존재여부 확인 -->
+	<select id="checkOrder" parameterType="String"
+		resultType="OrderVO">
 	<![CDATA[
 		select 
 			order_no as orderNo
@@ -85,19 +89,22 @@
 		from orders 
 		where customer_no = #{customerNo}  and order_stat = 1
 	]]>
-</select>
+	</select>
 
-<insert id ="insertOrder" parameterType ="OrderVO">
-	<selectKey resultType="int" order="BEFORE" keyProperty="orderNo">
-		select SEQ_ORDER_NO.nextval from dual 
-	</selectKey>
+	<!-- 주문 추가 -->
+	<insert id="insertOrder" parameterType="OrderVO">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="orderNo">
+			select SEQ_ORDER_NO.nextval from dual
+		</selectKey>
 	<![CDATA[
 		insert into orders (ORDER_NO, CUSTOMER_NO, ORDER_STAT, total_price)
 		values (#{orderNo},#{customerNo},1, #{totalPrice})
 	]]>
-</insert>
+	</insert>
 
-<insert id = "insertOrderDetail" parameterType ="map">
+	<!-- 주문 상세내역 추가 -->
+	<insert id="insertOrderDetail" parameterType="map">
 	<![CDATA[
         insert into order_detail 
         	(detail_no, order_no, product_no, product_count)
@@ -108,23 +115,27 @@
         		,#{orderProduct.productEa}
         		)
 	]]>
-</insert>
+	</insert>
 
-<delete id ="deleteOrder" parameterType ="int">
+	<!-- 주문 삭제 -->
+	<delete id="deleteOrder" parameterType="int">
 	<![CDATA[
 		delete orders
 		where order_no = #{orderNo}
 	]]>
-</delete>
+	</delete>
 
-<delete id ="deleteOrderDetail" parameterType ="int">
+	<!-- 주문 상세내역 삭제 -->
+	<delete id="deleteOrderDetail" parameterType="int">
 	<![CDATA[
 		delete order_detail
 		where order_no = #{orderNo}
 	]]>
-</delete>
+	</delete>
 
-<select id = "getOrderDetail" parameterType ="OrderVO" resultType ="ProductVO">
+	<!-- 주문 상세내역 가져오기 -->
+	<select id="getOrderDetail" parameterType="OrderVO"
+		resultType="ProductVO">
 	<![CDATA[
 		SELECT
    			 a.product_no as productNo
@@ -138,8 +149,12 @@
     	join product_image c on b.product_no  = c.product_no
     	where a.order_no = #{orderNo}
 	]]>
-</select>
-<select id="getAddressList" parameterType ="String" resultType ="AddressVO">
+	</select>
+
+
+	<!-- 주소 리스트 가져오기 -->
+	<select id="getAddressList" parameterType="String"
+		resultType="AddressVO">
 	<![CDATA[
 		select	
 			tell as tel
@@ -151,19 +166,22 @@
 		from address
 		where customer_no = #{customerNo}
 	]]>
-</select>
+	</select>
 
 
-<select id = "AddressCnt" parameterType ="AddressVO" resultType = "int">
+	<!-- 등록된 주소 리스트 수량 체크 -->
+	<select id="AddressCnt" parameterType="AddressVO"
+		resultType="int">
 	<![CDATA[
 		 select
          	count(*)
          from address
          where customer_no = #{customerNo}
 	]]>
-</select>
+	</select>
 
-<delete id ="deleteAddress" parameterType ="AddressVO">
+	<!-- 주소 삭제 -->
+	<delete id="deleteAddress" parameterType="AddressVO">
    <![CDATA[
       delete address
            where address_no  =
@@ -172,9 +190,10 @@
                from address
                where customer_no = #{customerNo})
    ]]>
-</delete>
+	</delete>
 
-<insert id = "insertAddress" parameterType ="AddressVO">
+	<!-- 주소 추가 -->
+	<insert id="insertAddress" parameterType="AddressVO">
    <![CDATA[
       insert into address
          (address_no, customer_no, address,tell, post_num, address_detail, reci_name, email)
@@ -189,7 +208,6 @@
             ,#{email}
             )
    ]]>
-</insert>
-
+	</insert>
 
 </mapper>
