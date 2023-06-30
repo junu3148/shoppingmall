@@ -147,7 +147,6 @@ table{ border : 1px solid black;}
 					</select>
 					<input type="text" name="input_email_domain"
 						id="input_email_domain" style="display: none" />
-
 					</td>
 				</tr>
 				<tr>
@@ -256,15 +255,13 @@ table{ border : 1px solid black;}
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+	/*결제하기 버튼 클릭 시*/
 	$('#pay-btn').on("click", function(){
 		iamport();
-
 	}); //결제하기 버튼 클릭 이벤트 end
 
-
-	
-
-
+	/*새로운 주소록 추가*/
 	$('.newAddress-btn').on("click", function(){
 		console.log('test');
 		var inputName = $('#name').val();
@@ -298,7 +295,7 @@ table{ border : 1px solid black;}
 	         type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
 	         data : addressVO,
 	         
-	         //응답 관련 세팅
+	         //응답 세팅
 	         dataType : "json",
 	         success : function(jsonResult){
 	         	if(jsonResult.data == true){
@@ -312,11 +309,7 @@ table{ border : 1px solid black;}
 	         error : function(XHR, status, error) {
 	         console.error(status + " : " + error);
 	         }
-					            
 	      });//ajax end
-		
-		
-		
 		}/*주소 입력 else문 end */
 	});//신규 주소 저장 버튼 클릭 이벤트 end
 
@@ -348,11 +341,17 @@ table{ border : 1px solid black;}
 		
 	}); //address-box 클릭시
 	
-	
+	/*우편번호 찾기 버튼 클릭*/
 	$('#btn-postnum').on("click", function(){
 		DaumPostcode();
 	});
 
+	/* 이메일 뒷주소 관련 selector 선택 시 발생할 이벤트 처리*/
+	$('#email').on("keyup", function() {
+		change_email_domain($(this).val());
+	});
+	
+	
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function DaumPostcode() {
 		new daum.Postcode(
@@ -416,10 +415,7 @@ table{ border : 1px solid black;}
 				}).open();
 	}
 
-	/* 이메일 뒷주소 관련 selector 선택 시 발생할 이벤트 처리*/
-	$('#email').on("keyup", function() {
-		change_email_domain($(this).val());
-	})
+
 
 	/*이메일 입력 스크립트*/
 	function change_email_domain(val) {
@@ -432,6 +428,7 @@ table{ border : 1px solid black;}
 		}
 	}
 	
+	/*주소 추가*/
 	function addAddress(addressVO){
 		
 		var str = "";
@@ -495,10 +492,10 @@ table{ border : 1px solid black;}
 			         
 			         //요청 세팅
 			         url : "${pageContext.request.contextPath}/payment/paymentSuccess",      
-			         type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+			         type : "post", 
 			         data : orderVO,
 			         
-			         //응답 관련 세팅
+			         //응답 세팅
 			         dataType : "json",
 			         success : function(jsonResult){
 						

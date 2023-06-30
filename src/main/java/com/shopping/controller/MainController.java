@@ -81,8 +81,10 @@ public class MainController {
 		System.out.println("productDetal");
 		productVO.setProductNo(productNo);
 
+		
 		Map<String, Object> detailViewInfo = productService.productPageInfo(productVO,selectReviewPage);
 
+		System.out.println("디테일 뷰에 넘어오는 거 확인 : " +  detailViewInfo);
 		model.addAttribute("product", detailViewInfo.get("product"));
 		model.addAttribute("paging", detailViewInfo.get("paging"));
 		model.addAttribute("review", detailViewInfo.get("review"));

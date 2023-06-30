@@ -34,6 +34,7 @@ public class CartController {
 	CartService cartService;
 	
 	
+	/*카트 보기*/
 	@RequestMapping(value ="/viewCart")
 	public String viewCart(@RequestParam(value = "customerNo", required = false, defaultValue= "0") int customerNo
 							, Model model) { 
@@ -86,8 +87,6 @@ public class CartController {
 								,HttpSession session) {
 		JasonResult jasonResult = new JasonResult();
 
-		System.out.println("안 오겠죠?" + jsonData);
-
 	    //직렬화 시켜 가져온 오브젝트 배열을 JSONArray 형식으로 바꿔준다.
 	    JSONArray jsonArray = new JSONArray(jsonData);
 	    List<ProductVO> productList = new ArrayList<ProductVO>();
@@ -98,7 +97,6 @@ public class CartController {
 	        
 	        //JSONArray 형태의 값을 가져와 JSONObject 로 풀어준다.    
 	        JSONObject obj = (JSONObject)jsonArray.get(i);
-	                System.out.println("obj에는 뭔 값이 있는데" + obj);
 	                
 	        productVO.setProductNo((int)obj.get("productNo"));
 	        productVO.setProductEa((int)obj.get("productEa"));
@@ -120,6 +118,7 @@ public class CartController {
 		return jasonResult;
 	}
 	
+	/*바로 구매*/
 	@RequestMapping(value ="/addOrderOne" , method = RequestMethod.GET)
 	public String addOrderOne(@ModelAttribute ProductVO productVO
 							,@ModelAttribute OrderVO orderVO) {
@@ -138,6 +137,7 @@ public class CartController {
 	}
 	
 	
+	/*고객이 카트에 담은 제품 정보*/
 	@RequestMapping(value ="/orderPage/{customerNo}", method = RequestMethod.GET)
 	public String orderPage(@PathVariable String customerNo
 							, Model model) {

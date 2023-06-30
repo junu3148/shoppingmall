@@ -172,7 +172,15 @@
 #cart-btn{text-decoration: none;}
 .comment_delete_modal_btn , .heart_icon , .delete_icon{cursor: pointer;}
 .review_zone{font-size : 30px;}
-
+.ea_message{color : red;}
+#nav a {color : black; text-decoration: none;}
+#lnb a {
+  color: black !important;
+  text-decoration: none;
+}
+.top_btn{
+	display:
+}
 </style>
 
 </head>
@@ -186,6 +194,9 @@
 
 	<main id="pd_detail">
 
+
+		<!-- 제품 디테일 공간  -->
+		
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
 				<img
@@ -200,6 +211,7 @@
 							value="${product.price}" />
 						원
 					</p>
+					<input type ="text" value ="${product.subCategory}" id = "subCategory">
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>
@@ -219,16 +231,20 @@
 						<div class="pd_num clear">
 							<p>수량</p>
 							<div class="count-wrap _count">
-								<button type="button" class="minus">-</button>
+								<button type="button" class="minus" >-</button>
 								<input type="text" class="inp" name="productEa" value="1" />
 								<!-- 변경되는 숫자 -->
-								<button type="button" class="plus">+</button>
+								<button type="button" class="plus" data-max = "${product.productEa}">+</button>
 							</div>
 
-
-							<!--  바뀔 금액 자리 -->
+					
 							<span class="total_price"></span>
 						</div>
+							
+						<c:if test ="${product.productEa < 10 }">
+							<p class= "ea_message">현재 재고가 ${product.productEa}개 남은 제품입니다.</p>
+						</c:if>
+						
 
 						<div class="total_price_wrap">
 							<p>
@@ -358,6 +374,12 @@
 			<!-- 반복될 리뷰들 end -->
 			<!-- 리뷰 넣을 공간 -->
 
+		<!-- 탑버튼 -->
+		<a href="#none" class="top_btn"><img
+			src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+			alt=""></a>
+		<!-- /탑버튼 -->
+
 			<!-- 리뷰 페이징 시작 -->
 			<div class="review_paging">
 
@@ -394,11 +416,6 @@
 
 
 
-		<!-- 탑버튼 -->
-		<a href="#none" class="top_btn"><img
-			src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
-			alt=""></a>
-		<!-- /탑버튼 -->
 
 	</main>
 
@@ -487,7 +504,19 @@
 </body>
 
 <script>
+$(window).on("load", function(){
+	
+	var category  = $('#subCategory').val();
+	
+	if(category == "간식"){ $('.snack').css('color', '#4982cf');}
+	if(category == "배변용품"){  $('.toilet').css('color', '#4982cf');  }
+	if(category == "미용"){  $('.beauty').css('color', '#4982cf'); }
+	if(category == "장난감"){  $('.toy').css('color', '#4982cf'); }
+	if(category == "가구"){  $('.furniture').css('color', '#4982cf'); }
+	
+});
 
+/* 리뷰 좋아요 버튼 클릭 이벤트 처리*/
 $('.like_cnt').on("click", function(){
 	
 	var reviewNo = $(this).data('reviewno');
@@ -523,7 +552,7 @@ $('.like_cnt').on("click", function(){
 	
 });
 
-
+/* 코멘트 삭제 모달 팝업 버튼 클릭 이벤트*/
 $('.comment_delete_modal_btn').on("click", function(){
 	
 		$('#comment_modal').modal('show');
@@ -532,6 +561,7 @@ $('.comment_delete_modal_btn').on("click", function(){
 	    
 });
 
+/* 코멘트 삭제 이벤트*/
 $('.comment_delete_btn').on("click", function(){
 	
 	var commentNo =	$(this).data('commentno');
@@ -679,9 +709,11 @@ $('.see_more').on("click", function(){
 		$(".plus").on("click", function() {
 			var EA = $(".inp");
 			var EAval = Number(EA.val()); // EAval을 숫자로 변환
-
+			var max = Number($(this).data('max'));
+			
+			if((EAval + 1 ) <= max ){
 			EA.val(EAval + 1); // 증가된 값을 input 요소에 설정
-
+			}
 			updateTotalPrice();
 		}); //plus btn event end
 

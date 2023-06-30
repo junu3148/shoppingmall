@@ -137,14 +137,23 @@
 
 <script>
 
-/*주문하기 버튼 눌리면*/
+/*주문하기 버튼 클릭*/
 $('#order_btn').on("click", function(){
 	
 		var productList = [];
-	
-	/*값을 가져감*/
+		var chk = $('input[name="chk"]:checked');
+		 	/*체크된 제품이 없을 경우*/
+			if(chk.length == 0 ){
+				alert('구매할 제품을 선택해주세요.');
+				return false;
+			 }
+		
+	/*선택된 제품들 체크*/
 	 $('input[name="chk"]:checked').each(function() {
 
+		 var check = $(this);
+		 //console.log(check)
+		 
 		 var productEa =  parseInt($(this).closest('tr').find('input[name = "product_count"]').val());
 		 var price =  parseInt($(this).closest('tr').find('input[name  ="product_price"]').val());
 		 var productPrice = price*productEa;
@@ -176,7 +185,7 @@ $('#order_btn').on("click", function(){
          type : "post",
          data : {"jsonData" : ProductData},
          
-         //응답 관련 세팅
+         //응답 세팅
          dataType : "json",
          success : function(jsonResult){
          
@@ -203,10 +212,9 @@ $('.del').on("click", function(){
 	/* 선택된 제품의 금액과 수량 체크*/
     productNoList.push(productNo);
  	console.log(productNoList);
- 	
- 	
   }); //체크된 체크 박스 값 가져오기
 
+  
  	for(var i=0; i<productNoList.length; i++ ){
  		
  		var productNo = productNoList[i];
@@ -222,10 +230,10 @@ $('.del').on("click", function(){
 	            
 	            //요청 세팅
 	            url : "${pageContext.request.contextPath}/cart/deleteList",      
-	            type : "post", //어차피 내부 요청이라 주소창에 안 나온다.
+	            type : "post",
 	            data : CartVO,
 	            
-	            //응답 관련 세팅
+	            //응답 세팅
 	            dataType : "json",
 	            success : function(jsonResult){
 	            
@@ -247,13 +255,14 @@ $('.del').on("click", function(){
 });// 선택 상품 삭제 버튼 클릭 이벤트
 
 
-
+/*선택된 제품 재고*/
 $('.inp').on("keyup", function(){
 	
     updateValues();
 	
 });//
 
+/*전체 클릭 체크박스*/
 $("#cbx_chkAll").click(function() {
   if($("#cbx_chkAll").is(":checked")) {
     $("input[name=chk]").prop("checked", true);
@@ -276,7 +285,6 @@ $("input[name=chk]").click(function() {
     updateValues();
   }
 });
-
 
 
    //장바구니페이지 수량 체크
