@@ -40,7 +40,7 @@ public class ProductDAO {
 	// --------------- 상품 이미지 수정
 	public int modifyProductImg(Map<String, Object> prdouctImgMap) {
 		System.out.println("modifyProductImg DAO()");
-		System.out.println(prdouctImgMap);
+
 		return sqlSession.update("image.modifyProductImg", prdouctImgMap);
 	}
 
@@ -68,8 +68,8 @@ public class ProductDAO {
 	// ---------------- 관리자 페이지 상품 리스트 가져오기
 	public List<ProductVO> getAllProductList2(Criteria cri) {
 		System.out.println("getAllProductList DAO()");
-		
-		return sqlSession.selectList("product.getAllProductList2",cri);
+
+		return sqlSession.selectList("product.getAllProductList2", cri);
 	}
 
 	// ---------------- 전체 상품 리스트 가져오기 ----------------------------

@@ -23,14 +23,15 @@ import com.shopping.vo.ReviewVO;
 
 @Service
 public class ProductService {
-	//String saveDir = "/Users/yangjun-u/upload/";
-	String saveDir = "C:/shopping/img/upload/"; 
+	// String saveDir = "/Users/yangjun-u/upload/";// 맥호환
+	String saveDir = "C:/shopping/img/upload/";
 	@Autowired
 	private ProductDAO productDAO;
 	@Autowired
 	private ReviewDAO reviewDAO;
 	private Map<String, Object> prdouctImgMap = new HashMap<>();
 	private List<ProductVO> productList = new ArrayList<>();
+	private Map<String, Object> map = new HashMap<>();
 
 	// -------------- 상품 등록 & 상품이미지 등록
 	public int insertProduct(ProductVO vo, MultipartFile file) {
@@ -64,13 +65,11 @@ public class ProductService {
 	// ---------------- 관리자 페이지 상품 리스트 가져오기
 	public Map<String, Object> getProductList(Criteria cri) {
 		System.out.println("getProductList Service()");
-		
-		Map<String, Object> map = new HashMap<>();
-		
+
 		int total = productDAO.getTotal(cri);
-				
+
 		productList = productDAO.getAllProductList2(cri);
-		
+
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
 		map.put("pageMaker", pageMaker);
 		map.put("productList", productList);
@@ -83,8 +82,6 @@ public class ProductService {
 		System.out.println("Test Service()");
 
 		int total = 0;
-		List<ProductVO> productList = new ArrayList<>();
-		Map<String, Object> map = new HashMap<>();
 
 		// --------------- 상품 전체 리스트
 		if (category.equals("all") && subCategory.equals("all")) {
@@ -156,39 +153,37 @@ public class ProductService {
 		return result;
 	}
 
-	public Map<String,Object> productPageInfo(ProductVO productVO, int selectReviewPage){
-		
+	public Map<String, Object> productPageInfo(ProductVO productVO, int selectReviewPage) {
+
 		Map<String, Object> productPageInfo = new HashMap<>();
 		ProductVO productInfo = productDAO.getProduct(productVO);
-		
-		/* paging 을 위해 productNo의 리뷰 cnt 를 알아와야 함*/
-		/* 알아온 다음 페이징 객체를 이용하여 리뷰 리스트 가져옴*/
-		/* 돌아온 리뷰 리스트 사이즈만큼 for문을 돌려서 리뷰 객체에 해당하는 코멘트 객체를 넣음*/
-		
-		int totalCnt = reviewDAO.getReviewCnt(productVO); // 페이징 객체 사용을 위한 
-		PagingVO pagingVO = new PagingVO(selectReviewPage, totalCnt, productVO.getProductNo() + "",null); //페이징 객체 생성
 
-		List<ReviewVO> reviewList = reviewDAO.getReviewList(pagingVO); //페이징 처리된 리뷰 리스트 받아옴
-		
-		for(int i = 0; i<reviewList.size(); i++) { // 돌아온 리뷰 리스트 사이즈만큼 반복문 돌림
-		
-		//ReviewVO 안의 ReviewNo 으로 comment 리스트 불러와서
-		List<CommentVO> commentList = reviewDAO.getReviewComment(reviewList.get(i)); 
-		//ReviewVO 안에 담아준다.
-		reviewList.get(i).setComment(commentList);
-		
+		/* paging 을 위해 productNo의 리뷰 cnt 를 알아와야 함 */
+		/* 알아온 다음 페이징 객체를 이용하여 리뷰 리스트 가져옴 */
+		/* 돌아온 리뷰 리스트 사이즈만큼 for문을 돌려서 리뷰 객체에 해당하는 코멘트 객체를 넣음 */
+
+		int totalCnt = reviewDAO.getReviewCnt(productVO); // 페이징 객체 사용을 위한
+		PagingVO pagingVO = new PagingVO(selectReviewPage, totalCnt, productVO.getProductNo() + "", null); // 페이징 객체 생성
+
+		List<ReviewVO> reviewList = reviewDAO.getReviewList(pagingVO); // 페이징 처리된 리뷰 리스트 받아옴
+
+		for (int i = 0; i < reviewList.size(); i++) { // 돌아온 리뷰 리스트 사이즈만큼 반복문 돌림
+
+			// ReviewVO 안의 ReviewNo 으로 comment 리스트 불러와서
+			List<CommentVO> commentList = reviewDAO.getReviewComment(reviewList.get(i));
+			// ReviewVO 안에 담아준다.
+			reviewList.get(i).setComment(commentList);
+
 		}
-		
-		//내보내기
+
+		// 내보내기
 		productPageInfo.put("product", productInfo);
 		productPageInfo.put("paging", pagingVO);
-		productPageInfo.put("review",reviewList);
-		
-		
+		productPageInfo.put("review", reviewList);
+
 		return productPageInfo;
 	}
-	
-	
+
 	// ------------- 파일체크 & 맵 치환
 	public void fileCheck(ProductVO vo, MultipartFile file) {
 
@@ -227,7 +222,5 @@ public class ProductService {
 			System.out.println("No file uploaded.");
 		}
 	}
-	
-	
 
 }

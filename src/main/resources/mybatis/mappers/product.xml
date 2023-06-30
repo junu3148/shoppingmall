@@ -15,7 +15,7 @@
 		
 		<![CDATA[
 			
-			insert into product(
+			INSERT INTO product(
 	                    PRODUCT_NO,
 	                    PRODUCT_NAME,
 	                    PRODUCT_EA,
@@ -25,7 +25,7 @@
 	                    CATEGORY,
 	                    SUBCATEGORY
 	                    )
-	            values(
+	            VALUES(
 	                    #{productNo},
 	                    #{productName},
 	                    #{productEa},
@@ -45,7 +45,7 @@
 		
 		<![CDATA[
 		
-			delete from product where product_no = #{productNo}
+			DELETE FROM product WHERE product_no = #{productNo}
 		
 		]]>
 
@@ -135,7 +135,7 @@
 		resultType="ProductVO">
 	<![CDATA[
 		
-	         select 
+	         SELECT 
 	                d.product_no as productNo,
 	                d.product_name as productName,
 	                d.product_ea as productEa,
@@ -146,7 +146,7 @@
 	                d.subcategory as subCategory,
 	                d.save_name as saveName,
 	                d.image_no as imageNo   
-		     from(select  
+		     FROM(SELECT  
 		                rownum as rn,
 		                c.product_no, 
 		                c.product_name,
@@ -158,7 +158,7 @@
 		                c.subcategory ,
 		                c.save_name ,
 		                c.image_no
-		            from (SELECT
+		            FROM (SELECT
 		                        a.product_no, 
 		                        a.product_name,
 		                        a.product_ea,
@@ -170,7 +170,7 @@
 		                        b.save_name ,
 		                        b.image_no 
 		                    FROM
-		                        product a inner join product_image b 
+		                        product a INNER JOIN product_image b 
 		                      ON 
 		                        a.product_no = b.product_no
 		                   WHERE
@@ -193,16 +193,16 @@
 		</if>
 	        		
         <![CDATA[                                        
-                        order by
+                        ORDER BY
         ]]>
 		<if test="minPrice != 0 ">
 			a.price ,
 		</if>
         <![CDATA[        
-                         a.product_no desc) c
+                         a.product_no DESC) c
                         ) d
-            where d.rn > (#{pageNum}-1) * #{amount}
-            and d.rn <= #{pageNum} * #{amount}
+            WHERE d.rn > (#{pageNum}-1) * #{amount}
+            AND d.rn <= #{pageNum} * #{amount}
 			
 		]]>
 	</select>
@@ -213,7 +213,7 @@
 	
 		<![CDATA[
 		
-	         select 
+	         SELECT 
 	                d.product_no as productNo,
 	                d.product_name as productName,
 	                d.product_ea as productEa,
@@ -224,7 +224,7 @@
 	                d.subcategory as subCategory,
 	                d.save_name as saveName,
 	                d.image_no as imageNo   
-		     from(select  
+		     FROM(SELECT  
 		                rownum as rn,
 		                c.product_no, 
 		                c.product_name,
@@ -236,7 +236,7 @@
 		                c.subcategory ,
 		                c.save_name ,
 		                c.image_no
-		            from (SELECT
+		            FROM (SELECT
 		                        a.product_no, 
 		                        a.product_name,
 		                        a.product_ea,
@@ -248,7 +248,7 @@
 		                        b.save_name ,
 		                        b.image_no 
 		                    FROM
-		                        product a inner join product_image b 
+		                        product a INNER JOIN product_image b 
 		                      ON 
 		                        a.product_no = b.product_no
 		                   WHERE
@@ -260,10 +260,10 @@
 		</if>
 	        		
         <![CDATA[                                        
-                        order by a.product_no desc) c
+                        ORDER BY a.product_no desc) c
                         ) d
-            where d.rn > (#{pageNum}-1) * #{amount}
-            and d.rn <= #{pageNum} * #{amount}
+            WHERE d.rn > (#{pageNum}-1) * #{amount}
+            AND d.rn <= #{pageNum} * #{amount}
 			
 		]]>
 
@@ -275,7 +275,7 @@
 	
 		<![CDATA[
 		
-		     select
+		     SELECT
 	               d.product_no as productNo,
 	               d.product_name as productName,
 	               d.product_ea as productEa,
@@ -286,7 +286,7 @@
 	               d.subcategory as subCategory,
 	               d.save_name as saveName,
 	               d.image_no as imageNo   
-	         from(select  
+	         FROM(SELECT  
 		                rownum as rn,
 		                c.product_no, 
 		                c.product_name,
@@ -298,7 +298,7 @@
 		                c.subcategory ,
 		                c.save_name ,
 		                c.image_no
-		            from (SELECT
+		            FROM (SELECT
 		                        a.product_no, 
 		                        a.product_name,
 		                        a.product_ea,
@@ -310,7 +310,7 @@
 		                        b.save_name ,
 		                        b.image_no 
 		                    FROM
-		                        product a inner join product_image b 
+		                        product a INNER JOIN product_image b 
 		                      ON 
 		                        a.product_no = b.product_no
 		                   WHERE
@@ -323,10 +323,10 @@
 		                
          <![CDATA[ 
 		        	 AND a.subcategory = '${subCategory}'  
-					 order by a.product_no desc) c
+					 ORDER BY a.product_no DESC) c
 		                        ) d
-	         where d.rn > (#{pageNum}-1) * #{amount}
-	         and d.rn <= #{pageNum} * #{amount}
+	         WHERE d.rn > (#{pageNum}-1) * #{amount}
+	         AND d.rn <= #{pageNum} * #{amount}
 			
 		]]>
 
@@ -354,7 +354,7 @@
 			      product a
 			      INNER JOIN product_image b 
 			      ON a.product_no = b.product_no
-			      WHERE product_name like '%'||#{keyword}||'%'
+			      WHERE product_name LIKE '%'||#{keyword}||'%'
 		  ORDER BY
 			      a.product_no DESC
 		
@@ -397,15 +397,15 @@
 		
 		<![CDATA[
 		
-			update product
-					   set                  
+			UPDATE product
+					   SET                  
 		                  product_name = #{productName},
 		                  product_ea = #{productEa},
 		                  price = #{price},
 		                  product_content = #{productContent},
 		                  category = #{category},
 		                  subcategory = #{subCategory}
-		        	where product_no = #{productNo}
+		        	WHERE product_no = #{productNo}
 	
 		]]>
 

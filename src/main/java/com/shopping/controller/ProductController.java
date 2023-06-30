@@ -22,31 +22,13 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private ProductVO productVO;
 
-	// ----------------- 상품 페이지
-	@RequestMapping(value = "/category/{no}", method = RequestMethod.GET)
-	public String product(@PathVariable("no") int no) {
-		System.out.println("product()");
-
-		return "";
-	}
-
-	// ----------------- 상품 등록 폼
-	@RequestMapping(value = "/insertProductForm", method = RequestMethod.GET)
-	public String insertProductForm() {
-		System.out.println("insertProductForm()");
-
-		return "Admin/ProductInsert";
-	}
-	
-	// ----------------- 상품 등록
+	// ------------------- 상품 등록
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
 	public String insertProduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("insertProduct()");
-		
-		int result = productService.insertProduct(vo, file);
+
+		productService.insertProduct(vo, file);
 
 		return "redirect:/product/productListForm";
 	}
@@ -63,15 +45,13 @@ public class ProductController {
 
 		return "Admin/ProductView";
 	}
-	
 
 	// ------------------- 상품 수정
 	@RequestMapping(value = "/modifyProduct", method = RequestMethod.POST)
 	public String modifyPoduct(@ModelAttribute ProductVO vo, @RequestParam("file") MultipartFile file) {
 		System.out.println("modifyProduct()");
-		
-				
-		int result = productService.modifyProduct(vo, file);
+
+		productService.modifyProduct(vo, file);
 
 		return "redirect:/product/productListForm";
 	}
@@ -81,7 +61,7 @@ public class ProductController {
 	public String deletePoduct(@PathVariable("no") int productNo) {
 		System.out.println("deleteProduct()");
 
-		int result = productService.deleteProduct(productNo);
+		productService.deleteProduct(productNo);
 
 		return "redirect:/product/productListForm";
 	}
@@ -90,12 +70,12 @@ public class ProductController {
 	@RequestMapping(value = "/searchProduct", method = RequestMethod.GET)
 	public String searchProduct(Model model, @ModelAttribute Criteria cri) {
 		System.out.println("searchProduct");
-		
+
 		Map<String, Object> map = productService.getProductList(cri);
-		
+
 		model.addAttribute("productList", map.get("productList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-		
+
 		return "Admin/ProductView";
 	}
 
