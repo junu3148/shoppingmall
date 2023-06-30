@@ -116,7 +116,25 @@
 			]]>
 	</select>
 
+<select id ="getDetailInfo" parameterType ="CustomerVO" resultType ="CustomerVO">
+	<![CDATA[
+		select
+			customer_no 
+    		,customer_name as customerName
+   			,customer_id as customerId
+    		,customer_role as customerRole
+    		,(select sum(total_price) from orders where order_stat = 2 and customer_no = a.customer_no) as totalPayment
+    	from customer a where customer_no = #{customerNo}
+	]]>
+</select>
 
+<update id = "updateCustomerRole" parameterType ="CustomerVO">
+	<![CDATA[
+		update customer 
+			set customer_role = #{customerRole}
+		where customer_no = #{customerNo}
+	]]>
+</update>
 	
 	
 </mapper>

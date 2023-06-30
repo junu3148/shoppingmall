@@ -68,6 +68,35 @@
 .footer .container-fluid {
 	height: 30px;
 }
+.inquiry_write2 , .customer_info{
+	width: 100%; text-align: center;
+}
+.customer_info td {
+	height: 70px;
+	font-size : 20px;
+}
+.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
+.inquiry_popup .inquiry_close{display: none;}
+.inquiry_popup .inquiry_write{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 700px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
+.inquiry_popup .inquiry_write2{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 500px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -250px; background: #fff;}
+.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 60px; text-align: center;}
+.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
+.inquiry_popup .inquiry_write th,
+.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
+.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
+.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#inquiry_cont{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#inquiry_cont2{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
+.user_img { width:150px; }
+.order_btn{ 
+    bottom: 3px;
+    background: #4982cf;
+    border: 1px solid #4982cf;
+    color: #fff;
+    width: 129px;
+}
+.inquiry_popup .shopping_btn{ text-decoration: none; }
 </style>
 </head>
 <body>
@@ -133,9 +162,9 @@
 						<div>
 							<table class="table table-striped">
 								<tr>
-									<td style="width: 20%; text-align: center;">고객 아이디</td>
-									<td style="width: 30%; text-align: center;">이름</td>
-									<td style="width: 10%; text-align: center;">고객번호</td>
+									<td style="width: 20%; text-align: center;"><b>고객 아이디</b></td>
+									<td style="width: 30%; text-align: center;"><b>이름</b></td>
+									<td style="width: 10%; text-align: center;"><b>고객번호</b></td>
 									<td style="width: 10%; text-align: center;"></td>
 								</tr>
 								<c:if test="${message != null}">
@@ -152,9 +181,8 @@
 											<td style="width: 20%; text-align: center;">${customer.customerId}</td>
 											<td style="width: 30%; text-align: center;">${customer.customerName}</td>
 											<td style="width: 10%; text-align: center;">${customer.customerNo}</td>
-											<td style="width: 10%; text-align: center;"><a
-												href="${pageContext.request.contextPath}/customer/detailInfo/${customer.customerNo}"
-												class="btn btn-primary">상세정보</a></td>
+											<td style="width: 10%; text-align: center;"><button type ="button"
+												class="btn btn-primary detail_Info" data-customerno = "${customer.customerNo}">상세정보</button></td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -162,7 +190,7 @@
 						</div>
 						<!-- 여기다가 넘버링할 거임 -->
 						<c:if test="${pageInfo.pagingInfo.selectPage >10}">
-							<a class="paging"
+							<a class="paging_"
 								href="${pageContext.request.contextPath}/customer/customerView?selectPage=${pageInfo.pagingInfo.startPageNum - 1}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">
 								◀ </a>
 						</c:if>
@@ -170,12 +198,12 @@
 						<c:forEach begin="${pageInfo.pagingInfo.startPageNum}"
 							end="${pageInfo.pagingInfo.endPageNum}" var="page">
 							<c:if test="${page <= pageInfo.pagingInfo.finalPage}">
-								<a class="paging"
+								<a class="paging_"
 									href="${pageContext.request.contextPath}/customer/customerView?selectPage=${page}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">${page}</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${pageInfo.pagingInfo.next == true}">
-							<a class="paging"
+							<a class="paging_"
 								href="${pageContext.request.contextPath}/customer/customerView?selectPage=${pageInfo.pagingInfo.endPageNum + 1}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">
 								▶ </a>
 						</c:if>
@@ -188,12 +216,121 @@
 		</div>
 	</div>
 
+<!-- 회원정보 조회용 -->
+
+					<!-- 상품 등록 -->
+					<section class="inquiry_popup"
+						style="display: none;">
+						<a href="#none" class="inquiry_close"><img
+							src="images/ver02/close.png" alt=""></a>
+						<div class="inquiry_write inquiry_write2">
+							<h3>상세 정보</h3>
+							<form action = "${pageContext.request.contextPath}/customer/modify" id = "modify_form">
+								<table class= "customer_info">
+
+									<tr>
+										<td style="text-align: center;" colspan ="2">
+										<img src ="${pageContext.request.contextPath}/assets/images/people.png" class= "user_img">
+										<input type ="hidden" name = "customerNo" id ="cus_no" value = "">
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: center;" colspan = "2" class = "cus_name">김세영님(아이디)</td>
+									</tr>
+
+									<tr>
+										<td style="text-align: center;" >등급</td>
+										<td style="text-align: center;" class ="cus_role">
+											<select class ="cus_role" name ="customerRole">
+    										<option value ="1">일반회원</option>
+    										<option value ="2">운영자</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">누적 구매 금액</td>
+										<td style="text-align: center;" class= "totalPayment" ></td>
+									</tr>
+								</table>
+								<div class="btn_wrap">
+									<button  class="order_btn" >수정</button> <a
+									
+										href="#none" class="shopping_btn">취소</a>
+								</div>
+
+							</form>
+						</div>
+					</section>
+
+
+<!-- 회원정보 조회용 -->
 </body>
 
 
 <script>
-	$('.paging').on("click", function() {
-		$('.paging').removeClass('active');
+
+$('#modify_form').on("submit", function(){
+	
+	 var result = confirm('정말 수정하시겠습니까?');
+		
+	 if(result){
+		return true;		 
+	 }else{
+		$('.inquiry_popup').hide();
+	 }
+	 return false;
+}); //modify_form submit end
+
+
+$('.shopping_btn').on("click", function(){
+	$('.inquiry_popup').hide();
+});
+
+$('.detail_Info').on("click", function(){
+	
+	var customerNo = $(this).data('customerno');
+	$('.inquiry_popup').show();
+	console.log(customerNo);
+	
+	CustomerVO = {
+			
+			customerNo : customerNo
+	}
+	
+	
+	$.ajax({
+		//요청 세팅(보낼 때--!)
+		url : "${pageContext.request.contextPath}/customer/customerDetailInfo",
+		type : "post", 
+		data : CustomerVO,
+		dataType : "json",
+		success : function(jsonResult) {
+			/*돌아온 정보*/
+			console.log(jsonResult.data);
+			
+			var customer = jsonResult.data;
+			var customerRole = "";
+			var totalPayment  = (customer.totalPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
+
+			console.log(customerRole);
+			
+			$('.cus_name').html("<b>" +  customer.customerName + '(' + customer.customerId + ')님' + "</b>"  );
+			$('.cus_role').val(customer.customerRole);
+			$('.totalPayment').text(totalPayment);
+			$('#cus_no').val(customerNo);
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	}); //ajax end	
+	
+	
+	
+}); //상세정보 클릭 시 end
+
+
+	$('.paging_').on("click", function() {
+		$('.paging_').removeClass('active');
 
 		$(this).addClass('active');
 

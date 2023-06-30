@@ -98,6 +98,20 @@ public class CustomerService {
 		return pageInfo;
 	}
 	
+	public CustomerVO getDetailCInfo(CustomerVO customerVO){
+		/*필요 정보 : 고객 이름, 아이디, 핸드폰번호, 등급, 누적 구매 금액*/
+		CustomerVO returnVO = customerDAO.getDetailInfo(customerVO);
+		
+		return returnVO;
+	}
+	
+	public int modifyCustomer(CustomerVO customerVO) {
+		
+		int row = customerDAO.updateCustomer(customerVO);
+		
+		return row;
+	}
+	
 	
 	
 }

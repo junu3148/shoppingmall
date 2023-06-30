@@ -167,7 +167,12 @@
 	text-align: center;
 }
 .like_cnt{float: right;}
+.see_more{float:right; color :#4982cf; cursor: pointer; font-size:15px;}
 .heart_icon{width:20px;}
+#cart-btn{text-decoration: none;}
+.comment_delete_modal_btn , .heart_icon , .delete_icon{cursor: pointer;}
+.review_zone{font-size : 30px;}
+
 </style>
 
 </head>
@@ -260,9 +265,9 @@
 			<div class="black_line"></div>
 			<div class="review_list">
 				<br> <br>
-				<h2>
+				<p class = "review_zone">
 					<b>구매평</b>
-				</h2>
+				</p>
 				<p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p>
 				<br> <br>
 				<div class="black_line"></div>
@@ -286,12 +291,13 @@
 									</c:forEach>
 								</div>
 								<h3>${review.title}</h3>
+  										<span class= "see_more"><b>전체 보기</b></span><br>
 								<hr>
 								<div>
 									<c:if test="${review.saveName != null}">
 										<img
 											src="${pageContext.request.contextPath}/upload/${review.saveName}"
-											id="review_img">
+											class="review_img">
 									</c:if>
 								</div>
 								<div>${review.content} 
@@ -299,8 +305,10 @@
 								<!-- 좋아요 누르기 -->
 								
 								<span class = "like_cnt" data-reviewno = "${review.reviewNo}">  
-									<img src="${pageContext.request.contextPath}/assets/images/heart.png" class= "heart_icon">
-  										<span class="like_cnt_ea">${review.likeCnt}</span></span>
+									<img src="${pageContext.request.contextPath}/assets/images/heart.png" class= "heart_icon" alt="리뷰 좋아요">
+  										<span class="like_cnt_ea">${review.likeCnt}</span>
+  										</span>
+  						
 								</div>
 							</div>
 							<div class="reple">
@@ -318,7 +326,7 @@
 											<li>${comment.customerName}: ${comment.content}
 												<c:if test= "${comment.customerNo == authCustomer.customerNo}"> 
 												<a class="comment_delete_modal_btn" data-commentno = "${comment.commentNo}"> 
-													<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png" class="delete_icon2">
+													<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png" class="delete_icon2" alt="댓글 삭제">
 												</a>
 												</c:if>
 											</li>
@@ -336,7 +344,7 @@
 										data-reviewno="${review.reviewNo}"
 										data-productno="${review.productNo}"> <img
 										src="${pageContext.request.contextPath}/assets/images/delete.png"
-										class="delete_icon">
+										class="delete_icon" alt="리뷰 삭제">
 									</a>
 									<!-- 리뷰 삭제하기 X 버튼 -->
 								</c:if>
@@ -411,7 +419,7 @@
 				</div>
 				<form action="${pageContext.request.contextPath}/cart/viewCart">
 					<div class="modal-footer">
-						<input type="text" value="${authCustomer.customerNo}"
+						<input type="hidden" value="${authCustomer.customerNo}"
 							name="customerNo">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal" id="more_see">좀 더 둘러보기</button>
@@ -556,7 +564,7 @@ $('.comment_delete_btn').on("click", function(){
 	
 });
 
-
+/*리뷰 삭제 모달 펼치는 기능*/
 $('.delete_review_button').on("click", function(){
 	
 	var reviewNo = $(this).data('reviewno');
@@ -569,12 +577,16 @@ $('.delete_review_button').on("click", function(){
 	
 }); //리뷰 삭제 버튼 클릭 이벤트 end
 
+
+/*모달 닫는 버튼*/
 $('.close_modal').on("click", function(){
 	$('#review_modal').modal('hide');
 	$('#comment_modal').modal('hide');
-	
+	$('#Cart-modal').modal('hide');	
 });
 
+
+/*댓글 등록 기능*/
 $('.add_comment_btn').on("click", function(){
 	
 	var content = $('.add_comment').val()
@@ -643,11 +655,12 @@ $('.add_comment_btn').on("click", function(){
 }); //리플 추가 에이잭스
 	
 
-$('.review_area').on("click", function(){
+/*댓글 펼치는 기능*/
+$('.see_more').on("click", function(){
 		
 		console.log('test');
-		var reple	=	$(this).siblings('.reple');
-		var img = $(this).find('#review_img');
+		var img	=	$(this).parent().find('.review_img');
+		var reple = $(this).parent().next('.reple');
 		
 		if(reple.css('display')== "none"){
 			reple.css('display', 'block');
