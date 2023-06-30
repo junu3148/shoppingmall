@@ -9,16 +9,16 @@
 	
 		<![CDATA[
 		
-			insert into product_image(
-					IMAGE_NO,
-                    PRODUCT_NO,
-                    SAVE_NAME
-                    )
-            values(
-            		seq_product_image_no.nextval ,
-                    #{productNo} ,
-                    #{saveName}
-                    )
+			INSERT INTO product_image(
+						image_no,
+	                    product_no,
+	                    save_name
+	                    )
+	            VALUES(
+	            		seq_product_image_no.nextval ,
+	                    #{productNo} ,
+	                    #{saveName}
+	                    )
                     
 		]]>
 	
@@ -29,7 +29,7 @@
 		
 		<![CDATA[
 		
-			delete from product_image where image_no = #{imageNo}
+			DELETE FROM product_image WHERE image_no = #{imageNo}
 		
 		]]>
 	
@@ -40,9 +40,10 @@
 	
 		<![CDATA[
 			
-			update product_image set
-                        			save_name = #{saveName}  
-                 			  where PRODUCT_NO = #{productNo}
+			UPDATE product_image 
+			   SET 
+			   	   save_name = #{saveName}  
+             WHERE product_no = #{productNo}
 		
 		]]>
 	
