@@ -14,7 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<title>portfolio</title>
+<title>product</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">
@@ -55,34 +55,22 @@
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
 <!-- js -->
 
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/product.js"></script>
 <style>
-
-.active .anum {
-	color: #4982cf;
-	font-weight: bold;
-	font-size: 15px;
-}
-
-#kv {
-	margin: auto;
-	text-align: center;
-}
-
-element.style {
-	height: 250px;
-}
+.active .anum {color: #4982cf; font-weight: bold; font-size: 15px;}
+#product #kv {margin: auto; text-align: center;}
 </style>
 
 </head>
 
 <body>
 	<div class="wrapper">
-
+	
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //헤더 -->
-
-
+		
 		<main id="product">
 			<section id="kv">
 				<img
@@ -113,7 +101,8 @@ element.style {
 					</c:forEach>
 				</ul>
 			</section>
-
+			
+			<!-- 페이징 -->
 			<c:if test="${empty keyword}">
 				<ul class="paging pageInfo">
 					<c:if test="${pageMaker.prev}">
@@ -148,81 +137,17 @@ element.style {
 					id="CriteriaSubCategory" name="subCategory"
 					value="${CriteriaSubCategory}">
 			</form>
-
-
-
 			<!-- 탑버튼 -->
 			<a href="#none" class="top_btn"><img
 				src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
 				alt=""></a>
 			<!-- /탑버튼 -->
-
 		</main>
-
-
-
+		
 		<!-- Footer -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //Footer -->
+		
 	</div>
 </body>
-
-<script>
-	$(document).ready(function() {
-		//네비클릭스 포커스
-		let CriteriaSubCategory = $("#CriteriaSubCategory").val() + '';
-
-		if (CriteriaSubCategory == '') {
-			$("#nav li").eq(0).addClass("on");
-		} else {
-			var subCategoryIndex = [ '간식', '배변용품', '미용', '장난감', '가구' ]
-					.indexOf(CriteriaSubCategory);
-			if (subCategoryIndex >= 0) {
-				$("#nav li").eq(subCategoryIndex + 1).addClass("on");
-			}
-		}
-
-		//카테고리 클릭시 포커스
-
-		let category = $("#category").val();
-		const categoryIndex = {
-			'all' : 0,
-			'강아지' : 1,
-			'고양이' : 2
-		};
-
-		if (category in categoryIndex) {
-			$(".category li").eq(categoryIndex[category])
-					.addClass("on");
-		}
-
-		//페이징 처리
-		$(".pageInfo a").on("click", function(e) {
-			e.preventDefault();
-			var pageNum = $(this).attr("href");
-			$("#moveForm input[name='pageNum']").val(pageNum);
-			$("#moveForm").submit();
-		});
-
-	});
-</script>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
- 
+
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,6 +48,9 @@
 <!-- 슬릭슬라이더 js -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
+	
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/qna.js"></script>
 
 <style>
 #buttoncss {
@@ -142,10 +145,8 @@
 	</div>
 
 	<main id="inquiry">
-
 		<section class="inquiry_">
 			<h3>문의하기</h3>
-
 			<div class="mo_scroll">
 				<p class="scroll_x">↔ 좌우로 스크롤하세요</p>
 				<div class="inquiry_wrap">
@@ -154,7 +155,6 @@
 						<li class="tit">제목</li>
 						<li class="date">작성날짜</li>
 					</ul>
-
 					<div class="qna_wrap">
 						<c:forEach items="${qnAList}" var="Qna">
 							<div class="qna">
@@ -179,12 +179,12 @@
 											<p class="no">Q</p>
 											<p class="question tit">${Qna.content}</p>
 											<div class="btn_wrap">
-												<c:if test="${empty Qna.adminContent && authCustomer.customerRole == 99}">
+												<c:if
+													test="${empty Qna.adminContent && authCustomer.customerRole == 99}">
 													<a href="#none" id="buttoncss"
 														class="order_btn insertQnAAdmin" data-no="${Qna.qnANo}">답글달기</a>
 												</c:if>
 											</div>
-
 										</c:if></li>
 									<c:if
 										test="${!empty Qna.adminContent && Qna.boardType == 0
@@ -201,16 +201,14 @@
 						</c:forEach>
 					</div>
 				</div>
-
 			</div>
-
+			<!-- 페이징 -->
 			<c:if test="${empty keyword}">
 				<ul class="paging pageInfo">
 					<c:if test="${pageMaker.prev}">
 						<li class="pageInfo_btn previous"><a
 							href="${pageMaker.startPage - 1}">◀</a></li>
 					</c:if>
-
 					<!-- 각 번호 페이지 버튼 -->
 					<c:forEach var="num" begin="${pageMaker.startPage}"
 						end="${pageMaker.endPage}">
@@ -218,7 +216,6 @@
 							<a class="anum" href="${num}">${num}</a>
 						</li>
 					</c:forEach>
-
 					<!-- 다음페이지 버튼 -->
 					<c:if test="${pageMaker.next}">
 						<li class="pageInfo_btn next"><a
@@ -233,10 +230,8 @@
 				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 				<input type="hidden" name="type" value="${pageMaker.cri.type}">
 			</form>
-
 			<div class="btn_wrap">
 				<a href="#none" class="order_btn">문의하기</a>
-				<!--<a href="#none" class="shopping_btn">쇼핑하기</a>-->
 			</div>
 		</section>
 
@@ -256,7 +251,6 @@
 							<col width="80%">
 						</colgroup>
 						<tr>
-
 							<th>비밀글 여부</th>
 							<td><input type="checkbox" id="secret_write_Y"
 								name="boardType" value="1"> <label for="secret_write_Y">YES</label>
@@ -278,7 +272,6 @@
 								</div></td>
 						</tr>
 					</table>
-
 					<div class="btn_wrap">
 						<a id="submitqna" href="#none" class="order_btn">문의</a> <a
 							href="#none" class="shopping_btn">취소</a>
@@ -286,7 +279,6 @@
 				</form>
 			</div>
 		</section>
-
 
 		<!-- 문의 답글 창 -->
 		<section id="inquiry_popup2" class="inquiry_popup"
@@ -314,7 +306,6 @@
 								</div></td>
 						</tr>
 					</table>
-
 					<div class="btn_wrap">
 						<a id="submitqna2" href="#none" class="order_btn">문의</a> <a
 							href="#none" class="shopping_btn">취소</a>
@@ -335,56 +326,5 @@
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
-
-
 </body>
-<script>
-	//페이징
-	$(document).ready(function() {
-
-		$(".pageInfo a").on("click", function(e) {
-			e.preventDefault();
-			var pageNum = $(this).attr("href");
-			$("#moveForm input[name='pageNum']").val(pageNum);
-			$("#moveForm").submit();
-		});
-
-	});
-	//문의글 등록
-	$("#submitqna").on("click", function() {
-		
-		event.preventDefault(); 
-		if ($("#inquiry_tit").val() != ""
-			&& $("#inquiry_cont").val() != "") {
-		$("#moveForm1").submit();
-		}else {
-			alert("내용을 입력해주세요.");
-		}
-	
-	});
-
-	//문의 답글 등록
-	$("#submitqna2").on("click", function() {
-		
-		if ($("#inquiry_cont2").val() != "") {
-		$("#moveForm2").submit();
-		}else {
-			alert("내용을 입력해주세요.");
-		}
-	});
-
-	// 문의 답글창 띄우기
-	$(".insertQnAAdmin").on("click", function() {
-		let customerNo = $(this).data("no");
-		$("#inquiry_popup2").show();
-		$("#customerNo").val(customerNo);
-	});
-
-	//문의 답글창 취소버튼
-	$("#inquiry_popup2 .btn_wrap .shopping_btn").on("click",function() {
-		$('#inquiry_popup2').hide();
-		$('#inquiry_popup2 input[type="text"], #inquiry_popup2 textarea').val(''); // Clear input fields
-		$('body').removeClass('no-scroll');
-	});
-</script>
 </html>

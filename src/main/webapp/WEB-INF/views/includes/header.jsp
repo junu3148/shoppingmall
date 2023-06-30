@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!-- 헤더 -->
 <header class="pc">
 	<!--웹에서의 헤더-->
@@ -108,7 +107,7 @@
 				<ul>
 					<li><a href="#none">공지사항</a></li>
 					<li><a href="#none">FAQ</a></li>
-					<li><a href="#none">Q&A</a></li>
+					<li><a href="#none">QnA</a></li>
 					<li><a href="#none">이벤트</a></li>
 				</ul></li>
 		</ul>
@@ -119,7 +118,8 @@
 <!-- 검색창 -->
 <div class="search_popup" style="display: none;">
 	<a href="#none" class="search_close"><img
-		src="${pageContext.request.contextPath}/assets/images/ver02/search_x.png" alt=""></a>
+		src="${pageContext.request.contextPath}/assets/images/ver02/search_x.png"
+		alt=""></a>
 	<div>
 		<form id="searchForm"
 			action="${pageContext.request.contextPath}/main/productSearch"

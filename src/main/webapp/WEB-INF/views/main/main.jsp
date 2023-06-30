@@ -54,11 +54,11 @@
 <!-- js -->
 
 <style>
-.i img{
+.i img {
 	width: 100%;
-    height: 100%;
-    object-fit: cover;
-    }
+	height: 100%;
+	object-fit: cover;
+}
 </style>
 </head>
 
@@ -67,9 +67,6 @@
 	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
-
-
-
 
 	<main>
 		<!-- 메인 롤링배너 (KV) -->
@@ -88,33 +85,34 @@
 					<a href="#none"></a>
 				</div>
 			</div>
-
 			<div class="swiper-pagination"></div>
-
-			<!--<div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>-->
 		</div>
 		<!-- /메인 롤링배너 (KV) -->
 
 		<!-- 베스트셀러 -->
 		<section id="best_seller">
 			<h2 class="en">best seller</h2>
-			<div class="best_kv" style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/a.jpg); background-size: 100%;">
+			<div class="best_kv"
+				style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/a.jpg); background-size: 100%;">
 				<h3>
-					 <span>CATDOG</span>
+					<span>CATDOG</span>
 				</h3>
 				<p>
-				반려 동물을 위한 프리미엄 쇼핑<br>
+					반려 동물을 위한 프리미엄 쇼핑<br>
 				</p>
 			</div>
 			<div id="best_seller_div">
 				<c:forEach items="${productList}" var="product">
-				<div class="cont">
-					<a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}"> <img
-						src="${pageContext.request.contextPath}/upload/${product.saveName}" alt=""> <span class="tit">${product.productName}</span> <span
-						class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />원</span>
-					</a>
-				</div>
+					<div class="cont">
+						<a
+							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
+							<img
+							src="${pageContext.request.contextPath}/upload/${product.saveName}"
+							alt=""> <span class="tit">${product.productName}</span> <span
+							class="price"><fmt:formatNumber type="number"
+									maxFractionDigits="3" value="${product.price}" />원</span>
+						</a>
+					</div>
 				</c:forEach>
 			</div>
 		</section>
@@ -123,11 +121,21 @@
 		<!-- 메뉴 버튼 -->
 		<section id="menu_link">
 			<ul class="i">
-				<li><a href="${pageContext.request.contextPath}/main/category/간식" ><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category간식.png); background-size: cover; background-position: right;">사료/간식</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/main/category/배변용품"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category배변용품.png); background-size: cover; background-position: right;">배변용품</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/main/category/미용"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category미용.png); background-size: cover; background-position: right;">미용</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/main/category/장난감"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category장난감.png); background-size: cover; background-position: right;">장난감</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/main/category/가구"><span style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category가구.png); background-size: cover; background-position: right;">가구</span></a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/category/간식"><span
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category간식.png); background-size: cover; background-position: right;">사료/간식</span></a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/category/배변용품"><span
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category배변용품.png); background-size: cover; background-position: right;">배변용품</span></a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/category/미용"><span
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category미용.png); background-size: cover; background-position: right;">미용</span></a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/category/장난감"><span
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category장난감.png); background-size: cover; background-position: right;">장난감</span></a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/main/category/가구"><span
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category가구.png); background-size: cover; background-position: right;">가구</span></a></li>
 			</ul>
 		</section>
 		<!-- /메뉴 버튼 -->
@@ -136,19 +144,24 @@
 		<section id="sns">
 			<h2 class="en">sns</h2>
 			<ul class="clear">
-				<li><a href="https://www.instagram.com/p/Ct6vJ5CPalQ/?igshid=YzcxN2Q2NzY0OA=="><img
+				<li><a
+					href="https://www.instagram.com/p/Ct6vJ5CPalQ/?igshid=YzcxN2Q2NzY0OA=="><img
 						src="${pageContext.request.contextPath }/assets/images/sns1.png"
 						alt=""></a></li>
-				<li><a href="https://www.instagram.com/p/Ct6vJluv3AM/?igshid=YzcxN2Q2NzY0OA=="><img
+				<li><a
+					href="https://www.instagram.com/p/Ct6vJluv3AM/?igshid=YzcxN2Q2NzY0OA=="><img
 						src="${pageContext.request.contextPath }/assets/images/sns2.png"
 						alt=""></a></li>
-				<li><a href="https://www.instagram.com/p/Ct6vLeYvc2v/?igshid=YzcxN2Q2NzY0OA=="><img
+				<li><a
+					href="https://www.instagram.com/p/Ct6vLeYvc2v/?igshid=YzcxN2Q2NzY0OA=="><img
 						src="${pageContext.request.contextPath }/assets/images/sns3.png"
 						alt=""></a></li>
-				<li><a href="https://www.instagram.com/p/Ct6vK37vZ3k/?igshid=YzcxN2Q2NzY0OA=="><img
+				<li><a
+					href="https://www.instagram.com/p/Ct6vK37vZ3k/?igshid=YzcxN2Q2NzY0OA=="><img
 						src="${pageContext.request.contextPath }/assets/images/sns4.png"
 						alt=""></a></li>
-				<li><a href="https://www.instagram.com/p/Ct6vKbnPOWW/?igshid=YzcxN2Q2NzY0OA=="><img
+				<li><a
+					href="https://www.instagram.com/p/Ct6vKbnPOWW/?igshid=YzcxN2Q2NzY0OA=="><img
 						src="${pageContext.request.contextPath }/assets/images/sns5.png"
 						alt=""></a></li>
 			</ul>
@@ -160,20 +173,10 @@
 			src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
 			alt=""></a>
 		<!-- /탑버튼 -->
-
 	</main>
-
-
-
 
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
-
-
-
-
 </body>
-
-
 </html>
