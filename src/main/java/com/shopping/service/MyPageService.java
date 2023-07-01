@@ -21,7 +21,7 @@ import com.shopping.vo.ReviewVO;
 public class MyPageService {
 
 	@Autowired
-	MyPageDAO myPageDAO;
+	private MyPageDAO myPageDAO;
 	
 	
 	/* 고객넘버로 고객 정보 가져오기*/

@@ -11,11 +11,12 @@ import com.shopping.vo.ReviewVO;
 public class ReviewService {
 	
 	@Autowired
-	ReviewDAO reviewDAO;
+	private ReviewDAO reviewDAO;
 	
+	/*코멘트 추가*/
 	public CommentVO addComment(CommentVO commentVO) {
+		System.out.println("addComment Service()");
 		
-		System.out.println("서비스까지 넘어온 코멘트 객체 " + commentVO);
 		/*insert 해서 받아온 객체 no을 이용해 다시 불러올 예정임*/
 		reviewDAO.insertComment(commentVO);
 		CommentVO returnVO = reviewDAO.getReviewComment(commentVO);
@@ -23,34 +24,32 @@ public class ReviewService {
 		return returnVO;
 	}
 	
+	
+	/*리뷰 삭제*/
 	public int deleteReview(ReviewVO reviewVO) {
-		
+		System.out.println("deleteReview Service()");
 		int row  = reviewDAO.deleteReview(reviewVO);
-		
-		System.out.println("");
 		
 		return row;
 	}
 	
+	/*리뷰에 달린 댓글 삭제*/
 	public boolean deleteReviewComment(CommentVO commentVO) {
-		
+		System.out.println("deleteReviewComment Service()");
 		boolean result = false;
 		
-		System.out.println(" 컨트롤 까지 넘어온 코멘트 객체  " + commentVO);
 		int row = reviewDAO.deleteReviewComment(commentVO);
-		
 		if (row > 0 ) {result = true; }
 		
 		return result;
 	}
 	
+	/*라이크 버튼 +1 */
 	public boolean addLikeCnt(ReviewVO reviewVO) {
-		
+		System.out.println("addLikeCnt Service()");
 		boolean result = false;
 		
-		System.out.println("서비스에서 확인하는 리뷰 객체 정보 " + reviewVO);
 		int row = reviewDAO.addLikeCnt(reviewVO);
-		
 		if(row>0) {result = true;}
 		
 		return result;

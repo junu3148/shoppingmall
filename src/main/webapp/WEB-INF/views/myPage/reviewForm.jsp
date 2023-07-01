@@ -160,6 +160,8 @@ height:100%;
 font-size : 20px;
 margin-top : 5%;
 }
+#aside{
+position: flex;}
 </style>
 <body>
 
@@ -178,6 +180,7 @@ margin-top : 5%;
 		<div id="aside">
 			<ul>
 				<li><a href=""></a></li>
+				<li><a href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}">마이페이지</a></li>
 				<li><a href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}">My리뷰</a></li>
 				<li><a href="">정보 수정</a></li>
 			</ul>
@@ -231,8 +234,8 @@ margin-top : 5%;
 						</tr>
 						<tr>
 							<td colspan ="2"><br><textarea name ="content" id ="content" class ="review_Form" placeholder ="20자 이상 200자 미만으로 입력하세요." required></textarea>
-							<input type ="text" name = "customerNo" value ="${authCustomer.customerNo}">
-							<input type ="text" name = productNo value ="${reviewProduct.productNo}">
+							<input type ="hidden" name = "customerNo" value ="${authCustomer.customerNo}">
+							<input type ="hidden" name = productNo value ="${reviewProduct.productNo}">
 							</td>
 						</tr>
 						<tr id ="btn_area">

@@ -64,11 +64,14 @@ table td {  vertical-align: middle;}
 			<div id="aside">
 				<ul>
 					<li><a href=""></a></li>
+					<li><a href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}">마이페이지</a></li>
 					<li><a href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}">My리뷰</a></li>
 					<li><a href="">정보 수정</a></li>
 				</ul>
 			</div>
-
+			
+			
+			<!-- 고객 정보 -->
 			<div class = customer_info>
 					<div class ="customer_profile">
 							<img src="https://static-00.iconduck.com/assets.00/person-circle-icon-512x512-zwz8ctki.png" id ="customer_img">
@@ -80,8 +83,12 @@ table td {  vertical-align: middle;}
 							<c:if test ="${customerInfo.customerRole == 2}">
 								Admin
 							</c:if>
+							<br>누적 금액 : <fmt:formatNumber type="number"
+									maxFractionDigits="3" value="${customerInfo.totalPayment}" />원
 						</div>
 				</div>
+			<!-- 고객 정보 -->	
+				
 				<div id="board">
 					<div id="list">
 					

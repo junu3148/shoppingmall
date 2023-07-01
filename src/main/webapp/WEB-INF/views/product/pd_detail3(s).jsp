@@ -211,7 +211,7 @@
 							value="${product.price}" />
 						원
 					</p>
-					<input type ="text" value ="${product.subCategory}" id = "subCategory">
+					<input type ="hidden" value ="${product.subCategory}" id = "subCategory">
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>

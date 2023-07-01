@@ -15,7 +15,7 @@ import com.shopping.vo.ReviewVO;
 public class MyPageDAO {
 	
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	/* 고객 정보 받아오기*/
 	public CustomerVO getCustomerByNo(int customerNo) { 

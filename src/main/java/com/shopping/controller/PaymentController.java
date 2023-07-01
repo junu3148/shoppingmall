@@ -17,7 +17,7 @@ import com.shopping.vo.OrderVO;
 public class PaymentController {
 
 	@Autowired
-	PaymentService paymentService;
+	private PaymentService paymentService;
 	
 	/*결제성공시 로직*/
 	@ResponseBody

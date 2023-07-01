@@ -7,8 +7,7 @@
 
 
 	<!-- 로그인 -->
-	<select id="selectLoginVO" parameterType="CustomerVO"
-		resultType="CustomerVO">
+	<select id="selectLoginVO" parameterType="CustomerVO" resultType="CustomerVO">
 		<![CDATA[
 			select
 				CUSTOMER_NO as customerNo
@@ -36,8 +35,7 @@
 
 	<!-- 아이디 유효성 체크 -->
 
-	<select id="selectSameId" parameterType="CustomerVO"
-		resultType="CustomerVO">
+	<select id="selectSameId" parameterType="CustomerVO" resultType="CustomerVO">
 		<![CDATA[
 		  SELECT customer_name AS customerName
 			FROM customer
@@ -123,24 +121,24 @@
 	<!-- 고객 상세정보  가져오기 -->
 	<select id="getDetailInfo" parameterType="CustomerVO"
 		resultType="CustomerVO">
-	<![CDATA[
-		select
-			customer_no 
-    		,customer_name as customerName
-   			,customer_id as customerId
-    		,customer_role as customerRole
-    		,(select sum(total_price) from orders where order_stat = 2 and customer_no = a.customer_no) as totalPayment
-    	from customer a where customer_no = #{customerNo}
-	]]>
+		<![CDATA[
+			select
+				customer_no 
+    			,customer_name as customerName
+   				,customer_id as customerId
+    			,customer_role as customerRole
+    			,(select sum(total_price) from orders where order_stat = 2 and customer_no = a.customer_no) as totalPayment
+    		from customer a where customer_no = #{customerNo}
+		]]>
 	</select>
 	
 	<!-- 고객 권한 업데이트 -->
 	<update id="updateCustomerRole" parameterType="CustomerVO">
-	<![CDATA[
-		update customer 
-			set customer_role = #{customerRole}
-		where customer_no = #{customerNo}
-	]]>
+		<![CDATA[
+			update customer 
+				set customer_role = #{customerRole}
+			where customer_no = #{customerNo}
+		]]>
 	</update>
 
 

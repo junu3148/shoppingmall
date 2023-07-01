@@ -16,7 +16,7 @@ import com.shopping.vo.OrderVO;
 public class PaymentService {
 
 	@Autowired
-	PaymentDAO paymentDAO;
+	private PaymentDAO paymentDAO;
 	
 	/*결제 성공시 진행될 비즈니스 로직 --넘어온 정보는 고객 넘버와 오더 넘버임*/
 	//1. order_detail 테이블에서 결제한 제품 정보 알아오기-- product배열로 받는다.

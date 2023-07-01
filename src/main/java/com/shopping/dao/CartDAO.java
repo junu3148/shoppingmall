@@ -16,7 +16,7 @@ import com.shopping.vo.ProductVO;
 public class CartDAO {
 
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	
 	/*장바구니 리스트*/

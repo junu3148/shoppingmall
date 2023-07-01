@@ -17,71 +17,66 @@ public class ReviewDAO {
 	@Autowired
 	private SqlSession session;
 	
+	/*리뷰 갯수 확인*/
 	public int getReviewCnt(ProductVO productVO) {
-		
+		System.out.println("getReviewCnt DAO()");
 		int cnt = session.selectOne("review.getReviewCnt", productVO);
 
 		return cnt;
 	}
 	
+	/*리뷰 리스트 가져오기*/
 	public List<ReviewVO> getReviewList(PagingVO pagingVO){
-			
+		System.out.println("getReviewList DAO()");
 		List<ReviewVO> reviewList = session.selectList("review.getReviewList", pagingVO);
-		System.out.println("넘어온 리뷰 리스트 확인" + reviewList);
+
 		return reviewList;
 	}
 	
+	/*리뷰에 달린 댓글 가져오기*/
 	public List<CommentVO> getReviewComment(ReviewVO reviewVO){
-		
-		System.out.println("전달된 reviewVO 확인하기 : " + reviewVO);
+		System.out.println("getReviewComment DAO()");
 		List<CommentVO> commentList = session.selectList("review.getCommentList",reviewVO);
-		System.out.println("넘어온 코멘트 리스트 확인하기" + commentList);
 		
 		return commentList;
-//		return null;
 	}
 	
+	/*댓글 등록*/
 	public void insertComment(CommentVO commentVO) {
-		
+		System.out.println("insertComment DAO()");
 		int row = session.insert("review.insertReview", commentVO);
-		System.out.println("여기까지 넘어오나요 확인? " + commentVO);
-		System.out.println("인서트 성공했나요 확인 : " + row);
+
 	}
 	
+	/*리뷰에 달린 댓글 가져오기*/
 	public CommentVO getReviewComment(CommentVO commentVO) {
-		
-		System.out.println("리뷰 코멘트 가져올 객체 정보 확인 : " + commentVO);
+		System.out.println("getReviewComment DAO()");
 		CommentVO returnVO = session.selectOne("review.getReviewComment", commentVO);
-		
-		System.out.println("에이잭스로 그릴 코멘트 객체 정보 확인 : " + returnVO);
 		
 		return returnVO;
 	}
 	
+	/*리뷰 삭제하기*/
 	public int deleteReview(ReviewVO reviewVO) {
-		
-		System.out.println("DAO까지객체 오는지 호가인함 : " + reviewVO);
-		
+		System.out.println("deleteReview DAO()");
 		int rows = session.delete("review.deleteReview", reviewVO);
 
 		return rows;
 	}
 	
+	/*리뷰에 달린 댓글 삭제*/
 	public int deleteReviewComment(CommentVO commentVO) {
-		
-		int   row = 0;
-		
-		System.out.println("DAO까지 넘어오는 객체값 확인 코멘트 : " +commentVO);
-		row = session.delete("review.deleteComment", commentVO);	
+		System.out.println("deleteReviewComment DAO()");
+		int row = session.delete("review.deleteComment", commentVO);	
 		
 		return row;
 	}
 	
+	/*라이크 버튼 카운트 추가*/
 	public int addLikeCnt(ReviewVO reviewVO) {
-		
-		System.out.println("라이크카운트 DAO 넘어온 객체 정보" + reviewVO);
-		
+		System.out.println("addLikeCnt DAO()");
 		int  row = session.update("review.addLikeCnt", reviewVO);
+		
 		return row;
 	}
 }

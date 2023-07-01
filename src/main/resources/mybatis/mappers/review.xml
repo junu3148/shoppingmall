@@ -4,69 +4,73 @@
 <!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
 <mapper namespace="review">
 
-<select id ="getReviewCnt" parameterType ="ProductVO" resultType ="int">
-	<![CDATA[
-		select 
-			count(review_no) 
-		from review 
-		where product_no = #{productNo}	
-	]]>
-</select>
+	<!-- 리뷰 갯수 찾아오기 -->
+	<select id="getReviewCnt" parameterType="ProductVO" resultType="int">
+		<![CDATA[
+			select 
+				count(review_no) 
+			from review 
+			where product_no = #{productNo}	
+		]]>
+	</select>
 
-
-<select id = "getReviewList" parameterType ="PagingVO" resultType ="ReviewVO">
-	<![CDATA[
-		select
-   			 rownum
-    		,customer_name as customerName
-    		,product_no as productNo
-    		,customer_no as customerNo
-   			 ,grade
-   			 ,review_no as reviewNo
-    		,like_cnt as likeCnt
-   			 ,title
-    		,content
-    		,REG_DATE  as regDate
-            ,saveName
-		from
-			(select
-   				 customer_name
-   				 ,product_no
-   				 ,a.customer_no
-    			 ,grade
-   				 ,a.review_no
-    			 ,like_cnt
+	<!-- 리뷰 작성내역 불러오기 -->
+	<select id="getReviewList" parameterType="PagingVO" resultType="ReviewVO">
+		<![CDATA[
+			select
+   				 rownum
+    			,customer_name as customerName
+    			,product_no as productNo
+    			,customer_no as customerNo
+   				 ,grade
+   				 ,review_no as reviewNo
+    			,like_cnt as likeCnt
    				 ,title
-   				 ,content
-  				 ,reg_date
-                 ,( select save_name from review_image where review_no = a.review_no) as saveName
-       		 from review a join customer b 
-        	on a.customer_no = b.customer_no
-        	where product_no = #{keyword}
-        	order by review_no desc)
-       		 where rownum between #{boardNumStart} and #{ boardNumEnd}	
-	]]>
-</select>
+    			,content
+    			,REG_DATE  as regDate
+        	    ,saveName
+			from
+				(select
+   					 customer_name
+   					 ,product_no
+   					 ,a.customer_no
+    				 ,grade
+   					 ,a.review_no
+    				 ,like_cnt
+   					 ,title
+   					 ,content
+  					 ,reg_date
+           	         ,( select save_name from review_image where review_no = a.review_no) as saveName
+       			 from review a join customer b 
+        		 on a.customer_no = b.customer_no
+        		 where product_no = #{keyword}
+        		 order by review_no desc)
+       			 where rownum between #{boardNumStart} and #{ boardNumEnd}	
+		]]>
+	</select>
 
-<select id ="getCommentList" parameterType ="ReviewVO" resultType ="CommentVO">
-	<![CDATA[
-		select
-    		review_comment_no as commentNo
-    		,a.customer_no as customerNo
-   		 	,c.customer_name as customerName
-    		,a.content as content
-    		,a.reg_date as regDate
-    	from review_comment a join review b on a.review_no = b.review_no
-    	join customer c on b.customer_no = c.customer_no
-   		 where a.review_no = #{reviewNo}
-    	order by review_comment_no desc
-	]]>
-</select>
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="getCommentList" parameterType="ReviewVO" resultType="CommentVO">
+		<![CDATA[
+			select
+    			review_comment_no as commentNo
+    			,a.customer_no as customerNo
+   			 	,c.customer_name as customerName
+    			,a.content as content
+    			,a.reg_date as regDate
+    		from review_comment a join review b on a.review_no = b.review_no
+    		join customer c on b.customer_no = c.customer_no
+   			 where a.review_no = #{reviewNo}
+    		order by review_comment_no desc
+		]]>
+	</select>
 
-<insert id ="insertReview" parameterType ="CommentVO" >
-	<selectKey resultType="int" order="BEFORE" keyProperty="commentNo">
-		select seq_review_comment_no.nextval from dual 
-	</selectKey>
+	<!-- 리뷰 등록하기 -->
+	<insert id="insertReview" parameterType="CommentVO">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="commentNo">
+			select seq_review_comment_no.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into review_comment 
 				(review_comment_no
@@ -84,9 +88,11 @@
 				,sysdate
 				)
 		]]>
-</insert>
+	</insert>
 
-<select id ="getReviewComment" parameterType ="CommentVO" resultType ="CommentVO">
+	<!-- 리뷰에 달린 댓글 가져오기 -->
+	<select id="getReviewComment" parameterType="CommentVO"
+		resultType="CommentVO">
 	<![CDATA[
 		select 
 			review_comment_no as commentNo
@@ -98,26 +104,29 @@
 		on a.customer_no = b.customer_no 
 		where review_comment_no = #{commentNo}
 	]]>
-</select>
+	</select>
 
-<delete id ="deleteReview" parameterType ="ReviewVO">
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="ReviewVO">
 	<![CDATA[
 		delete review where review_no = #{reviewNo}
 	]]>
-</delete>
+	</delete>
 
-<delete id = "deleteComment" parameterType ="CommentVO">
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComment" parameterType="CommentVO">
 	<![CDATA[
 		delete review_comment where review_comment_no = #{commentNo}
 	]]>
-</delete>
+	</delete>
 
-<update id ="addLikeCnt" parameterType ="ReviewVO">
+	<!-- 좋아요 버튼 기능 -->
+	<update id="addLikeCnt" parameterType="ReviewVO">
 	<![CDATA[
 		update review 
 			set like_cnt = like_cnt + 1 
 		where review_no = #{reviewNo}
 	]]>
-</update>
+	</update>
 
 </mapper>

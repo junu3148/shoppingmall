@@ -31,7 +31,7 @@ import com.shopping.vo.ProductVO;
 public class CartController {
 
 	@Autowired
-	CartService cartService;
+	private CartService cartService;
 	
 	
 	/*카트 보기*/

@@ -17,7 +17,7 @@ import com.shopping.vo.ProductVO;
 public class CartService {
 	
 	@Autowired	
-	CartDAO cartDAO;
+	private CartDAO cartDAO;
 	
 	/*장바구니 보기*/
 	public List<ProductVO> viewCart(int customerNo) { 
@@ -101,8 +101,6 @@ public class CartService {
 	}//addOrder end
 	
 	
-	///////////////////////////////////////
-	
 
 	/*고객의 주문 페이지 정보를 불러옴*/
 	/*주문 디테일 제품 리스트와 주문 정보가 들어가 있는 orderVO + 고객의 주소 정보*/
@@ -133,6 +131,7 @@ public class CartService {
 		
 		if(insertRows>0) {result = true;}
 		
-		return result;	}
+		return result;	
+		}
 	
 }

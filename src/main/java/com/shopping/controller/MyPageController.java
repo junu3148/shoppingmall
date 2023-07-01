@@ -24,9 +24,9 @@ public class MyPageController {
 	
 	
 	@Autowired
-	MyPageService myPageService;
+	private MyPageService myPageService;
 	
-	/* 회원정보 수정창 이동*/
+	/* 마이페이지 이동 */
 	@RequestMapping(value ="/{customerNo}")
 	public String modifyForm(@PathVariable int customerNo
 							,@RequestParam (value ="selectPage",  required = false, defaultValue = "1") int selectPage
