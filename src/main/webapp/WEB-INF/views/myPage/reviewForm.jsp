@@ -1,5 +1,3 @@
-<!-- 카트 jsp -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -42,6 +40,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/sub.css"
 	type="text/css">
+	    <link href="${pageContext.request.contextPath}/assets/css/customer.css" rel="stylesheet">
 <!-- 서브 css -->
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -54,115 +53,9 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
 <!-- js -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/customer.js"></script>
 </head>
-<style>
-#wrap {
-	float: left;
-	width: 80%;
-	background-color: #FFFFFF;
-	margin-top: 200px;
-	justify-content: center;
-	margin-left: 10%;
-	margin-right: 10%;
-}
 
-#aside {
-	text-align: center;
-	float: left;
-	width: 180px;
-	height: 300px;
-	background-color: #FFFFFF;
-}
-
-.customer_profile {
-	text-align: center;
-	text-align: center;
-	padding: 30px;
-	background-color: aliceblue;
-}
-
-#customer_img {
-	width: 70px;
-}
-
-#board {
-	height: 2000px;
-	margin: 0 auto;
-}
-
-.review_product {
-	text-align: center;
-	width: 1100px;
-	margin-left: 5px;
-	margin: 0 auto;
-	margin-top: 10px;
-	border-collapse: separate;
-	border: 1px solid #eee;
-}
-
-table td {
-	vertical-align: middle;
-}
-
-.category {
-	background-color: #eee;
-}
-
-.product_list {
-	height: 100px;
-}
-
-#aside ul {
-	list-style: none;
-	padding: 10px;
-}
-
-#aside ul li a {
-	text-decoration: none;
-}
-
-#aside ul li {
-	margin-bottom: 10px;
-}
-
-.product-img {
-	width: 80px;
-}
-
-.review_btn {
-	background: #4982cf;
-	border: 1px solid #4982cf;
-	color: #fff;
-	width:140px;
-	height: 60px;
-	font-size :20px;
-}
-
-#review_table {
-	margin: 0%;
-	border: 1px solid #eee;
-	width: 1100px;
-	margin-left: 5px;
-	margin: 0 auto;
-	border-collapse: separate;
-	height: 700px;
-	padding: 1%;
-}
-#btn_area{text-align : center;}
-[name="content"] {width: 100%; height:550px;}
-[name="title"] { width:100%;  height:30px;}
-input.reviewForm {
-  border-color: #eee; /* 원하는 테두리 색상으로 변경 */
-}
-.grade{
-width:50%;
-height:100%;
-font-size : 20px;
-margin-top : 5%;
-}
-#aside{
-position: flex;}
-</style>
 <body>
 
 	<!-- 헤더 -->
@@ -196,46 +89,47 @@ position: flex;}
 					<tbody>
 
 						<tr class="product_list">
-							<td><a
-								href="${pageContext.request.contextPath}/main/productDetal/"><img
-									src="${pageContext.request.contextPath}/upload/${reviewProduct.saveName}"
-									class="product-img"></a></td>
+							<td><a href="${pageContext.request.contextPath}/main/productDetal/"><img
+										src="${pageContext.request.contextPath}/upload/${reviewProduct.saveName}" class="product-img"></a>
+							</td>
 							<td>${reviewProduct.productName}</td>
 						</tr>
 
 					</tbody>
 				</table>
-				<form  action ="${pageContext.request.contextPath}/myPage/writeReview"  method = "POST" enctype="multipart/form-data">
-				<div id="review_form">
-					<table id="review_table">
-						<tr>
-							<td><img src="" class="product-img"></td>
-							<td><input type="file" class ="review_Form" name ="file"></td>
-						</tr>
-						<tr>
-							<td colspan ="2"><br><input type ="text" name ="title"class ="review_Form" 	required></td>
-						</tr>
-						<tr>
-							<td><select name = "grade" class="grade">
-								<option value ="1">★☆☆☆☆</option>
-								<option value ="2">★★☆☆☆</option>
-								<option value ="3">★★★☆☆</option>
-								<option value ="4">★★★★☆</option>
-								<option value ="5">★★★★★</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td colspan ="2"><br><textarea name ="content" id ="content" class ="review_Form" placeholder ="20자 이상 200자 미만으로 입력하세요." required></textarea>
-							<input type ="hidden" name = "customerNo" value ="${authCustomer.customerNo}">
-							<input type ="hidden" name = productNo value ="${reviewProduct.productNo}">
-							</td>
-						</tr>
-						<tr id ="btn_area">
-							
-							<td colspan ="2"><br><button type ="submit" class="review_btn"> 리뷰 등록</button></td>
-						</tr>
-					</table>
-				</div>
+				<form action="${pageContext.request.contextPath}/myPage/writeReview" method="POST"
+					enctype="multipart/form-data">
+					<div id="review_form">
+						<table id="review_table">
+							<tr>
+								<td><img src="" class="product-img"></td>
+								<td><input type="file" class="review_Form" name="file"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br><input type="text" name="title" class="review_Form" required></td>
+							</tr>
+							<tr>
+								<td><select name="grade" class="grade">
+										<option value="1">★☆☆☆☆</option>
+										<option value="2">★★☆☆☆</option>
+										<option value="3">★★★☆☆</option>
+										<option value="4">★★★★☆</option>
+										<option value="5">★★★★★</option>
+									</select></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br><textarea name="content" id="content" class="review_Form"
+										placeholder="20자 이상 200자 미만으로 입력하세요." required></textarea>
+									<input type="hidden" name="customerNo" value="${authCustomer.customerNo}">
+									<input type="hidden" name=productNo value="${reviewProduct.productNo}">
+								</td>
+							</tr>
+							<tr id="btn_area">
+
+								<td colspan="2"><br><button type="submit" class="review_btn"> 리뷰 등록</button></td>
+							</tr>
+						</table>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -243,16 +137,14 @@ position: flex;}
 
 
 	<!-- 탑버튼 -->
-	<a href="#none" class="top_btn"><img
-		src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
-		alt=""></a>
+	<a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+			alt=""></a>
 	<!-- /탑버튼 -->
 
 
 
 
 </body>
-
 
 
 </html>

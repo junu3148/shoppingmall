@@ -2,7 +2,6 @@ package com.shopping.controller;
 
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopping.service.MyPageService;
+import com.shopping.vo.CustomerVO;
 import com.shopping.vo.ProductVO;
 import com.shopping.vo.ReviewVO;
 
@@ -75,6 +75,23 @@ public class MyPageController {
 		model.addAttribute("paging",reviewList.get("pagingVO"));
 		
 		return "myPage/reviewView";
+	}
+	
+	/*고객 정보 수정 전 비밀번호 체크*/
+	@RequestMapping(value ="/checkPassword", method = RequestMethod.GET)
+	public String modifyCheckPage() {
+		System.out.println("modifyCheckPage()");
+		
+		return "myPage/modify";
+	}
+	/*정보 수정 폼*/
+	
+	@RequestMapping(value = "/modifyForm")
+	public String modifyForm(@ModelAttribute CustomerVO customerVO) {
+		
+		System.out.println("넘어온 정보 확인" + customerVO);
+		
+		return "";
 	}
 	
 }

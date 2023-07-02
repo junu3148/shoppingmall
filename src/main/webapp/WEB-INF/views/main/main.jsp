@@ -54,11 +54,20 @@
 <!-- js -->
 
 <style>
+
 .i img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	background-size: 100% 100%;
 }
+.video_area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
 </style>
 </head>
 
@@ -93,12 +102,13 @@
 		<section id="best_seller">
 			<h2 class="en">best seller</h2>
 			<div class="best_kv"
-				style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/a.jpg); background-size: 100%;">
+				style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/best_kv3.png); background-size: 100%;">
 				<h3>
-					<span>CATDOG</span>
+					<span><strong>CATDOG!</strong></span>
 				</h3>
 				<p>
-					반려 동물을 위한 프리미엄 쇼핑<br>
+					반려동물과의 행복한 동행을 위한<br>
+					임팩트 있는 선택
 				</p>
 			</div>
 			<div id="best_seller_div">
@@ -123,23 +133,29 @@
 			<ul class="i">
 				<li><a
 					href="${pageContext.request.contextPath}/main/category/간식"><span
-						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category간식.png); background-size: cover; background-position: right;">사료/간식</span></a></li>
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/menu간식.png); background-position: center;">사료/간식</span></a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/category/배변용품"><span
-						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category배변용품.png); background-size: cover; background-position: right;">배변용품</span></a></li>
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/menu배변용품.png); background-size: cover; background-position: center;">배변용품</span></a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/category/미용"><span
-						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category미용.png); background-size: cover; background-position: right;">미용</span></a></li>
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/menu미용.png); background-size: cover;  background-position: center;">미용</span></a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/category/장난감"><span
-						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category장난감.png); background-size: cover; background-position: right;">장난감</span></a></li>
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/menu장난감.png); background-size: cover; background-position: center;">장난감</span></a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/main/category/가구"><span
-						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/category가구.png); background-size: cover; background-position: right;">가구</span></a></li>
+						style="background-image: url(${pageContext.request.contextPath}/assets/images/ver02/menu가구.png); background-size: cover; background-position: center;">가구</span></a></li>
 			</ul>
 		</section>
 		<!-- /메뉴 버튼 -->
-
+		
+					
+		<div class= "video_area">
+			  <iframe width="560" height="315" src="https://www.youtube.com/embed/YM9yu9xG-Bc" frameborder="0" allowfullscreen></iframe>
+		</div>
+		
+		
 		<!-- SNS -->
 		<section id="sns">
 			<h2 class="en">sns</h2>

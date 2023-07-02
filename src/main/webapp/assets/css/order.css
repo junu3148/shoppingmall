@@ -1,0 +1,75 @@
+/*주문 페이지*/
+
+#wrap { width: 80%; height: 100%; margin-left:10%; margin-right:10%; margin-top: 10%;display: flex; font-size: 20px; }
+#address-form { width: 20%; margin-top: 3%; margin-bottom: 3%; margin-right: 0%;}
+#address-history {width: 200px;  margin-top: 10%; margin-left: 0%; margin-bottom: 3%; margin-right: 0%; background-color:  white ;padding-left:15%; padding-right:15%; }
+.address-form td, #address-List td { padding: 1%; }
+#order-heading{ text-align: center; font-size:50px;}
+.pay-button {display: block; margin: 0 auto;}
+#address_title{text-align:center; margin-bottom : 5%; background-color : white; border-radius: 10px;}
+.address-form{background-color :  white; width: 30%;margin-top: 10%; margin-bottom: 3%; }
+option { width:20%;}
+table{ border : 1px solid black;}
+.input-width-control{width:10%;}
+.input-width-control2, #email{width:15%;}
+#roadAddress, #detailAddress{width:90%}
+.product-img{ width:100px; height:100px;}
+.pay-button{background: #4982cf; border: 1px solid #4982cf; color: #fff; width: 100px;  height: 40px; font-size:17px;}
+#product_Name{ font-size : 10px;}
+#order table{width: 100%;border: 1px solid #eee; border-collapse: collapse;}
+#order table td, #cart table th{vertical-align: middle; border: 1px solid #eee; padding: 10px;}
+#order table td .cart_pd{width: 100px; height: 100px;}
+#order table td .cart_pd + span{display: block; margin-top: 3px;}
+#order table td .count-wrap .inp{ width: 50px; border: 1px solid #ddd; font-size: 20px;}
+#order .del{padding: 10px 20px; border: 1px solid #eee; display: inline-block; margin-top: 20px;}
+#order .total_order{margin-top: 50px; border: 1px solid #333; border-left: 0; border-right: 0;}
+#order .total_order .total{border-bottom: 1px solid #eee; box-sizing: border-box; padding: 10px 20px;}
+#order .total_order .total span{color: #4982cf; font-weight: 900;}
+#order .total_order .total + ul{display: flex; justify-content: center; margin: 10px 0;}
+#order .total_order .total + ul li{margin: 10px;}
+#order .total_order .total + ul li p{font-weight: bold; font-size: 20px;}
+#order .total_order .total + ul li span{margin-top: 5px; font-size: 12px; color: #999; display: block;}
+#order .total_order .total + ul li p.total_price{color: #4982cf; font-size: 30px}
+#address-form{ text-align : left;}
+#order_info{text-align: center;}
+.click-btn {background: #4982cf; border: 1px solid #4982cf; color: #fff; width: 100px; height: 40px;}
+#pay-btn{text-align:center; height:70px; width:200px; font-size : 100%;}
+#center-btn{text-align:center;}
+.address-table{width:100%;font-size: 18px; background-color : white; margin-bottom : 2%;}
+.cntMessage{text-align : center; color : red; margin : 3%;}
+.address-List{width: 100%; height:100%;   border-radius: 10px; border: none; font-size:5% }
+.newAddress-btn{width:150px; height:60px; font-size : 18px;}
+.address-box{background-color:  #4982cf; padding:5%; width : 100%; height:100%;border:none; border-radius: 10px; }
+
+
+/*prodcuct_detail*/
+.review_box {margin: 13%;}
+.black_line {width: 100%;height: 1px;background-color: #bbbbbb;}
+.review_box {margin-bottom: 300px;}
+.black_line {width: 100%;height: 1px;background-color: #bbbbbb;}
+.horizontal_div::after {content: "";display: table;clear: both;}
+.content {display: flex;justify-content: space-between;font-size: 20px;}
+.left {flex: 1;padding: 1%;}
+.right {margin-left: auto;padding: 20px;}
+.reple {display: none;}
+.reple_child {margin-top: 20px;}
+.text {position: relative;}
+.add_comment_btn {position: absolute;bottom: 5px;margin-bottom: 0;left: 72%;background: #4982cf;border: 1px solid #4982cf;color: #fff;}
+.order_btn {background: #4982cf;border: 1px solid #4982cf;color: #fff;padding: 15px 50px;margin: 0 5px;font-weight: 600;}
+.add_comment {width: 50%;}
+#review_img {width: 100px;}
+#grade_star {width: 20px;}
+.comment_cnt {color: #4982cf;}
+.delete_icon {width: 20px;}
+.delete_icon2 {width: 15px;margin-left: auto;align-items: center;}
+.review_paging {margin: 5%;text-align: center;font-size:13px;}
+.like_cnt{float: right;}
+.see_more{float:right; color :#4982cf; cursor: pointer; font-size:15px;}
+.heart_icon{width:20px;}
+#cart-btn{text-decoration: none;}
+.comment_delete_modal_btn , .heart_icon , .delete_icon{cursor: pointer;}
+.review_zone{font-size : 30px;}
+.ea_message{color : red;}
+#nav a {color : black; text-decoration: none;}
+#lnb a {color: black !important;text-decoration: none;}
+.review_paging a {text-decoration :none; font-size: 15px;}

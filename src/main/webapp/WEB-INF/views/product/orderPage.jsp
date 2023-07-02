@@ -26,51 +26,11 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> <!-- 스와이퍼 js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script> <!-- 슬릭슬라이더 js -->
     <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/script3.js"></script> <!-- js -->
-    
-<style>
-#wrap { width: 80%; height: 100%; margin-left:10%; margin-right:10%; margin-top: 10%;display: flex; font-size: 20px; }
-#address-form { width: 20%; margin-top: 3%; margin-bottom: 3%; margin-right: 0%;}
-#address-history {width: 200px;  margin-top: 10%; margin-left: 0%; margin-bottom: 3%; margin-right: 0%; background-color:  white ;padding-left:15%; padding-right:15%; }
-.address-form td, #address-List td { padding: 1%; }
-#order-heading{ text-align: center; font-size:50px;}
-.pay-button {display: block; margin: 0 auto;}
-#address_title{text-align:center; margin-bottom : 5%; background-color : white; border-radius: 10px;}
-.address-form{background-color :  white; width: 30%;margin-top: 10%; margin-bottom: 3%; }
-option { width:20%;}
-table{ border : 1px solid black;}
-.input-width-control{width:10%;}
-.input-width-control2, #email{width:15%;}
-#roadAddress, #detailAddress{width:90%}
-.product-img{ width:100px; height:100px;}
-.pay-button{background: #4982cf; border: 1px solid #4982cf; color: #fff; width: 100px;  height: 40px; font-size:17px;}
-#product_Name{ font-size = 10px;}
-#order table{width: 100%;border: 1px solid #eee; border-collapse: collapse;}
-#order table td, #cart table th{vertical-align: middle; border: 1px solid #eee; padding: 10px;}
-#order table td .cart_pd{width: 100px; height: 100px;}
-#order table td .cart_pd + span{display: block; margin-top: 3px;}
-#order table td .count-wrap .inp{ width: 50px; border: 1px solid #ddd; font-size: 20px;}
-#order .del{padding: 10px 20px; border: 1px solid #eee; display: inline-block; margin-top: 20px;}
-#order .total_order{margin-top: 50px; border: 1px solid #333; border-left: 0; border-right: 0;}
-#order .total_order .total{border-bottom: 1px solid #eee; box-sizing: border-box; padding: 10px 20px;}
-#order .total_order .total span{color: #4982cf; font-weight: 900;}
-#order .total_order .total + ul{display: flex; justify-content: center; margin: 10px 0;}
-#order .total_order .total + ul li{margin: 10px;}
-#order .total_order .total + ul li p{font-weight: bold; font-size: 20px;}
-#order .total_order .total + ul li span{margin-top: 5px; font-size: 12px; color: #999; display: block;}
-#order .total_order .total + ul li p.total_price{color: #4982cf; font-size: 30px}
-#address-form{ text-align : left;}
-#order_info{text-align: center;}
-.click-btn {background: #4982cf; border: 1px solid #4982cf; color: #fff; width: 100px; height: 40px;}
-#pay-btn{text-align:center; height:30px;}
-#center-btn{text-align:center;}
-.address-table{width:100%;font-size: 18px; background-color : white; margin-bottom : 2%;}
-.cntMessage{text-align : center; color : red; margin : 3%;}
-.address-List{width: 100%; height:100%;   border-radius: 10px; border: none; font-size:5% }
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/order.css" type="text/css">
 
-.address-box{background-color:  #4982cf; padding:5%; width : 100%; height:100%;border:none; border-radius: 10px; }
-</style>
 
 </head>
+
 
 <body>
 
@@ -80,186 +40,196 @@ table{ border : 1px solid black;}
 
 
 
-<div id="wrap">
-    <main id="order">
-        
-        <section class="pc">
-            <h3>주문</h3>
-			
-			<table id="address-form">
-				<tr>
-					<td colspan ="4" id = "orderNo" data-orderno ="${orderInfo.orderNo}" >
-						주문번호 : ${orderInfo.orderNo}
-					</td>
-				</tr>
-				<tr>
-					<td colspan ="4">받는 사람 : <input type="text" id ="name" class="input-width-control2">
-					</td>
-				</tr>
-				<tr>
-					<td colspan ="4">휴대전화 <select id="tel-front">
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="018">018</option>
-					</select> - <input type="text" id = "tel-middle" class="input-width-control"> - <input
-						type="text" class="input-width-control" id = "tel-last" >
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">배송지 정보</td>
-				</tr>
-				<tr>
-					<td colspan ="4"><input type="text" id="postcode"
-						placeholder="우편번호"> <input type="button"
-						id="btn-postnum" value="우편번호 찾기"><br></td>
-				</tr>
-				<tr>			
-					<td colspan ="4"><input type="text" id="roadAddress"
-						placeholder="도로명주소" ></td>
-				</tr>
-				<tr>
-					<td colspan ="4"><span id="guide" style="color: #999; display: none"></span>
-						<input type="text" id="detailAddress" placeholder="상세주소">
-					</td>
-				</tr>
-				<tr>
-					<td  colspan ="4">이메일 : <input type="text" name="email" id="email"
-						maxlength="100" />@ <select name="email_domain"
-						id="email_domain" onchange="change_email_domain(this.value);">
-							<option value="">선택하세요</option>
-							<option value="input">직접입력</option>
-							<option value="hanmail.net">hanmail.net</option>
-							<option value="naver.com">naver.com</option>
-							<option value="empal.com">empal.com</option>
-							<option value="paran.com">paran.com</option>
-							<option value="nate.com">nate.com</option>
-							<option value="korea.com">korea.com</option>
-							<option value="hitel.net">hitel.net</option>
-							<option value="unitel.co.kr">unitel.co.kr</option>
-							<option value="nownuri.net">nownuri.net</option>
-							<option value="gmail.com">gmail.com</option>
-							<option value="lycos.co.kr">lycos.co.kr</option>
-							<option value="hanafos.com">hanafos.com</option>
-							<option value="dreamwiz.com">dreamwiz.com</option>
-							<option value="hanmir.com">hanmir.com</option>
-							<option value="freechal.com">freechal.com</option>
-							<option value="chollian.net">chollian.net</option>
-							<option value="yahoo.co.kr">yahoo.co.kr</option>
-							<option value="hotmail.com">hotmail.com</option>
-					</select>
-					<input type="text" name="input_email_domain"
-						id="input_email_domain" style="display: none" />
-					</td>
-				</tr>
-				<tr>
-					<td id = "center-btn">
-						<button  type ="button" class = "click-btn newAddress-btn">신규 주소<br>저장</button>
-					</td>
-				</tr>
-			</table>
-			
-            <table id = "order_info">
-                <tr>
-                    <th>상품 정보</th>
-                    <th>수량</th>
-                    <th>주문 금액</th>
-                    <th>배송 정보</th>
-                </tr>
-                <c:forEach items = "${orderInfo.productList}" var = "product"> 
-                
-                <tr id = "p${product.productNo}" data-no ="${product.productNo}" data-productea = "${product.productEa}" data-productprice ="${product.price}" class= "order_product_list">
-                    <td>
-                        <a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
-                            <img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
-                            <span>${product.productName}</span>
-                        </a>
-                    </td>
-                    <td>
-						${product.productEa} 개
-                    </td>
-                    <td>	 <fmt:formatNumber type="number" maxFractionDigits="3"
-							value="${product.price * product.productEa}" />원
-                    </td>
-                    <td>
-                        <span>무료</span>(택배)
-                    </td>
-                </tr>
-                
-                </c:forEach>
+	<div id="wrap">
+		<main id="order">
 
-                
-            </table>
-            <div class= "cntMessage">
-				<span>*재고가 부족한 상품은 자동으로 최대 주문 가능 수량으로 변경 됩니다.*</span>    
-            </div>
-          <form action ="${pageContext.request.contextPath}/order/${authCustomer.customerNo}" method = "get">
-            <div class="total_order">
-                <p class="total">총 주문 금액</p>
-                <ul>
-                    <li>
-                        <p class="total_price"></p>
-                        <input type ="hidden" id ="total_price">
-                    </li>
-                </ul>
-            </div>
-            <div class="btn_wrap">
-            		<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
-                <button type ="button" class="click-btn" id ="pay-btn">결제하기</button>
-            </div>
-	      </form>
-        </section>
+			<!-- 주문정보 -->
+			<section class="pc">
+				<h3>주문</h3>
 
+				<table id="address-form">
+					<tr>
+						<td colspan="4" id="orderNo" data-orderno="${orderInfo.orderNo}">
+							주문번호 : ${orderInfo.orderNo}
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">받는 사람 : <input type="text" id="name" class="input-width-control2">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">휴대전화 <select id="tel-front">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="018">018</option>
+							</select> - <input type="text" id="tel-middle" class="input-width-control"> - <input type="text"
+								class="input-width-control" id="tel-last">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">배송지 정보</td>
+					</tr>
+					<tr>
+						<td colspan="4"><input type="text" id="postcode" placeholder="우편번호"> <input type="button" id="btn-postnum"
+								value="우편번호 찾기"><br></td>
+					</tr>
+					<tr>
+						<td colspan="4"><input type="text" id="roadAddress" placeholder="도로명주소"></td>
+					</tr>
+					<tr>
+						<td colspan="4"><span id="guide" style="color: #999; display: none"></span>
+							<input type="text" id="detailAddress" placeholder="상세주소">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">이메일 : <input type="text" name="email" id="email" maxlength="100" />@ <select
+								name="email_domain" id="email_domain" onchange="change_email_domain(this.value);">
+								<option value="">선택하세요</option>
+								<option value="input">직접입력</option>
+								<option value="hanmail.net">hanmail.net</option>
+								<option value="naver.com">naver.com</option>
+								<option value="empal.com">empal.com</option>
+								<option value="paran.com">paran.com</option>
+								<option value="nate.com">nate.com</option>
+								<option value="korea.com">korea.com</option>
+								<option value="hitel.net">hitel.net</option>
+								<option value="unitel.co.kr">unitel.co.kr</option>
+								<option value="nownuri.net">nownuri.net</option>
+								<option value="gmail.com">gmail.com</option>
+								<option value="lycos.co.kr">lycos.co.kr</option>
+								<option value="hanafos.com">hanafos.com</option>
+								<option value="dreamwiz.com">dreamwiz.com</option>
+								<option value="hanmir.com">hanmir.com</option>
+								<option value="freechal.com">freechal.com</option>
+								<option value="chollian.net">chollian.net</option>
+								<option value="yahoo.co.kr">yahoo.co.kr</option>
+								<option value="hotmail.com">hotmail.com</option>
+							</select>
+							<input type="text" name="input_email_domain" id="input_email_domain" style="display: none" />
+						</td>
+					</tr>
+					<tr>
+						<td id="center-btn">
+							<button type="button" class="click-btn newAddress-btn">신규 주소<br>저장</button>
+						</td>
+					</tr>
+				</table>
 
-    </main>
-  
+				<!-- //주문정보 -->
 
+				<!-- 주문상품 정보 -->
+				<table id="order_info">
+					<tr>
+						<th>상품 정보</th>
+						<th>수량</th>
+						<th>주문 금액</th>
+						<th>배송 정보</th>
+					</tr>
+					<c:forEach items="${orderInfo.productList}" var="product">
 
-		<div class="address-form"><!--주소 정보창 반복문으로 돌릴 거임-->
-				<div class ="address-box">
-				<div id ="address_title">
-				기존 주소록<br>사용하기				
-				</div>
-		
-				<div id = "address-Area">
-				<c:forEach items ="${addressList}" var ="address">
-					<div class= "address-List">
-					<table class= address-table>
-						<tr>
-							<td class = "address-name">${address.name}</td>
+						<tr id="p${product.productNo}" data-no="${product.productNo}" data-productea="${product.productEa}"
+							data-productprice="${product.price}" class="order_product_list">
+							<td>
+								<a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
+									<img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
+									<span>${product.productName}</span>
+								</a>
+							</td>
+							<td>
+								${product.productEa} 개
+							</td>
+							<td>
+								<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price * product.productEa}" />원
+							</td>
+							<td>
+								<span>무료</span>(택배)
+							</td>
 						</tr>
-						<tr>
-							<td class = "address-tel">${address.tel}</td>
-						</tr>
-						<tr>
-							<td class = "address-postNum">${address.postNum}</td>
-						</tr>
-						<tr>
-							<td class = "address-address">${address.address}</td>
-						</tr>
-						<tr>
-							<td class = "address-addressDetail">${address.addressDetail}</td>
-						</tr>
-						<tr>
-							<td class = "address-email">${address.email}</td>
-						</tr>
-						
-					</table>
-					</div>
+
 					</c:forEach>
-					</div>
+
+				</table>
+
+				<!-- 주문상품 정보 end -->
+
+
+				<div class="cntMessage">
+					<span>*재고가 부족한 상품은 자동으로 최대 주문 가능 수량으로 변경 됩니다.*</span>
 				</div>
+
+
+				<!-- 총 주문금액 -->
+				<form action="${pageContext.request.contextPath}/order/${authCustomer.customerNo}" method="get">
+					<div class="total_order">
+						<p class="total">총 주문 금액</p>
+						<ul>
+							<li>
+								<p class="total_price"></p>
+								<input type="hidden" id="total_price">
+							</li>
+						</ul>
+					</div>
+					<div class="btn_wrap">
+						<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
+						<button type="button" class="click-btn" id="pay-btn">결제하기</button>
+					</div>
+				</form>
+			</section>
+			<!-- 총 주문금액 -->
+
+
+		</main>
+
+
+		<!--기존 주소록 -->
+		<div class="address-form">
+			<div class="address-box">
+				<div id="address_title">
+					기존 주소록<br>사용하기
+				</div>
+
+				<div id="address-Area">
+					<c:forEach items="${addressList}" var="address">
+						<div class="address-List">
+							<table class=address-table>
+								<tr>
+									<td class="address-name">${address.name}</td>
+								</tr>
+								<tr>
+									<td class="address-tel">${address.tel}</td>
+								</tr>
+								<tr>
+									<td class="address-postNum">${address.postNum}</td>
+								</tr>
+								<tr>
+									<td class="address-address">${address.address}</td>
+								</tr>
+								<tr>
+									<td class="address-addressDetail">${address.addressDetail}</td>
+								</tr>
+								<tr>
+									<td class="address-email">${address.email}</td>
+								</tr>
+
+							</table>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 
 		</div><!--주소 정보창 완료-->
-</div>
+	</div>
 
-        <!-- 탑버튼 -->
-        <a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png" alt=""></a>
-        <!-- /탑버튼 -->
-	 	<!-- Footer -->
+	<!-- 탑버튼 -->
+	<a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+			alt=""></a>
+	<!-- /탑버튼 -->
+	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 </body>
+
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -436,11 +406,11 @@ table{ border : 1px solid black;}
 	/*이메일 입력 스크립트*/
 	function change_email_domain(val) {
 		if (val == "input") {
-			document.getElementById("input_email_domain").style.display = "inline";
-			document.getElementById("input_email_domain").focus();
+			$("#input_email_domain").css("display", "inline");
+			$("#input_email_domain").focus();
 		} else {
-			document.getElementById("input_email_domain").style.display = "none";
-			document.getElementById("input_email_domain").value = "";
+			$("#input_email_domain").css("display", none); 
+			$("#input_email_domain").val("");
 		}
 	}
 	
@@ -452,7 +422,7 @@ table{ border : 1px solid black;}
 	$('.order_product_list').each(function() {
 	    var productEa = $(this).data('productea');
 	    var productPrice = $(this).data('productprice');
-	    
+	    console.log(productEa + productPrice + "얜 또 왜 이래");
 	    total_price += productEa * productPrice;
 	  });
 		$('.total_price').text('총 ' + total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원');

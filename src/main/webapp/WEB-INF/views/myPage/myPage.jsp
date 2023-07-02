@@ -28,25 +28,13 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> <!-- 스와이퍼 js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script> <!-- 슬릭슬라이더 js -->
     <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/script3.js"></script> <!-- js -->
+    <link href="${pageContext.request.contextPath}/assets/css/customer.css" rel="stylesheet">
+    <script type="text/javascript"
+src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
 </head>
 <style>
 	
-#wrap {float: left; width: 80%; background-color: #FFFFFF; margin-top: 200px; text-align: center; justify-content: center; margin-left: 10%; margin-right: 10%;}
-#aside {float: left; width: 180px; height: 300px; background-color: #FFFFFF; }
-.customer_profile{ text-align: center; padding: 30px; background-color: aliceblue;}
-#customer_img{ width: 70px;}
-#board{height: 2000px; margin: 0 auto;}
-table{ width: 1100px; margin-left: 5px;  margin: 0 auto; margin-top: 10px;  border-collapse: separate;
-border:1px solid #eee;}
-table td {  vertical-align: middle;}
-.category{background-color: #eee;}
-.product_list {height: 100px;}
-#aside ul { list-style: none; padding: 10px;}
-#aside ul li a { text-decoration: none; }
-#aside ul li { margin-bottom: 10px; }
-.product-img{width: 80px;}
-.review-btn {background: #4982cf; border: 1px solid #4982cf; color: #fff;}
-.clear{height:20px;}
+
 </style>
 <body>
   
@@ -86,7 +74,7 @@ table td {  vertical-align: middle;}
 					<div id="list">
 					
 		
-						<table class="table-hover table">
+						<table class="table-hover table order-list-table">
 							<thead>
 								<tr class= "category">
 									<th colspan="2">제품명</th>
@@ -142,17 +130,7 @@ table td {  vertical-align: middle;}
 </body>
 
 <script>
-	$(window).on("load", function(){
-		
-		var selectPage =  $('#select_Page').val();
-		
 
-		
-		$('#P' + selectPage).css("color", "#4982cf");
-		$('#P' + selectPage).css("font-weight", "bold");
-		$('#P' + selectPage).css("font-size", "15px");
-	});
-	
 
 </script>
 

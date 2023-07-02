@@ -1,0 +1,70 @@
+
+/*customer_view*/
+#wrap {float: left; width: 80%; background-color: #FFFFFF; margin-top: 200px; text-align: center; justify-content: center; margin-left: 10%; margin-right: 10%;}
+#aside {float: left; width: 180px; height: 300px; background-color: #FFFFFF; }
+.customer_profile{ text-align: center; padding: 30px; background-color: aliceblue;position: flex;}
+#customer_img{ width: 70px;}
+#board{height: 2000px; margin: 0 auto;}
+.order-list-table{ width: 1100px; margin-left: 5px;  margin: 0 auto; margin-top: 10px;  border-collapse: separate;
+border:1px solid #eee;}
+.order-list-table td {  vertical-align: middle;}
+.category{background-color: #eee;}
+.product_list {height: 100px;}
+#aside ul { list-style: none; padding: 10px;}
+#aside ul li a { text-decoration: none; }
+#aside ul li { margin-bottom: 10px; }
+.product-img{width: 80px;}
+.review-btn {background: #4982cf; border: 1px solid #4982cf; color: #fff;}
+.clear{height:20px;}
+.review_product {text-align: center;  width: 1100px; margin-left: 5px; margin: 0 auto;margin-top: 10px;border-collapse: separate;border: 1px solid #eee;}
+table td { vertical-align: middle;}
+#review_table {margin: 0%;border: 1px solid #eee;width: 1100px;margin-left: 5px;margin: 0 auto;border-collapse: separate;height: 700px;padding: 1%;}
+#btn_area{text-align : center;}
+[name="content"] {width: 100%; height:550px;}
+[name="title"] { width:100%;  height:30px;}
+input.reviewForm {border-color: #eee; /* 원하는 테두리 색상으로 변경 */}
+.grade{width:50%;height:100%;font-size : 20px;margin-top : 5%;}
+.review_product {text-align: center;width: 1100px;margin-left: 5px;margin: 0 auto;margin-top: 10px;border-collapse: separate;border: 1px solid #eee;}
+review_table{ height:70px;}
+.review_content{height : 50px;display:none;text-align: center;}
+.review_content td{height:100%;}
+.review_img{height : 15px;}
+.review_list td {height:50px;}
+.content_img {width:200px;}
+.content {margin-top: auto;}
+
+
+/* My page */
+.footer {text-align: center;}
+.footer .container-fluid {height: 30px;}
+.inquiry_write2 , .customer_info{width: 100%; text-align: center;}
+.customer_info td {height: 70px;font-size : 20px;}
+.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
+.inquiry_popup .inquiry_close{display: none;}
+.inquiry_popup .inquiry_write{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 700px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
+.inquiry_popup .inquiry_write2{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 500px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -250px; background: #fff;}
+.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 60px; text-align: center;}
+.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
+.inquiry_popup .inquiry_write th, .inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
+.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
+.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#inquiry_cont{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#inquiry_cont2{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
+.user_img { width:150px; }
+.order_btn{ bottom: 3px;background: #4982cf;border: 1px solid #4982cf;color: #fff;width: 129px;}
+.inquiry_popup .shopping_btn{ text-decoration: none; }
+
+
+/*password chk*/
+.password-btn{background: #4982cf; border: 1px solid #4982cf; color: #fff; width:50px; height:33px;}
+.password_check input {height:30px;}
+.password_check {
+  position: fixed;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  border:0.5px solid black;
+  padding : 5%;
+  margin-top : 5%;
+}

@@ -41,6 +41,7 @@
 	type="text/css">
 <!-- 서브 css -->
 
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/order.css" type="text/css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 제이쿼리 최신버전 js -->
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -51,138 +52,19 @@
 <script
 	type="${pageContext.request.contextPath }/assets/text/javascript"
 	src="js/script3.js"></script>
+<script
+	type="${pageContext.request.contextPath }/assets/text/javascript"
+	src="js/script3.js"></script>
 <!-- js -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 모달용 부트 스트랩 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	        <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/pro_detail.js"></script> <!-- js -->
 
 <style>
-.review_box {
-	margin: 13%;
-}
 
-.black_line {
-	width: 100%;
-	height: 1px;
-	background-color: #bbbbbb;
-}
-
-.review_box {
-	margin-bottom: 300px;
-}
-
-.black_line {
-	width: 100%;
-	height: 1px;
-	background-color: #bbbbbb;
-}
-
-.horizontal_div::after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-.content {
-	display: flex;
-	justify-content: space-between;
-	font-size: 20px;
-}
-
-.left {
-	flex: 1;
-	padding: 1%;
-}
-
-.right {
-	margin-left: auto;
-	padding: 20px;
-}
-
-.reple {
-	display: none;
-}
-
-.reple {
-	display: none;
-}
-
-.reple_child {
-	margin-top: 20px;
-}
-
-.text {
-	position: relative;
-}
-
-.add_comment_btn {
-	position: absolute;
-	bottom: 5px;
-	margin-bottom: 0;
-	left: 72%;
-	background: #4982cf;
-	border: 1px solid #4982cf;
-	color: #fff;
-}
-
-.order_btn {
-	background: #4982cf;
-	border: 1px solid #4982cf;
-	color: #fff;
-	padding: 15px 50px;
-	margin: 0 5px;
-	font-weight: 600;
-}
-
-.add_comment {
-	width: 50%;
-}
-
-#review_img {
-	width: 100px;
-}
-
-#grade_star {
-	width: 20px;
-}
-
-.comment_cnt {
-	color: #4982cf;
-}
-
-.delete_icon {
-	width: 20px;
-}
-
-.delete_icon2 {
-	width: 15px;
-	margin-left: auto;
-	align-items: center;
-}
-
-.review_paging {
-	margin: 5%;
-	text-align: center;
-	font-size:13px;
-}
-.like_cnt{float: right;}
-.see_more{float:right; color :#4982cf; cursor: pointer; font-size:15px;}
-.heart_icon{width:20px;}
-#cart-btn{text-decoration: none;}
-.comment_delete_modal_btn , .heart_icon , .delete_icon{cursor: pointer;}
-.review_zone{font-size : 30px;}
-.ea_message{color : red;}
-#nav a {color : black; text-decoration: none;}
-#lnb a {
-  color: black !important;
-  text-decoration: none;
-}
-.top_btn{
-	display:
-}
-.review_paging a {text-decoration :none; font-size: 15px;}
 </style>
 
 </head>
@@ -198,22 +80,19 @@
 
 
 		<!-- 제품 디테일 공간  -->
-		
+
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
-				<img
-					src="${pageContext.request.contextPath}/upload/${product.saveName}"
-					alt="${product.productName}">
+				<img src="${pageContext.request.contextPath}/upload/${product.saveName}" alt="${product.productName}">
 			</div>
 			<div class="info_wrap">
 				<div class="title">
 					<h4>${product.productName}</h4>
 					<p>
-						<fmt:formatNumber type="number" maxFractionDigits="3"
-							value="${product.price}" />
+						<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />
 						원
 					</p>
-					<input type ="hidden" value ="${product.subCategory}" id = "subCategory">
+					<input type="hidden" value="${product.subCategory}" id="subCategory">
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>
@@ -221,32 +100,30 @@
 						<li class="clear"><strong>배송 방법</strong> <span>택배비</span></li>
 						<li class="clear"><strong>배송비</strong> <span>2,500원
 								(50,000원 이상 구매 시 무료)</span></li>
-						<li class="clear"><strong>배송 안내</strong> <span
-							class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수
+						<li class="clear"><strong>배송 안내</strong> <span class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수
 								있습니다.(+5,000원)</span></li>
 						<li>쇼핑에 참고 부탁드립니다. ^_^</li>
 					</ul>
 					<input type="hidden" value="${product.price}" id="price">
 					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
-					<form action="${pageContext.request.contextPath}/cart/addOrderOne"
-						method="get" class="addOrderOne">
+					<form action="${pageContext.request.contextPath}/cart/addOrderOne" method="get" class="addOrderOne">
 						<div class="pd_num clear">
 							<p>수량</p>
 							<div class="count-wrap _count">
-								<button type="button" class="minus" >-</button>
+								<button type="button" class="minus">-</button>
 								<input type="text" class="inp" name="productEa" value="1" />
 								<!-- 변경되는 숫자 -->
-								<button type="button" class="plus" data-max = "${product.productEa}">+</button>
+								<button type="button" class="plus" data-max="${product.productEa}">+</button>
 							</div>
 
-					
+
 							<span class="total_price"></span>
 						</div>
-							
-						<c:if test ="${product.productEa < 10 }">
-							<p class= "ea_message">현재 재고가 ${product.productEa}개 남은 제품입니다.</p>
+
+						<c:if test="${product.productEa < 10 }">
+							<p class="ea_message">현재 재고가 ${product.productEa}개 남은 제품입니다.</p>
 						</c:if>
-						
+
 
 						<div class="total_price_wrap">
 							<p>
@@ -257,16 +134,13 @@
 							<!--  바뀔 금액 자리 -->
 							<p class="total_price"></p>
 							<input type="hidden" name="totalPrice" id="total_price">
-							<input type="hidden" name="productNo" id="productNo"
-								value="${product.productNo}"> <input type="hidden"
-								name="customerNo" id="customerNo"
-								value="${authCustomer.customerNo}">
+							<input type="hidden" name="productNo" id="productNo" value="${product.productNo}"> <input type="hidden"
+								name="customerNo" id="customerNo" value="${authCustomer.customerNo}">
 						</div>
 
 						<div class="btn_wrap">
 							<button type="submit" class="order_btn data-set">구매하기</button>
-							<a href="#none" class="shopping_btn data-set" id="cart-btn"
-								data-productno="${product.productNo}"
+							<a href="#none" class="shopping_btn data-set" id="cart-btn" data-productno="${product.productNo}"
 								data-cusno="${authCustomer.customerNo}">장바구니</a>
 						</div>
 					</form>
@@ -283,7 +157,7 @@
 			<div class="black_line"></div>
 			<div class="review_list">
 				<br> <br>
-				<p class = "review_zone">
+				<p class="review_zone">
 					<b>구매평</b>
 				</p>
 				<p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p>
@@ -302,51 +176,50 @@
 									<c:set var="endValue" value="${review.grade-1}" />
 									<c:forEach begin="0" end="${endValue}">
 										<c:if test="${review.grade != 0}">
-											<img
-												src="${pageContext.request.contextPath}/assets/images/star.png"
-												id="grade_star">
+											<img src="${pageContext.request.contextPath}/assets/images/star.png" id="grade_star">
 										</c:if>
 									</c:forEach>
 								</div>
 								<h3>${review.title}</h3>
-  										<span class= "see_more"><b>전체 보기</b></span><br>
+								<span class="see_more"><b>전체 보기</b></span><br>
 								<hr>
 								<div>
 									<c:if test="${review.saveName != null}">
-										<img
-											src="${pageContext.request.contextPath}/upload/${review.saveName}"
-											class="review_img" style ="width:100px;">
+										<img src="${pageContext.request.contextPath}/upload/${review.saveName}" class="review_img"
+											style="width:100px;">
 									</c:if>
 								</div>
-								<div>${review.content} 
-								
-								<!-- 좋아요 누르기 -->
-								
-								<span class = "like_cnt" data-reviewno = "${review.reviewNo}">  
-									<img src="${pageContext.request.contextPath}/assets/images/heart.png" class= "heart_icon" alt="리뷰 좋아요">
-  										<span class="like_cnt_ea">${review.likeCnt}</span>
-  										</span>
-  						
+								<div>${review.content}
+
+									<!-- 좋아요 누르기 -->
+
+									<span class="like_cnt" data-reviewno="${review.reviewNo}">
+										<img src="${pageContext.request.contextPath}/assets/images/heart.png" class="heart_icon"
+											alt="리뷰 좋아요">
+										<span class="like_cnt_ea">${review.likeCnt}</span>
+									</span>
+
 								</div>
 							</div>
 							<div class="reple">
 								<input type="hidden" name="review_no" value="${review.reviewNo}">
 								<div class="text">
-								<c:set var="commentLength" value="${fn:length(review.comment)}" />
+									<c:set var="commentLength" value="${fn:length(review.comment)}" />
 									<p>
 										댓글 <span class="comment_cnt">(${commentLength})</span>
 									</p>
 									<textarea class="add_comment" style="width: 70%; height: 100%"></textarea>
-									<button class="add_comment_btn" data-authno = ${authCustomer.customerNo}>등록</button>
+									<button class="add_comment_btn" data-authno=${authCustomer.customerNo}>등록</button>
 								</div>
 								<div class="reple_child">
 									<c:forEach items="${review.comment}" var="comment">
-										<ul id = "c${comment.commentNo}">
+										<ul id="c${comment.commentNo}">
 											<li>${comment.customerName}: ${comment.content}
-												<c:if test= "${comment.customerNo == authCustomer.customerNo}"> 
-												<a class="comment_delete_modal_btn" data-commentno = "${comment.commentNo}"> 
-													<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png" class="delete_icon2" alt="댓글 삭제">
-												</a>
+												<c:if test="${comment.customerNo == authCustomer.customerNo}">
+													<a class="comment_delete_modal_btn" data-commentno="${comment.commentNo}">
+														<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png"
+															class="delete_icon2" alt="댓글 삭제">
+													</a>
 												</c:if>
 											</li>
 										</ul>
@@ -359,11 +232,9 @@
 								&nbsp; &nbsp; &nbsp;
 								<c:if test="${authCustomer.customerNo == review.customerNo}">
 									<!-- 리뷰 삭제하기 X 버튼  //  로그인한 유저넘버와 리뷰를 작성한 유저 넘버가 같을 때 볼 수 있다.-->
-									<a class="delete_review_button"
-										data-reviewno="${review.reviewNo}"
+									<a class="delete_review_button" data-reviewno="${review.reviewNo}"
 										data-productno="${review.productNo}"> <img
-										src="${pageContext.request.contextPath}/assets/images/delete.png"
-										class="delete_icon" alt="리뷰 삭제">
+											src="${pageContext.request.contextPath}/assets/images/delete.png" class="delete_icon" alt="리뷰 삭제">
 									</a>
 									<!-- 리뷰 삭제하기 X 버튼 -->
 								</c:if>
@@ -377,11 +248,10 @@
 			<!-- 반복될 리뷰들 end -->
 			<!-- 리뷰 넣을 공간 -->
 
-		<!-- 탑버튼 -->
-		<a href="#none" class="top_btn"><img
-			src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
-			alt=""></a>
-		<!-- /탑버튼 -->
+			<!-- 탑버튼 -->
+			<a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+					alt=""></a>
+			<!-- /탑버튼 -->
 
 			<!-- 리뷰 페이징 시작 -->
 			<div class="review_paging">
@@ -392,11 +262,11 @@
 						◀ </a>
 				</c:if>
 
-				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}"
-					var="page">
+				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="page">
 					<c:if test="${page <= paging.finalPage}">
 						<a class="review_paging"
-							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${page}" id ="P${page}">${page}</a>
+							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${page}"
+							id="P${page}">${page}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${paging.next == true}">
@@ -404,7 +274,7 @@
 						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.endPageNum + 1}">
 						▶ </a>
 				</c:if>
-				<input type ="hidden" value ="${paging.selectPage}" id ="select_Page">
+				<input type="hidden" value="${paging.selectPage}" id="select_Page">
 			</div>
 			<!-- 리뷰 페이징 끝 -->
 
@@ -439,10 +309,8 @@
 				</div>
 				<form action="${pageContext.request.contextPath}/cart/viewCart">
 					<div class="modal-footer">
-						<input type="hidden" value="${authCustomer.customerNo}"
-							name="customerNo">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal" id="more_see">좀 더 둘러보기</button>
+						<input type="hidden" value="${authCustomer.customerNo}" name="customerNo">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="more_see">좀 더 둘러보기</button>
 						<button type="submit" class="btn btn-primary">장바구니 이동하기</button>
 					</div>
 				</form>
@@ -463,14 +331,12 @@
 						없습니다.
 					</span>
 				</div>
-				<form
-					action="${pageContext.request.contextPath}/review/deleteReview">
+				<form action="${pageContext.request.contextPath}/review/deleteReview">
 					<div class="modal-footer">
 						<input type="text" value="" name="reviewNo" id="delete_No">
 						<input type="text" value="" name="productNo" id="product_No">
 						<button type="submit" class="btn btn-primary">글 삭제하기</button>
-						<button type="button" class="btn btn-secondary close_modal"
-							data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-secondary close_modal" data-bs-dismiss="modal">닫기</button>
 					</div>
 				</form>
 			</div>
@@ -479,7 +345,7 @@
 
 
 	<!-- 리뷰 삭제 확인 모달 -->
-	
+
 	<!-- 리뷰 코멘트 삭제 모달 -->
 	<div class="modal" tabindex="-1" id="comment_modal">
 		<div class="modal-dialog">
@@ -493,46 +359,21 @@
 					</span>
 				</div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary comment_delete_btn">댓글 삭제하기</button>
-						<button type="button" class="btn btn-secondary close_modal"
-							data-bs-dismiss="modal">닫기</button>
-					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary comment_delete_btn">댓글 삭제하기</button>
+					<button type="button" class="btn btn-secondary close_modal" data-bs-dismiss="modal">닫기</button>
+				</div>
 			</div>
 		</div>
 	</div>
-<!-- 리뷰 코멘트 삭제 모달 -->
+	<!-- 리뷰 코멘트 삭제 모달 -->
 
 
 </body>
 
 <script>
 
-/*제품이 등록된 카테고리별 상단 바 디자인 요소 다르게 함*/
-$(window).on("load", function(){
-	
-	var category  = $('#subCategory').val();
-	
-	if(category == "간식"){ $('.snack').css('color', '#4982cf');}
-	if(category == "배변용품"){  $('.toilet').css('color', '#4982cf');  }
-	if(category == "미용"){  $('.beauty').css('color', '#4982cf'); }
-	if(category == "장난감"){  $('.toy').css('color', '#4982cf'); }
-	if(category == "가구"){  $('.furniture').css('color', '#4982cf'); }
-	
 
-		
-		var selectPage =  $('#select_Page').val();
-		
-
-		
-		$('#P' + selectPage).css("color", "#4982cf");
-		$('#P' + selectPage).css("font-weight", "bold");
-		$('#P' + selectPage).css("font-size", "15px");
-
-	
-	
-	
-});
 
 /* 리뷰 좋아요 버튼 클릭 이벤트 처리*/
 $('.like_cnt').on("click", function(){
@@ -604,48 +445,19 @@ $('.comment_delete_btn').on("click", function(){
 });//코멘트 삭제 이벤트
 
 
-/* 코멘트 삭제 모달 나오게 만드는 이벤트*/
-$('.comment_delete_modal_btn').on("click", function(){
-	
-		$('#comment_modal').modal('show');
-	    var commentNo =	$(this).data('commentno');
-	    console.log('모달로 넘어가는 번호' + commentNo)
-	    $('.comment_delete_btn').attr("data-commentno",commentNo);
-	    
-});
-
-/*리뷰 삭제 모달 펼치는 기능*/
-$('.delete_review_button').on("click", function(){
-	
-	var reviewNo = $(this).data('reviewno');
-	var productNo = $(this).data('productno');
-	console.log(reviewNo)
-	
-	$('#review_modal').modal('show');
-	$('#delete_No').val(reviewNo);
-	$('#product_No').val(productNo);
-	
-}); //리뷰 삭제 버튼 클릭 이벤트 end
-
-
-/*모달 닫는 버튼*/
-$('.close_modal').on("click", function(){
-	$('#review_modal').modal('hide');
-	$('#comment_modal').modal('hide');
-	$('#Cart-modal').modal('hide');	
-});
-
 
 /*댓글 등록 기능*/
 $('.add_comment_btn').on("click", function(){
 	
-	var content = $('.add_comment').val()
+	var content = $(this).siblings('.add_comment').val();
+	var resetText = $(this).siblings('.add_comment');
 	var  customerNo = $(this).data('authno');
 	var reviewNo = $(this).closest('.reple').find('input[name="review_no"]').val();
 	var reple_render = 	$(this).closest(".reple").find(".reple_child");
 	var commentInput = $(this).find('.add_comment');
-
-
+	
+	
+	resetText.val("");
 	
 	if(content.length < 3){
 		alert('댓글은 네 글자 이상 입력해주세요.');
@@ -670,17 +482,17 @@ $('.add_comment_btn').on("click", function(){
 					
 				
 				console.log(comment);					
-				console.log(reple_render);		
+				console.log('이건 어디에 쓰는 거지' + reple_render);		
+				
 
+				
 				var str = "";
-				str += "<ul id='c" + comment.commentNo + "'>";		
+				str += "<ul id='c" + comment.commentNo + "' class= 'comment__list'>";		
 				str += "<li>";		
 				str += comment.customerName + " : " + comment.content;
-				str += "<c:if test='${comment.customerNo == authCustomer.customerNo}'>";
 				str += "<a class='comment_delete_modal_btn' data-commentno='" + comment.commentNo + "'>"; 
 				str += "<img src='${pageContext.request.contextPath}/assets/images/delete_gray.png' class='delete_icon2'>";
 				str += "</a>";		
-				str += "</c:if>";		
 				str += "</li>";		
 				str += "</ul>";		
 				
@@ -713,32 +525,8 @@ $('.see_more').on("click", function(){
 		}
 	}); //content 클래스 클릭 이벤트 발생
 
-	$(window).on("load", function() {
+	
 
-		updateTotalPrice();
-
-		//플러스 버튼을 클릭했을 때 수량 증가
-		$(".plus").on("click", function() {
-			var EA = $(".inp");
-			var EAval = Number(EA.val()); // EAval을 숫자로 변환
-			var max = Number($(this).data('max'));
-			
-			if((EAval + 1 ) <= max ){
-			EA.val(EAval + 1); // 증가된 값을 input 요소에 설정
-			}
-			updateTotalPrice();
-		}); //plus btn event end
-
-		// 마이너스 버튼을 클릭했을 때 수량 감소
-		$(".minus").on("click", function() {
-			var EA = $(".inp");
-			var EAval = Number(EA.val()); // EAval을 숫자로 변환
-
-			if (EAval > 1) {
-				EA.val(EAval - 1); // 감소된 값을 input 요소에 설정
-				updateTotalPrice();
-			}
-		}); //minus btn event end
 
 		/*장바구니 모달 만들거임*/
 
@@ -793,6 +581,16 @@ $('.see_more').on("click", function(){
 			}
 		});//주문하기 버튼 누르면 일어나는 이벤트
 		
+		/* 코멘트 삭제 모달 나오게 만드는 이벤트*/
+		$('.reple_child').on("click",".comment_delete_modal_btn", function(){
+
+				$('#comment_modal').modal('show');
+			    var commentNo =	$(this).data('commentno');
+			    console.log('모달로 넘어가는 번호' + commentNo)
+			    $('.comment_delete_btn').attr("data-commentno",commentNo);
+			    
+		});
+	
 		
 		/* 좀 더 둘러보기 클릭 시 modal 닫힘 */
 		$('#more_see').on("click", function(){
@@ -801,23 +599,12 @@ $('.see_more').on("click", function(){
 			
 		});
 		
-	}); //window load event end
-
-	//변동되는 숫자에 따라 금액을 조정하고, 조정된 금액에 ','와 '원'을 더해주는 function 
-	function updateTotalPrice() {
-		var EAval = Number($(".inp").val());
-		var price = $("#price").val()
-
-		var total_price = EAval * price;
-		var set_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원';
-		
-		$('#total_price').val(total_price);
-		$(".total_price").text(set_price);
-		
-	}
-	
-	
-	
+		/*모달 닫는 버튼*/
+		$('.close_modal').on("click", function(){
+			$('#review_modal').modal('hide');
+			$('#comment_modal').modal('hide');
+			$('#Cart-modal').modal('hide');	
+		});
 	
 </script>
 

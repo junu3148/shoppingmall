@@ -26,38 +26,52 @@
 				count(detail_no) 
 			from order_detail a join orders b 
 			on a.order_no = b.order_no 
-			where b.customer_no = #{customerNo} 
+			where b.customer_no = #{customerNo}  and b.order_stat = 2
 		]]>
 	</select>
 
 	<!-- 내 주문내역 가져오기 -->
 	<select id="getOrderList" parameterType="PagingVO" resultType="ProductVO">
 		<![CDATA[
-			select
-   		 		rownum
-   				,productEa
-   				,regDate
-    			,ProductNo
-    			,price
-	    		,saveName
-    			,productName
-			from
-				(SELECT 
-        			b.product_count as productEa
-      				,a.order_date as regDate
-       		 		, b.product_no as ProductNo
-       		 		, p.price * b.product_count AS price
-       		   		, pi.save_name as saveName
-        			, p.product_name as productName
-				FROM orders a
-				JOIN order_detail b ON a.order_no = b.order_no
-				JOIN product p ON p.product_no = b.product_no
-				JOIN product_image pi ON pi.product_no = b.product_no
-				WHERE a.customer_no = #{keyword}
-  				AND a.order_stat = 2
-			    order by a.order_no desc)
-  			where rownum  between #{boardNumStart} and #{boardNumEnd}
-	]]>
+  		  	 select
+       			 productEa
+       			 ,regDate
+       			 ,ProductNo
+      	    	 ,price
+        		 ,saveName
+     	   	 	 ,productName
+       		 from
+   				 (
+   				 select 
+       				 rownum as rw
+       				 ,productEa
+       				 ,regDate
+        			 ,ProductNo
+       				 ,price
+       				 ,saveName
+        			 ,productName
+       			 from
+       				 (
+       				 SELECT 
+          				  b.product_count as productEa,
+        			      a.order_date as regDate,
+        			      b.product_no as ProductNo,
+    			          p.price * b.product_count AS price,
+      				      pi.save_name as saveName,
+     			          p.product_name as productName
+       				 FROM
+          				orders a
+         			    JOIN order_detail b ON a.order_no = b.order_no
+           			    JOIN product p ON p.product_no = b.product_no
+            			JOIN product_image pi ON pi.product_no = b.product_no
+       				 WHERE
+          				a.customer_no = #{keyword}
+         	 		  	AND a.order_stat = 2
+        			ORDER BY
+            			a.order_no DESC)
+            			)
+            		where rw between #{boardNumStart} and #{boardNumEnd}
+		]]>
 	</select>
 	
 	<!-- 주문한 제품 정보 가져오기 -->

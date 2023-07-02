@@ -57,46 +57,9 @@
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
 	rel="stylesheet">
 
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/customer.css" type="text/css">
 <style>
-.content {
-	margin-top: auto;
-}
 
-.footer {
-	text-align: center;
-}
-.footer .container-fluid {
-	height: 30px;
-}
-.inquiry_write2 , .customer_info{
-	width: 100%; text-align: center;
-}
-.customer_info td {
-	height: 70px;
-	font-size : 20px;
-}
-.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
-.inquiry_popup .inquiry_close{display: none;}
-.inquiry_popup .inquiry_write{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 700px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
-.inquiry_popup .inquiry_write2{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 500px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -250px; background: #fff;}
-.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 60px; text-align: center;}
-.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
-.inquiry_popup .inquiry_write th,
-.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
-.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
-.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#inquiry_cont{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#inquiry_cont2{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
-.user_img { width:150px; }
-.order_btn{ 
-    bottom: 3px;
-    background: #4982cf;
-    border: 1px solid #4982cf;
-    color: #fff;
-    width: 129px;
-}
-.inquiry_popup .shopping_btn{ text-decoration: none; }
 </style>
 </head>
 <body>
@@ -290,40 +253,13 @@ $('.detail_Info').on("click", function(){
 	
 	var customerNo = $(this).data('customerno');
 	$('.inquiry_popup').show();
-	console.log(customerNo);
 	
 	CustomerVO = {
 			
 			customerNo : customerNo
 	}
 	
-	
-	$.ajax({
-		//요청 세팅(보낼 때--!)
-		url : "${pageContext.request.contextPath}/customer/customerDetailInfo",
-		type : "post", 
-		data : CustomerVO,
-		dataType : "json",
-		success : function(jsonResult) {
-			/*돌아온 정보*/
-			console.log(jsonResult.data);
-			
-			var customer = jsonResult.data;
-			var customerRole = "";
-			var totalPayment  = (customer.totalPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
-
-			console.log(customerRole);
-			
-			$('.cus_name').html("<b>" +  customer.customerName + '(' + customer.customerId + ')님' + "</b>"  );
-			$('.cus_role').val(customer.customerRole);
-			$('.totalPayment').text(totalPayment);
-			$('#cus_no').val(customerNo);
-		},
-		error : function(XHR, status, error) {
-			console.error(status + " : " + error);
-		}
-	}); //ajax end	
-	
+	detail_info_view(CustomerVO);
 	
 	
 }); //상세정보 클릭 시 end
@@ -342,5 +278,37 @@ $('.detail_Info').on("click", function(){
 	function updateMaxRange(value) {
 		document.getElementById("maxRangeInput").value = value;
 	}
+	
+	/* 디테일한 고객 정보 불러오기*/
+	function detail_info_view(CustomerVO){
+		
+		$.ajax({
+			//요청 세팅(보낼 때--!)
+			url : "${pageContext.request.contextPath}/customer/customerDetailInfo",
+			type : "post", 
+			data : CustomerVO,
+			dataType : "json",
+			success : function(jsonResult) {
+				/*돌아온 정보*/
+				console.log(jsonResult.data);
+				
+				var customer = jsonResult.data;
+				var customerRole = "";
+				var totalPayment  = (customer.totalPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') + "원");
+
+				console.log(customerRole);
+				
+				$('.cus_name').html("<b>" +  customer.customerName + '(' + customer.customerId + ')님' + "</b>"  );
+				$('.cus_role').val(customer.customerRole);
+				$('.totalPayment').text(totalPayment);
+				$('#cus_no').val(customerNo);
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		}); //ajax end	
+		
+		}
+	
 </script>
 </html>

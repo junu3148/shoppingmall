@@ -1,4 +1,3 @@
-<!-- 카트 jsp -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,104 +30,117 @@
 </head>
 
 <body>
-  
-  	<!-- 헤더 -->
+
+	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
-  
-
-    <main id="cart">
-        
-        <section class="pc">
-            <h3>장바구니</h3>
-
-            <table>
-                <tr>
-                    <th><label for="cbx_chkAll"><input type="checkbox" id="cbx_chkAll" /></label></th>
-                    <th>상품 정보</th>
-                    <th>수량</th>
-                    <th>주문 금액</th>
-                    <th>배송 정보</th>
-                </tr>
-                
-                <c:forEach items = "${cartList}" var = "product"> 
-                
-                <tr id = "p${product.productNo}" data-no ="${product.productNo}">
-                    <td><label for="check01"><input type="checkbox" name="chk" id="check01" ></label></td>
-                    <td>
-                   <input type ="hidden" name  ="product_price" value ="${product.price}">
-                        <a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
-                            <img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
-                            <span>${product.productName}</span>
-                        </a>
-                    </td>
-                    <td>
-                        <div class="count-wrap _count">
-                            <button type="button" class="minus">-</button>
-                            <input type="text"  class="inp"  name = "product_count" value="${product.productEa}"/>
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </td>
-                    <td>					
-                        <span title = "order-price"><fmt:formatNumber type="number" maxFractionDigits="3"
-							value="${product.price * product.productEa}" />원</span>
-                    </td>
-                    <td>
-                        <span>무료</span>(택배)
-                    </td>
-                </tr>
-                
-                </c:forEach>
-                
-            </table>
-
-            <a href="#none" class="del">선택 상품 삭제</a>
-            
-
-          <form action ="${pageContext.request.contextPath}/order/${authCustomer.customerNo}" method = "get">
-            <div class="total_order">
-                <p class="total">총 주문 상품 <span id = "total_ea">0개</span></p>
-                <ul>
-                    <li>
-                        <p class = "total_price">0원</p>
-                        <span>상품 금액</span>
-                    </li>
-                    <li><p>+</p></li>
-                    <li>
-                        <p>0원</p>
-                        <span>배송비</span>
-                    </li>
-                    <li><p>=</p></li>
-                    <li>
-                        <p class="total_price">0원</p>
-                        <span>총 주문 금액</span>
-                        <input type="hidden" name = "totalPrice">
-                    </li>
-                </ul>
-            </div>
-            <div class="btn_wrap">
-            		<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
-                <a class="order_btn" id = "order_btn">주문하기</a>
-                <a href="${pageContext.request.contextPath }/main/all" class="shopping_btn">쇼핑하기</a>
-            </div>
-	      </form>
-        </section>
 
 
+	<main id="cart">
+
+
+		<!-- 장바구니에 담긴 상품 영역 -->
+		<section class="pc">
+			<h3>장바구니</h3>
+
+			<table>
+				<tr>
+					<th><label for="cbx_chkAll"><input type="checkbox" id="cbx_chkAll" /></label></th>
+					<th>상품 정보</th>
+					<th>수량</th>
+					<th>주문 금액</th>
+					<th>배송 정보</th>
+				</tr>
+
+				<c:forEach items="${cartList}" var="product">
+
+					<tr id="p${product.productNo}" data-no="${product.productNo}">
+						<td><label for="check01"><input type="checkbox" name="chk" id="check01"></label></td>
+						<td>
+							<input type="hidden" name="product_price" value="${product.price}">
+							<a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
+								<img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
+								<span>${product.productName}</span>
+							</a>
+						</td>
+						<td>
+							<div class="count-wrap _count">
+								<button type="button" class="minus">-</button>
+								<input type="text" class="inp" name="product_count" value="${product.productEa}" />
+								<button type="button" class="plus">+</button>
+							</div>
+						</td>
+						<td>
+							<span title="order-price">
+								<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price * product.productEa}" />원
+							</span>
+						</td>
+						<td>
+							<span>무료</span>(택배)
+						</td>
+					</tr>
+
+				</c:forEach>
+
+			</table>
+
+			<a href="#none" class="del">선택 상품 삭제</a>
+
+			<!-- 장바구니 담긴 상품 영역 -->
+
+
+			<!-- 주문 폼 -->
+			<form action="${pageContext.request.contextPath}/order/${authCustomer.customerNo}" method="get">
+				<div class="total_order">
+					<p class="total">총 주문 상품 <span id="total_ea">0개</span></p>
+					<ul>
+						<li>
+							<p class="total_price">0원</p>
+							<span>상품 금액</span>
+						</li>
+						<li>
+							<p>+</p>
+						</li>
+						<li>
+							<p>0원</p>
+							<span>배송비</span>
+						</li>
+						<li>
+							<p>=</p>
+						</li>
+						<li>
+							<p class="total_price">0원</p>
+							<span>총 주문 금액</span>
+							<input type="hidden" name="totalPrice">
+						</li>
+					</ul>
+				</div>
+				<div class="btn_wrap">
+					<!-- 원래 a 태그였는데 제출 위해서 변경함 -->
+					<a class="order_btn" id="order_btn">주문하기</a>
+					<a href="${pageContext.request.contextPath }/main/all" class="shopping_btn">쇼핑하기</a>
+				</div>
+			</form>
+			<!-- 주문 폼 종료 -->
+
+		</section>
 
 
 
-        
 
 
 
-        <!-- 탑버튼 -->
-        <a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png" alt=""></a>
-        <!-- /탑버튼 -->
 
-    </main>
 
- 	<!-- Footer -->
+
+		<!-- 탑버튼 -->
+		<a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+				alt=""></a>
+		<!-- /탑버튼 -->
+
+	</main>
+
+	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
@@ -159,7 +171,6 @@ $('#order_btn').on("click", function(){
 		 var productPrice = price*productEa;
 		 var productNo =  parseInt($(this).closest('tr').data('no'));
   
-		 console.log(productEa +' 와 ' + productNo + '가격값 :' + productPrice);
 		 
 		 /*productNo, productEA, product total price */
 		 var ProductVO = {
@@ -189,7 +200,7 @@ $('#order_btn').on("click", function(){
          //응답 세팅
          dataType : "json",
          success : function(jsonResult){
-         	console.log('아앙')
+        	 
 			if(jsonResult.data == true){
 				window.location.href = "${pageContext.request.contextPath}/cart/orderPage/${authCustomer.customerNo}";
 			}
@@ -202,8 +213,12 @@ $('#order_btn').on("click", function(){
       });//ajax end
 }); //주문하기 버튼 클릭 end
 
+
+
+
+/*선택 상품 삭제 이벤트(AJAX)*/
 $('.del').on("click", function(){
-    /* 총 주문 금액 업데이트하는 식*/
+
   	var productNoList = [];
   
   $('input[name="chk"]:checked').each(function() {
@@ -225,7 +240,6 @@ $('.del').on("click", function(){
  			productNo : productNo
  		}
  		
- 		console.log(CartVO)
  		
  		 $.ajax({
 	            
