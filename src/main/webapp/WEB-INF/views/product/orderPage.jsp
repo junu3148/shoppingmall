@@ -30,12 +30,12 @@
 <style>
 #wrap { width: 80%; height: 100%; margin-left:10%; margin-right:10%; margin-top: 10%;display: flex; font-size: 20px; }
 #address-form { width: 20%; margin-top: 3%; margin-bottom: 3%; margin-right: 0%;}
-#address-history { border: #999 1px solid; width: 200px;  margin-top: 10%; margin-left: 0%; margin-bottom: 3%; margin-right: 0%; background-color:  white ;padding-left:15%; padding-right:15%; }
-td { padding: 1%; }
+#address-history {width: 200px;  margin-top: 10%; margin-left: 0%; margin-bottom: 3%; margin-right: 0%; background-color:  white ;padding-left:15%; padding-right:15%; }
+.address-form td, #address-List td { padding: 1%; }
 #order-heading{ text-align: center; font-size:50px;}
 .pay-button {display: block; margin: 0 auto;}
-.address-form{background-color :  white; width: 30%;margin-top: 10%; margin-bottom: 3%;  border: 1px #999 solid;}
-.address-box{background-color:  #4982cf; border: 1px #999 solid; padding:5%;}
+#address_title{text-align:center; margin-bottom : 5%; background-color : white; border-radius: 10px;}
+.address-form{background-color :  white; width: 30%;margin-top: 10%; margin-bottom: 3%; }
 option { width:20%;}
 table{ border : 1px solid black;}
 .input-width-control{width:10%;}
@@ -63,8 +63,11 @@ table{ border : 1px solid black;}
 .click-btn {background: #4982cf; border: 1px solid #4982cf; color: #fff; width: 100px; height: 40px;}
 #pay-btn{text-align:center; height:30px;}
 #center-btn{text-align:center;}
-#address-title{padding:10px; text-align:center;}
-.address-table{width:100%;font-size: 18px; background-color : white; }
+.address-table{width:100%;font-size: 18px; background-color : white; margin-bottom : 2%;}
+.cntMessage{text-align : center; color : red; margin : 3%;}
+.address-List{width: 100%; height:100%;   border-radius: 10px; border: none; font-size:5% }
+
+.address-box{background-color:  #4982cf; padding:5%; width : 100%; height:100%;border:none; border-radius: 10px; }
 </style>
 
 </head>
@@ -165,7 +168,7 @@ table{ border : 1px solid black;}
                 </tr>
                 <c:forEach items = "${orderInfo.productList}" var = "product"> 
                 
-                <tr id = "p${product.productNo}" data-no ="${product.productNo}">
+                <tr id = "p${product.productNo}" data-no ="${product.productNo}" data-productea = "${product.productEa}" data-productprice ="${product.price}" class= "order_product_list">
                     <td>
                         <a href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
                             <img src="${pageContext.request.contextPath}/upload/${product.saveName}" class="cart_pd" alt="">
@@ -175,8 +178,8 @@ table{ border : 1px solid black;}
                     <td>
 						${product.productEa} 개
                     </td>
-                    <td>	총 <fmt:formatNumber type="number" maxFractionDigits="3"
-							value="${product.price}" />원
+                    <td>	 <fmt:formatNumber type="number" maxFractionDigits="3"
+							value="${product.price * product.productEa}" />원
                     </td>
                     <td>
                         <span>무료</span>(택배)
@@ -184,17 +187,19 @@ table{ border : 1px solid black;}
                 </tr>
                 
                 </c:forEach>
+
                 
             </table>
-            
-
+            <div class= "cntMessage">
+				<span>*재고가 부족한 상품은 자동으로 최대 주문 가능 수량으로 변경 됩니다.*</span>    
+            </div>
           <form action ="${pageContext.request.contextPath}/order/${authCustomer.customerNo}" method = "get">
             <div class="total_order">
-                <p class="total">총 주문 금액</span></p>
+                <p class="total">총 주문 금액</p>
                 <ul>
                     <li>
-                        <p class="total_price">
-                           <fmt:formatNumber type="number" maxFractionDigits="3" value="${orderInfo.totalPrice}" />원</p>
+                        <p class="total_price"></p>
+                        <input type ="hidden" id ="total_price">
                     </li>
                 </ul>
             </div>
@@ -211,12 +216,14 @@ table{ border : 1px solid black;}
 
 
 		<div class="address-form"><!--주소 정보창 반복문으로 돌릴 거임-->
-		<div id = "address-title">
-				기존 주소록<br>사용하기
-		</div>
 				<div class ="address-box">
+				<div id ="address_title">
+				기존 주소록<br>사용하기				
+				</div>
+		
 				<div id = "address-Area">
 				<c:forEach items ="${addressList}" var ="address">
+					<div class= "address-List">
 					<table class= address-table>
 						<tr>
 							<td class = "address-name">${address.name}</td>
@@ -238,6 +245,7 @@ table{ border : 1px solid black;}
 						</tr>
 						
 					</table>
+					</div>
 					</c:forEach>
 					</div>
 				</div>
@@ -256,6 +264,13 @@ table{ border : 1px solid black;}
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
+/*전체 총 금액 업데이트*/
+	$(document).ready(function() {
+	  
+		total_price_update();
+
+		});	
+	
 	/*결제하기 버튼 클릭 시*/
 	$('#pay-btn').on("click", function(){
 		iamport();
@@ -415,7 +430,8 @@ table{ border : 1px solid black;}
 				}).open();
 	}
 
-
+	
+	
 
 	/*이메일 입력 스크립트*/
 	function change_email_domain(val) {
@@ -427,6 +443,22 @@ table{ border : 1px solid black;}
 			document.getElementById("input_email_domain").value = "";
 		}
 	}
+	
+	
+	/*총 금액 업데이트문*/
+	function total_price_update(){
+		
+		var total_price = 0;
+	$('.order_product_list').each(function() {
+	    var productEa = $(this).data('productea');
+	    var productPrice = $(this).data('productprice');
+	    
+	    total_price += productEa * productPrice;
+	  });
+		$('.total_price').text('총 ' + total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+ '원');
+		$('#total_price').val(total_price);
+	}
+	
 	
 	/*주소 추가*/
 	function addAddress(addressVO){
@@ -461,8 +493,10 @@ table{ border : 1px solid black;}
 	function iamport(){
 		//가맹점 식별코드
 		var orderNo = $('#orderNo').data('orderno');
+		var totalPrice = $('#total_price').val()
 		IMP.init('imp85336870');
 		
+		console.log(totalPrice);
 		
 		IMP.request_pay({
 		    pg : 'danal_tpay',
@@ -483,7 +517,8 @@ table{ border : 1px solid black;}
 		    			         
 		         orderVO = {
 		        		 orderNo : orderNo,
-		        		 customerNo : ${authCustomer.customerNo}
+		        		 customerNo : ${authCustomer.customerNo},
+		         		 totalPrice : totalPrice
 		         }
 		         
 		         console.log(orderVO);

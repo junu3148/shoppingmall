@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shopping.ajax.JasonResult;
+import com.shopping.ajax.JsonResult;
 import com.shopping.service.PaymentService;
 import com.shopping.vo.OrderVO;
 
@@ -22,9 +22,9 @@ public class PaymentController {
 	/*결제성공시 로직*/
 	@ResponseBody
 	@RequestMapping(value ="/paymentSuccess", method= RequestMethod.POST)
-	public JasonResult pay(@ModelAttribute OrderVO orderVO) {
+	public JsonResult pay(@ModelAttribute OrderVO orderVO) {
 		System.out.println("pay()");
-		JasonResult jsonResult  = new JasonResult();
+		JsonResult jsonResult  = new JsonResult();
 		
 		boolean result = paymentService.paymentSuccess(orderVO);
 		jsonResult.success(result);

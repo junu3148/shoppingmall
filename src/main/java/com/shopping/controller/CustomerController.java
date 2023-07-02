@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shopping.ajax.JasonResult;
+import com.shopping.ajax.JsonResult;
 import com.shopping.service.CustomerService;
 import com.shopping.vo.CustomerVO;
 
@@ -92,9 +92,9 @@ public class CustomerController {
 	/*  AJAX로 회원아이디 유효성 체크*/
 	@ResponseBody
 	@RequestMapping(value ="/checkId")
-	public JasonResult checkId(@ModelAttribute CustomerVO customerVO) { 
+	public JsonResult checkId(@ModelAttribute CustomerVO customerVO) { 
 		System.out.println("checkId()");
-		JasonResult jasonResult = new JasonResult();
+		JsonResult jasonResult = new JsonResult();
 		
 		boolean result = customerService.checkId(customerVO);
 		jasonResult.success(result);
@@ -121,9 +121,9 @@ public class CustomerController {
 	/*고객 상세 정보*/
 	@ResponseBody
 	@RequestMapping(value ="/customerDetailInfo", method = RequestMethod.POST)
-	public JasonResult customerDetailInfo(@ModelAttribute CustomerVO customerVO) {
+	public JsonResult customerDetailInfo(@ModelAttribute CustomerVO customerVO) {
 		System.out.println("customerDetailInfo()");
-		JasonResult jsonResult = new JasonResult();
+		JsonResult jsonResult = new JsonResult();
 
 		CustomerVO returnVO = customerService.getDetailCInfo(customerVO);
 		jsonResult.success(returnVO);
@@ -135,7 +135,7 @@ public class CustomerController {
 	@RequestMapping(value ="/modify", method = RequestMethod.GET)
 	public String modifyCustomer(@ModelAttribute CustomerVO customerVO) {
 		System.out.println("modifyCustomer()");
-		int row = customerService.modifyCustomer(customerVO);
+		customerService.modifyCustomer(customerVO);
 		
 		return "redirect:/customer/customerView";
 	}

@@ -13,7 +13,7 @@
 			<c:choose>
 				<c:when test="${authCustomer != null}">
 					<li class="login"><a href="${pageContext.request.contextPath }/customer/logout">로그아웃</a></li>
-					<li class="notice"><a href="${pageContext.request.contextPath }/myPage/${authCustomer.customerNo}">마이페이지</a></li>
+					<li class="notice"><a href="${pageContext.request.contextPath }/myPage/${authCustomer.customerNo}?selectPage=1">마이페이지</a></li>
 					<li class="cart"><a href="${pageContext.request.contextPath }/cart/viewCart?customerNo=${authCustomer.customerNo}">장바구니</a></li>
 				</c:when>
 				<c:otherwise>

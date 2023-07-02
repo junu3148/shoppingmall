@@ -94,6 +94,8 @@ public class CartService {
 				
 				cartDAO.insertOrderDetail(map);	//디테일 테이블에도 물건 추가함			
 			}
+			cartDAO.checkOrderDetailList(orderVO); //오더 테이블 제품 확인하고 재고보다 주문하는 수량이 많을 경우 최대 재고로  업데이트 
+			
 			if(row>0) {result = true;} //order 추가 성공하면 true 리턴함
 			
 			return result;

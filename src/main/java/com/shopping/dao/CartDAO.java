@@ -105,6 +105,13 @@ public class CartDAO {
 		return row;
 	}
 	
+	/*오더 디테일 리스트 확인 후 재고보다 많이 선택하면 재고에 맞춰서 수량 조절함*/
+	public int checkOrderDetailList(OrderVO orderVO) {
+		System.out.println("오더 리스트 확인할 때 넘어올 값 : " + orderVO);
+		sqlSession.update("cart.checkOrderDetailList", orderVO);
+		
+		return 0;
+	}
 	
 	/*주문 상태 1인 오더 디테일 정보를 가져옴*/
 	public List<ProductVO> getOrderList(OrderVO orderVO){

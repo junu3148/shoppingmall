@@ -102,6 +102,7 @@
 	border: 1px solid #eee;
 }
 
+
 table td {
 	vertical-align: middle;
 }
@@ -137,13 +138,22 @@ review_table{ height:70px;}
 	font-size :20px;
 }
 .review_content{
-	background-color : #ddd;
 	height : 50px;
+	display:none;
+	text-align: center;
+}
+.review_content td{
+height:100%;
 }
 .review_img{
-height : 30px;
+height : 15px;
 }
-
+.review_list td {
+	height:50px;
+}
+.content_img {
+	width:200px;
+}
 </style>
 <body>
 
@@ -157,16 +167,8 @@ height : 30px;
 
 
 
-
-		<!-- //content-head -->
-		<div id="aside">
-			<ul>
-				<li><a href=""></a></li>
-				<li><a href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}">마이페이지</a></li>
-				<li><a href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}">My리뷰</a></li>
-				<li><a href="">정보 수정</a></li>
-			</ul>
-		</div>
+		<!-- aside-bar -->
+		<c:import url="/WEB-INF/views/includes/myPage-aside.jsp"></c:import>
 
 		<div class=customer_info>
 			<div class="customer_profile">
@@ -190,17 +192,16 @@ height : 30px;
 					<tbody>
 						<tr class="review_list">
 							<td>${review.reviewNo}</td>
-							<td>${review.title}</td>
+							<td>
+							<c:if test ="${review.saveName != null}">
+							<img src ="${pageContext.request.contextPath }/assets/images/photo.png" class = "review_img">
+							</c:if>${review.title}
+							</td>
 							<td>${review.regDate}</td>
 							<td>${review.likeCnt}</td>
 						</tr>
 						<tr class= "review_content">
-							<td><c:if test ="${review.saveName != null}">
-							<div class="image_area">
-							<img src ="${pageContext.request.contextPath }/assets/images/photo.png" class = "review_img">
-							</div>
-							</c:if></td>
-							<td colspan = "3">${review.content}</td>
+							<td  colspan="4">${review.content}</td>
 						</tr>
 					</tbody>
 						</c:forEach>
@@ -233,5 +234,23 @@ height : 30px;
 
 
 </body>
+<script>
+$('.review_list').on("click", function(){
+ 
+	var content	=	$(this).parent().find('.review_content');
+	
+	if(content.css('display')== "none"){
+		content.css('display', 'block');
+
+	}else{
+		content.css('display', 'none');
+
+	}
+}); //content 클래스 클릭 이벤트 발생
+
+
+
+</script>
+
 
 </html>

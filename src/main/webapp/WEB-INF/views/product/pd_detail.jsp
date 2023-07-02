@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -57,12 +57,134 @@
 <!-- 모달용 부트 스트랩 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-<style>
-.order_btn{background: #4982cf; border: 1px solid #4982cf; color: #fff; padding: 15px 50px; margin: 0 5px; font-weight: 600;}
 
-</style>	
-	
+<style>
+.review_box {
+	margin: 13%;
+}
+
+.black_line {
+	width: 100%;
+	height: 1px;
+	background-color: #bbbbbb;
+}
+
+.review_box {
+	margin-bottom: 300px;
+}
+
+.black_line {
+	width: 100%;
+	height: 1px;
+	background-color: #bbbbbb;
+}
+
+.horizontal_div::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.content {
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+}
+
+.left {
+	flex: 1;
+	padding: 1%;
+}
+
+.right {
+	margin-left: auto;
+	padding: 20px;
+}
+
+.reple {
+	display: none;
+}
+
+.reple {
+	display: none;
+}
+
+.reple_child {
+	margin-top: 20px;
+}
+
+.text {
+	position: relative;
+}
+
+.add_comment_btn {
+	position: absolute;
+	bottom: 5px;
+	margin-bottom: 0;
+	left: 72%;
+	background: #4982cf;
+	border: 1px solid #4982cf;
+	color: #fff;
+}
+
+.order_btn {
+	background: #4982cf;
+	border: 1px solid #4982cf;
+	color: #fff;
+	padding: 15px 50px;
+	margin: 0 5px;
+	font-weight: 600;
+}
+
+.add_comment {
+	width: 50%;
+}
+
+#review_img {
+	width: 100px;
+}
+
+#grade_star {
+	width: 20px;
+}
+
+.comment_cnt {
+	color: #4982cf;
+}
+
+.delete_icon {
+	width: 20px;
+}
+
+.delete_icon2 {
+	width: 15px;
+	margin-left: auto;
+	align-items: center;
+}
+
+.review_paging {
+	margin: 5%;
+	text-align: center;
+	font-size:13px;
+}
+.like_cnt{float: right;}
+.see_more{float:right; color :#4982cf; cursor: pointer; font-size:15px;}
+.heart_icon{width:20px;}
+#cart-btn{text-decoration: none;}
+.comment_delete_modal_btn , .heart_icon , .delete_icon{cursor: pointer;}
+.review_zone{font-size : 30px;}
+.ea_message{color : red;}
+#nav a {color : black; text-decoration: none;}
+#lnb a {
+  color: black !important;
+  text-decoration: none;
+}
+.top_btn{
+	display:
+}
+.review_paging a {text-decoration :none; font-size: 15px;}
+</style>
+
 </head>
 
 <body>
@@ -72,9 +194,11 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
 
-
 	<main id="pd_detail">
 
+
+		<!-- 제품 디테일 공간  -->
+		
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
 				<img
@@ -89,6 +213,7 @@
 							value="${product.price}" />
 						원
 					</p>
+					<input type ="hidden" value ="${product.subCategory}" id = "subCategory">
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>
@@ -103,55 +228,197 @@
 					</ul>
 					<input type="hidden" value="${product.price}" id="price">
 					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
-				<form action ="${pageContext.request.contextPath}/cart/addOrderOne" method = "get" class ="addOrderOne">
-					<div class="pd_num clear">
-						<p>수량</p>
-						<div class="count-wrap _count">
-							<button type="button" class="minus">-</button>
-							<input type="text" class="inp" name = "productEa" value="1"/>
-							<!-- 변경되는 숫자 -->
-							<button type="button" class="plus">+</button>
+					<form action="${pageContext.request.contextPath}/cart/addOrderOne"
+						method="get" class="addOrderOne">
+						<div class="pd_num clear">
+							<p>수량</p>
+							<div class="count-wrap _count">
+								<button type="button" class="minus" >-</button>
+								<input type="text" class="inp" name="productEa" value="1" />
+								<!-- 변경되는 숫자 -->
+								<button type="button" class="plus" data-max = "${product.productEa}">+</button>
+							</div>
+
+					
+							<span class="total_price"></span>
+						</div>
+							
+						<c:if test ="${product.productEa < 10 }">
+							<p class= "ea_message">현재 재고가 ${product.productEa}개 남은 제품입니다.</p>
+						</c:if>
+						
+
+						<div class="total_price_wrap">
+							<p>
+								총 상품금액(<span id="selectEA">1</span>개)
+							</p>
+
+
+							<!--  바뀔 금액 자리 -->
+							<p class="total_price"></p>
+							<input type="hidden" name="totalPrice" id="total_price">
+							<input type="hidden" name="productNo" id="productNo"
+								value="${product.productNo}"> <input type="hidden"
+								name="customerNo" id="customerNo"
+								value="${authCustomer.customerNo}">
 						</div>
 
-
-						<!--  바뀔 금액 자리 -->
-						<span class="total_price"></span>
-					</div>
-
-					<div class="total_price_wrap">
-						<p>
-							총 상품금액(<span id="selectEA">1</span>개)
-						</p>
-
-
-						<!--  바뀔 금액 자리 -->
-						<p class="total_price"></p>
-						<input type ="hidden" name ="totalPrice" id="total_price">
-						<input type ="hidden" name ="productNo" id="productNo" value="${product.productNo}">
-						<input type ="hidden" name ="customerNo" id="customerNo" value="${authCustomer.customerNo}">
-					</div>
-
-					<div class="btn_wrap">
-						<button type ="submit"  class="order_btn data-set">구매하기</button>
-						<a
-							href="#none" class="shopping_btn data-set" id="cart-btn"
-							data-productno="${product.productNo}"
-							data-cusno="${authCustomer.customerNo}">장바구니</a>
-					</div>
-						</form>
+						<div class="btn_wrap">
+							<button type="submit" class="order_btn data-set">구매하기</button>
+							<a href="#none" class="shopping_btn data-set" id="cart-btn"
+								data-productno="${product.productNo}"
+								data-cusno="${authCustomer.customerNo}">장바구니</a>
+						</div>
+					</form>
 
 
 				</div>
+				<!-- 리뷰 -->
+				<div style="height: 100px"></div>
 			</div>
 		</section>
 
+		<!-- 리뷰 공간 -->
+		<div class="review_box">
+			<div class="black_line"></div>
+			<div class="review_list">
+				<br> <br>
+				<p class = "review_zone">
+					<b>구매평</b>
+				</p>
+				<p>상품을 구매하신 분들만 작성하신 리뷰입니다.</p>
+				<br> <br>
+				<div class="black_line"></div>
+			</div>
 
+			<!-- 반복될 리뷰 창 -->
+
+			<c:forEach items="${review}" var="review">
+				<div class="review_content_box">
+					<div class="content">
+						<div class="left">
+							<div class="review_area">
+								<div>
+									<c:set var="endValue" value="${review.grade-1}" />
+									<c:forEach begin="0" end="${endValue}">
+										<c:if test="${review.grade != 0}">
+											<img
+												src="${pageContext.request.contextPath}/assets/images/star.png"
+												id="grade_star">
+										</c:if>
+									</c:forEach>
+								</div>
+								<h3>${review.title}</h3>
+  										<span class= "see_more"><b>전체 보기</b></span><br>
+								<hr>
+								<div>
+									<c:if test="${review.saveName != null}">
+										<img
+											src="${pageContext.request.contextPath}/upload/${review.saveName}"
+											class="review_img" style ="width:100px;">
+									</c:if>
+								</div>
+								<div>${review.content} 
+								
+								<!-- 좋아요 누르기 -->
+								
+								<span class = "like_cnt" data-reviewno = "${review.reviewNo}">  
+									<img src="${pageContext.request.contextPath}/assets/images/heart.png" class= "heart_icon" alt="리뷰 좋아요">
+  										<span class="like_cnt_ea">${review.likeCnt}</span>
+  										</span>
+  						
+								</div>
+							</div>
+							<div class="reple">
+								<input type="hidden" name="review_no" value="${review.reviewNo}">
+								<div class="text">
+								<c:set var="commentLength" value="${fn:length(review.comment)}" />
+									<p>
+										댓글 <span class="comment_cnt">(${commentLength})</span>
+									</p>
+									<textarea class="add_comment" style="width: 70%; height: 100%"></textarea>
+									<button class="add_comment_btn" data-authno = ${authCustomer.customerNo}>등록</button>
+								</div>
+								<div class="reple_child">
+									<c:forEach items="${review.comment}" var="comment">
+										<ul id = "c${comment.commentNo}">
+											<li>${comment.customerName}: ${comment.content}
+												<c:if test= "${comment.customerNo == authCustomer.customerNo}"> 
+												<a class="comment_delete_modal_btn" data-commentno = "${comment.commentNo}"> 
+													<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png" class="delete_icon2" alt="댓글 삭제">
+												</a>
+												</c:if>
+											</li>
+										</ul>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<div class="right">
+							<p>${review.customerName}
+								&nbsp; &nbsp; &nbsp;
+								<c:if test="${authCustomer.customerNo == review.customerNo}">
+									<!-- 리뷰 삭제하기 X 버튼  //  로그인한 유저넘버와 리뷰를 작성한 유저 넘버가 같을 때 볼 수 있다.-->
+									<a class="delete_review_button"
+										data-reviewno="${review.reviewNo}"
+										data-productno="${review.productNo}"> <img
+										src="${pageContext.request.contextPath}/assets/images/delete.png"
+										class="delete_icon" alt="리뷰 삭제">
+									</a>
+									<!-- 리뷰 삭제하기 X 버튼 -->
+								</c:if>
+							</p>
+							<p>${review.regDate}</p>
+						</div>
+					</div>
+					<div class="black_line"></div>
+				</div>
+			</c:forEach>
+			<!-- 반복될 리뷰들 end -->
+			<!-- 리뷰 넣을 공간 -->
 
 		<!-- 탑버튼 -->
 		<a href="#none" class="top_btn"><img
 			src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
 			alt=""></a>
 		<!-- /탑버튼 -->
+
+			<!-- 리뷰 페이징 시작 -->
+			<div class="review_paging">
+
+				<c:if test="${paging.selectPage >10}">
+					<a class="review_paging"
+						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.startPageNum - 1}">
+						◀ </a>
+				</c:if>
+
+				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}"
+					var="page">
+					<c:if test="${page <= paging.finalPage}">
+						<a class="review_paging"
+							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${page}" id ="P${page}">${page}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${paging.next == true}">
+					<a class="review_paging"
+						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.endPageNum + 1}">
+						▶ </a>
+				</c:if>
+				<input type ="hidden" value ="${paging.selectPage}" id ="select_Page">
+			</div>
+			<!-- 리뷰 페이징 끝 -->
+
+
+
+		</div>
+		<!-- review_box end -->
+
+
+
+
+
+
+
 
 	</main>
 
@@ -160,8 +427,7 @@
 	<!-- //Footer -->
 
 
-
-	<!-- 모달창 -->
+	<!-- 장바구니 추가 모달 -->
 	<div class="modal" tabindex="-1" id="Cart-modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -171,22 +437,281 @@
 				<div class="modal-body">
 					<span id="howAdd"></span>
 				</div>
-				<form action = "${pageContext.request.contextPath}/cart/viewCart" method ="GET" >
-				<div class="modal-footer">
-					<input type ="hidden" value = "${authCustomer.customerNo}" name = "customerNo">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal" id = "more_see">좀 더 둘러보기</button>
-					<button type="submit" class="btn btn-primary">장바구니 이동하기</button>
+				<form action="${pageContext.request.contextPath}/cart/viewCart">
+					<div class="modal-footer">
+						<input type="hidden" value="${authCustomer.customerNo}"
+							name="customerNo">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal" id="more_see">좀 더 둘러보기</button>
+						<button type="submit" class="btn btn-primary">장바구니 이동하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 장바구니 추가 모달 -->
+
+	<!-- 리뷰 삭제 확인 모달 -->
+	<div class="modal" tabindex="-1" id="review_modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">알림</h5>
 				</div>
+				<div class="modal-body">
+					<span id="howAdd">정말 삭제하시겠습니까? <br> 삭제한 리뷰는 다시 복구할 수
+						없습니다.
+					</span>
+				</div>
+				<form
+					action="${pageContext.request.contextPath}/review/deleteReview">
+					<div class="modal-footer">
+						<input type="text" value="" name="reviewNo" id="delete_No">
+						<input type="text" value="" name="productNo" id="product_No">
+						<button type="submit" class="btn btn-primary">글 삭제하기</button>
+						<button type="button" class="btn btn-secondary close_modal"
+							data-bs-dismiss="modal">닫기</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 
 
+	<!-- 리뷰 삭제 확인 모달 -->
+	
+	<!-- 리뷰 코멘트 삭제 모달 -->
+	<div class="modal" tabindex="-1" id="comment_modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">알림</h5>
+				</div>
+				<div class="modal-body">
+					<span id="howAdd">정말 삭제하시겠습니까? <br> 삭제한 댓글은 다시 복구할 수
+						없습니다.
+					</span>
+				</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary comment_delete_btn">댓글 삭제하기</button>
+						<button type="button" class="btn btn-secondary close_modal"
+							data-bs-dismiss="modal">닫기</button>
+					</div>
+			</div>
+		</div>
+	</div>
+<!-- 리뷰 코멘트 삭제 모달 -->
+
+
 </body>
 
 <script>
+
+/*제품이 등록된 카테고리별 상단 바 디자인 요소 다르게 함*/
+$(window).on("load", function(){
+	
+	var category  = $('#subCategory').val();
+	
+	if(category == "간식"){ $('.snack').css('color', '#4982cf');}
+	if(category == "배변용품"){  $('.toilet').css('color', '#4982cf');  }
+	if(category == "미용"){  $('.beauty').css('color', '#4982cf'); }
+	if(category == "장난감"){  $('.toy').css('color', '#4982cf'); }
+	if(category == "가구"){  $('.furniture').css('color', '#4982cf'); }
+	
+
+		
+		var selectPage =  $('#select_Page').val();
+		
+
+		
+		$('#P' + selectPage).css("color", "#4982cf");
+		$('#P' + selectPage).css("font-weight", "bold");
+		$('#P' + selectPage).css("font-size", "15px");
+
+	
+	
+	
+});
+
+/* 리뷰 좋아요 버튼 클릭 이벤트 처리*/
+$('.like_cnt').on("click", function(){
+	
+	var reviewNo = $(this).data('reviewno');
+	var updateCnt = parseInt($(this).find('.like_cnt_ea').text()) + 1;
+	var likeCnt = $(this).find('.like_cnt_ea')
+	
+	console.log(reviewNo);
+	console.log(updateCnt);
+	
+	ReviewVO = {
+			
+			reviewNo : reviewNo
+	}
+	
+	$.ajax({
+		//요청 세팅(보낼 때--!)
+		url : "${pageContext.request.contextPath}/review/addLikeCount",
+		type : "post", 
+		data : ReviewVO,
+		dataType : "json",
+		success : function(jsonResult) {
+		
+			if(jsonResult.data == true){
+				likeCnt.text(updateCnt);
+			}
+
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	}); //ajax end	
+	
+	
+});
+
+/* 코멘트 삭제 이벤트*/
+$('.comment_delete_btn').on("click", function(){
+	
+	var commentNo =	$(this).data('commentno');
+	
+	console.log('삭제하려고 넘어온 번호 : ' + commentNo);
+	
+	CommentVO = {
+			commentNo : commentNo
+				}
+
+	$.ajax({
+		//요청 세팅(보낼 때--!)
+		url : "${pageContext.request.contextPath}/review/deleteComment",
+		type : "post", 
+		data : CommentVO,
+		dataType : "json",
+		success : function(jsonResult) {
+			
+			if(jsonResult.data == true){
+				$('#comment_modal').modal('hide');
+				$('#c'+ commentNo).remove();
+				alert('삭제되었습니다.')
+			}
+
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	}); //ajax end	
+	
+});//코멘트 삭제 이벤트
+
+
+/* 코멘트 삭제 모달 나오게 만드는 이벤트*/
+$('.comment_delete_modal_btn').on("click", function(){
+	
+		$('#comment_modal').modal('show');
+	    var commentNo =	$(this).data('commentno');
+	    console.log('모달로 넘어가는 번호' + commentNo)
+	    $('.comment_delete_btn').attr("data-commentno",commentNo);
+	    
+});
+
+/*리뷰 삭제 모달 펼치는 기능*/
+$('.delete_review_button').on("click", function(){
+	
+	var reviewNo = $(this).data('reviewno');
+	var productNo = $(this).data('productno');
+	console.log(reviewNo)
+	
+	$('#review_modal').modal('show');
+	$('#delete_No').val(reviewNo);
+	$('#product_No').val(productNo);
+	
+}); //리뷰 삭제 버튼 클릭 이벤트 end
+
+
+/*모달 닫는 버튼*/
+$('.close_modal').on("click", function(){
+	$('#review_modal').modal('hide');
+	$('#comment_modal').modal('hide');
+	$('#Cart-modal').modal('hide');	
+});
+
+
+/*댓글 등록 기능*/
+$('.add_comment_btn').on("click", function(){
+	
+	var content = $('.add_comment').val()
+	var  customerNo = $(this).data('authno');
+	var reviewNo = $(this).closest('.reple').find('input[name="review_no"]').val();
+	var reple_render = 	$(this).closest(".reple").find(".reple_child");
+	var commentInput = $(this).find('.add_comment');
+
+
+	
+	if(content.length < 3){
+		alert('댓글은 네 글자 이상 입력해주세요.');
+	}else{
+		
+		CommentVO = {
+			content : content,
+			customerNo : customerNo,
+			reviewNo : reviewNo
+		}
+		console.log(CommentVO)
+	
+		$.ajax({
+			//요청 세팅(보낼 때--!)
+			url : "${pageContext.request.contextPath}/review/addComment",
+			type : "post", 
+			data : CommentVO,
+			dataType : "json",
+			success : function(jsonResult) {
+				
+				var comment = jsonResult.data;
+					
+				
+				console.log(comment);					
+				console.log(reple_render);		
+
+				var str = "";
+				str += "<ul id='c" + comment.commentNo + "'>";		
+				str += "<li>";		
+				str += comment.customerName + " : " + comment.content;
+				str += "<c:if test='${comment.customerNo == authCustomer.customerNo}'>";
+				str += "<a class='comment_delete_modal_btn' data-commentno='" + comment.commentNo + "'>"; 
+				str += "<img src='${pageContext.request.contextPath}/assets/images/delete_gray.png' class='delete_icon2'>";
+				str += "</a>";		
+				str += "</c:if>";		
+				str += "</li>";		
+				str += "</ul>";		
+				
+				reple_render.prepend(str);
+				commentInput.val("");
+
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		}); //ajax end	
+	
+	}//댓글 글자수 검증 end
+}); //리플 추가 에이잭스
+	
+
+/*댓글 펼치는 기능*/
+$('.see_more').on("click", function(){
+		
+		console.log('test');
+		var img	=	$(this).parent().find('.review_img');
+		var reple = $(this).parent().next('.reple');
+		
+		if(reple.css('display')== "none"){
+			reple.css('display', 'block');
+			img.css("width", '100%');
+		}else{
+			reple.css('display', 'none');
+			img.css("width", '100px');
+		}
+	}); //content 클래스 클릭 이벤트 발생
 
 	$(window).on("load", function() {
 
@@ -196,9 +721,11 @@
 		$(".plus").on("click", function() {
 			var EA = $(".inp");
 			var EAval = Number(EA.val()); // EAval을 숫자로 변환
-
+			var max = Number($(this).data('max'));
+			
+			if((EAval + 1 ) <= max ){
 			EA.val(EAval + 1); // 증가된 값을 input 요소에 설정
-
+			}
 			updateTotalPrice();
 		}); //plus btn event end
 
@@ -288,6 +815,10 @@
 		$(".total_price").text(set_price);
 		
 	}
+	
+	
+	
+	
 </script>
 
 </html>

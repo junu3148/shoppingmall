@@ -172,6 +172,7 @@ $('#order_btn').on("click", function(){
 		 productList.push(ProductVO);
 		 
 
+		 
 	 });//값 받아오기
 	
 	 /* 객체 배열을 JSON으로 받기 위한 메서드 --> 배열을 String 으로 변환하기에 controller에서 string으로 받아야 함*/
@@ -188,7 +189,7 @@ $('#order_btn').on("click", function(){
          //응답 세팅
          dataType : "json",
          success : function(jsonResult){
-         
+         	console.log('아앙')
 			if(jsonResult.data == true){
 				window.location.href = "${pageContext.request.contextPath}/cart/orderPage/${authCustomer.customerNo}";
 			}

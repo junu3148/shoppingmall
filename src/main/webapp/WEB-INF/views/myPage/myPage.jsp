@@ -46,6 +46,7 @@ table td {  vertical-align: middle;}
 #aside ul li { margin-bottom: 10px; }
 .product-img{width: 80px;}
 .review-btn {background: #4982cf; border: 1px solid #4982cf; color: #fff;}
+.clear{height:20px;}
 </style>
 <body>
   
@@ -59,17 +60,9 @@ table td {  vertical-align: middle;}
 
 	
 
-				
-			<!-- //content-head -->
-			<div id="aside">
-				<ul>
-					<li><a href=""></a></li>
-					<li><a href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}">마이페이지</a></li>
-					<li><a href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}">My리뷰</a></li>
-					<li><a href="">정보 수정</a></li>
-				</ul>
-			</div>
-			
+		<!-- aside-bar -->
+		<c:import url="/WEB-INF/views/includes/myPage-aside.jsp"></c:import>
+
 			
 			<!-- 고객 정보 -->
 			<div class = customer_info>
@@ -92,7 +85,7 @@ table td {  vertical-align: middle;}
 				<div id="board">
 					<div id="list">
 					
-							
+		
 						<table class="table-hover table">
 							<thead>
 								<tr class= "category">
@@ -119,21 +112,21 @@ table td {  vertical-align: middle;}
 								</c:forEach>
 							</tbody>
 						</table>
-						
+							<div class="clear"></div>
 									<!-- 페이징 -->
 										<c:if test = "${paging.selectPage >10}">
-										<a class = "paging" href = "${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}"> ◀ </a>
+										<a class = "paging_" href = "${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}"> ◀ </a>
 										</c:if>
 										
 										<c:forEach begin = "${paging.startPageNum}" end = "${paging.endPageNum}"  var = "page">
 											<c:if test = "${page <= paging.finalPage}">
-											<a class = "paging" href ="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${page}">${page}</a>
+											<a class = "paging_" href ="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${page}" id ="P${page}">${page}</a>
 											</c:if>
 										</c:forEach>
 										<c:if test = "${paging.next == true}">
-										<a class = "paging" href ="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}"> ▶ </a>
+										<a class = "paging_" href ="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}"> ▶ </a>
 										</c:if>
-						
+							<input type ="hidden" value ="${paging.selectPage}" id = "select_Page"> 
 					</div>
        	</div>
 </div>
@@ -148,6 +141,19 @@ table td {  vertical-align: middle;}
 
 </body>
 
+<script>
+	$(window).on("load", function(){
+		
+		var selectPage =  $('#select_Page').val();
+		
 
+		
+		$('#P' + selectPage).css("color", "#4982cf");
+		$('#P' + selectPage).css("font-weight", "bold");
+		$('#P' + selectPage).css("font-size", "15px");
+	});
+	
+
+</script>
 
 </html>

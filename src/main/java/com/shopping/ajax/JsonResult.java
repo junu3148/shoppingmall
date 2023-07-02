@@ -1,17 +1,17 @@
 package com.shopping.ajax;
 
-public class JasonResult {
+public class JsonResult {
 	//필드 
 		private String result; /* 'success' or 'fail' */
 		private Object data; /*  성공했을 때(result=='success') data */
 		private String failMsg; /* 실패했을 때 result = fail 일 때 참고할 수 있는 메세지
 		
 		/* 생성자*/
-		public JasonResult() {
+		public JsonResult() {
 			super();
 		}
 
-		public JasonResult(String result, Object data, String failMsg) {
+		public JsonResult(String result, Object data, String failMsg) {
 			super();
 			this.result = result;
 			this.data = data;

@@ -97,12 +97,11 @@
 			select SEQ_ORDER_NO.nextval from dual
 		</selectKey>
 			<![CDATA[
-				insert into orders (ORDER_NO, CUSTOMER_NO, ORDER_STAT, total_price)
+				insert into orders (ORDER_NO, CUSTOMER_NO, ORDER_STAT)
 				values (
 						#{orderNo}
 						,#{customerNo}
 						,1
-						,#{totalPrice}
 						)
 			]]>
 	</insert>
@@ -143,7 +142,7 @@
 			SELECT
    				 a.product_no as productNo
    				 ,a.product_count as productEa
-   				 ,b.price * a.product_count  as  price
+   				 ,b.price
     			 ,b.product_name as productName
   				 ,c.save_name as saveName
 			FROM
@@ -154,7 +153,14 @@
 		]]>
 	</select>
 
-
+	<update id ="checkOrderDetailList" parameterType ="OrderVO">
+		update order_detail a set 
+			product_count = (select product_ea from product where product_no = a.product_no)
+		where a.order_no = #{orderNo}
+		and a.product_count > (select product_ea from product where a.product_no = product_no) 
+	</update>
+	
+	
 	<!-- 주소 리스트 가져오기 -->
 	<select id="getAddressList" parameterType="String" resultType="AddressVO">
 		<![CDATA[

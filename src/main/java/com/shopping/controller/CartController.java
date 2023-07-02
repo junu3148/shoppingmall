@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shopping.ajax.JasonResult;
+import com.shopping.ajax.JsonResult;
 import com.shopping.service.CartService;
 import com.shopping.vo.AddressVO;
 import com.shopping.vo.CartVO;
@@ -52,10 +52,10 @@ public class CartController {
 	/*카트에 제품 추가*/
 	@ResponseBody
 	@RequestMapping(value ="/addCart", method = RequestMethod.POST )
-	public JasonResult addCart(@ModelAttribute CartVO cartVO) {
+	public JsonResult addCart(@ModelAttribute CartVO cartVO) {
 		
 		System.out.println("addCart()");
-		JasonResult jasonResult = new JasonResult();
+		JsonResult jasonResult = new JsonResult();
 		
 		/* 추가한 제품 수량 리턴*/
 		int productCnt = cartService.addCart(cartVO);
@@ -69,10 +69,10 @@ public class CartController {
 	/* 카트에 있는 제품 삭제 */
 	@ResponseBody
 	@RequestMapping(value="/deleteList", method =RequestMethod.POST)
-	public JasonResult deleteList(@ModelAttribute CartVO cartVO) { 
+	public JsonResult deleteList(@ModelAttribute CartVO cartVO) { 
 		
 		System.out.println("deleteList()");
-		JasonResult jasonResult = new JasonResult();
+		JsonResult jasonResult = new JsonResult();
 		
 		boolean result = cartService.deleteList(cartVO);
 		jasonResult.success(result);
@@ -85,15 +85,14 @@ public class CartController {
 	/*주문 데이터 추가*/
 	@ResponseBody
 	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
-	public JasonResult addOrders(@RequestParam String jsonData
+	public JsonResult addOrders(@RequestParam String jsonData
 								,HttpSession session) {
 		System.out.println("addOrders()");
-		JasonResult jasonResult = new JasonResult();
+		JsonResult jasonResult = new JsonResult();
 
 	    //직렬화 시켜 가져온 오브젝트 배열을 JSONArray 형식으로 바꿔준다.
 	    JSONArray jsonArray = new JSONArray(jsonData);
 	    List<ProductVO> productList = new ArrayList<ProductVO>();
-	    int totalPrice = 0;
 	    
 	    for(int i=0; i<jsonArray.length(); i++){
 	    	ProductVO productVO = new ProductVO();
@@ -103,8 +102,6 @@ public class CartController {
 	                
 	        productVO.setProductNo((int)obj.get("productNo"));
 	        productVO.setProductEa((int)obj.get("productEa"));
-	        productVO.setPrice((int)obj.get("price"));
-	        totalPrice += (int)obj.get("price");
 	        
 	        productList.add(productVO);
 	    }
@@ -113,10 +110,10 @@ public class CartController {
 	    OrderVO orderVO = new OrderVO();
 	    orderVO.setProductList(productList);
 	    orderVO.setCustomerNo(loginCustomer.getCustomerNo());
-	    orderVO.setTotalPrice(totalPrice);
 	    
 	    boolean result = cartService.addOrder(orderVO);
 	    jasonResult.success(result);
+
 	    
 		return jasonResult;
 	}
@@ -131,7 +128,7 @@ public class CartController {
 		List<ProductVO> list = new ArrayList<>();
 		list.add(productVO);
 		orderVO.setProductList(list);
-		boolean result = cartService.addOrder(orderVO);
+		cartService.addOrder(orderVO);
 		
 		return "redirect:orderPage/"+ orderVO.getCustomerNo() ;
 	}
@@ -154,9 +151,9 @@ public class CartController {
 	
 	@ResponseBody
 	@RequestMapping(value ="/addAddress", method = RequestMethod.POST)
-	public JasonResult addAddress(@ModelAttribute AddressVO addressVO) {
+	public JsonResult addAddress(@ModelAttribute AddressVO addressVO) {
 		
-		JasonResult jasonResult = new JasonResult();
+		JsonResult jasonResult = new JsonResult();
 		boolean result = cartService.addAdress(addressVO);
 		
 		jasonResult.success(result);

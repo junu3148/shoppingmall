@@ -44,7 +44,7 @@
 	<!--주문 상태 업데이트 -->
 	<update id="updateOrderStat" parameterType="OrderVO">
 	<![CDATA[
-		   update orders set order_stat = 2 where order_no = #{orderNo}
+		   update orders set order_stat = 2, total_price = #{totalPrice} where order_no = #{orderNo}
 	]]>
 	</update>
 </mapper>
