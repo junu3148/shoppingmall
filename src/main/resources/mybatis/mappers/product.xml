@@ -322,8 +322,7 @@
 		</if>
 		                
          <![CDATA[ 
-		        	 AND a.subcategory = '${subCat
-		        	 .egory}'  
+		        	 AND a.subcategory = '${subCategory}'  
 					 ORDER BY a.product_no DESC) c
 		                        ) d
 	         WHERE d.rn > (#{pageNum}-1) * #{amount}
