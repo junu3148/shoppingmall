@@ -36,11 +36,7 @@ public class MyPageDAO {
 	/*결제한 주문내역 확인*/
 	public List<ProductVO> getOrderList(PagingVO pagingVO){
 		System.out.println("getOrderList DAO()");
-		System.out.println("주문내역 땡겨오려고 보낸 페이징 객체 정보" + pagingVO);
-		
 		List<ProductVO> orderList = sqlSession.selectList("myPage.getOrderList", pagingVO);
-		System.out.println("전달 받은 리스트" + orderList);
-		
 		
 		return orderList;
 	}
@@ -80,7 +76,6 @@ public class MyPageDAO {
 	public List<ReviewVO> getMyReviewList(PagingVO pagingVO){
 		System.out.println("getMyReviewList DAO()");
 		List<ReviewVO> reviewList = sqlSession.selectList("myPage.getReviewList", pagingVO);
-		
 		return reviewList;
 	}
 }

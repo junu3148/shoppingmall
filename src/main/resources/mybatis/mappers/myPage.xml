@@ -138,8 +138,17 @@
 	<!-- 내가 쓴 리뷰 리스트 -->
 	<select id="getReviewList" parameterType="PagingVO" resultType="ReviewVO">
 		<![CDATA[
+			 select
+              	reviewNo
+    			,customerNo
+    			,title
+    			,content
+    			, regDate
+    			, likeCnt
+    			,saveName
+        from(
 			select 
-  		  		rownum
+  		  		rownum as rw
    	 			,review_no as reviewNo
     			,customer_no as customerNo
     			,title
@@ -160,8 +169,10 @@
         			from review a
         			where customer_no = #{keyword}
        				order by review_no desc
-    		 	) 
-    		where rownum between #{boardNumStart} and #{boardNumEnd}
+    		 		)
+              )
+    		where rw between #{boardNumStart} and #{boardNumEnd}
+		
 	]]>
 	</select>
 
