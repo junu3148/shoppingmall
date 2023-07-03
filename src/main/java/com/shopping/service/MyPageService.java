@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shopping.dao.CustomerDAO;
 import com.shopping.dao.MyPageDAO;
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.PagingVO;
@@ -22,7 +23,8 @@ public class MyPageService {
 
 	@Autowired
 	private MyPageDAO myPageDAO;
-	
+	@Autowired
+	private CustomerDAO customerDAO;
 	
 	/* 고객넘버로 고객 정보 가져오기*/
 	/*구매 내역 페이징 위한 pageNo*/
@@ -95,6 +97,22 @@ public class MyPageService {
 			reviewListPage.put("reviewList", reviewList);
 			
 			return reviewListPage;
+		}
+		
+	/*고객 번호와 패스워드 대조하여 맞으면 객체 반환함*/
+		public CustomerVO checkPassword(CustomerVO customerVO) {
+			
+			CustomerVO returnVO = customerDAO.checkPassword(customerVO);
+			
+			return returnVO;
+		}
+		
+		/*고객의 비밀번호 업데이트*/
+		public int updateCustomerPassword(CustomerVO customerVO) {
+			
+			int row = customerDAO.updateCustomerPassword(customerVO);
+			
+			return row;
 		}
 	
 }

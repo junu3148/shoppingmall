@@ -77,5 +77,20 @@ public class CustomerDAO {
 		
 		return row;
 	}
-
+	/*고객 비밀번호와 회원번호 대조하여 객체 반환*/
+	public CustomerVO checkPassword(CustomerVO customerVO) {
+		
+		System.out.println("여기까지 오나요" + customerVO);
+		CustomerVO returnVO = session.selectOne("customer.getCustomerByPass", customerVO);
+		System.out.println("돌아온 객체 " + returnVO);
+		
+		return returnVO;
+	}
+	
+	public int updateCustomerPassword(CustomerVO customerVO) {
+		
+		int row = session.update("customer.updatePassword", customerVO);
+		
+		return row;
+	}
 }

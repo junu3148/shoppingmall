@@ -78,20 +78,35 @@ public class MyPageController {
 	}
 	
 	/*고객 정보 수정 전 비밀번호 체크*/
-	@RequestMapping(value ="/checkPassword", method = RequestMethod.GET)
+	@RequestMapping(value ="/checkPasswordForm", method = RequestMethod.GET)
 	public String modifyCheckPage() {
 		System.out.println("modifyCheckPage()");
 		
-		return "myPage/modify";
+		return "myPage/checkPassword";
 	}
-	/*정보 수정 폼*/
 	
-	@RequestMapping(value = "/modifyForm")
-	public String modifyForm(@ModelAttribute CustomerVO customerVO) {
+	/*정보 수정 폼*/	
+	@RequestMapping(value = "/checkPassword")
+	public String modifyForm(@ModelAttribute CustomerVO customerVO
+							,Model model) {
 		
 		System.out.println("넘어온 정보 확인" + customerVO);
+		CustomerVO returnVO = myPageService.checkPassword(customerVO);
 		
-		return "";
+		model.addAttribute("customer", returnVO);
+		
+		return "myPage/modifyForm";
+	}
+	
+	@RequestMapping(value ="/modifyCustomerInfo", method = RequestMethod.POST)
+	public String modifyCustomerInfo(@ModelAttribute CustomerVO customerVO) {
+		
+		System.out.println("정보 수정을 위해 넘어온 객체 확인" + customerVO);
+		
+		int row = myPageService.updateCustomerPassword(customerVO);
+		
+		
+		return "redirect:/myPage/" + customerVO.getCustomerNo();
 	}
 	
 }

@@ -86,7 +86,7 @@
 
 
 					<div class= "password_check">
-						<form action="${pageContext.request.contextPath}/myPage/modifyForm">
+						<form action="${pageContext.request.contextPath}/myPage/checkPassword">
 							비밀번호를 입력하세요.
 							<input type ="text" name = "customerPassword" required>
 							<input type ="hidden" name ="customerNo" value ="${authCustomer.customerNo}">

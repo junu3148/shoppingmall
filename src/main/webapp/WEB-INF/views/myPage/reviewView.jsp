@@ -119,20 +119,20 @@
 				
 				<!-- 페이징 -->
 				<c:if test="${paging.selectPage >10}">
-					<a class="paging"
+					<a class="paging_"
 						href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}">
 						◀ </a>
 				</c:if>
 
 				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="page">
 					<c:if test="${page <= paging.finalPage}">
-						<a class="paging"
+						<a class="paging_"
 							href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${page}"
 							id="P${page}">${page}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${paging.next == true}">
-					<a class="paging"
+					<a class="paging_"
 						href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}">
 						▶ </a>
 				</c:if>

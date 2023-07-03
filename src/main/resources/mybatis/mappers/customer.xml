@@ -140,6 +140,28 @@
 			where customer_no = #{customerNo}
 		]]>
 	</update>
-
-
+	
+	<!-- 마이페이지 정보 수정용 객체 반환 -->
+	<select id ="getCustomerByPass" parameterType = "CustomerVO" resultType ="CustomerVO">
+		<![CDATA[
+			select
+				customer_id as customerId
+    			,customer_name as customerName
+    			,customer_password as customerPassword
+    			,customer_id as customerId
+    			,customer_Role as customerRole
+    			,(select sum(total_price) from orders where customer_no = a.customer_no) as totalPayment
+			from customer a
+			where customer_no = #{customerNo}
+			and customer_password = #{customerPassword}
+		]]>
+	</select>
+	
+	<update id ="updatePassword" parameterType ="CustomerVO">
+		<![CDATA[
+			update customer 
+				set customer_password = #{customerPassword}
+				where customer_no = #{customerNo}
+		]]>
+	</update>
 </mapper>
