@@ -17,7 +17,8 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentDAO paymentDAO;
-	
+	@Autowired
+	Map<String, Object> list = new HashMap<>();
 	/*결제 성공시 진행될 비즈니스 로직 --넘어온 정보는 고객 넘버와 오더 넘버임*/
 	//1. order_detail 테이블에서 결제한 제품 정보 알아오기-- product배열로 받는다.
 	//2. 카트 디테일에 있는 제품 삭제
@@ -32,7 +33,6 @@ public class PaymentService {
 		int result1 =0;
 		int result2 =0;
 		for(int i = 0; i<orderVO.getProductList().size(); i++) {
-			Map<String, Object> list = new HashMap<>();
 			list.put("customerNo", orderVO.getCustomerNo());
 			list.put("Product",orderVO.getProductList().get(i)); 
 			

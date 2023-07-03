@@ -40,7 +40,6 @@ public class ReviewController {
 
 		
 		return "redirect:/main/productDetal/" + reviewVO.getProductNo();
-		
 	}
 	
 	/*코멘트 삭제*/
@@ -49,7 +48,7 @@ public class ReviewController {
 	public JsonResult deleteComment(@ModelAttribute CommentVO commentVO) {
 		System.out.println("deleteComment()");
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(" 넘어오는 댓글 정보" + commentVO);
+
 		boolean result = reviewService.deleteReviewComment(commentVO);
 		jsonResult.success(result);
 		

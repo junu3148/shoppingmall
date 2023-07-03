@@ -89,8 +89,8 @@ public class MyPageController {
 	@RequestMapping(value = "/checkPassword")
 	public String modifyForm(@ModelAttribute CustomerVO customerVO
 							,Model model) {
-		
-		System.out.println("넘어온 정보 확인" + customerVO);
+		System.out.println("modifyForm()");
+
 		CustomerVO returnVO = myPageService.checkPassword(customerVO);
 		
 		model.addAttribute("customer", returnVO);
@@ -101,9 +101,8 @@ public class MyPageController {
 	@RequestMapping(value ="/modifyCustomerInfo", method = RequestMethod.POST)
 	public String modifyCustomerInfo(@ModelAttribute CustomerVO customerVO) {
 		
-		System.out.println("정보 수정을 위해 넘어온 객체 확인" + customerVO);
-		
-		int row = myPageService.updateCustomerPassword(customerVO);
+		System.out.println("modifyCustomerInfo()");
+		myPageService.updateCustomerPassword(customerVO);
 		
 		
 		return "redirect:/myPage/" + customerVO.getCustomerNo();

@@ -411,7 +411,8 @@ $('.like_cnt').on("click", function(){
 	
 });
 
-/* 코멘트 삭제 이벤트*/
+/* ---------------------------------------코멘트 삭제 이벤트-------------------------------*/
+ 
 $('.comment_delete_btn').on("click", function(){
 	
 	var commentNo =	$(this).data('commentno');
@@ -580,6 +581,7 @@ $('.see_more').on("click", function(){
 				return false;
 			}
 		});//주문하기 버튼 누르면 일어나는 이벤트
+		
 		
 		/* 코멘트 삭제 모달 나오게 만드는 이벤트*/
 		$('.reple_child').on("click",".comment_delete_modal_btn", function(){

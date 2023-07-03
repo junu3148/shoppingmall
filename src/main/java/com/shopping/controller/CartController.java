@@ -36,7 +36,7 @@ public class CartController {
 	
 	/*카트 보기*/
 	@RequestMapping(value ="/viewCart")
-	public String viewCart(@RequestParam(value = "customerNo", required = false, defaultValue= "0") int customerNo
+	public String viewCart(@RequestParam("customerNo") int customerNo
 							, Model model) { 
 			System.out.println("viewCart()");
 		

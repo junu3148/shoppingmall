@@ -194,7 +194,7 @@
 									<tr>
 										<td style="text-align: center;" colspan ="2">
 										<img src ="${pageContext.request.contextPath}/assets/images/people.png" class= "user_img">
-										<input type ="hidden" name = "customerNo" id ="cus_no" value = "">
+										<input type ="hidden" name = "customerNo" id ="cus_no" value ="">
 										</td>
 									</tr>
 									<tr>
@@ -301,7 +301,7 @@ $('.detail_Info').on("click", function(){
 				$('.cus_name').html("<b>" +  customer.customerName + '(' + customer.customerId + ')님' + "</b>"  );
 				$('.cus_role').val(customer.customerRole);
 				$('.totalPayment').text(totalPayment);
-				$('#cus_no').val(customerNo);
+				$('#cus_no').val(CustomerVO.customerNo);
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);

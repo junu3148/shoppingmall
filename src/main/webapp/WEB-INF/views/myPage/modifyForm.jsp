@@ -61,7 +61,10 @@
             <link href="${pageContext.request.contextPath}/assets/css/customer.css" rel="stylesheet">
 </head>
 <style>
-td{border : 1px solid black;}
+.modify_Form_table{width: 60%;height:100%;margin: auto;margin-top : 5%;font-size: 20px;border: 1px solid black;}
+.modify_Form_table td {height:40px;padding: 2%;}
+.modify_btn{ bottom: 3px;background: #4982cf;border: 1px solid #4982cf;color: #fff;width: 80px; font-size: 16px; }
+.user_img{width: 150px;}
 </style>
 <body>
 
@@ -80,63 +83,52 @@ td{border : 1px solid black;}
 
 		<div class=customer_info>
 			<div class="customer_profile">
-				<h3>내가 쓴 리뷰 확인하기</h3>
+				<h3>개인정보 수정</h3>
 			</div>
 		</div>
 		<div id="board">
 			<div id="list">
 
-
-				<table class="review_product table">
-					<thead>
-						<tr class="category">
-							<th>리뷰 번호</th>
-							<th>리뷰 제목</th>
-							<th>작성일</th>
-							<th>좋아요</th>
+			<form action ="${pageContext.request.contextPath}/myPage/modifyCustomerInfo" method ="POST" class="modify_form">
+				<table class="modify_Form_table">
+						<tr>
+							<td><input type = "hidden" value ="${authCustomer.customerNo}"  name = "customerNo"></td>
 						</tr>
-					</thead>
-					<c:forEach items="${reviewList}" var="review">
-						<tbody>
-							<tr class="review_list">
-								<td>${review.reviewNo}</td>
-								<td>
-									<c:if test="${review.saveName != null}">
-										<img src="${pageContext.request.contextPath }/assets/images/photo.png" class="review_img">
-									</c:if>${review.title}
-								</td>
-								<td>${review.regDate}</td>
-								<td>${review.likeCnt}</td>
-							</tr>
-							<tr class="review_content">
-								<td colspan="4">${review.content}</td>
-							</tr>
-						</tbody>
-					</c:forEach>
+						<tr>
+							<td colspan ="2"><img src ="${pageContext.request.contextPath}/assets/images/user.png" class="user_img"></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td>이름 : </td>
+							<td>${customer.customerName}</td>
+						</tr>
+						<tr>
+							<td>아이디 : </td>
+							<td>${customer.customerId}</td>
+						</tr>
+						<tr>
+							<td>고객 등급 : </td>
+							<td>${customer.customerRole}</td>
+						</tr>
+						<tr>
+							<td>비밀번호 : </td>
+							<td><input type ="password" value = "${customer.customerPassword}" name = "customerPassword"/>
+							<button type="submit" class= "modify_btn">바꾸기</button></td>
+						</tr>
+						<tr>
+							<td>총 구매액 :</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${customer.totalPayment}" />원</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
 				</table>
+			</form>
 				
-				
-				
-				<!-- 페이징 -->
-				<c:if test="${paging.selectPage >10}">
-					<a class="paging_"
-						href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}">
-						◀ </a>
-				</c:if>
 
-				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="page">
-					<c:if test="${page <= paging.finalPage}">
-						<a class="paging_"
-							href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${page}"
-							id="P${page}">${page}</a>
-					</c:if>
-				</c:forEach>
-				<c:if test="${paging.next == true}">
-					<a class="paging_"
-						href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}">
-						▶ </a>
-				</c:if>
-				<input type="hidden" value="${paging.selectPage}" id="select_Page">
 
 			</div>
 		</div>
@@ -150,7 +142,16 @@ td{border : 1px solid black;}
 
 
 </body>
-
+<script>
+$('.modify_form').on("submit", function(){
+	var result = confirm('정말 삭제하시겠습니까?');
+	if(result){
+		return true;
+	}else{
+		return false;
+	}
+});
+</script>
 
 
 </html>
