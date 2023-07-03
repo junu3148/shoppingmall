@@ -48,7 +48,7 @@
 <!-- 슬릭슬라이더 js -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
-	
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/qna.js"></script>
 
@@ -132,18 +132,6 @@
 		</div>
 	</header>
 	<!-- /헤더 -->
-
-	<div class="search_popup" style="display: none;">
-		<a href="#none" class="search_close"><img
-			src="images/ver02/close.png" alt=""></a>
-		<div>
-			<input type="search" id="search" placeholder="검색어를 입력해주세요">
-			<button type="submit">
-				<img src="images/ver02/search_w.png" alt="">
-			</button>
-		</div>
-	</div>
-
 	<main id="inquiry">
 		<section class="inquiry_">
 			<h3>문의하기</h3>

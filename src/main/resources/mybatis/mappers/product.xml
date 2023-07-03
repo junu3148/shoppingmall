@@ -122,7 +122,7 @@
 			      product a
 			      INNER JOIN product_image b 
 			      ON a.product_no = b.product_no
-            where rownum <= 5
+            WHERE rownum <= 5
 		  ORDER BY
 			      a.product_no DESC		
 		
@@ -385,7 +385,7 @@
 			      product a
 			      INNER JOIN product_image b 
 			      ON a.product_no = b.product_no
-			  where
+			 WHERE
 			      a.product_no = #{productNo}
 
 		]]>
