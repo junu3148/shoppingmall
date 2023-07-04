@@ -60,6 +60,7 @@
 <style>
 .active .anum {color: #4982cf; font-weight: bold; font-size: 15px;}
 #product #kv {margin: auto; text-align: center;}
+#soldout{text-align: center; font-size: 15px; color: white; background-color: #e60a2f; width:100px; margin:0 auto;}
 </style>
 
 </head>
@@ -93,10 +94,18 @@
 							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}">
 								<img
 								src="${pageContext.request.contextPath}/upload/${product.saveName}">
-								<span class="tit">${product.productName}</span> <span
-								class="price jb"> <fmt:formatNumber type="number"
-										maxFractionDigits="3" value="${product.price}" />원
-							</span>
+								<c:if test="${product.productEa > 0}">
+								<span class="tit">${product.productName}</span> 
+								<span class="price jb"> 
+								<fmt:formatNumber type="number"	maxFractionDigits="3" value="${product.price}" />원
+								</span>
+								</c:if>
+								<c:if test="${product.productEa <= 0}">
+								<span class="tit"><del>${product.productName}</del>></span> 
+								<span class="price jb"><del> 
+								<fmt:formatNumber type="number"	maxFractionDigits="3" value="${product.price}" />원</del></span>
+								<p id="soldout"><b>품절</b></p>
+								</c:if>
 						</a></li>
 					</c:forEach>
 				</ul>

@@ -64,6 +64,7 @@
 	        <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/pro_detail.js"></script> <!-- js -->
 
 <style>
+#soldout{text-align: center; font-size: 20px; color: red;}
 
 </style>
 
@@ -137,12 +138,16 @@
 							<input type="hidden" name="productNo" id="productNo" value="${product.productNo}"> <input type="hidden"
 								name="customerNo" id="customerNo" value="${authCustomer.customerNo}">
 						</div>
-
+						<c:if test="${product.productEa > 0}">
 						<div class="btn_wrap">
 							<button type="submit" class="order_btn data-set">구매하기</button>
 							<a href="#none" class="shopping_btn data-set" id="cart-btn" data-productno="${product.productNo}"
 								data-cusno="${authCustomer.customerNo}">장바구니</a>
 						</div>
+						</c:if>
+						<c:if test="${product.productEa <= 0}">
+						<p id="soldout"><b>품절된 상품입니다.</b></p>
+						</c:if>
 					</form>
 
 
