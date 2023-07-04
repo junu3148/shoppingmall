@@ -59,7 +59,7 @@
     			,a.content as content
     			,a.reg_date as regDate
     		from review_comment a join review b on a.review_no = b.review_no
-    		join customer c on b.customer_no = c.customer_no
+    		join customer c on a.customer_no = c.customer_no
    			 where a.review_no = #{reviewNo}
     		order by review_comment_no desc
 		]]>
