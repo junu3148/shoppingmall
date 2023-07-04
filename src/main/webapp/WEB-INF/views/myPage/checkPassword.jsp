@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html lang="ko">
- 
+
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,11 +54,15 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
 <!-- 부트스트랩 -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
 <!-- js -->
-    <link href="${pageContext.request.contextPath}/assets/css/myPage.css" rel="stylesheet">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
-            <link href="${pageContext.request.contextPath}/assets/css/customer.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/myPage.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
+<link href="${pageContext.request.contextPath}/assets/css/customer.css"
+	rel="stylesheet">
 </head>
 
 <body>
@@ -67,12 +71,7 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
 
-
-
 	<div id="wrap">
-
-
-
 		<!-- aside-bar -->
 		<c:import url="/WEB-INF/views/includes/myPage-aside.jsp"></c:import>
 
@@ -83,32 +82,26 @@
 		</div>
 		<div id="board">
 			<div id="list">
-
-
-					<div class= "password_check">
-						<form action="${pageContext.request.contextPath}/myPage/checkPassword">
-							비밀번호를 입력하세요.
-							<input type ="text" name = "customerPassword" required>
-							<input type ="hidden" name ="customerNo" value ="${authCustomer.customerNo}">
-							<button type ="submit" class= "password-btn">확인</button>
-						</form>
-					</div>
-				
-
-
+				<div class="password_check">
+					<form
+						action="${pageContext.request.contextPath}/myPage/checkPassword">
+						비밀번호를 입력하세요. <input type="password" name="customerPassword"
+							required> <input type="hidden" name="customerNo"
+							value="${authCustomer.customerNo}">
+						<button type="submit" class="password-btn">확인</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
 	<!-- 탑버튼 -->
-	<a href="#none" class="top_btn"><img src="${pageContext.request.contextPath}/assets/images/ver02/top_btn.png"
-			alt=""></a>
+	<a href="#none" class="top_btn"><img
+		src="${pageContext.request.contextPath}/assets/images/ver02/top_btn.png"
+		alt=""></a>
 	<!-- /탑버튼 -->
 
-
 </body>
-
-
 
 </html>

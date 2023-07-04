@@ -53,40 +53,11 @@
 	src="${pageContext.request.contextPath }/assets/js/qna.js"></script>
 
 <style>
-#buttoncss {
-	padding: 15px 28px;
-	margin: -40px 30px 10px;
-}
-
-.active .anum {
-	color: #4982cf;
-	font-weight: bold;
-	font-size: 15px;
-}
-
-.btn_wrap2 {
-	display: flex;
-	justify-content: flex-end;
-}
-
-#allqna {
-	background: #4982cf;
-	border: 1px solid #4982cf;
-	color: #fff;
-	padding: 15px 50px;
-	font-weight: 600;
-	text-align: right;
-	margin-right: 20px;
-}
-
-#myqna {
-	background: #4982cf;
-	border: 1px solid #4982cf;
-	color: #fff;
-	padding: 15px 50px;
-	font-weight: 600;
-	text-align: right
-}
+#buttoncss {padding: 15px 28px;	margin: -40px 30px 10px;}
+.active .anum {color: #4982cf; font-weight: bold; font-size: 15px;}
+.btn_wrap2 {display: flex; justify-content: flex-end;}
+#allqna {background: #4982cf; border: 1px solid #4982cf; color: #fff; padding: 15px 50px; font-weight: 600; text-align: right; margin-right: 20px;}
+#myqna {background: #4982cf; border: 1px solid #4982cf; color: #fff; padding: 15px 50px; font-weight: 600; text-align: right}
 </style>
 
 </head>
@@ -160,8 +131,8 @@
 		<section class="inquiry_">
 			<h3>문의하기</h3>
 			<div class="btn_wrap2">
-				<a href="${pageContext.request.contextPath }/QnA/QnAList" id="allqna">전체 문의보기</a>
-				<a href="#none" id="myqna">나의 문의보기</a>
+				<a href="${pageContext.request.contextPath }/QnA/QnAList"
+					id="allqna">전체 문의보기</a> <a href="#none" id="myqna">나의 문의보기</a>
 			</div>
 			<br>
 			<div class="mo_scroll">
@@ -249,9 +220,11 @@
 					name="type" value="${pageMaker.cri.type}">
 
 			</form>
-			<div class="btn_wrap">
-				<a href="#none" class="order_btn">문의하기</a>
-			</div>
+			<c:if test="${authCustomer.customerRole != 99}">
+				<div class="btn_wrap">
+					<a href="#none" class="order_btn">문의하기</a>
+				</div>
+			</c:if>
 		</section>
 
 		<!-- 고객 문의 창 -->
