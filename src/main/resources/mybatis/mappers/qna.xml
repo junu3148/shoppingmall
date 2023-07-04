@@ -45,6 +45,12 @@
 				                FROM
 				                    qna a
 				                    LEFT OUTER JOIN qna_comment b ON a.qna_no = b.qna_no
+		]]>		
+								<if test="keyword != null and keyword != ''">
+									WHERE customer_no = #{keyword}
+								</if>
+								                    
+		<![CDATA[		                    
 				                ORDER BY
 				                    a.qna_no DESC
 				            ) c
@@ -58,16 +64,20 @@
 	</select>
 	
 	<!-- 문의글 갯수 -->
-	<select  id="getTotal" resultType="int">
+	<select  id="getTotal" parameterType="Criteria" resultType="int">
 	
 		<![CDATA[
 		
 			SELECT COUNT(qna_no) FROM  qna
-		
+			WHERE 1=1		
 		]]>
+		<if test="keyword != null and keyword != ''">
+			AND customer_no = #{keyword}
+		</if>
 			
 	</select> 
-
+	
+	
 	<!-- 문의 등록 -->
 	<insert id="insertQnA" parameterType="QnAVO">
 		

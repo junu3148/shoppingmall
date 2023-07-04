@@ -49,5 +49,7 @@ $(document).ready(function() {
 					.val(''); // Clear input fields
 				$('body').removeClass('no-scroll');
 			});
+			
+	
 
 });

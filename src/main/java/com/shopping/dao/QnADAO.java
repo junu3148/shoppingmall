@@ -23,10 +23,10 @@ public class QnADAO {
 	}
 
 	// ----------------- 문의글 갯수
-	public int getTotal() {
+	public int getTotal(Criteria cri) {
 		System.out.println("getTotal DAO()");
-
-		return sqlSession.selectOne("qna.getTotal");
+	
+		return sqlSession.selectOne("qna.getTotal",cri);
 
 	}
 

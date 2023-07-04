@@ -18,14 +18,15 @@ public class QnAService {
 	@Autowired
 	private QnADAO qnADAO;
 
+
 	// ----------------- 문의 리스트
 	public Map<String, Object> getQnAList(Criteria cri) {
 		System.out.println("getQnAList DAO()");
 
 		Map<String, Object> map = new HashMap<>();
-
-		int total = qnADAO.getTotal();
-
+	
+		int total = qnADAO.getTotal(cri);
+	
 		List<QnAVO> qnAList = qnADAO.getQnAList(cri);
 
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);

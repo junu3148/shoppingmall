@@ -13,7 +13,7 @@ public class Criteria {
 
 	/* 검색 키워드 */
 	private String keyword;
-
+		
 	private int minPrice;
 
 	private int maxPrice;
@@ -105,6 +105,7 @@ public class Criteria {
 		this.type = type;
 
 	}
+	
 
 	@Override
 	public String toString() {

@@ -31,7 +31,7 @@
 			</c:otherwise>
 			</c:choose>	
 		</ul>
-	</div>
+	</div> 
 	<div id="header">
 		<h1>
 			<a href="${pageContext.request.contextPath}/main/">로고이미지</a>

@@ -63,6 +63,30 @@
 	font-weight: bold;
 	font-size: 15px;
 }
+
+.btn_wrap2 {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#allqna {
+	background: #4982cf;
+	border: 1px solid #4982cf;
+	color: #fff;
+	padding: 15px 50px;
+	font-weight: 600;
+	text-align: right;
+	margin-right: 20px;
+}
+
+#myqna {
+	background: #4982cf;
+	border: 1px solid #4982cf;
+	color: #fff;
+	padding: 15px 50px;
+	font-weight: 600;
+	text-align: right
+}
 </style>
 
 </head>
@@ -135,6 +159,11 @@
 	<main id="inquiry">
 		<section class="inquiry_">
 			<h3>문의하기</h3>
+			<div class="btn_wrap2">
+				<a href="${pageContext.request.contextPath }/QnA/QnAList" id="allqna">전체 문의보기</a>
+				<a href="#none" id="myqna">나의 문의보기</a>
+			</div>
+			<br>
 			<div class="mo_scroll">
 				<p class="scroll_x">↔ 좌우로 스크롤하세요</p>
 				<div class="inquiry_wrap">
@@ -215,8 +244,10 @@
 				action="${pageContext.request.contextPath}/QnA/QnAList" method="get">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-				<input type="hidden" name="type" value="${pageMaker.cri.type}">
+				<input type="hidden" id="keyword" name="keyword"
+					value="${pageMaker.cri.keyword}"> <input type="hidden"
+					name="type" value="${pageMaker.cri.type}">
+
 			</form>
 			<div class="btn_wrap">
 				<a href="#none" class="order_btn">문의하기</a>
@@ -315,4 +346,25 @@
 	<!-- //Footer -->
 
 </body>
+
+<script>
+	//나의 문의 보기
+	$("#myqna").on("click", function() {
+
+		let keyword = $("#keyword");
+		let customerNo = '${authCustomer.customerNo}';
+		keyword.val(customerNo);
+		$("#moveForm").submit();
+
+	});
+</script>
+
 </html>
+
+
+
+
+
+
+
+

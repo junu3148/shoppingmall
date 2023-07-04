@@ -22,14 +22,14 @@ public class QnAController {
 
 	// ------------------- 문의리스트
 	@RequestMapping(value = "/QnAList", method = RequestMethod.GET)
-	public String QnAList2(Model model, Criteria cri) {
+	public String QnAList(Model model, Criteria cri) {
 		System.out.println("QnAList()");
 
 		Map<String, Object> map = qnAService.getQnAList(cri);
 
 		model.addAttribute("qnAList", map.get("qnAList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-
+	
 		return "qna/qnaList";
 	}
 
