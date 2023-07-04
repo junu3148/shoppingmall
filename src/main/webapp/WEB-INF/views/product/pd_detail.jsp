@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
- 
+
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,7 +41,9 @@
 	type="text/css">
 <!-- 서브 css -->
 
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/order.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/order.css"
+	type="text/css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 제이쿼리 최신버전 js -->
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -61,11 +63,16 @@
 <!-- 모달용 부트 스트랩 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	        <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/pro_detail.js"></script> <!-- js -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/pro_detail.js"></script>
+<!-- js -->
 
 <style>
-#soldout{text-align: center; font-size: 20px; color: red;}
-
+#soldout {
+	text-align: center;
+	font-size: 20px;
+	color: red;
+}
 </style>
 
 </head>
@@ -84,16 +91,20 @@
 
 		<section class="detail_wrap clear">
 			<div class="img_wrap">
-				<img src="${pageContext.request.contextPath}/upload/${product.saveName}" alt="${product.productName}">
+				<img
+					src="${pageContext.request.contextPath}/upload/${product.saveName}"
+					alt="${product.productName}">
 			</div>
 			<div class="info_wrap">
 				<div class="title">
 					<h4>${product.productName}</h4>
 					<p>
-						<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}" />
+						<fmt:formatNumber type="number" maxFractionDigits="3"
+							value="${product.price}" />
 						원
 					</p>
-					<input type="hidden" value="${product.subCategory}" id="subCategory">
+					<input type="hidden" value="${product.subCategory}"
+						id="subCategory">
 				</div>
 				<div>
 					<p class="context">${product.productContent}</p>
@@ -101,20 +112,23 @@
 						<li class="clear"><strong>배송 방법</strong> <span>택배비</span></li>
 						<li class="clear"><strong>배송비</strong> <span>2,500원
 								(50,000원 이상 구매 시 무료)</span></li>
-						<li class="clear"><strong>배송 안내</strong> <span class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수
+						<li class="clear"><strong>배송 안내</strong> <span
+							class="delivery_context"> 특수지역이나 부피가 큰 제품의 경우 배송비가 추가될 수
 								있습니다.(+5,000원)</span></li>
 						<li>쇼핑에 참고 부탁드립니다. ^_^</li>
 					</ul>
 					<input type="hidden" value="${product.price}" id="price">
 					<!-- 금액으로 변동되는 금액 맞추기 위해서 hidden input 처리 -->
-					<form action="${pageContext.request.contextPath}/cart/addOrderOne" method="get" class="addOrderOne">
+					<form action="${pageContext.request.contextPath}/cart/addOrderOne"
+						method="get" class="addOrderOne">
 						<div class="pd_num clear">
 							<p>수량</p>
 							<div class="count-wrap _count">
 								<button type="button" class="minus">-</button>
 								<input type="text" class="inp" name="productEa" value="1" />
 								<!-- 변경되는 숫자 -->
-								<button type="button" class="plus" data-max="${product.productEa}">+</button>
+								<button type="button" class="plus"
+									data-max="${product.productEa}">+</button>
 							</div>
 
 
@@ -135,18 +149,23 @@
 							<!--  바뀔 금액 자리 -->
 							<p class="total_price"></p>
 							<input type="hidden" name="totalPrice" id="total_price">
-							<input type="hidden" name="productNo" id="productNo" value="${product.productNo}"> <input type="hidden"
-								name="customerNo" id="customerNo" value="${authCustomer.customerNo}">
+							<input type="hidden" name="productNo" id="productNo"
+								value="${product.productNo}"> <input type="hidden"
+								name="customerNo" id="customerNo"
+								value="${authCustomer.customerNo}">
 						</div>
 						<c:if test="${product.productEa > 0}">
-						<div class="btn_wrap">
-							<button type="submit" class="order_btn data-set">구매하기</button>
-							<a href="#none" class="shopping_btn data-set" id="cart-btn" data-productno="${product.productNo}"
-								data-cusno="${authCustomer.customerNo}">장바구니</a>
-						</div>
+							<div class="btn_wrap">
+								<button type="submit" class="order_btn data-set">구매하기</button>
+								<a href="#none" class="shopping_btn data-set" id="cart-btn"
+									data-productno="${product.productNo}"
+									data-cusno="${authCustomer.customerNo}">장바구니</a>
+							</div>
 						</c:if>
 						<c:if test="${product.productEa <= 0}">
-						<p id="soldout"><b>품절된 상품입니다.</b></p>
+							<p id="soldout">
+								<b>품절된 상품입니다.</b>
+							</p>
 						</c:if>
 					</form>
 
@@ -181,7 +200,9 @@
 									<c:set var="endValue" value="${review.grade-1}" />
 									<c:forEach begin="0" end="${endValue}">
 										<c:if test="${review.grade != 0}">
-											<img src="${pageContext.request.contextPath}/assets/images/star.png" id="grade_star">
+											<img
+												src="${pageContext.request.contextPath}/assets/images/star.png"
+												id="grade_star">
 										</c:if>
 									</c:forEach>
 								</div>
@@ -190,8 +211,9 @@
 								<hr>
 								<div>
 									<c:if test="${review.saveName != null}">
-										<img src="${pageContext.request.contextPath}/upload/${review.saveName}" class="review_img"
-											style="width:100px;">
+										<img
+											src="${pageContext.request.contextPath}/upload/${review.saveName}"
+											class="review_img" style="width: 100px;">
 									</c:if>
 								</div>
 								<div>${review.content}
@@ -199,9 +221,10 @@
 									<!-- 좋아요 누르기 -->
 
 									<span class="like_cnt" data-reviewno="${review.reviewNo}">
-										<img src="${pageContext.request.contextPath}/assets/images/heart.png" class="heart_icon"
-											alt="리뷰 좋아요">
-										<span class="like_cnt_ea">${review.likeCnt}</span>
+										<img
+										src="${pageContext.request.contextPath}/assets/images/heart.png"
+										class="heart_icon" alt="리뷰 좋아요"> <span
+										class="like_cnt_ea">${review.likeCnt}</span>
 									</span>
 
 								</div>
@@ -214,16 +237,19 @@
 										댓글 <span class="comment_cnt">(${commentLength})</span>
 									</p>
 									<textarea class="add_comment" style="width: 70%; height: 100%"></textarea>
-									<button class="add_comment_btn" data-authno=${authCustomer.customerNo}>등록</button>
+									<button class="add_comment_btn"
+										data-authno="${authCustomer.customerNo}">등록</button>
 								</div>
 								<div class="reple_child">
 									<c:forEach items="${review.comment}" var="comment">
 										<ul id="c${comment.commentNo}">
-											<li>${comment.customerName}: ${comment.content}
-												<c:if test="${comment.customerNo == authCustomer.customerNo}">
-													<a class="comment_delete_modal_btn" data-commentno="${comment.commentNo}">
-														<img src="${pageContext.request.contextPath}/assets/images/delete_gray.png"
-															class="delete_icon2" alt="댓글 삭제">
+											<li class="comment_content">${comment.customerName}:
+												${comment.content} <c:if
+													test="${comment.customerNo == authCustomer.customerNo}">
+													<a class="comment_delete_modal_btn"
+														data-commentno="${comment.commentNo}"> <img
+														src="${pageContext.request.contextPath}/assets/images/delete_gray.png"
+														class="delete_icon2" alt="댓글 삭제">
 													</a>
 												</c:if>
 											</li>
@@ -237,9 +263,11 @@
 								&nbsp; &nbsp; &nbsp;
 								<c:if test="${authCustomer.customerNo == review.customerNo}">
 									<!-- 리뷰 삭제하기 X 버튼  //  로그인한 유저넘버와 리뷰를 작성한 유저 넘버가 같을 때 볼 수 있다.-->
-									<a class="delete_review_button" data-reviewno="${review.reviewNo}"
+									<a class="delete_review_button"
+										data-reviewno="${review.reviewNo}"
 										data-productno="${review.productNo}"> <img
-											src="${pageContext.request.contextPath}/assets/images/delete.png" class="delete_icon" alt="리뷰 삭제">
+										src="${pageContext.request.contextPath}/assets/images/delete.png"
+										class="delete_icon" alt="리뷰 삭제">
 									</a>
 									<!-- 리뷰 삭제하기 X 버튼 -->
 								</c:if>
@@ -254,8 +282,9 @@
 			<!-- 리뷰 넣을 공간 -->
 
 			<!-- 탑버튼 -->
-			<a href="#none" class="top_btn"><img src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
-					alt=""></a>
+			<a href="#none" class="top_btn"><img
+				src="${pageContext.request.contextPath }/assets/images/ver02/top_btn.png"
+				alt=""></a>
 			<!-- /탑버튼 -->
 
 			<!-- 리뷰 페이징 시작 -->
@@ -267,7 +296,8 @@
 						◀ </a>
 				</c:if>
 
-				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="page">
+				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}"
+					var="page">
 					<c:if test="${page <= paging.finalPage}">
 						<a class="review_paging"
 							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${page}"
@@ -314,8 +344,10 @@
 				</div>
 				<form action="${pageContext.request.contextPath}/cart/viewCart">
 					<div class="modal-footer">
-						<input type="hidden" value="${authCustomer.customerNo}" name="customerNo">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="more_see">좀 더 둘러보기</button>
+						<input type="hidden" value="${authCustomer.customerNo}"
+							name="customerNo">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal" id="more_see">좀 더 둘러보기</button>
 						<button type="submit" class="btn btn-primary">장바구니 이동하기</button>
 					</div>
 				</form>
@@ -336,12 +368,14 @@
 						없습니다.
 					</span>
 				</div>
-				<form action="${pageContext.request.contextPath}/review/deleteReview">
+				<form
+					action="${pageContext.request.contextPath}/review/deleteReview">
 					<div class="modal-footer">
 						<input type="text" value="" name="reviewNo" id="delete_No">
 						<input type="text" value="" name="productNo" id="product_No">
 						<button type="submit" class="btn btn-primary">글 삭제하기</button>
-						<button type="button" class="btn btn-secondary close_modal" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-secondary close_modal"
+							data-bs-dismiss="modal">닫기</button>
 					</div>
 				</form>
 			</div>
@@ -365,8 +399,10 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary comment_delete_btn">댓글 삭제하기</button>
-					<button type="button" class="btn btn-secondary close_modal" data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary comment_delete_btn">댓글
+						삭제하기</button>
+					<button type="button" class="btn btn-secondary close_modal"
+						data-bs-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>
@@ -417,8 +453,8 @@ $('.like_cnt').on("click", function(){
 });
 
 /* ---------------------------------------코멘트 삭제 이벤트-------------------------------*/
- 
-$('.comment_delete_btn').on("click", function(){
+
+$('.comment_delete_btn').off('click').on("click", function(){
 	
 	var commentNo =	$(this).data('commentno');
 	
@@ -439,7 +475,8 @@ $('.comment_delete_btn').on("click", function(){
 			if(jsonResult.data == true){
 				$('#comment_modal').modal('hide');
 				$('#c'+ commentNo).remove();
-				alert('삭제되었습니다.')
+				alert('삭제되었습니다.');
+				$('.comment_delete_btn').removeAttr("data-commentno");
 			}
 
 		},
@@ -486,12 +523,6 @@ $('.add_comment_btn').on("click", function(){
 				
 				var comment = jsonResult.data;
 					
-				
-				console.log(comment);					
-				console.log('이건 어디에 쓰는 거지' + reple_render);		
-				
-
-				
 				var str = "";
 				str += "<ul id='c" + comment.commentNo + "' class= 'comment__list'>";		
 				str += "<li>";		
@@ -612,7 +643,7 @@ $('.see_more').on("click", function(){
 			$('#comment_modal').modal('hide');
 			$('#Cart-modal').modal('hide');	
 		});
-	
+
 </script>
 
 </html>
