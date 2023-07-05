@@ -21,7 +21,7 @@ public class QnAService {
 
 	// ----------------- 문의 리스트
 	public Map<String, Object> getQnAList(Criteria cri) {
-		System.out.println("getQnAList DAO()");
+		System.out.println("getQnAList Service()");
 
 		Map<String, Object> map = new HashMap<>();
 	
@@ -35,6 +35,23 @@ public class QnAService {
 
 		return map;
 	}
+	
+	// ----------------- 관리자페이지 문의 리스트
+		public Map<String, Object> adminGetQnAList(Criteria cri) {
+			System.out.println("adminGetQnAList Service()");
+
+			Map<String, Object> map = new HashMap<>();
+		
+			int total = qnADAO.adminGetTotal(cri);
+		
+			List<QnAVO> qnAList = qnADAO.adminGetQnAList(cri);
+		
+			PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+			map.put("pageMaker", pageMaker);
+			map.put("qnAList", qnAList);
+
+			return map;
+		}
 
 	// ----------------- 문의 등록
 	public int insertQnA(QnAVO vo) {

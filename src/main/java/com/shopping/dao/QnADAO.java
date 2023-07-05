@@ -29,6 +29,21 @@ public class QnADAO {
 		return sqlSession.selectOne("qna.getTotal",cri);
 
 	}
+	
+	// ----------------- 관리자 페이지 문의 리스트
+	public List<QnAVO> adminGetQnAList(Criteria cri) {
+		System.out.println("adminGetQnAList DAO()");
+
+		return sqlSession.selectList("qna.adminGetQnAList", cri);
+	}
+
+	// ----------------- 관리자 페이지 문의글 갯수
+	public int adminGetTotal(Criteria cri) {
+		System.out.println("adminGetTotal DAO()");
+	
+		return sqlSession.selectOne("qna.adminGetTotal",cri);
+
+	}
 
 	// ----------------- 문의 등록
 	public int insertQnA(QnAVO vo) {

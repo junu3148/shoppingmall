@@ -43,6 +43,20 @@ public class QnAController {
 		return "redirect:/QnA/QnAList";
 
 	}
+	
+	// ------------------- 문의리스트
+	@RequestMapping(value = "/addminQnA", method = RequestMethod.GET)
+	public String addminQnA(Model model, Criteria cri) {
+		System.out.println("addminQnA()");
+		
+		Map<String, Object> map = qnAService.adminGetQnAList(cri);
+		
+		model.addAttribute("qnAList", map.get("qnAList"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		
+		return "Admin/ProductView2";
+		
+	}
 
 	// ------------------- 문의 답글 등록
 	@RequestMapping(value = "/insertQnAAdmin", method = RequestMethod.GET)

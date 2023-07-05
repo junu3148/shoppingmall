@@ -78,6 +78,85 @@
 	</select> 
 	
 	
+	<!-- 관리자페이지 문의 리스트 -->
+	<select id="adminGetQnAList" parameterType="Criteria" resultType="QnAVO">
+	
+		<![CDATA[
+		
+			  SELECT
+				    d.qna_no        AS qnano,
+				    d.customer_no   AS customerno,
+				    d.board_type    AS boardtype,
+				    d.title,
+				    d.content,
+				    d.reg_date      AS regdate,
+				    d.admincontent,
+				    d.adminregdate
+				FROM
+				    (
+				        SELECT
+				            ROWNUM AS rw,
+				            c.qna_no,
+				            c.customer_no,
+				            c.board_type,
+				            c.title,
+				            c.content,
+				            c.reg_date,
+				            c.admincontent,
+				            c.adminregdate
+				        FROM
+				            (
+				              SELECT
+				                    a.qna_no,
+				                    a.customer_no,
+				                    a.board_type,
+				                    a.title,
+				                    a.content,
+				                    a.reg_date,
+				                    b.content    AS admincontent,
+				                    b.reg_date   AS adminregdate
+				                FROM
+				                    qna a
+				                    LEFT OUTER JOIN qna_comment b ON a.qna_no = b.qna_no	                    
+				            ORDER BY
+				                    a.qna_no DESC
+				            ) c
+				       WHERE
+           					c.admincontent IS NULL    
+				    ) d
+				WHERE
+				    rw > (#{pageNum}-1) * #{amount}
+				    AND rw <= #{pageNum} * #{amount}
+		
+		]]>
+
+	</select>
+	
+	<!-- 관리자페이지 문의글 갯수 -->
+	<select  id="adminGetTotal" parameterType="Criteria" resultType="int">
+	
+		<![CDATA[
+			SELECT
+			      COUNT(*)
+			  FROM
+			      (
+			       SELECT
+			             b.content
+			         FROM
+			             qna a
+	      LEFT OUTER JOIN 
+	                     qna_comment b 
+	                   ON 
+	                     a.qna_no = b.qna_no
+			        WHERE
+			             b.content IS NULL
+			    )
+			
+		]]>
+		
+			
+	</select>
+	
 	<!-- 문의 등록 -->
 	<insert id="insertQnA" parameterType="QnAVO">
 		
