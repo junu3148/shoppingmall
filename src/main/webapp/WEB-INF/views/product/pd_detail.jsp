@@ -291,7 +291,7 @@
 			<div class="review_paging">
 
 				<c:if test="${paging.selectPage >10}">
-					<a class="review_paging"
+					<a class="review_paging" style ="text-decoration: none"
 						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.startPageNum - 1}">
 						◀ </a>
 				</c:if>
@@ -299,13 +299,13 @@
 				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}"
 					var="page">
 					<c:if test="${page <= paging.finalPage}">
-						<a class="review_paging"
+						<a class="review_paging" style ="text-decoration: none"
 							href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${page}"
 							id="P${page}">${page}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${paging.next == true}">
-					<a class="review_paging"
+					<a class="review_paging" style ="text-decoration: none"
 						href="${pageContext.request.contextPath}/main/productDetal/${product.productNo}?selectReviewPage=${paging.endPageNum + 1}">
 						▶ </a>
 				</c:if>

@@ -108,6 +108,7 @@ src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
 				</table>
 				<div class="clear"></div>
 				<!-- 페이징 -->
+				<div class="paging-area">
 				<c:if test="${paging.selectPage >10}">
 					<a class="paging_"
 						href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}">
@@ -128,6 +129,7 @@ src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
 						▶ </a>
 				</c:if>
 				<input type="hidden" value="${paging.selectPage}" id="select_Page">
+				</div>
 			</div>
 		</div>
 	</div>

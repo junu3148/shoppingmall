@@ -17,8 +17,23 @@
 	<!-- 리뷰 작성내역 불러오기 -->
 	<select id="getReviewList" parameterType="PagingVO" resultType="ReviewVO">
 		<![CDATA[
+			   
+    
+        select
+            customerName
+            ,productNo
+            ,customerNo
+            ,grade
+            ,reviewNo
+            ,likeCnt
+            ,title
+            ,content
+            ,regDate
+            ,saveName
+       	from
+             (
 			select
-   				 rownum
+   				 rownum as rw
     			,customer_name as customerName
     			,product_no as productNo
     			,customer_no as customerNo
@@ -45,7 +60,8 @@
         		 on a.customer_no = b.customer_no
         		 where product_no = #{keyword}
         		 order by review_no desc)
-       			 where rownum between #{boardNumStart} and #{ boardNumEnd}	
+                 )
+       			 where rw between #{boardNumStart} and #{ boardNumEnd}	
 		]]>
 	</select>
 

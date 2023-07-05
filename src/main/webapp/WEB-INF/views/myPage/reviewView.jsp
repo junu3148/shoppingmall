@@ -116,7 +116,7 @@ td{border : 1px solid black;}
 				</table>
 				
 				
-				
+				<div class= "paging-area review-view">
 				<!-- 페이징 -->
 				<c:if test="${paging.selectPage >10}">
 					<a class="paging_"
@@ -137,7 +137,7 @@ td{border : 1px solid black;}
 						▶ </a>
 				</c:if>
 				<input type="hidden" value="${paging.selectPage}" id="select_Page">
-
+				</div>
 			</div>
 		</div>
 	</div>
