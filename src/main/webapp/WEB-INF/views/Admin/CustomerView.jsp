@@ -59,7 +59,7 @@
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/customer.css" type="text/css">
 <style>
-
+.content a{text-decoration: none;}
 </style>
 </head>
 <body>

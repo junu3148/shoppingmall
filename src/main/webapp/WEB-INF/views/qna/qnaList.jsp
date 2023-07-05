@@ -132,7 +132,10 @@
 			<h3>문의하기</h3>
 			<div class="btn_wrap2">
 				<a href="${pageContext.request.contextPath }/QnA/QnAList"
-					id="allqna">전체 문의보기</a> <a href="#none" id="myqna">나의 문의보기</a>
+					id="allqna">전체 문의보기</a>
+				<c:if test="${authCustomer.customerRole != 99}">
+					<a href="#none" id="myqna">나의 문의보기</a>
+				</c:if>
 			</div>
 			<br>
 			<div class="mo_scroll">
@@ -166,13 +169,6 @@
 											|| authCustomer.customerRole == 99}">
 											<p class="no">Q</p>
 											<p class="question tit">${Qna.content}</p>
-											<div class="btn_wrap">
-												<c:if
-													test="${empty Qna.adminContent && authCustomer.customerRole == 99}">
-													<a href="#none" id="buttoncss"
-														class="order_btn insertQnAAdmin" data-no="${Qna.qnANo}">답글달기</a>
-												</c:if>
-											</div>
 										</c:if></li>
 									<c:if
 										test="${!empty Qna.adminContent && Qna.boardType == 0
@@ -333,11 +329,3 @@
 </script>
 
 </html>
-
-
-
-
-
-
-
-

@@ -58,6 +58,7 @@
 	src="${pageContext.request.contextPath}/assets/js/adminProduct.js"></script>
 
 <style>
+.wrapper a{text-decoration: none;}
 .pageInfo{margin-top:60px}
 .pageInfo_btn a {color: black;}
 .active .anum {color: #4982cf; font-weight: bold; font-size: 15px;}

@@ -64,17 +64,17 @@
 	src="${pageContext.request.contextPath }/assets/js/qna.js"></script>
 
 <style>
+.wrapper a{text-decoration: none;}
 .pageInfo{margin-top:60px}
 .pageInfo_btn a {color: black;}
 .active .anum {color: #4982cf; font-weight: bold; font-size: 15px;}
 .content {margin-top: auto;}
 .footer {text-align: center;}
 .footer .container-fluid {height: 30px;}
-#inquiry_popup input {width: 450px;}
-#inquiry_popup2 input {width: 450px;}
-#insertProductForm a {text-decoration: none;}
-#modifyProductForm a {text-decoration: none;}
-
+.table a{text-decoration: none;}
+.insertQnAAdmin{ background: #4982cf; border: 1px solid #4982cf; color: #fff; padding: 6px 6px; margin: 0 5px; }
+.insertQnAAdmin:hover{ color:#fff; }
+.btn_wrap a{text-decoration: none;}
 </style>
 </head>
 <body>
@@ -123,7 +123,7 @@
 									<td style="width: 10%; text-align: center;">제목</td>
 									<td style="width: 55%; text-align: center;">내용</td>
 									<td style="width: 15%; text-align: center;">작성날짜</td>
-									<td style="width: 10%; text-align: center;">답글달기</td>
+									<td style="width: 10%; text-align: center;">답글</td>
 								</tr>
 								<c:forEach items="${qnAList}" var="qna">
 									<tr>
@@ -133,7 +133,7 @@
 										<td style="width: 15%; text-align: center;">${qna.regDate}</td>
 										<td style="width: 10%; text-align: center;"><a
 											href="#none" id="buttoncss" class="order_btn insertQnAAdmin"
-											data-no="${Qna.qnANo}">답글달기</a></td>
+											data-no="${qna.qnANo}">답글달기</a></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -172,42 +172,40 @@
 					</div>
 				</main>
 			</div>
-			
-			
-			<!-- 문의 답글 창 -->
-		<section id="inquiry_popup2" class="inquiry_popup"
-			style="display: none;">
-			<a href="#none" class="inquiry_close"><img
-				src="images/ver02/close.png" alt=""></a>
-			<div class="inquiry_write">
-				<h3>문의에대한 답변</h3>
-				<form id="moveForm2"
-					action="${pageContext.request.contextPath}/QnA/insertQnAAdmin"
-					method="get">
-					<table>
-						<colgroup>
-							<col width="20%">
-							<col width="80%">
-						</colgroup>
-						<tr>
-							<th><label for="inquiry_cont">답변내용</label></th>
-							<td><input id="customerNo" type="hidden" name="qnANo"
-								value=""> <textarea name="content" id="inquiry_cont2"
-									required></textarea>
-								<div class="textLengthWrap">
-									<span class="textCount">0자</span> <span class="textTotal">/
-										700자</span>
-								</div></td>
-						</tr>
-					</table>
-					<div class="btn_wrap">
-						<a id="submitqna2" href="#none" class="order_btn">문의</a> <a
-							href="#none" class="shopping_btn">취소</a>
-					</div>
-				</form>
-			</div>
-		</section>
 
+			<main id="inquiry">
+				<!-- 문의 답글 창 -->
+				<section id="inquiry_popup2" class="inquiry_popup"
+					style="display: none;">					
+					<div class="inquiry_write">
+						<h3>문의에대한 답변</h3>
+						<form id="moveForm2"
+							action="${pageContext.request.contextPath}/QnA/insertQnAAdmin"
+							method="get">
+							<table>
+								<colgroup>
+									<col width="20%">
+									<col width="80%">
+								</colgroup>
+								<tr>
+									<th><label for="inquiry_cont">답변내용</label></th>
+									<td><input id="customerNo" type="hidden" name="qnANo"
+										value=""> <textarea name="content" id="inquiry_cont2"
+											required></textarea>
+										<div class="textLengthWrap">
+											<span class="textCount">0자</span> <span class="textTotal">/
+												700자</span>
+										</div></td>
+								</tr>
+							</table>
+							<div class="btn_wrap">
+								<a id="submitqna2" href="#none" class="order_btn">답글등록</a> <a
+									href="#none" class="shopping_btn">취소</a>
+							</div>
+						</form>
+					</div>
+				</section>
+			</main>
 			<!-- footer -->
 			<c:import url="/WEB-INF/views/includes/admin-footer.jsp"></c:import>
 

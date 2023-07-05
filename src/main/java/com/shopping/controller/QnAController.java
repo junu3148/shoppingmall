@@ -54,7 +54,7 @@ public class QnAController {
 		model.addAttribute("qnAList", map.get("qnAList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		
-		return "Admin/ProductView2";
+		return "Admin/QnAView";
 		
 	}
 
@@ -65,7 +65,7 @@ public class QnAController {
 
 		qnAService.insertQnAAdmin(vo);
 
-		return "redirect:/QnA/QnAList";
+		return "redirect:/QnA/addminQnA";
 	}
 
 }
