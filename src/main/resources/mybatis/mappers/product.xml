@@ -107,24 +107,41 @@
 		
 		<![CDATA[
 	
-			SELECT  
-			      a.product_no as productNo,
-			      product_name as productName,
-			      product_ea as productEa,
-			      price,
-			      product_content as productContent,
-			      reg_date as regDate,
-			      category,
-			      subcategory as subCategory,
-			      b.save_name as saveName,
-			      b.image_no as imageNo
+			SELECT
+				  product_no        AS productno,
+				  product_name      AS productname,
+				  product_ea        AS productea,
+				  price,
+				  product_content   AS productcontent,
+				  reg_date          AS regdate,
+				  category,
+				  subcategory       AS subcategory,
+				  save_name         AS savename,
+				  image_no          AS imageno
 			  FROM
-			      product a
-			      INNER JOIN product_image b 
-			      ON a.product_no = b.product_no
-            WHERE rownum <= 5
-		  ORDER BY
-			      a.product_no DESC		
+				  (
+				   SELECT
+				         ROWNUM,
+				         a.product_no,
+				         product_name,
+				         product_ea,
+				         price,
+				         product_content,
+				         reg_date,
+				         category,
+				         subcategory,
+				         b.save_name,
+				         b.image_no
+				     FROM
+				         product a
+				     INNER JOIN product_image b ON a.product_no = b.product_no
+				    WHERE
+				         a.product_ea > 0
+			     ORDER BY
+				         a.product_ea DESC
+				   )
+			 WHERE
+				  ROWNUM <= 5		
 		
 		]]>
 
