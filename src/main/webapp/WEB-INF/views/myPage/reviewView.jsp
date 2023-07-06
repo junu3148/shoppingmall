@@ -55,13 +55,15 @@
 	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
 <!-- 부트스트랩 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
+
 <!-- js -->
     <link href="${pageContext.request.contextPath}/assets/css/myPage.css" rel="stylesheet">
         <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
             <link href="${pageContext.request.contextPath}/assets/css/customer.css" rel="stylesheet">
 </head>
 <style>
-td{border : 1px solid black;}
+#popup_layer{
+display:none;}
 </style>
 <body>
 
@@ -87,6 +89,9 @@ td{border : 1px solid black;}
 			<div id="list">
 
 
+	
+
+
 			<div class= "paging-area review-view">
 				<table class="review_product table">
 					<thead>
@@ -99,7 +104,7 @@ td{border : 1px solid black;}
 					</thead>
 					<c:forEach items="${reviewList}" var="review">
 						<tbody>
-							<tr class="review_list">
+							<tr class="review_list" data-no="${review.reviewNo}" data-img="${review.saveName}" data-title ="${review.title}" data-regdate="${review.regDate}" data-likecnt="${review.likeCnt}" data-content ="${review.content}">
 								<td>${review.reviewNo}</td>
 								<td>
 									<c:if test="${review.saveName != null}">
@@ -108,9 +113,6 @@ td{border : 1px solid black;}
 								</td>
 								<td>${review.regDate}</td>
 								<td>${review.likeCnt}</td>
-							</tr>
-							<tr class="review_content">
-								<td colspan="4">${review.content}</td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -151,8 +153,49 @@ td{border : 1px solid black;}
 	<!-- /탑버튼 -->
 
 
+<!-- 모달창 -->
+
+<div id="popup_layer">
+  <div class="popup_box">
+      <!--팝업 컨텐츠 영역-->
+      <div class="popup_cont">
+          <span id= "no"> </span><h1 id="title"></h1> <span id ="regDate"></span>
+      	<div id ="popup_content">
+      		<img src =""  id = "img"> 
+      		<p id ="content"></p>
+      	</div>
+      </div>
+
+      <!--팝업 버튼 영역-->
+      <div class="popup_btn">
+          <!-- <a id="chk_today" href="javascript:closeToday();" class="close_day">Do not open for 7 days</a>-->
+          <button type="button" id ="close_popup_btn">닫기</button>
+      </div>
+  </div>
+</div>
+
+
 </body>
 
+<script>
+$('.review_list').on("click", function(){
+	 var no = $(this).data('no');
+	 var img = $(this).data('img');
+	 var title = $(this).data('title');
+	 var regDate = $(this).data('regdate');
+	 var like = $(this).data('likecnt');
+	 var content = $(this).data('content');
+	 
+	 $('#title').text(title);
+	 $('#no').text(no);
+	 $('#regDate').text(regDate);
+	 $('#content').text(content);
+	 if(img != ''){
+	 $('#img').attr("src","${pageContext.request.contextPath}/upload/"+img);
+	 }
+	 $('#popup_layer').css("display", "block");
+	}); //content 클래스 클릭 이벤트 발생
 
 
+</script>
 </html>

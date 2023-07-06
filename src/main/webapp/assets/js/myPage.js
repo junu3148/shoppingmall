@@ -8,17 +8,18 @@
 		$('#P' + selectPage).css("font-weight", "bold");
 		$('#P' + selectPage).css("font-size", "15px");
 	
-	$('.review_list').on("click", function(){
- 
-	var content	=	$(this).parent().find('.review_content');
 	
-	if(content.css('display')== "none"){
-		content.css('display', 'block');
 
-	}else{
-		content.css('display', 'none');
-
-	}
-	}); //content 클래스 클릭 이벤트 발생
+	
+$('#close_popup_btn').on("click", function(){
+	$('#popup_layer').css("display", "none");
+	$('#img').removeAttr("src");
+});
+$('#close_popup_btn').on('mouseenter', function() {
+    $(this).css('cursor', 'pointer');
+  });
+$('.review_list').on('mouseenter', function() {
+    $(this).css('cursor', 'pointer');
+  });
 
 });
