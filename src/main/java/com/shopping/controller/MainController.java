@@ -90,7 +90,7 @@ public class MainController {
 		model.addAttribute("paging", detailViewInfo.get("paging"));
 		model.addAttribute("review", detailViewInfo.get("review"));
 		
-		return "product/pd_detail";
+		return "product/productDetail";
 
 	}
 

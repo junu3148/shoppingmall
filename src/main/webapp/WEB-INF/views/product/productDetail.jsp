@@ -647,13 +647,3 @@ $('.see_more').on("click", function(){
 </script>
 
 </html>
-
-
-
-
-
-
-
-
-
-
