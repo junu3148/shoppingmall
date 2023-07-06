@@ -16,7 +16,7 @@ import com.shopping.vo.QnAVO;
 public class QnAService {
 
 	@Autowired
-	private QnADAO qnADAO;
+	private QnADAO qnaDAO;
 
 
 	// ----------------- 문의 리스트
@@ -25,13 +25,13 @@ public class QnAService {
 
 		Map<String, Object> map = new HashMap<>();
 	
-		int total = qnADAO.getTotal(cri);
+		int total = qnaDAO.getTotal(cri);
 	
-		List<QnAVO> qnAList = qnADAO.getQnAList(cri);
+		List<QnAVO> qnaList = qnaDAO.getQnAList(cri);
 
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
 		map.put("pageMaker", pageMaker);
-		map.put("qnAList", qnAList);
+		map.put("qnaList", qnaList);
 
 		return map;
 	}
@@ -42,13 +42,13 @@ public class QnAService {
 
 			Map<String, Object> map = new HashMap<>();
 		
-			int total = qnADAO.adminGetTotal(cri);
+			int total = qnaDAO.adminGetTotal(cri);
 		
-			List<QnAVO> qnAList = qnADAO.adminGetQnAList(cri);
+			List<QnAVO> qnaList = qnaDAO.adminGetQnAList(cri);
 		
 			PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
 			map.put("pageMaker", pageMaker);
-			map.put("qnAList", qnAList);
+			map.put("qnaList", qnaList);
 
 			return map;
 		}
@@ -57,14 +57,14 @@ public class QnAService {
 	public int insertQnA(QnAVO vo) {
 		System.out.println("insertQnA Service()");
 
-		return qnADAO.insertQnA(vo);
+		return qnaDAO.insertQnA(vo);
 	}
 
 	// ----------------- 관리자 문의 등록
 	public int insertQnAAdmin(QnAVO vo) {
 		System.out.println("insertQnAAdmin Service()");
 
-		return qnADAO.insertQnAAdmin(vo);
+		return qnaDAO.insertQnAAdmin(vo);
 	}
 
 }

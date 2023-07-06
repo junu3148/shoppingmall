@@ -18,16 +18,16 @@ import com.shopping.vo.QnAVO;
 public class QnAController {
 
 	@Autowired
-	private QnAService qnAService;
+	private QnAService qnaService;
 
 	// ------------------- 문의리스트
 	@RequestMapping(value = "/QnAList", method = RequestMethod.GET)
 	public String QnAList(Model model, Criteria cri) {
 		System.out.println("QnAList()");
 
-		Map<String, Object> map = qnAService.getQnAList(cri);
+		Map<String, Object> map = qnaService.getQnAList(cri);
 
-		model.addAttribute("qnAList", map.get("qnAList"));
+		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 	
 		return "qna/qnaList";
@@ -38,7 +38,7 @@ public class QnAController {
 	public String insertQnA(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnA()");
 
-		qnAService.insertQnA(vo);
+		qnaService.insertQnA(vo);
 
 		return "redirect:/QnA/QnAList";
 
@@ -49,12 +49,12 @@ public class QnAController {
 	public String addminQnA(Model model, Criteria cri) {
 		System.out.println("addminQnA()");
 		
-		Map<String, Object> map = qnAService.adminGetQnAList(cri);
+		Map<String, Object> map = qnaService.adminGetQnAList(cri);
 		
-		model.addAttribute("qnAList", map.get("qnAList"));
+		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		
-		return "Admin/QnAView";
+		return "Admin/qnaView";
 		
 	}
 
@@ -63,7 +63,7 @@ public class QnAController {
 	public String insertQnAAdmin(@ModelAttribute QnAVO vo) {
 		System.out.println("insertQnAAdmin()");
 
-		qnAService.insertQnAAdmin(vo);
+		qnaService.insertQnAAdmin(vo);
 
 		return "redirect:/QnA/addminQnA";
 	}

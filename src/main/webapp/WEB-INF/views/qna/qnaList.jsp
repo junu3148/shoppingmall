@@ -147,37 +147,37 @@
 						<li class="date">작성날짜</li>
 					</ul>
 					<div class="qna_wrap">
-						<c:forEach items="${qnAList}" var="Qna">
+						<c:forEach items="${qnaList}" var="QnA">
 							<div class="qna">
 								<ul class="list">
-									<li class="no">${Qna.qnANo}</li>
+									<li class="no">${QnA.qnaNo}</li>
 									<c:if
-										test="${Qna.boardType == 0 
-									|| (Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo)
+										test="${QnA.boardType == 0 
+									|| (QnA.boardType == 1 && QnA.customerNo == authCustomer.customerNo)
 									|| authCustomer.customerRole == 99}">
-										<li class="tit">${Qna.title}</li>
+										<li class="tit">${QnA.title}</li>
 									</c:if>
 									<c:if
-										test="${Qna.boardType == 1 && Qna.customerNo != authCustomer.customerNo && authCustomer.customerRole != 99}">
+										test="${QnA.boardType == 1 && QnA.customerNo != authCustomer.customerNo && authCustomer.customerRole != 99}">
 										<li class="tit secret">비밀글 입니다</li>
 									</c:if>
-									<li class="date">${Qna.regDate}</li>
+									<li class="date">${QnA.regDate}</li>
 								</ul>
 								<ul class="text_wrap">
 									<li class="q_area"><c:if
-											test="${Qna.boardType == 0 || (Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo)
+											test="${QnA.boardType == 0 || (QnA.boardType == 1 && QnA.customerNo == authCustomer.customerNo)
 											|| authCustomer.customerRole == 99}">
 											<p class="no">Q</p>
-											<p class="question tit">${Qna.content}</p>
+											<p class="question tit">${QnA.content}</p>
 										</c:if></li>
 									<c:if
-										test="${!empty Qna.adminContent && Qna.boardType == 0
-									 || !empty Qna.adminContent && Qna.boardType == 1 && Qna.customerNo == authCustomer.customerNo
-									 || !empty Qna.adminContent && authCustomer.customerRole == 99}">
+										test="${!empty QnA.adminContent && QnA.boardType == 0
+									 || !empty QnA.adminContent && QnA.boardType == 1 && QnA.customerNo == authCustomer.customerNo
+									 || !empty QnA.adminContent && authCustomer.customerRole == 99}">
 										<li class="a_area">
 											<p class="no">A</p>
-											<p class="answer tit">${Qna.adminContent}</p>
-											<p class="answer_date date">${Qna.adminRegDate}</p>
+											<p class="answer tit">${QnA.adminContent}</p>
+											<p class="answer_date date">${QnA.adminRegDate}</p>
 										</li>
 									</c:if>
 								</ul>
@@ -267,42 +267,7 @@
 				</form>
 			</div>
 		</section>
-
-		<!-- 문의 답글 창 -->
-		<section id="inquiry_popup2" class="inquiry_popup"
-			style="display: none;">
-			<a href="#none" class="inquiry_close"><img
-				src="images/ver02/close.png" alt=""></a>
-			<div class="inquiry_write">
-				<h3>문의에대한 답변</h3>
-				<form id="moveForm2"
-					action="${pageContext.request.contextPath}/QnA/insertQnAAdmin"
-					method="get">
-					<table>
-						<colgroup>
-							<col width="20%">
-							<col width="80%">
-						</colgroup>
-						<tr>
-							<th><label for="inquiry_cont">답변내용</label></th>
-							<td><input id="customerNo" type="hidden" name="qnANo"
-								value=""> <textarea name="content" id="inquiry_cont2"
-									required></textarea>
-								<div class="textLengthWrap">
-									<span class="textCount">0자</span> <span class="textTotal">/
-										700자</span>
-								</div></td>
-						</tr>
-					</table>
-					<div class="btn_wrap">
-						<a id="submitqna2" href="#none" class="order_btn">문의</a> <a
-							href="#none" class="shopping_btn">취소</a>
-					</div>
-				</form>
-			</div>
-		</section>
-
-
+		
 		<!-- 탑버튼 -->
 		<a href="#none" class="top_btn"><img
 			src="images/ver02/top_btn.png" alt=""></a>

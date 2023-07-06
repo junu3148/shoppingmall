@@ -125,15 +125,15 @@
 									<td style="width: 15%; text-align: center;">작성날짜</td>
 									<td style="width: 10%; text-align: center;">답글</td>
 								</tr>
-								<c:forEach items="${qnAList}" var="qna">
+								<c:forEach items="${qnaList}" var="QnA">
 									<tr>
-										<td style="width: 10%; text-align: center;">${qna.qnANo}</td>
-										<td style="width: 10%; text-align: center;">${qna.title}</td>
-										<td style="width: 55%; text-align: center;">${qna.content}</td>
-										<td style="width: 15%; text-align: center;">${qna.regDate}</td>
+										<td style="width: 10%; text-align: center;">${QnA.qnaNo}</td>
+										<td style="width: 10%; text-align: center;">${QnA.title}</td>
+										<td style="width: 55%; text-align: center;">${QnA.content}</td>
+										<td style="width: 15%; text-align: center;">${QnA.regDate}</td>
 										<td style="width: 10%; text-align: center;"><a
 											href="#none" id="buttoncss" class="order_btn insertQnAAdmin"
-											data-no="${qna.qnANo}">답글달기</a></td>
+											data-no="${QnA.qnANo}">답글달기</a></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -189,7 +189,7 @@
 								</colgroup>
 								<tr>
 									<th><label for="inquiry_cont">답변내용</label></th>
-									<td><input id="customerNo" type="hidden" name="qnANo"
+									<td><input type="hidden" name="qnaNo"
 										value=""> <textarea name="content" id="inquiry_cont2"
 											required></textarea>
 										<div class="textLengthWrap">
