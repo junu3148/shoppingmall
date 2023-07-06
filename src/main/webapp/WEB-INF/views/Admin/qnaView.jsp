@@ -120,20 +120,20 @@
 							<table class="table table-striped">
 								<tr>
 									<td style="width: 10%; text-align: center;">No.</td>
-									<td style="width: 10%; text-align: center;">제목</td>
-									<td style="width: 55%; text-align: center;">내용</td>
+									<td style="width: 15%; text-align: center;">제목</td>
+									<td style="width: 50%; text-align: center;">내용</td>
 									<td style="width: 15%; text-align: center;">작성날짜</td>
 									<td style="width: 10%; text-align: center;">답글</td>
 								</tr>
 								<c:forEach items="${qnaList}" var="QnA">
 									<tr>
 										<td style="width: 10%; text-align: center;">${QnA.qnaNo}</td>
-										<td style="width: 10%; text-align: center;">${QnA.title}</td>
-										<td style="width: 55%; text-align: center;">${QnA.content}</td>
+										<td style="width: 15%; text-align: center;">${QnA.title}</td>
+										<td style="width: 50%; text-align: center;">${QnA.content}</td>
 										<td style="width: 15%; text-align: center;">${QnA.regDate}</td>
 										<td style="width: 10%; text-align: center;"><a
 											href="#none" id="buttoncss" class="order_btn insertQnAAdmin"
-											data-no="${QnA.qnANo}">답글달기</a></td>
+											data-no="${QnA.qnaNo}">답글달기</a></td>
 									</tr>
 								</c:forEach>
 							</table>
