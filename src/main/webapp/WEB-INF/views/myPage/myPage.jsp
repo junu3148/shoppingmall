@@ -76,6 +76,7 @@ src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
 			<div id="list">
 
 
+			<div class="paging-area">
 				<table class="table-hover table order-list-table">
 					<thead>
 						<tr class="category">
@@ -108,9 +109,8 @@ src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
 				</table>
 				<div class="clear"></div>
 				<!-- 페이징 -->
-				<div class="paging-area">
 				<c:if test="${paging.selectPage >10}">
-					<a class="paging_"
+					<a class="paging_" style ="margin: 14px"
 						href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}">
 						◀ </a>
 				</c:if>
@@ -118,13 +118,13 @@ src="${pageContext.request.contextPath}/assets/js/myPage.js"></script>
 				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}"
 					var="page">
 					<c:if test="${page <= paging.finalPage}">
-						<a class="paging_"
+						<a class="paging_" style ="margin: 14px"
 							href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${page}"
 							id="P${page}">${page}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${paging.next == true}">
-					<a class="paging_"
+					<a class="paging_" style ="margin: 14px"
 						href="${pageContext.request.contextPath}/myPage/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}">
 						▶ </a>
 				</c:if>

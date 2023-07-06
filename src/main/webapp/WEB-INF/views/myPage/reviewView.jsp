@@ -87,6 +87,7 @@ td{border : 1px solid black;}
 			<div id="list">
 
 
+			<div class= "paging-area review-view">
 				<table class="review_product table">
 					<thead>
 						<tr class="category">
@@ -116,27 +117,28 @@ td{border : 1px solid black;}
 				</table>
 				
 				
-				<div class= "paging-area review-view">
 				<!-- 페이징 -->
+			<div class= "forPaging">
 				<c:if test="${paging.selectPage >10}">
-					<a class="paging_"
+					<a class="paging_" style ="margin: 14px"
 						href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.startPageNum - 1}">
 						◀ </a>
 				</c:if>
 
 				<c:forEach begin="${paging.startPageNum}" end="${paging.endPageNum}" var="page">
 					<c:if test="${page <= paging.finalPage}">
-						<a class="paging_"
+						<a class="paging_" style ="margin: 14px"
 							href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${page}"
 							id="P${page}">${page}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${paging.next == true}">
-					<a class="paging_"
+					<a class="paging_" style ="margin: 14px"
 						href="${pageContext.request.contextPath}/myPage/myReview/${authCustomer.customerNo}?selectPage=${paging.endPageNum + 1}">
 						▶ </a>
 				</c:if>
 				<input type="hidden" value="${paging.selectPage}" id="select_Page">
+					</div>
 				</div>
 			</div>
 		</div>
