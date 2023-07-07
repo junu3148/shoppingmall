@@ -94,7 +94,7 @@
 							</c:if>
 						</c:if>
 						<c:if test="${authCustomer == null}">
-							<li>로그인이 필요합니다.&nbsp;&nbsp; <a
+							<li>로그인이 필요합니다.&nbsp;&nbsp; <a class="btn btn-secondary"
 								href="${pageContext.request.contextPath}/customer/loginPage">Login</a>
 							</li>
 						</c:if>
