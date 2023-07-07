@@ -66,7 +66,7 @@
 	<div class="wrapper">
 		<!-- Top Nav Bar  include로 뺄 예정임-->
 		<c:import url="/WEB-INF/views/includes/admin-header.jsp"></c:import>
-
+		
 		<!---------------------------------top nav----------------------------------------->
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -74,15 +74,14 @@
 					<ul class="navbar-nav navbar-align">
 						<c:if test="${authCustomer != null}">
 							<c:if test="${authCustomer.customerRole != 1}">
-             		 안녕하세요! ${authCustomer.customerName}님&nbsp;&nbsp;
-              		 <a class="btn btn-secondary disabled" role="button"
-									aria-disabled="true"
+             		 안녕하세요!  ${authCustomer.customerId}님&nbsp;&nbsp;
+              		 <a class="btn btn-secondary" 
 									href="${pageContext.request.contextPath}/customer/logout">Logout</a>
 							</c:if>
 						</c:if>
 						<c:if test="${authCustomer == null}">
             			로그인이 필요합니다.&nbsp;&nbsp;
-            				<a
+            				<a class="btn btn-secondary" 
 								href="${pageContext.request.contextPath}/customer/loginPage">Login</a>
 						</c:if>
 					</ul>
