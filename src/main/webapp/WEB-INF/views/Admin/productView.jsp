@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- 
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +46,8 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <!--css 등록해야함-->
-<link href="${pageContext.request.contextPath}/assets/css/app.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/app.css"
+	rel="stylesheet">
 <!--css 등록해야함-->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 제이쿼리 최신버전 js -->
@@ -75,7 +76,7 @@
 </head>
 <body>
 	<div class="wrapper">
-	
+
 		<!-- Top Nav Bar  include로 뺄 예정임-->
 		<c:import url="/WEB-INF/views/includes/admin-header.jsp"></c:import>
 
@@ -86,15 +87,16 @@
 					<ul class="navbar-nav navbar-align">
 						<c:if test="${authCustomer != null}">
 							<c:if test="${authCustomer.customerRole != 1}">
-             		 안녕하세요! ${authCustomer.customerId}님&nbsp;&nbsp;
-              		 <a
+								<li>안녕하세요! ${authCustomer.customerId}님&nbsp;&nbsp; 
+								<a class="btn btn-secondary" 									
 									href="${pageContext.request.contextPath}/customer/logout">Logout</a>
+								</li>
 							</c:if>
 						</c:if>
 						<c:if test="${authCustomer == null}">
-            			로그인이 필요합니다.&nbsp;&nbsp;
-            				<a
+							<li>로그인이 필요합니다.&nbsp;&nbsp; <a
 								href="${pageContext.request.contextPath}/customer/loginPage">Login</a>
+							</li>
 						</c:if>
 					</ul>
 				</div>
@@ -350,64 +352,74 @@
 								</div>
 							</form>
 						</div>
-					</section>				
+					</section>
 				</main>
 			</div>
-			
+
 			<!-- footer -->
 			<c:import url="/WEB-INF/views/includes/admin-footer.jsp"></c:import>
-			
+
 		</div>
 	</div>
 </body>
 
 
 <script>
+	// 상품 수정창 띄우기 -- 이미지경로&삭제경로 때문에 스크립트로 못뺌...
+	$(".table-striped .btn-primary").on(
+			"click",
+			function() {
 
-// 상품 수정창 띄우기 -- 이미지경로&삭제경로 때문에 스크립트로 못뺌...
-$(".table-striped .btn-primary").on("click", function() {
+				let productNo = $(this).data("no");
+				let productName = $(this).data("name");
+				let productEa = $(this).data("ea");
+				let price = $(this).data("price");
+				let productContent = $(this).data("content");
+				let category = $(this).data("category");
+				let subCategory = $(this).data("subcategory");
+				let saveName = $(this).data("savename");
 
-	let productNo = $(this).data("no");
-	let productName = $(this).data("name");
-	let productEa = $(this).data("ea");
-	let price = $(this).data("price");
-	let productContent = $(this).data("content");
-	let category = $(this).data("category");
-	let subCategory = $(this).data("subcategory");
-	let saveName = $(this).data("savename");
+				$("#productNo").val(productNo);
+				$("#productName").val(productName);
+				$("#productEa").val(productEa);
+				$("#price").val(price);
+				$("#productContent").val(productContent);
+				$("#category").val(category);
+				$("#subCategory").val(subCategory);
+				$("#preview")
+						.attr(
+								"src",
+								"${pageContext.request.contextPath}/upload/"
+										+ saveName);
+				$("#deleteProduct").attr(
+						"href",
+						"${pageContext.request.contextPath}/product/deleteProduct/"
+								+ productNo);
 
-	$("#productNo").val(productNo);
-	$("#productName").val(productName);
-	$("#productEa").val(productEa);
-	$("#price").val(price);
-	$("#productContent").val(productContent);
-	$("#category").val(category);
-	$("#subCategory").val(subCategory);
-	$("#preview").attr("src", "${pageContext.request.contextPath}/upload/" + saveName);
-	$("#deleteProduct").attr("href", "${pageContext.request.contextPath}/product/deleteProduct/" + productNo);
+				$("#inquiry_popup").show();
 
-	$("#inquiry_popup").show();
+			});
 
-});
+	//상품 등록창 취소버튼 -- 이미지경로 때문에 스크립트로 못뺌...
+	$(".btn_wrap .shopping_btn")
+			.on(
+					"click",
+					function() {
 
-//상품 등록창 취소버튼 -- 이미지경로 때문에 스크립트로 못뺌...
-$(".btn_wrap .shopping_btn").on("click", function() {
+						$('#inquiry_popup2').hide();
+						$('body').removeClass('no-scroll');
+						$("#productName2").val("");
+						$("#productEa2").val("");
+						$("#price2").val("");
+						$("#productContent2").val("");
+						$("#category2").val("");
+						$("#subCategory2").val("");
+						$("#file2").val("");
+						$("#preview2")
+								.attr("src",
+										"${pageContext.request.contextPath}/assets/images/sns4.png");
 
-	$('#inquiry_popup2').hide();
-	$('body').removeClass('no-scroll');
-	$("#productName2").val("");
-	$("#productEa2").val("");
-	$("#price2").val("");
-	$("#productContent2").val("");
-	$("#category2").val("");
-	$("#subCategory2").val("");
-	$("#file2").val("");
-	$("#preview2").attr("src", "${pageContext.request.contextPath}/assets/images/sns4.png");
-
-});
-
-
-
+					});
 </script>
 
 </html>
