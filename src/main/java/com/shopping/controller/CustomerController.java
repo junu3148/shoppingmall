@@ -49,11 +49,11 @@ public class CustomerController {
 			return "customer/login";
 		}
 		else {
+			session.setAttribute("authCustomer", authCustomer);
+			session.setMaxInactiveInterval(6000);
 			if(authCustomer.getCustomerRole().equals("99")) {
 				return "redirect:/product/productListForm";
 			}else {
-				session.setAttribute("authCustomer", authCustomer);
-				session.setMaxInactiveInterval(6000);
 				return "redirect:/main/";
 			}
 		}
