@@ -609,7 +609,7 @@ $('.see_more').on("click", function(){
 		}); //addcart btn click event end
 
 		 
-		
+		 
 		$('.addOrderOne').on("submit", function(){
 				
 			if(${authCustomer ==null}){
