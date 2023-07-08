@@ -608,7 +608,7 @@ $('.see_more').on("click", function(){
 			;//if~login user addcart end
 		}); //addcart btn click event end
 
-		
+		 
 		
 		$('.addOrderOne').on("submit", function(){
 				
