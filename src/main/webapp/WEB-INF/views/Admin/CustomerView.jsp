@@ -74,19 +74,21 @@
 					<ul class="navbar-nav navbar-align">
 						<c:if test="${authCustomer != null}">
 							<c:if test="${authCustomer.customerRole != 1}">
-             		 안녕하세요!  ${authCustomer.customerId}님&nbsp;&nbsp;
-              		 <a class="btn btn-secondary" 
+								<li>안녕하세요! ${authCustomer.customerId}님&nbsp;&nbsp; 
+								<a class="btn btn-secondary" 									
 									href="${pageContext.request.contextPath}/customer/logout">Logout</a>
+								</li>
 							</c:if>
 						</c:if>
 						<c:if test="${authCustomer == null}">
-            			로그인이 필요합니다.&nbsp;&nbsp;
-            				<a class="btn btn-secondary" 
+							<li>로그인이 필요합니다.&nbsp;&nbsp; <a class="btn btn-secondary"
 								href="${pageContext.request.contextPath}/customer/loginPage">Login</a>
+							</li>
 						</c:if>
 					</ul>
 				</div>
 			</nav>
+
 
 			<!---------------------------------//top nav//----------------------------------------->
 

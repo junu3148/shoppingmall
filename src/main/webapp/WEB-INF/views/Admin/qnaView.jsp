@@ -159,7 +159,7 @@
 							</c:if>
 						</ul>
 						<form id="moveForm"
-							action="${pageContext.request.contextPath}/product/productListForm"
+							action="${pageContext.request.contextPath}/QnA/QnAList"
 							method="get">
 							<input type="hidden" name="pageNum"
 								value="${pageMaker.cri.pageNum}"> <input type="hidden"

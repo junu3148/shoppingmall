@@ -625,7 +625,7 @@ $('.see_more').on("click", function(){
 				$('#comment_modal').modal('show');
 			    var commentNo =	$(this).data('commentno');
 			    console.log('모달로 넘어가는 번호' + commentNo)
-			    $('.comment_delete_btn').attr("data-commentno",commentNo);
+			    $('.comment_delete_btn').data("commentno",commentNo);
 			    
 		});
 	
