@@ -60,6 +60,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/customer.css" type="text/css">
 <style>
 .content a{text-decoration: none;}
+a {margin: 12px; font-size: 13px;    text-decoration: none; color: #212121; }
 </style>
 </head>
 <body>
@@ -163,7 +164,7 @@
 							end="${pageInfo.pagingInfo.endPageNum}" var="page">
 							<c:if test="${page <= pageInfo.pagingInfo.finalPage}">
 								<a class="paging_"
-									href="${pageContext.request.contextPath}/customer/customerView?selectPage=${page}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}">${page}</a>
+									href="${pageContext.request.contextPath}/customer/customerView?selectPage=${page}&searchOption=${pageInfo.pagingInfo.searchOption}&keyword=${pageInfo.pagingInfo.keyword}" id ="p${page}">${page}</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${pageInfo.pagingInfo.next == true}">
@@ -174,7 +175,7 @@
 					</div>
 				</main>
 			</div>
-
+			<input type ="hidden" id ="selectPage_" value ="${pageInfo.pagingInfo.selectPage}">
 			<c:import url="/WEB-INF/views/includes/admin-footer.jsp"></c:import>
 
 		</div>
@@ -232,6 +233,18 @@
 
 
 <script>
+
+$(window).on('load', function() {
+	
+	var page =	$('#selectPage_').val();
+	console.log(page);
+
+	$('#p' + page).css("color","#4982cf");
+	$('#p' + page).css("font-weight","bold");
+	$('#p' + page).css("font-size","15px");
+
+});
+
 
 $('#modify_form').on("submit", function(){
 	
