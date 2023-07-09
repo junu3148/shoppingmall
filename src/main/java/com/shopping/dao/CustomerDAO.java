@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.PagingVO;
-import com.shopping.vo.ProductVO;
 
 @Repository
 public class CustomerDAO {
@@ -91,4 +90,13 @@ public class CustomerDAO {
 		
 		return row;
 	}
+	
+	/* 고객 정보 받아오기*/
+	public CustomerVO getCustomerByNo(int customerNo) { 
+		System.out.println("getCustomerByNo DAO()");
+		CustomerVO returnVO = session.selectOne("customer.getCustomerByNo", customerNo);
+		
+		return returnVO;
+	}
+	
 }

@@ -154,7 +154,7 @@ public class CartController {
 	public JsonResult addAddress(@ModelAttribute AddressVO addressVO) {
 		
 		JsonResult jasonResult = new JsonResult();
-		boolean result = cartService.addAdress(addressVO);
+		boolean result = cartService.addAddress(addressVO);
 		
 		jasonResult.success(result);
 		

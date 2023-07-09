@@ -44,8 +44,7 @@ public class ReviewDAO {
 	/*댓글 등록*/
 	public void insertComment(CommentVO commentVO) {
 		System.out.println("insertComment DAO()");
-		int row = session.insert("review.insertReview", commentVO);
-
+		session.insert("review.insertReviewComment", commentVO);
 	}
 	
 	/*리뷰에 달린 댓글 가져오기*/
@@ -79,4 +78,35 @@ public class ReviewDAO {
 		
 		return row;
 	}
+	
+	/*리뷰 추가*/
+	public int insertReview(ReviewVO reviewVO) {
+		System.out.println("insertReview DAO()");
+		int row = session.insert("review.insertReview", reviewVO);
+		
+		return row;
+	}
+	
+	/*리뷰 이미지 테이블에 이미지 추가*/
+	public int insertReviewImage(ReviewVO reviewVO) {
+		System.out.println("insertReviewImage DAO()");
+		int row = session.insert("review.insertReviewImage", reviewVO);
+		
+		return row;
+	}
+	
+	/*내가 쓴 리뷰 갯수 확인*/
+	public int getMyReviewCnt(String customerNo) {
+		System.out.println("getMyReviewCnt DAO()");
+		int cnt = session.selectOne("review.cntMyReview", customerNo);
+		return cnt;
+	}
+	
+	/*내가 쓴 리뷰 리스트*/
+	public List<ReviewVO> getMyReviewList(PagingVO pagingVO){
+		System.out.println("getMyReviewList DAO()");
+		List<ReviewVO> reviewList = session.selectList("review.getMyReviewList", pagingVO);
+		return reviewList;
+	}
+	
 }

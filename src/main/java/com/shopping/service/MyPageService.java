@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopping.dao.CustomerDAO;
-import com.shopping.dao.MyPageDAO;
+import com.shopping.dao.OrderDAO;
+import com.shopping.dao.ProductDAO;
+import com.shopping.dao.ReviewDAO;
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.PagingVO;
 import com.shopping.vo.ProductVO;
@@ -22,21 +24,26 @@ import com.shopping.vo.ReviewVO;
 public class MyPageService {
 
 	@Autowired
-	private MyPageDAO myPageDAO;
-	@Autowired
 	private CustomerDAO customerDAO;
-
+	@Autowired
+	private OrderDAO orderDAO;
+	@Autowired
+	private ProductDAO productDAO;
+	@Autowired
+	private ReviewDAO reviewDAO;
+	
+	
 	/* 고객넘버로 고객 정보 가져오기 */
 	/* 구매 내역 페이징 위한 pageNo */
 	public Map<String, Object> myPageInfoByNo(int customerNo, int pageNo) {
 		System.out.println("myPageInfoByNo Service()");
 		Map<String, Object> myPageInfo = new HashMap<>();
 
-		CustomerVO returnVO = myPageDAO.getCustomerByNo(customerNo); // 고객 아이디와 이름 권한 번호 가져옴
-		int orderCnt = myPageDAO.getOrderCnt(customerNo);
+		CustomerVO returnVO = customerDAO.getCustomerByNo(customerNo); // 고객 아이디와 이름 권한 번호 가져옴
+		int orderCnt = orderDAO.getOrderCnt(customerNo);
 		PagingVO pagingVO = new PagingVO(pageNo, orderCnt, customerNo + "", null);
 
-		List<ProductVO> orderList = myPageDAO.getOrderList(pagingVO);
+		List<ProductVO> orderList = orderDAO.getOrderList(pagingVO);
 		myPageInfo.put("customerInfo", returnVO);
 		myPageInfo.put("orderList", orderList);
 		myPageInfo.put("paging", pagingVO);
@@ -47,7 +54,7 @@ public class MyPageService {
 	/* 주문한 제품 정보 가져오기 */
 	public ProductVO getProductInfo(int productNo) {
 		System.out.println("getProductInfo Service()");
-		ProductVO productVO = myPageDAO.getProductInfo(productNo);
+		ProductVO productVO = productDAO.getProductInfo(productNo);
 
 		return productVO;
 	}
@@ -56,7 +63,7 @@ public class MyPageService {
 	public void addReview(MultipartFile file, ReviewVO reviewVO) {
 		System.out.println("addReview Service()");
 		
-		myPageDAO.insertReview(reviewVO);
+		reviewDAO.insertReview(reviewVO);
 
 		if (!file.isEmpty()) {
 			String orgName = file.getOriginalFilename();
@@ -74,7 +81,7 @@ public class MyPageService {
 				e.printStackTrace();
 			}
 			
-			myPageDAO.insertReviewImage(reviewVO);
+			reviewDAO.insertReviewImage(reviewVO);
 
 		}
 		/* key로 review 넘버 받아와서 review 이미지 테이블에 세이브 네임 저장 */
@@ -85,9 +92,9 @@ public class MyPageService {
 	public Map<String, Object> getReviewList(String customerNo, int selectPage) {
 		System.out.println("getReviewList Service()");
 
-		int totalCnt = myPageDAO.getMyReviewCnt(customerNo);
+		int totalCnt = reviewDAO.getMyReviewCnt(customerNo);
 		PagingVO pagingVO = new PagingVO(selectPage, totalCnt, customerNo, null);
-		List<ReviewVO> reviewList = myPageDAO.getMyReviewList(pagingVO);
+		List<ReviewVO> reviewList = reviewDAO.getMyReviewList(pagingVO);
 
 		Map<String, Object> reviewListPage = new HashMap<String, Object>();
 

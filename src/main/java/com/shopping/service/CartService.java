@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shopping.dao.AddressDAO;
 import com.shopping.dao.CartDAO;
+import com.shopping.dao.OrderDAO;
 import com.shopping.vo.AddressVO;
 import com.shopping.vo.CartVO;
 import com.shopping.vo.OrderVO;
@@ -18,6 +20,10 @@ public class CartService {
 	
 	@Autowired	
 	private CartDAO cartDAO;
+	@Autowired
+	private AddressDAO addressDAO;
+	@Autowired
+	private OrderDAO orderDAO;
 	
 	/*장바구니 보기*/
 	public List<ProductVO> viewCart(int customerNo) { 
@@ -75,15 +81,15 @@ public class CartService {
 		System.out.println("addOrder Service()");
 		boolean result = false;
 		
-		OrderVO ordersCheck = cartDAO.checkOrder(orderVO.getCustomerNo());
+		OrderVO ordersCheck = orderDAO.checkOrder(orderVO.getCustomerNo());
 		
 		/*결제 진행 중 상태인 주문건(상태 1)이 있으면~해당 주문 삭제함*/
 		if(ordersCheck != null) {
 			int orderNo = ordersCheck.getOrderNo();
-			cartDAO.deleteOrderDetail(orderNo);
-			cartDAO.deleteOrder(orderNo);
+			orderDAO.deleteOrderDetail(orderNo);
+			orderDAO.deleteOrder(orderNo);
 		}
-			int row = cartDAO.insertOrder(orderVO); //order 만들기 + orderNo 값 받아오기
+			int row = orderDAO.insertOrder(orderVO); //order 만들기 + orderNo 값 받아오기
 			
 			List<ProductVO> productList = orderVO.getProductList();
 			Map<String, Object> map = new HashMap<>();
@@ -92,9 +98,9 @@ public class CartService {
 			for(int i =0; i<productList.size(); i ++) {
 				map.put("orderProduct", productList.get(i));
 				
-				cartDAO.insertOrderDetail(map);	//디테일 테이블에도 물건 추가함			
+				orderDAO.insertOrderDetail(map);	//디테일 테이블에도 물건 추가함			
 			}
-			cartDAO.checkOrderDetailList(orderVO); //오더 테이블 제품 확인하고 재고보다 주문하는 수량이 많을 경우 최대 재고로  업데이트 
+			orderDAO.checkOrderDetailList(orderVO); //오더 테이블 제품 확인하고 재고보다 주문하는 수량이 많을 경우 최대 재고로  업데이트 
 			
 			if(row>0) {result = true;} //order 추가 성공하면 true 리턴함
 			
@@ -110,11 +116,11 @@ public class CartService {
 		System.out.println("getOrderInfo Service()");
 		Map<String,Object> orderInfo = new HashMap<>();
 		
-		OrderVO orderVO = cartDAO.checkOrder(customerNo);
-		List<ProductVO> orderList =  cartDAO.getOrderList(orderVO);
+		OrderVO orderVO = orderDAO.checkOrder(customerNo);
+		List<ProductVO> orderList =  orderDAO.getOrderList(orderVO);
 		orderVO.setProductList(orderList);
 		
-		List<AddressVO> addressList = cartDAO.getCustomerAddress(customerNo);
+		List<AddressVO> addressList = addressDAO.getCustomerAddress(customerNo);
 		
 		orderInfo.put("orderInfo", orderVO);
 		orderInfo.put("addressList", addressList);
@@ -123,13 +129,13 @@ public class CartService {
 	}
 	
 	/*주소 추가*/
-	public boolean addAdress(AddressVO addressVO) {
+	public boolean addAddress(AddressVO addressVO) {
 		System.out.println("addAdress Service()");
 		boolean result = false;
 		
-		int cnt = cartDAO.addressCount(addressVO);
-		if(cnt>2) {cartDAO.deleteOldAddress(addressVO);}
-		int insertRows  = cartDAO.insertAddress(addressVO);
+		int cnt = addressDAO.addressCount(addressVO);
+		if(cnt>2) {addressDAO.deleteOldAddress(addressVO);}
+		int insertRows  = addressDAO.insertAddress(addressVO);
 		
 		if(insertRows>0) {result = true;}
 		

@@ -116,4 +116,14 @@ public class ProductDAO {
 
 	}
 
+	
+	/*주문한 제품 정보 받아오기*/
+	public ProductVO getProductInfo(int productNo) {
+		System.out.println("getProductInfo DAO()");
+		ProductVO returnVO = sqlSession.selectOne("product.getProductInfo", productNo);
+
+		return returnVO;
+	}
+	
+	
 }

@@ -23,8 +23,9 @@
 		<mapper resource="mybatis/mappers/image.xml" />
 		<mapper resource="mybatis/mappers/qna.xml" />
 		<mapper resource="mybatis/mappers/payment.xml" />
-		<mapper resource="mybatis/mappers/myPage.xml" />
 		<mapper resource="mybatis/mappers/review.xml" />
+		<mapper resource="mybatis/mappers/address.xml" />
+		<mapper resource="mybatis/mappers/order.xml" />
 	</mappers>
 
 

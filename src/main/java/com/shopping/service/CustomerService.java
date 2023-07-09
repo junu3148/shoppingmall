@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.shopping.dao.CustomerDAO;
 import com.shopping.vo.CustomerVO;
 import com.shopping.vo.PagingVO;
-import com.shopping.vo.ProductVO;
 
 @Service
 public class CustomerService {

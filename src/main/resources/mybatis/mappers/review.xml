@@ -82,7 +82,7 @@
 	</select>
 
 	<!-- 리뷰 등록하기 -->
-	<insert id="insertReview" parameterType="CommentVO">
+	<insert id="insertReviewComment" parameterType="CommentVO">
 		<selectKey resultType="int" order="BEFORE"
 			keyProperty="commentNo">
 			select seq_review_comment_no.nextval from dual
@@ -144,5 +144,95 @@
 		where review_no = #{reviewNo}
 	]]>
 	</update>
+
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="ReviewVO">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="reviewNo">
+			select seq_review_no.nextval from dual
+		</selectKey>
+			<![CDATA[
+				insert into review
+					(review_no, customer_no, product_no, title, content, reg_date, like_cnt, grade)
+				values(
+					#{reviewNo}
+					, #{customerNo}
+					, #{productNo}
+					, #{title}
+					, #{content}
+					, sysdate
+					, 0
+					,#{grade}
+					)
+			]]>
+	</insert>
+
+
+	<!-- 리뷰 이미지 등록 -->
+	<insert id="insertReviewImage" parameterType="ReviewVO">
+		<![CDATA[
+			insert into review_image
+				(review_no, save_name)
+			values(
+				#{reviewNo}
+				,#{saveName}
+				)
+		]]>
+	</insert>
+
+
+	<!-- 내가 쓴 리뷰 갯수 확인 -->
+	<select id="cntMyReview" parameterType="String" resultType="int">
+		<![CDATA[
+			select 
+				count(*) 
+			from review 
+			where customer_no = #{customerNo}
+		]]>
+	</select>
+
+	<!-- 내가 쓴 리뷰 리스트 -->
+	<select id="getMyReviewList" parameterType="PagingVO" resultType="ReviewVO">
+		<![CDATA[
+			 select
+              	reviewNo
+    			,customerNo
+    			,title
+    			,content
+    			, regDate
+    			, likeCnt
+    			,saveName
+        from(
+			select 
+  		  		rownum as rw
+   	 			,review_no as reviewNo
+    			,customer_no as customerNo
+    			,title
+    			,content
+    			,reg_date as regDate
+    			,like_cnt as likeCnt
+    			,saveName
+    		from
+   				 (
+       				 select 
+       				 	review_no
+       				 	,customer_no
+       				 	, title
+       				 	, content
+       				 	, reg_date
+       				 	, like_cnt
+       				 	,(select save_name from review_image where review_no = a.review_no) as saveName
+        			from review a
+        			where customer_no = #{keyword}
+       				order by review_no desc
+    		 		)
+              )
+    		where rw between #{boardNumStart} and #{boardNumEnd}
+		
+	]]>
+	</select>
+	
+
 
 </mapper>

@@ -429,6 +429,27 @@
 
 	</update>
 
+		<!-- 주문한 제품 정보 가져오기 S 추가-->
+	<select id="getProductInfo" parameterType="int" resultType="ProductVO">
+	
+		<![CDATA[
+	
+			select  
+				a.product_no as productNo
+				,product_name as productName
+				,save_name as saveName
+			from 
+				product a join product_image b 
+				on a.product_no = b.product_no 
+			where 
+				a.product_no = #{productNo}
+	
+		]]>
+
+
+	</select>
+	
+
 
 </mapper>
 

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+
+<mapper namespace="order">
+	<!-- 주문 존재여부 확인 -->
+	<select id="checkOrder" parameterType="String" resultType="OrderVO">
+		<![CDATA[
+			select 
+				order_no as orderNo
+				,total_price as totalPrice
+			from orders 
+			where customer_no = #{customerNo}  and order_stat = 1
+		]]>
+	</select>
+
+	<!-- 주문 추가 -->
+	<insert id="insertOrder" parameterType="OrderVO">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="orderNo">
+			select SEQ_ORDER_NO.nextval from dual
+		</selectKey>
+			<![CDATA[
+				insert into orders (ORDER_NO, CUSTOMER_NO, ORDER_STAT)
+				values (
+						#{orderNo}
+						,#{customerNo}
+						,1
+						)
+			]]>
+	</insert>
+
+	<!-- 주문 상세내역 추가 -->
+	<insert id="insertOrderDetail" parameterType="map">
+		<![CDATA[
+   	     insert into order_detail 
+    	    	(detail_no, order_no, product_no, product_count)
+    	    values (
+    	    		SEQ_DETAIL_NO.nextval
+       		 		, #{orderNo}
+        			, #{orderProduct.productNo}
+        			,#{orderProduct.productEa}
+        			)
+		]]>
+	</insert>
+
+	<!-- 주문 삭제 -->
+	<delete id="deleteOrder" parameterType="int">
+		<![CDATA[
+			delete orders
+			where order_no = #{orderNo}
+		]]>
+	</delete>
+
+	<!-- 주문 상세내역 삭제 -->
+	<delete id="deleteOrderDetail" parameterType="int">
+		<![CDATA[
+			delete order_detail
+			where order_no = #{orderNo}
+		]]>
+	</delete>
+
+	<!-- 주문 상세내역 가져오기 -->
+	<select id="getOrderDetail" parameterType="OrderVO" resultType="ProductVO">
+		<![CDATA[
+			SELECT
+   				 a.product_no as productNo
+   				 ,a.product_count as productEa
+   				 ,b.price
+    			 ,b.product_name as productName
+  				 ,c.save_name as saveName
+			FROM
+    		order_detail a join product b
+    		on a.product_no = b.product_no
+    		join product_image c on b.product_no  = c.product_no
+    		where a.order_no = #{orderNo}
+		]]>
+	</select>
+
+	<!-- 주문 상세정보 체크 -->
+	<update id ="checkOrderDetailList" parameterType ="OrderVO">
+		update order_detail a set 
+			product_count = (select product_ea from product where product_no = a.product_no)
+		where a.order_no = #{orderNo}
+		and a.product_count > (select product_ea from product where a.product_no = product_no) 
+	</update>
+	
+	<!-- 내 주문내역 갯수 가져오기 -->
+	<select id="getOrderCnt" parameterType="int" resultType="int">
+		<![CDATA[
+			select 
+				count(detail_no) 
+			from order_detail a join orders b 
+			on a.order_no = b.order_no 
+			where b.customer_no = #{customerNo}  and b.order_stat = 2
+		]]>
+	</select>
+
+	<!-- 내 주문내역 가져오기 -->
+	<select id="getOrderList" parameterType="PagingVO" resultType="ProductVO">
+		<![CDATA[
+  		  	 select
+       			 productEa
+       			 ,regDate
+       			 ,ProductNo
+      	    	 ,price
+        		 ,saveName
+     	   	 	 ,productName
+       		 from
+   				 (
+   				 select 
+       				 rownum as rw
+       				 ,productEa
+       				 ,regDate
+        			 ,ProductNo
+       				 ,price
+       				 ,saveName
+        			 ,productName
+       			 from
+       				 (
+       				 SELECT 
+          				  b.product_count as productEa,
+        			      a.order_date as regDate,
+        			      b.product_no as ProductNo,
+    			          p.price * b.product_count AS price,
+      				      pi.save_name as saveName,
+     			          p.product_name as productName
+       				 FROM
+          				orders a
+         			    JOIN order_detail b ON a.order_no = b.order_no
+           			    JOIN product p ON p.product_no = b.product_no
+            			JOIN product_image pi ON pi.product_no = b.product_no
+       				 WHERE
+          				a.customer_no = #{keyword}
+         	 		  	AND a.order_stat = 2
+        			ORDER BY
+            			a.order_no DESC)
+            			)
+            		where rw between #{boardNumStart} and #{boardNumEnd}
+		]]>
+	</select>
+</mapper>

@@ -12,6 +12,7 @@ section#kv{height: 250px; width: 100%; padding: 0;}
 .btn_wrap a.order_btn{background: #4982cf; border: 1px solid #4982cf; color: #fff;}
 .btn_wrap a.shopping_btn{background: #fff; border: 1px solid #4982cf; color: #4982cf;}
 body.no-scroll{overflow: hidden;}
+a:hover, button:hover { cursor: pointer;}
 
 /* header */
 header.pc{width: 100%; height: 110px; position: fixed; top: 0; left: 0; z-index: 99;}

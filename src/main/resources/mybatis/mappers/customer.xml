@@ -164,4 +164,20 @@
 				where customer_no = #{customerNo}
 		]]>
 	</update>
+	
+		<!-- 고객 번호로 정보 가져오기 -->
+	<select id="getCustomerByNo" parameterType="int"
+		resultType="CustomerVO">
+		<![CDATA[
+			select 
+				customer_no as customerNo
+				,customer_id as customerId
+				,customer_name as customerName
+				,customer_role as customerRole
+                ,(select sum(total_price) from orders where customer_no = 201  and order_stat = 2) as totalPayment
+			from customer 
+			where customer_no = #{customerNo}
+		]]>
+	</select>
+	
 </mapper>
