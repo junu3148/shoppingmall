@@ -188,8 +188,10 @@
 		<div class="address-form">
 			<div class="address-box">
 				<div id="address_title">
-					기존 주소록<br>사용하기
+					<b>기존 주소록<br>사용하기</b>
+
 				</div>
+					<span id = "address-message">*주소록은 최대 3개까지만 등록 가능합니다.</span>
 
 				<div id="address-Area">
 					<c:forEach items="${addressList}" var="address">

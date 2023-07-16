@@ -6,10 +6,9 @@
 .address-form td, #address-List td { padding: 1%; }
 #order-heading{ text-align: center; font-size:50px;}
 .pay-button {display: block; margin: 0 auto;}
-#address_title{text-align:center; margin-bottom : 5%; background-color : white; border-radius: 10px;}
-.address-form{background-color :  white; width: 30%;margin-top: 10%; margin-bottom: 3%; }
+#address_title{text-align:center; margin-bottom : 5%; border-radius: 10px; font-size : 23px;}
+.address-form{background-color :  white; width: 30%;margin-top: 10%; margin-bottom: 3%;}
 option { width:20%;}
-table{ border : 1px solid black;}
 .input-width-control{width:10%;}
 .input-width-control2, #email{width:15%;}
 #roadAddress, #detailAddress{width:90%}
@@ -39,9 +38,10 @@ table{ border : 1px solid black;}
 .cntMessage{text-align : center; color : red; margin : 3%;}
 .address-List{width: 100%; height:100%;   border-radius: 10px; border: none; font-size:5% }
 .newAddress-btn{width:150px; height:60px; font-size : 18px;}
-.address-box{background-color:  #4982cf; padding:5%; width : 100%; height:100%;border:none; border-radius: 10px; }
-
-
+.address-box{background-color:  #e8e8e8; padding:5%; width : 250px; height:100%;border:none; border-radius: 10px; }
+.address-table{border-radius: 5px; background-color: #f7f7f7; font-size:15px; margin-bottom:10px;}
+#address-message{ font-size : 13px;}
+#btn-postnum{background-color: #4982cf;border: 1px solid #4982cf; color: #fff; }
 /*prodcuct_detail*/
 .review_box {margin: 13%;}
 .black_line {width: 100%;height: 1px;background-color: #bbbbbb;}
@@ -53,7 +53,7 @@ table{ border : 1px solid black;}
 .right {margin-left: auto;padding: 20px;}
 .reple {display: none;}
 .reple_child {margin-top: 20px;}
-.text {position: relative;}
+.text {position: relative;} 
 .add_comment_btn {position: absolute;bottom: 5px;margin-bottom: 0;left: 72%;background: #4982cf;border: 1px solid #4982cf;color: #fff;}
 .order_btn {background: #4982cf;border: 1px solid #4982cf;color: #fff;padding: 15px 50px;margin: 0 5px;font-weight: 600;}
 .add_comment {width: 50%;}
