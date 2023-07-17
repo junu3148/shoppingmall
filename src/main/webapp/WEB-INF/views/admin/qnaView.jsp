@@ -190,7 +190,7 @@
 								</colgroup>
 								<tr>
 									<th><label for="inquiry_cont">답변내용</label></th>
-									<td><input type="hidden" name="qnaNo"
+									<td><input type="hidden" name="qnaNo" id = "qnaNo"
 										value=""> <textarea name="content" id="inquiry_cont2"
 											required></textarea>
 										<div class="textLengthWrap">

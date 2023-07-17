@@ -208,7 +208,7 @@
 										<td style="text-align: center;" class ="cus_role">
 											<select class ="cus_role" name ="customerRole">
     										<option value ="1">일반회원</option>
-    										<option value ="2">운영자</option>
+    										<option value ="99">운영자</option>
 											</select>
 										</td>
 									</tr>

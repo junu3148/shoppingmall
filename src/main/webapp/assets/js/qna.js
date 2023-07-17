@@ -33,9 +33,10 @@ $(document).ready(function() {
 
 	// 문의 답글창 띄우기
 	$(".insertQnAAdmin").on("click", function() {
-		let customerNo = $(this).data("no");
+		let qnaNo = $(this).data("no");
 		$("#inquiry_popup2").show();
-		$("#customerNo").val(customerNo);
+		$("#qnaNo").val(qnaNo);
+
 	});
 
 	//문의 답글창 취소버튼

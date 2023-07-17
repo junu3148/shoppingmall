@@ -7,7 +7,7 @@
             <div class="logo"><img src="${pageContext.request.contextPath }/assets/images/ver02/logo_blue.png"></div>
             <div class="customer">
                 <h4>고객센터</h4>
-                <p class="tel">054-873-7749</p>
+                <p class="tel">021-123-1234</p>
                 <p class="time">
                     화~일 : AM 10:00 ~ PM 05:00 (점심시간 : PM 12:00 ~ PM 01:00)<br>
                     매주 월요일 / 1월1일 / 설날·추석 당일 휴무
@@ -16,7 +16,7 @@
             </div>
             <div class="address">
                 <h4>반품주소 안내</h4>
-                <p>경북 청송군 주왕산면 주왕산로 494 청송백자전수관</p>
+                <p>서울시 강동구 천호동 454-15 동원천호빌딩 5층</p>
             </div>
         </div>
 
