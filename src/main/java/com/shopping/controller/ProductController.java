@@ -43,7 +43,7 @@ public class ProductController {
 		model.addAttribute("productList", map.get("productList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 
-		return "Admin/productView";
+		return "admin/productView";
 	}
 
 	// ------------------- 상품 수정
@@ -76,7 +76,7 @@ public class ProductController {
 		model.addAttribute("productList", map.get("productList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 
-		return "Admin/productView";
+		return "admin/productView";
 	}
 
 }

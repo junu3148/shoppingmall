@@ -60,7 +60,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/customer.css" type="text/css">
 <style>
 .content a{text-decoration: none;}
-a {margin: 12px; font-size: 13px;    text-decoration: none; color: #212121; }
+.paging_{margin: 12px; font-size: 13px;    text-decoration: none; color: #212121; }
 </style>
 </head>
 <body>

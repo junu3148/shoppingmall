@@ -120,7 +120,7 @@ public class CustomerController {
 		model.addAttribute("pageInfo", pageInfo);
 		
 		
-		return "Admin/CustomerView";
+		return "admin/customerView";
 	}
 	
 	/*고객 상세 정보*/

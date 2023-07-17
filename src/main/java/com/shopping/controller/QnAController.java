@@ -54,7 +54,7 @@ public class QnAController {
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		
-		return "Admin/qnaView";
+		return "admin/qnaView";
 		
 	}
 

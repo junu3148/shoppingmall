@@ -87,10 +87,10 @@
 				<div class="swiper-slide banner02">
 					<a href="#none"></a>
 				</div>
-				<div class="swiper-slide banner03">
+				<div class="swiper-slide banner01">
 					<a href="#none"></a>
 				</div>
-				<div class="swiper-slide banner04">
+				<div class="swiper-slide banner02">
 					<a href="#none"></a>
 				</div>
 			</div>
