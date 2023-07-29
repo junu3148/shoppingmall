@@ -9,54 +9,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>제품 수정 페이지?</title>
+<title>product view</title>
 <!--부트 스트랩 코드-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
 <!-- 초기화 css -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css" type="text/css">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 구글폰트 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
-<!-- 구글폰트 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
 	rel="stylesheet">
-<!-- 서브 css -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
+<!--컨텐츠 상단 폰트-->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <!--부트 스트랩 코드-->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 	crossorigin="anonymous"></script>
-<!--js 코드-->
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<!--css 등록해야함-->
-<link href="${pageContext.request.contextPath}/assets/css/app.css"
-	rel="stylesheet">
-<!--css 등록해야함-->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 제이쿼리 최신버전 js -->
-<!--컨텐츠 상단 폰트-->
-<link
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/adminProduct.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!--js 코드-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/adminProduct.js"></script>
 
 <style>
 .wrapper a{text-decoration: none;}
@@ -87,8 +69,8 @@
 					<ul class="navbar-nav navbar-align">
 						<c:if test="${authCustomer != null}">
 							<c:if test="${authCustomer.customerRole != 1}">
-								<li>안녕하세요! ${authCustomer.customerId}님&nbsp;&nbsp; 
-								<a class="btn btn-secondary" 									
+								<li>안녕하세요! ${authCustomer.customerId}님&nbsp;&nbsp; <a
+									class="btn btn-secondary"
 									href="${pageContext.request.contextPath}/customer/logout">Logout</a>
 								</li>
 							</c:if>
@@ -366,60 +348,45 @@
 
 <script>
 	// 상품 수정창 띄우기 -- 이미지경로&삭제경로 때문에 스크립트로 못뺌...
-	$(".table-striped .btn-primary").on(
-			"click",
-			function() {
+	$(".table-striped .btn-primary").on("click",function() {
 
-				let productNo = $(this).data("no");
-				let productName = $(this).data("name");
-				let productEa = $(this).data("ea");
-				let price = $(this).data("price");
-				let productContent = $(this).data("content");
-				let category = $(this).data("category");
-				let subCategory = $(this).data("subcategory");
-				let saveName = $(this).data("savename");
+		let productNo = $(this).data("no");
+		let productName = $(this).data("name");
+		let productEa = $(this).data("ea");
+		let price = $(this).data("price");
+		let productContent = $(this).data("content");
+		let category = $(this).data("category");
+		let subCategory = $(this).data("subcategory");
+		let saveName = $(this).data("savename");
 
-				$("#productNo").val(productNo);
-				$("#productName").val(productName);
-				$("#productEa").val(productEa);
-				$("#price").val(price);
-				$("#productContent").val(productContent);
-				$("#category").val(category);
-				$("#subCategory").val(subCategory);
-				$("#preview")
-						.attr(
-								"src",
-								"${pageContext.request.contextPath}/upload/"
-										+ saveName);
-				$("#deleteProduct").attr(
-						"href",
-						"${pageContext.request.contextPath}/product/deleteProduct/"
-								+ productNo);
+		$("#productNo").val(productNo);
+		$("#productName").val(productName);
+		$("#productEa").val(productEa);
+		$("#price").val(price);
+		$("#productContent").val(productContent);
+		$("#category").val(category);
+		$("#subCategory").val(subCategory);
+		$("#preview").attr("src","${pageContext.request.contextPath}/upload/" + saveName);
+		$("#deleteProduct").attr("href","${pageContext.request.contextPath}/product/deleteProduct/"	+ productNo);
+		$("#inquiry_popup").show();
 
-				$("#inquiry_popup").show();
-
-			});
+	});
 
 	//상품 등록창 취소버튼 -- 이미지경로 때문에 스크립트로 못뺌...
-	$(".btn_wrap .shopping_btn")
-			.on(
-					"click",
-					function() {
+	$(".btn_wrap .shopping_btn").on("click",function() {
 
-						$('#inquiry_popup2').hide();
-						$('body').removeClass('no-scroll');
-						$("#productName2").val("");
-						$("#productEa2").val("");
-						$("#price2").val("");
-						$("#productContent2").val("");
-						$("#category2").val("");
-						$("#subCategory2").val("");
-						$("#file2").val("");
-						$("#preview2")
-								.attr("src",
-										"${pageContext.request.contextPath}/assets/images/sns4.png");
+		$('#inquiry_popup2').hide();
+		$('body').removeClass('no-scroll');
+		$("#productName2").val("");
+		$("#productEa2").val("");
+		$("#price2").val("");
+		$("#productContent2").val("");
+		$("#category2").val("");
+		$("#subCategory2").val("");
+		$("#file2").val("");
+		$("#preview2").attr("src","${pageContext.request.contextPath}/assets/images/sns4.png");
 
-					});
+	});
 </script>
 
 </html>

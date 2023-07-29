@@ -8,48 +8,58 @@
 	<div id="lnb">
 		<ul class="lnb">
 			<c:if test="${authCustomer.customerRole == 99}">
-			<li class="admin"><a href="${pageContext.request.contextPath }/product/productListForm"><b>관리페이지</b></a></li>
+				<li class="admin"><a
+					href="${pageContext.request.contextPath }/product/productListForm"><b>관리페이지</b></a></li>
 			</c:if>
 			<c:choose>
 				<c:when test="${authCustomer != null}">
-					<li class="login"><a href="${pageContext.request.contextPath }/customer/logout">로그아웃</a></li>
-					<li class="notice"><a href="${pageContext.request.contextPath }/myPage/${authCustomer.customerNo}?selectPage=1">마이페이지</a></li>
-					<li class="cart"><a href="${pageContext.request.contextPath }/cart/viewCart?customerNo=${authCustomer.customerNo}">장바구니</a></li>
+					<li class="login"><a
+						href="${pageContext.request.contextPath }/customer/logout">로그아웃</a></li>
+					<li class="notice"><a
+						href="${pageContext.request.contextPath }/myPage/${authCustomer.customerNo}?selectPage=1">마이페이지</a></li>
+					<li class="cart"><a
+						href="${pageContext.request.contextPath }/cart/viewCart?customerNo=${authCustomer.customerNo}">장바구니</a></li>
 				</c:when>
 				<c:otherwise>
 					<li class="login"><a
 						href="${pageContext.request.contextPath }/customer/loginPage">로그인</a></li>
 				</c:otherwise>
-			</c:choose>			
+			</c:choose>
 			<li class="search"><a href="#none">검색</a></li>
 			<c:choose>
-			<c:when test="${!empty authCustomer}">
-			<li class="notice"><a href="${pageContext.request.contextPath }/QnA/QnAList">커뮤니티</a></li>
-			</c:when>
-			<c:otherwise>
-			<li class="notice"><a href="${pageContext.request.contextPath }/customer/loginPage">커뮤니티</a></li>
-			</c:otherwise>
-			</c:choose>	
+				<c:when test="${!empty authCustomer}">
+					<li class="notice"><a
+						href="${pageContext.request.contextPath }/QnA/QnAList">커뮤니티</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="notice"><a
+						href="${pageContext.request.contextPath }/customer/loginPage">커뮤니티</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
-	</div> 
+	</div>
 	<div id="header">
 		<h1>
 			<a href="${pageContext.request.contextPath}/main/">로고이미지</a>
 		</h1>
 		<!-- 메뉴 (gnb) -->
 		<ul id="nav">
-			<li ><a
-				href="${pageContext.request.contextPath}/main/all">All</a></li>
+			<li><a href="${pageContext.request.contextPath}/main/all">All</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/category/간식" class= "snack">사료/간식</a></li>
+				href="${pageContext.request.contextPath}/main/category/간식"
+				class="snack">사료/간식</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/category/배변용품" class= "toilet">배변용품</a></li>
+				href="${pageContext.request.contextPath}/main/category/배변용품"
+				class="toilet">배변용품</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/category/미용" class= "beauty">미용</a></li>
+				href="${pageContext.request.contextPath}/main/category/미용"
+				class="beauty">미용</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/category/장난감" class= "toy">장난감</a></li>
+				href="${pageContext.request.contextPath}/main/category/장난감"
+				class="toy">장난감</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/main/category/가구" class= "furniture">가구</a></li>
+				href="${pageContext.request.contextPath}/main/category/가구"
+				class="furniture">가구</a></li>
 		</ul>
 		<!-- /메뉴 (gnb) -->
 	</div>

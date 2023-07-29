@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
+
 <nav id="sidebar" class="sidebar js-sidebar">
 	<div class="sidebar-content js-simplebar">
 		<a class="sidebar-brand"
@@ -25,7 +25,7 @@
 					<i class="align-middle" data-feather="log-in"></i> <span
 					class="align-middle">고객조회</span>
 			</a></li>
-			<li class="sidebar-item"><a class="sidebar-link" 
+			<li class="sidebar-item"><a class="sidebar-link"
 				href="${pageContext.request.contextPath}/QnA/addminQnA"> <i
 					class="align-middle" data-feather="user-plus"></i> <span
 					class="align-middle">QnA관리</span>

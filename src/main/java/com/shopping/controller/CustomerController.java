@@ -43,7 +43,7 @@ public class CustomerController {
 		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n<br> 입력하신 내용을 다시 확인해주세요.";
 
 		CustomerVO authCustomer = customerService.login(customerVO);
-		
+		System.out.println(authCustomer);
 		if(authCustomer == null) {
 			model.addAttribute("message", message);
 			return "customer/login";

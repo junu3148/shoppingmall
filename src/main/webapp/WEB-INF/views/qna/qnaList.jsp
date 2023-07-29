@@ -10,47 +10,30 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 <title>portfolio</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
 <!-- 초기화 css -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <!-- 스와이퍼 css -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
 <!-- 슬릭슬라이더 css -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
 <!-- 슬릭슬라이더 css -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<!-- 구글폰트 -->
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 구글폰트 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<!-- 구글폰트 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<!-- 서브 css -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- 제이쿼리 최신버전 js -->
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<!-- 스와이퍼 js -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-<!-- 슬릭슬라이더 js -->
-<!-- 슬릭슬라이더 js -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/js/qna.js"></script>
+<!-- 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+
+<!-- 제이쿼리 최신버전 js -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 스와이퍼 js -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<!-- 슬릭슬라이더 js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/script3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/qna.js"></script>
 
 <style>
 #buttoncss {padding: 15px 28px;	margin: -40px 30px 10px;}

@@ -1,5 +1,5 @@
 	$(document).ready(function() {
-		//네비클릭스 포커스
+		//네비클릭시 포커스
 		let CriteriaSubCategory = $("#CriteriaSubCategory").val() + '';
 
 		if (CriteriaSubCategory == '') {

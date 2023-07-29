@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- 
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,61 +13,34 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 <title>portfolio</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/reset.css"
-	type="text/css">
 <!-- 초기화 css -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style3.css" type="text/css">
 <!-- 스와이퍼 css -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
 <!-- 슬릭슬라이더 css -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
-<!-- 슬릭슬라이더 css -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<!-- 구글폰트 -->
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 구글폰트 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<!-- 구글폰트 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/style3.css"
-	type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 <!-- 메인 css -->
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 js -->
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 스와이퍼 js -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <!-- 슬릭슬라이더 js -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/script3.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <!-- js -->
+<script type="text/javascript"	src="${pageContext.request.contextPath}/assets/js/script3.js"></script>
 
 <style>
-
-.i img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	background-size: 100% 100%;
-}
-.video_area {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10%;
-}
-
+.i img {width: 100%; height: 100%; object-fit: cover; background-size: 100% 100%;}
+.video_area { display: flex; justify-content: center; align-items: center; margin-top: 10%;}
 </style>
 </head>
 
@@ -107,8 +80,7 @@
 					<span><strong>CATDOG!</strong></span>
 				</h3>
 				<p>
-					반려동물과의 행복한 동행을 위한<br>
-					임팩트 있는 선택
+					반려동물과의 행복한 동행을 위한<br> 임팩트 있는 선택
 				</p>
 			</div>
 			<div id="best_seller_div">
@@ -149,13 +121,15 @@
 			</ul>
 		</section>
 		<!-- /메뉴 버튼 -->
-		
-					
-		<div class= "video_area">
-			  <iframe width="560" height="315" src="https://www.youtube.com/embed/YM9yu9xG-Bc" frameborder="0" allowfullscreen></iframe>
+
+
+		<div class="video_area">
+			<iframe width="560" height="315"
+				src="https://www.youtube.com/embed/YM9yu9xG-Bc" frameborder="0"
+				allowfullscreen></iframe>
 		</div>
-		
-		
+
+
 		<!-- SNS -->
 		<section id="sns">
 			<h2 class="en">sns</h2>
