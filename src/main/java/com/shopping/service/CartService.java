@@ -98,7 +98,8 @@ public class CartService {
 			for(int i =0; i<productList.size(); i ++) {
 				map.put("orderProduct", productList.get(i));
 				
-				orderDAO.insertOrderDetail(map);	//디테일 테이블에도 물건 추가함			
+				orderDAO.insertOrderDetail(map);	//디테일 테이블에도 물건 추가함
+				
 			}
 			orderDAO.checkOrderDetailList(orderVO); //오더 테이블 제품 확인하고 재고보다 주문하는 수량이 많을 경우 최대 재고로  업데이트 
 			

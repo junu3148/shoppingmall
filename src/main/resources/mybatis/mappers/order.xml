@@ -20,7 +20,7 @@
 	<insert id="insertOrder" parameterType="OrderVO">
 		<selectKey resultType="int" order="BEFORE"
 			keyProperty="orderNo">
-			select SEQ_ORDER_NO.nextval from dual
+			select SEQ_ORDER_NO.nextval AS orderNo from dual
 		</selectKey>
 			<![CDATA[
 				insert into orders (ORDER_NO, CUSTOMER_NO, ORDER_STAT)
@@ -41,7 +41,7 @@
     	    		SEQ_DETAIL_NO.nextval
        		 		, #{orderNo}
         			, #{orderProduct.productNo}
-        			,#{orderProduct.productEa}
+        			, #{orderProduct.productEa}
         			)
 		]]>
 	</insert>
