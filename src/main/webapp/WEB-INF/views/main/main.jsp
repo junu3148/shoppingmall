@@ -60,12 +60,9 @@
 				<div class="swiper-slide banner02">
 					<a href="#none"></a>
 				</div>
-				<div class="swiper-slide banner01">
+				<div class="swiper-slide banner03">
 					<a href="#none"></a>
-				</div>
-				<div class="swiper-slide banner02">
-					<a href="#none"></a>
-				</div>
+				</div>				
 			</div>
 			<div class="swiper-pagination"></div>
 		</div>
