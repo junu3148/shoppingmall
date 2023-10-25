@@ -6,7 +6,7 @@
 
 
 ## 프로젝트 소개
-##### 상세 포트폴리오 : [notion 포트폴리오](https://url.kr/a59hjd)
+##### 상세 포트폴리오 : [notion 포트폴리오]([https://url.kr/a59hjd](https://www.notion.so/CATDOG-89b364f83fe945c08f3a0f3df7c90027))
 일반적인 쇼핑몰에서 제공하는 기능을 구현한 애완용품 쇼핑몰입니다.
 
 <br>
